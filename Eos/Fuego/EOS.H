@@ -161,14 +161,14 @@ struct Fuego
   AMREX_GPU_HOST_DEVICE
   AMREX_FORCE_INLINE
   void
-  SINGE_BASE_WDOT(amrex::Real R, amrex::Real T, amrex::Real Y[], amrex::Real WDOT[])
+  SINGE_BASE_WDOT(amrex::Real R, amrex::Real T, amrex::Real Y[], amrex::Real Diffusion[], amrex::Real dt, amrex::Real WDOT[])
   {
     amrex::Real P;
     RTY2P(R, T, Y, P);
     amrex::Real wbar;
     CKMMWY(&Y[0], &wbar);
     wbar = 1.0/wbar; 
-    base_getrates (P, T, wbar, Y, WDOT);
+    base_getrates (P, T, wbar, Y, Diffusion, dt, WDOT);
 
     amrex::Real mw[NUM_SPECIES];
     get_mw(mw);
