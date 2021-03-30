@@ -6,6 +6,7 @@
 #include <AMReX_Utility.H>
 
 #include "mechanism.h"
+#include "base_getrates.h"
 #include "chemistry_file.H"
 #include "PhysicsConstants.H"
 
@@ -155,6 +156,24 @@ struct Fuego
     amrex::Real wbar;
     CKMMWY(&Y[0], &wbar);
     T = P * wbar / (R * Constants::RU);
+  }
+
+  AMREX_GPU_HOST_DEVICE
+  AMREX_FORCE_INLINE
+  void
+  SINGE_BASE_WDOT(amrex::Real R, amrex::Real T, amrex::Real Y[], amrex::Real WDOT[])
+  {
+    amrex::Real P;
+    RTY2P(R, T, Y, P);
+    amrex::Real wbar;
+    CKMMWY(&Y[0], &wbar);
+    wbar = 1.0/wbar; 
+    base_getrates (P, T, wbar, Y, WDOT);
+
+    amrex::Real mw[NUM_SPECIES];
+    get_mw(mw);
+    for (int n = 0; n < NUM_SPECIES; n++)
+      WDOT[n] *= mw[n];
   }
 
   AMREX_GPU_HOST_DEVICE
