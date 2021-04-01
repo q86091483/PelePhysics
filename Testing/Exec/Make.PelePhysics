@@ -14,6 +14,10 @@ EBASE = Pele
 # this list will be searched for runtime parameters
 EXTERN_CORE ?=
 
+ifeq ($(USE_SINGE),TRUE)
+  DEFINES += -DUSE_SINGE
+endif
+
 ifeq ($(USE_SUNDIALS_PP),TRUE) 
   include $(PELE_PHYSICS_HOME)/ThirdParty/Make.ThirdParty
 else ifeq ($(USE_RK64_PP),TRUE)

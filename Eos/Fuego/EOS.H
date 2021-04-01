@@ -161,31 +161,21 @@ struct Fuego
   AMREX_GPU_HOST_DEVICE
   AMREX_FORCE_INLINE
   void
-  SINGE_BASE_WDOT(amrex::Real R, amrex::Real T, amrex::Real Y[], amrex::Real Diffusion[], amrex::Real dt, amrex::Real WDOT[])
+  RTY2WDOT(amrex::Real R, amrex::Real T, amrex::Real Y[], amrex::Real WDOT[], amrex::Real diffusion[], amrex::Real dt)
   {
-    amrex::Real P;
-    RTY2P(R, T, Y, P);
-    amrex::Real wbar;
-    CKMMWY(&Y[0], &wbar);
-    wbar = 1.0/wbar; 
-    base_getrates (P, T, wbar, Y, Diffusion, dt, WDOT);
-
-    amrex::Real mw[NUM_SPECIES];
-    get_mw(mw);
-    for (int n = 0; n < NUM_SPECIES; n++)
-      WDOT[n] *= mw[n];
-  }
-
-  AMREX_GPU_HOST_DEVICE
-  AMREX_FORCE_INLINE
-  void
-  RTY2WDOT(amrex::Real R, amrex::Real T, amrex::Real Y[], amrex::Real WDOT[])
-  {
-    // CKWYR(&R, &T, Y, WDOT);
-    amrex::Real C[NUM_SPECIES];
-    CKYTCR(&R, &T, Y, C);
-    CKWC(&T, C, WDOT);
-
+#ifdef USE_SINGE 
+     amrex::Real P;
+      RTY2P(R, T, Y, P);
+      amrex::Real wbar;
+      CKMMWY(&Y[0], &wbar);
+      wbar = 1.0/wbar; 
+      base_getrates (P, T, wbar, Y, diffusion, dt, WDOT);
+#else
+      CKWYR(&R, &T, Y, WDOT);
+      amrex::Real C[NUM_SPECIES];
+      CKYTCR(&R, &T, Y, C);
+      CKWC(&T, C, WDOT);
+#endif
     amrex::Real mw[NUM_SPECIES];
     get_mw(mw);
     for (int n = 0; n < NUM_SPECIES; n++)
