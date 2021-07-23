@@ -5,9 +5,8 @@
 #include <AMReX_REAL.H>
 #include <AMReX_Utility.H>
 
-#include "mechanism.h"
+#include "mechanism.H"
 #include "base_getrates.h"
-#include "chemistry_file.H"
 #include "PhysicsConstants.H"
 
 namespace pele {
@@ -161,21 +160,31 @@ struct Fuego
   AMREX_GPU_HOST_DEVICE
   AMREX_FORCE_INLINE
   void
-  RTY2WDOT(amrex::Real R, amrex::Real T, amrex::Real Y[], amrex::Real WDOT[], amrex::Real diffusion[], amrex::Real dt)
+  SINGEWDOT(amrex::Real R, amrex::Real T, amrex::Real Y[], amrex::Real WDOT[], amrex::Real diffusion[], amrex::Real dt)
   {
-#ifdef USE_SINGE 
-     amrex::Real P;
-      RTY2P(R, T, Y, P);
-      amrex::Real wbar;
-      CKMMWY(&Y[0], &wbar);
-      wbar = 1.0/wbar; 
-      base_getrates (P, T, wbar, Y, diffusion, dt, WDOT);
-#else
-      CKWYR(&R, &T, Y, WDOT);
-      amrex::Real C[NUM_SPECIES];
-      CKYTCR(&R, &T, Y, C);
-      CKWC(&T, C, WDOT);
-#endif
+    amrex::Real P;
+    RTY2P(R, T, Y, P);
+    amrex::Real wbar;
+    CKMMWY(&Y[0], &wbar);
+    wbar = 1.0/wbar;
+    //std::cout << "Using Singe Kernels" << std::endl; 
+    base_getrates (P, T, wbar, Y, diffusion, dt, WDOT);
+    amrex::Real mw[NUM_SPECIES];
+    get_mw(mw);
+    for (int n = 0; n < NUM_SPECIES; n++)
+      WDOT[n] *= mw[n];
+  }
+
+  AMREX_GPU_HOST_DEVICE
+  AMREX_FORCE_INLINE
+  void
+  RTY2WDOT(amrex::Real R, amrex::Real T, amrex::Real Y[], amrex::Real WDOT[])
+  {
+    // CKWYR(&R, &T, Y, WDOT);
+    amrex::Real C[NUM_SPECIES];
+    CKYTCR(&R, &T, Y, C);
+    CKWC(&T, C, WDOT);
+
     amrex::Real mw[NUM_SPECIES];
     get_mw(mw);
     for (int n = 0; n < NUM_SPECIES; n++)

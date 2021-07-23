@@ -1,4 +1,3 @@
-#include "chemistry_file.H"
 #include "gpu_getrates.h"
 
 #ifndef MAX
