@@ -15,6 +15,7 @@
 #include "Constant.H"
 #include "Simple.H"
 #include "Sutherland.H"
+#include "Manifold.H"
 
 namespace pele {
 namespace physics {

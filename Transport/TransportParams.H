@@ -22,7 +22,7 @@ struct TransParm
 template <typename EOSType, typename TransportType>
 struct InitTransParm
 {
-  void operator()(TransParm<EOSType, TransportType> /*tparm*/) {}
+  void operator()(TransParm<EOSType, TransportType>* /*tparm*/) {}
 };
 
 template <typename EOSType>
@@ -70,6 +70,26 @@ struct InitTransParm<EOSType, SutherlandTransport>
     pp.query("viscosity_S", tparm->viscosity_S);
     pp.query("const_bulk_viscosity", tparm->const_bulk_viscosity);
     pp.query("const_diffusivity", tparm->const_diffusivity);
+  }
+};
+
+template <typename EOSType>
+struct TransParm<EOSType, ManifoldTransport>
+{
+  pele::physics::TabFuncParams::TabFuncData* tf_data;
+};
+
+template <typename EOSType>
+struct InitTransParm<EOSType, ManifoldTransport>
+{
+  void operator()(TransParm<EOSType, ManifoldTransport>* tparm)
+  {
+    amrex::Abort("For manifold transport tabulated data must be provided to transport parameters");
+  }
+  
+  void operator()(TransParm<EOSType, ManifoldTransport>* tparm, pele::physics::TabFuncParams::TabFuncData* tf_data_in)
+  {
+    tparm->tf_data = tf_data_in;
   }
 };
 

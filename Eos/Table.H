@@ -204,6 +204,14 @@ namespace pele{
       AMREX_FORCE_INLINE
       TabFunc(TabFuncParams::TabFuncData* tf_data_in) {
 	tf_data = tf_data_in;
+
+	// TODO:  Convert to accessor functions?
+	idx_density = tf_data->idx_density;
+	idx_T = tf_data->idx_T;
+	idx_Wdot = tf_data->idx_Wdot;
+	idx_rhoD = tf_data->idx_rhoD;
+	idx_mu = tf_data->idx_mu;
+	Pnom = tf_data->Pnom;
       }    
       
       // Lookup directly if you already know index
@@ -237,6 +245,13 @@ namespace pele{
 	// finite differences from table
 	amrex::Real out = differentiate(indices, alphas, dxinv, &tf_data->values[ivar * tf_data->varSpacing], derivs);
       }
+
+      int idx_density;
+      int idx_T;
+      int idx_Wdot;
+      int idx_rhoD;
+      int idx_mu;
+      amrex::Real Pnom;
 
     private:
       TabFuncParams::TabFuncData* tf_data;
