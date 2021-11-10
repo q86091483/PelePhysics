@@ -10,11 +10,11 @@ COMP       = gnu
 FCOMP      = gfortran
 USE_MPI    = FALSE
 USE_OMP    = FALSE
-USE_CUDA   = FALSE
+USE_CUDA   = TRUE
 USE_HIP    = FALSE
 
 # PelePhysics
-FUEGO_GAS  = TRUE
+FUEGO_GAS  = FALSE
 TINY_PROFILE = FALSE
 
 # define the location of the PELE_PHYSICS top directory

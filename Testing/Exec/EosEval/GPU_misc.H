@@ -15,7 +15,8 @@ initialize_data(int i, int j, int k,
 		amrex::Array4<amrex::Real> const& temp,
 		amrex::Array4<amrex::Real> const& rho,
 		amrex::Array4<amrex::Real> const& energy,
-		amrex::GeometryData const& geomdata) noexcept
+		amrex::GeometryData const& geomdata,
+		pele::physics::TabFuncParams::TabFuncData* gpu_data ) noexcept
 {
    const amrex::Real* plo = geomdata.ProbLo();
    const amrex::Real* phi = geomdata.ProbHi();
@@ -33,6 +34,13 @@ initialize_data(int i, int j, int k,
 	amrex::GpuArray<amrex::Real,NUM_SPECIES> Y_hi;
 	amrex::GpuArray<amrex::Real,NUM_SPECIES> ei;
 
+	const amrex::Real in[3] = {0.055, 0.0000001, 0.15};
+	amrex::Real out = 0.0;
+	pele::physics::TabFunc tabby(gpu_data);
+	tabby.get_from_table(3, in, out);
+	printf("look up from table : %i %i %i : %f\n", i,j,k,out);
+	  
+	
 	for (int n = 0; n < 3; n++) {
 		L[n] = phi[n] - plo[n];
 		P[n] = L[n] / 4.0;

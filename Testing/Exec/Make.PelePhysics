@@ -1,4 +1,4 @@
-AMREX_HOME        ?= ../../../../../amrex
+AMREX_HOME        ?= /home/bperry/amrex-combustion/amrex
 PELE_HOME         ?= ../../../..
 PELE_PHYSICS_HOME ?= $(PELE_HOME)/PelePhysics
 

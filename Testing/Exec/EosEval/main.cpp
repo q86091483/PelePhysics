@@ -17,13 +17,27 @@ main(int argc, char* argv[])
   amrex::Initialize(argc, argv);
   {
 
+    pele::physics::TabFuncParams dogs;
+    std::cout << "testtest" << dogs.host_tabfunc_data().len_str << std::endl;
+
+    dogs.initialize();
+    pele::physics::TabFuncParams::TabFuncData* cpu_data = &dogs.host_tabfunc_data();
+    pele::physics::TabFuncParams::TabFuncData* gpu_data = dogs.device_tabfunc_data();  
+    //dogs.print();
+    
+    pele::physics::TabFunc tabby(cpu_data);
+    amrex::Real out = 0.0;
+    amrex::Real in[3] = {0.055, 0.0000001, 0.15};
+    tabby.get_from_table(3, in, out);
+    std::cout << "look up from table : " << out << std::endl ;
+    
     amrex::ParmParse pp;
 
     // Define geometry
     amrex::Array<int, AMREX_SPACEDIM> npts{AMREX_D_DECL(1, 1, 1)};
 
     for (int i = 0; i < AMREX_SPACEDIM; ++i) {
-      npts[i] = 128;
+      npts[i] = 4;
     }
 
     amrex::Box domain(
@@ -73,8 +87,8 @@ main(int argc, char* argv[])
       auto const& e_a = energy.array(mfi);
       amrex::ParallelFor(
         bx, [Y_a, T_a, rho_a, e_a,
-             geomdata] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
-          initialize_data(i, j, k, Y_a, T_a, rho_a, e_a, geomdata);
+             geomdata, gpu_data] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
+	      initialize_data(i, j, k, Y_a, T_a, rho_a, e_a, geomdata, gpu_data);
         });
     }
 
@@ -146,6 +160,9 @@ main(int argc, char* argv[])
     plt_VarsName.push_back("energy");
     amrex::WriteSingleLevelPlotfile(
       outfile, VarPlt, plt_VarsName, geom, 0.0, 0);
+
+    dogs.deallocate();
+
   }
 
   amrex::Finalize();

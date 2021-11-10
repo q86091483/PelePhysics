@@ -1,0 +1,3 @@
+eos.tablefile = chemtable.methane.hot
+eos.table_ndim = 3
+eos.v = 1
