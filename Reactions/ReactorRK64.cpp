@@ -32,6 +32,10 @@ ReactorRK64::react(
   ,
   amrex::gpuStream_t /*stream*/
 #endif
+#ifdef PELEC_USE_SINGE
+  ,
+  amrex::Real* diff_term
+#endif
 )
 {
   BL_PROFILE("Pele::ReactorRK64::react()");
@@ -58,6 +62,12 @@ ReactorRK64::react(
   amrex::Gpu::copy(
     amrex::Gpu::hostToDevice, rX_src_in, rX_src_in + ncells, d_rX_src);
 
+#ifdef PELEC_USE_SINGE
+  amrex::Gpu::DeviceVector<amrex::Real> diff_term_src(ncells * NUM_SPECIES, 0);
+  amrex::Real* d_diff_term = diff_term_src.data();
+  amrex::Gpu::copy(amrex::Gpu::hostToDevice, diff_term, diff_term + ncells * NUM_SPECIES, d_diff_term);
+#endif
+
   // capture reactor type
   const int captured_reactor_type = m_reactor_type;
   const int captured_nsubsteps_guess = rk64_nsubsteps_guess;
@@ -75,6 +85,7 @@ ReactorRK64::react(
     amrex::Real error_reg[NUM_SPECIES + 1] = {0.0};
     amrex::Real rhs[NUM_SPECIES + 1] = {0.0};
     amrex::Real rYsrc_ext[NUM_SPECIES] = {0.0};
+    amrex::Real diff_term_ext[NUM_SPECIES] = {0.0};
     amrex::Real current_time = time_init;
     const int neq = (NUM_SPECIES + 1);
 
@@ -92,6 +103,7 @@ ReactorRK64::react(
 
     for (int sp = 0; sp < NUM_SPECIES; sp++) {
       rYsrc_ext[sp] = d_rYsrc[icell * NUM_SPECIES + sp];
+      diff_term_ext[sp] = d_diff_term[icell * NUM_SPECIES + sp];
     }
 
     int nsteps = 0;
@@ -103,7 +115,7 @@ ReactorRK64::react(
       for (int stage = 0; stage < rkp.nstages_rk64; stage++) {
         utils::fKernelSpec<Ordering>(
           0, 1, current_time - time_init, captured_reactor_type, soln_reg, rhs,
-          rhoe_init, rhoesrc_ext, rYsrc_ext);
+          rhoe_init, rhoesrc_ext, rYsrc_ext, diff_term_ext, dt_react);
 
         for (int sp = 0; sp < neq; sp++) {
           error_reg[sp] += rkp.err_rk64[stage] * dt_rk * rhs[sp];
@@ -176,6 +188,10 @@ ReactorRK64::react(
   ,
   amrex::gpuStream_t /*stream*/
 #endif
+#ifdef PELEC_USE_SINGE
+  ,
+  amrex::Array4<amrex::Real> const& diff_term
+#endif
 )
 {
   BL_PROFILE("Pele::ReactorRK64::react()");
@@ -205,6 +221,7 @@ ReactorRK64::react(
     amrex::Real error_reg[NUM_SPECIES + 1] = {0.0};
     amrex::Real rhs[NUM_SPECIES + 1] = {0.0};
     amrex::Real rYsrc_ext[NUM_SPECIES] = {0.0};
+    amrex::Real diff_term_ext[NUM_SPECIES] = {0.0};
     amrex::Real current_time = time_init;
     const int neq = (NUM_SPECIES + 1);
 
@@ -242,6 +259,7 @@ ReactorRK64::react(
 
     for (int sp = 0; sp < NUM_SPECIES; sp++) {
       rYsrc_ext[sp] = rYsrc_in(i, j, k, sp);
+      diff_term_ext[sp] = diff_term(i, j, k, sp);
     }
 
     int nsteps = 0;
@@ -253,7 +271,7 @@ ReactorRK64::react(
       for (int stage = 0; stage < rkp.nstages_rk64; stage++) {
         utils::fKernelSpec<Ordering>(
           0, 1, current_time - time_init, captured_reactor_type, soln_reg, rhs,
-          rhoe_init, rhoesrc_ext, rYsrc_ext);
+          rhoe_init, rhoesrc_ext, rYsrc_ext, diff_term_ext, dt_react);
 
         for (int sp = 0; sp < neq; sp++) {
           error_reg[sp] += rkp.err_rk64[stage] * dt_rk * rhs[sp];

@@ -30,6 +30,10 @@ ReactorNull::react(
   ,
   amrex::gpuStream_t /*stream*/
 #endif
+#ifdef PELEC_USE_SINGE
+    ,
+    amrex::Array4<amrex::Real> const& diff_term
+#endif
 )
 {
 
@@ -87,6 +91,10 @@ ReactorNull::react(
 #ifdef AMREX_USE_GPU
   ,
   amrex::gpuStream_t /*stream*/
+#endif
+#ifdef PELEC_USE_SINGE
+  ,
+  amrex::Real* /*diff_term*/
 #endif
 )
 {

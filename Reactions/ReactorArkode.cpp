@@ -133,6 +133,10 @@ ReactorArkode::react(
   ,
   amrex::gpuStream_t stream
 #endif
+#ifdef PELEC_USE_SINGE
+  ,
+  amrex::Array4<amrex::Real> const& diff_term
+#endif
 )
 {
   BL_PROFILE("Pele::ReactorArkode::react()");
@@ -274,6 +278,10 @@ ReactorArkode::react(
 #ifdef AMREX_USE_GPU
   ,
   amrex::gpuStream_t stream
+#endif
+#ifdef PELEC_USE_SINGE
+  ,
+  realtype* diff_term
 #endif
 )
 {
@@ -448,7 +456,7 @@ ReactorArkode::cF_RHS(
   amrex::ParallelFor(udata->ncells, [=] AMREX_GPU_DEVICE(int icell) noexcept {
     utils::fKernelSpec<Ordering>(
       icell, ncells, dt_save, reactor_type, yvec_d, ydot_d, rhoe_init,
-      rhoesrc_ext, rYsrc_ext);
+      rhoesrc_ext, rYsrc_ext, rYsrc_ext, dt_save);
   });
 
   amrex::Gpu::Device::streamSynchronize();

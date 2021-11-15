@@ -231,7 +231,14 @@ fKernelSpec(
   amrex::Real* ydot_d,
   amrex::Real* rhoe_init,
   amrex::Real* rhoesrc_ext,
-  amrex::Real* rYs)
+  amrex::Real* rYs
+#ifdef PELEC_USE_SINGE  
+  , 
+  amrex::Real* diff_term
+  , 
+  const double dt_react
+#endif
+)
 {
   amrex::Real rho_pt = 0.0;
   amrex::GpuArray<amrex::Real, NUM_SPECIES> massfrac = {0.0};
@@ -267,8 +274,15 @@ fKernelSpec(
   }
 
   amrex::GpuArray<amrex::Real, NUM_SPECIES> cdots_pt = {0.0};
+#ifdef PELEC_USE_SINGE
+  amrex::GpuArray<amrex::Real, NUM_SPECIES> diffusion_pt = {0.0};
+  for (int n = 0; n < NUM_SPECIES; n++) {
+    diffusion_pt[n] = diff_term[vec_index<OrderType>(n, icell, ncells)];
+  }
+  eos.SINGEWDOT(rho_pt, temp_pt, massfrac.arr, cdots_pt.arr, diffusion_pt.arr, dt_react);
+#else
   eos.RTY2WDOT(rho_pt, temp_pt, massfrac.arr, cdots_pt.arr);
-
+#endif
   amrex::Real rhoesrc = rhoesrc_ext[icell];
   for (int n = 0; n < NUM_SPECIES; n++) {
     const amrex::Real cdot_rYs =

@@ -6,6 +6,7 @@
 #include <AMReX_Utility.H>
 
 #include "mechanism.H"
+#include "base_getrates.h"
 #include "PhysicsConstants.H"
 
 namespace pele {
@@ -155,6 +156,24 @@ struct Fuego
     amrex::Real wbar;
     CKMMWY(&Y[0], &wbar);
     T = P * wbar / (R * Constants::RU);
+  }
+
+  AMREX_GPU_HOST_DEVICE
+  AMREX_FORCE_INLINE
+  void
+  SINGEWDOT(amrex::Real R, amrex::Real T, amrex::Real Y[], amrex::Real WDOT[], amrex::Real diffusion[], amrex::Real dt)
+  {
+    amrex::Real P;
+    RTY2P(R, T, Y, P);
+    amrex::Real wbar;
+    CKMMWY(&Y[0], &wbar);
+    wbar = 1.0/wbar;
+    //std::cout << "Using Singe Kernels" << std::endl;
+    base_getrates (P, T, wbar, Y, diffusion, dt, WDOT);
+    amrex::Real mw[NUM_SPECIES];
+    get_mw(mw);
+    for (int n = 0; n < NUM_SPECIES; n++)
+      WDOT[n] *= mw[n];
   }
 
   AMREX_GPU_HOST_DEVICE
