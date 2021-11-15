@@ -6,7 +6,7 @@
 #include <AMReX_Utility.H>
 
 #include "mechanism.H"
-#include "base_getrates.h"
+#include "base_getrates.H"
 #include "PhysicsConstants.H"
 
 namespace pele {

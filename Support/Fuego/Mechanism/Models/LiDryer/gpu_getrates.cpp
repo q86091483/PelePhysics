@@ -1,5 +1,4 @@
-#include "chemistry_file.H"
-#include "gpu_getrates.h"
+#include "gpu_getrates.H"
 
 #ifndef MAX
 #define MAX(a,b) (((a) > (b)) ? (a) : (b))
