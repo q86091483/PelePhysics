@@ -6286,16 +6286,20 @@ class CPickler(CMill):
         for r in mechanism.reaction():
             slist = []
             # get a list of species involved in the reactants and products
-            for symbol, coefficient in r.reactants:
-                if symbol in self.qss_species_list:
-                    slist.append(symbol)
-            for symbol, coeffecient in r.products:
-                if symbol in self.qss_species_list:
-                    slist.append(symbol)
+            for symbol_r, coefficient_r in r.reactants:
+                if symbol_r in self.qss_species_list:
+                    slist.append(symbol_r)
+            for symbol_p, coeffecient_p in r.products:
+                if symbol_p in self.qss_species_list:        
+                    slist.append(symbol_p)
+
             # if species s1 and species s2 are in the same reaction,
             # denote they are linked in the species-species network
-            for s1 in slist:
-                for s2 in slist:
+            for i, s1 in enumerate(slist):
+                for j, s2 in enumerate(slist):
+                    # make sure the same QSS species is not on both sides of the reaction
+                    if s1==s2 and i!=j:
+                        sys.exit("species "+s1+" appears as both a product and a reactant. Check reaction "+r.equation())
                     # we should not use the original indices, but the reordered one
                     #self.QSS_SSnet[mechanism.qss_species(s1).id][mechanism.qss_species(s2).id] = 1
                     self.QSS_SSnet[self.ordered_idx_map[s1] - self.nSpecies][self.ordered_idx_map[s2] - self.nSpecies] = 1
@@ -6310,17 +6314,37 @@ class CPickler(CMill):
             product_list = []
             reaction_number = i
     
-            # get a list of species involved in the reactants and products
-            for symbol, coefficient in r.reactants:
-                if symbol in self.qss_species_list:
-                    reactant_list.append(symbol)
-            for	symbol,	coeffecient in r.products:
-                if symbol in self.qss_species_list:
-                    product_list.append(symbol)
+            # get a list of QSS species involved in the reactants
+            for symbol_r, coefficient_r in r.reactants:
+                if symbol_r in self.qss_species_list:
+                    # if the coefficient of the QSS reactant is >1, this indicates higher-order coupling: not allowed!
+                    if coefficient_r>1:
+                        sys.exit('Higher-order coupling found with '+symbol_r+' in reaction '+r.equation()+' not allowed !!!')
+                    reactant_list.append(symbol_r)
+
+            # get list of QSS species involved in the products
+            for	symbol_p, coefficient_p in r.products:
+                if symbol_p in self.qss_species_list:
+                    # if the coefficient of hte QSS product is >1 and the reaction is reversible, this indicates higher-order coupling: not allowed!
+                    if coefficient_p>1 and r.reversible:
+                        sys.exit('Higher-order coupling found with '+symbol_p+' in reaction '+r.equation()+' not allowed !!!')
+                    product_list.append(symbol_p)
+
+            
+            # if there are more than 1 QSS species as reactants in the reaction, this indicates higher-order coupling: not allowed! 
+            if len(reactant_list)>1:
+                sys.exit('Higher-order coupling found in reaction '+r.equation()+' not allowed !!!')
+
+            # if there are more than 1 QSS species as products and the reaction is reversible, this indicates higher-order coupling: not allowed!
+            if len(product_list)>1 and r.reversible:
+                sys.exit('Higher-order coupling found in reaction '+r.equation()+' not allowed !!!')
+                
         
-            # if qss species s is in reaction number i, 
-            # denote they are linked in the Species-Reaction network
-            # with negative if s is a reactant(consumed) and positive if s is a product(produced)
+            # for QSS species involved in reaction number i, 
+            # denote which side each is on as follows
+            # -1 for s reactants(consumed) and +1 for s products(produced)
+            # NOTE: the checks above ensure that for any given direction of a reaction, there is only a maximum of one QSS species on either side and their coefficients must = 1
+            # except for if they are both products in a one-way reaction, which we do not care about.
             for	s in reactant_list:
                 self.QSS_SRnet[self.ordered_idx_map[s] - self.nSpecies][reaction_number] = -1
             for s in product_list:
@@ -6760,71 +6784,31 @@ class CPickler(CMill):
         self.QSS_SCnet = self.QSS_SSnet
 
         for i in range(self.nQSSspecies):
-            for j in self.QSS_SS_Sj[self.QSS_SS_Si == i]:
-                if j != i:
-                    count = 0
-                    for r in self.QSS_SR_Rj[self.QSS_SR_Si == j]:
-                        reaction = mechanism.reaction(id=r)
-                        
-                        # we know j is in reaction r. Options are
-                        # IF r is reversible
-                        # j + i <-> prods OR reacts <-> j + i NOT ALLOWED
-                        # all other combinations are fine.
-                        # IF r is not reversible
-                        # j + i -> prods NOT ALLOWED 
-                        # all other combinations are fine
-                        # note that it is assumed no coupling bet same QSS -- this is if i == j 
+            # get off-diagonal, non-zero indices of QSS Species-Species network
+            relevant_species = (j for j in self.QSS_SS_Sj[self.QSS_SS_Si == i] if j != i)
+            for j in relevant_species:
+                count = 0 
+                # check all reactions that contain BOTH QSS species i and QSS species j
+                for r in list(set(self.QSS_SR_Rj[self.QSS_SR_Si == j]) & set(self.QSS_SR_Rj[self.QSS_SR_Si == i])):
+                    reaction = mechanism.reaction(id=r)
 
-                        if reaction.reversible:
-                            # QSS spec j is a reactant
-                            if any(reactant == self.qss_species_list[j] for reactant,_ in  list(set(reaction.reactants))):
-                                # Check if QSS species i is a reactant too
-                                if any(reactant == self.qss_species_list[i] for reactant,_ in list(set(reaction.reactants))):
-                                    sys.exit('Quadratic coupling between '+self.qss_species_list[j]+' and '+self.qss_species_list[i]+' in reaction '+reaction.equation()+' not allowed !!!')
-                                # if QSS specices j is a reactant and QSS species i is a product,
-                                # because react is two way then j depend on i and vice-versa
-                                elif any(product == self.qss_species_list[i] for product,_ in list(set(reaction.products))):
-                                    count += 1
-                            # if QSS species j is not a reactant, then it must be a product.
-                            else:
-                                # Check if QSS species i is also a product
-                                if any(product == self.qss_species_list[i] for product,_ in list(set(reaction.products))):
-                                    sys.exit('Quadratic coupling between '+self.qss_species_list[j]+' and '+self.qss_species_list[i]+' not allowed !!!')
-                                # if QSS specices j is a product and QSS species i is a reactant
-                                # because react is two way then j depend on i and vice-versa
-                                elif any(reactant == self.qss_species_list[i] for reactant,_ in list(set(reaction.reactants))):
-                                    count += 1
-                        else:
-                            # QSS spec j is a reactant
-                            if any(reactant == self.qss_species_list[j] for reactant,_ in list(set(reaction.reactants))):
-                                # Check if QSS species i is a reactant too
-                                if any(reactant == self.qss_species_list[i] for reactant,_ in list(set(reaction.reactants))):
-                                    sys.exit('Quadratic coupling between '+self.qss_species_list[j]+' and '+self.qss_species_list[i]+' in reaction '+reaction.equation()+' not allowed !!!')
-                                # if QSS specices j is a reactant and QSS species i is a product
-                                elif any(product == self.qss_species_list[i] for product,_ in list(set(reaction.products))):
-                                    count += 1
-                                    
-                    if count == 0:
-                        self.QSS_SCnet[i,j] = 0
-                else:
-                    for r in self.QSS_SR_Rj[self.QSS_SR_Si == j]:
-                        reaction = mechanism.reaction(id=r)
-                        # QSS j is a reactant
-                        if any(reactant == self.qss_species_list[j] for reactant,_ in  list(set(reaction.reactants))):
-                            for reactant in reaction.reactants:
-                                spec, coeff = reactant
-                                if ((spec == self.qss_species_list[j]) and (coeff > 1.0)):
-                                    sys.exit('Quadratic coupling with '+self.qss_species_list[j]+' in reaction '+reaction.equation()+' not allowed !!!')
-                        # QSS j is a product
-                        #else:
-                        #    for product in reaction.products:
-                        #        spec, coeff = product
-                        #        if ((spec == self.qss_species_list[j]) and (coeff > 1.0)):
-                        #            sys.exit('Quadratic coupling with '+self.qss_species_list[j]+' in reaction '+reaction.equation()+' not allowed !!!')
-                        
+                    # If QSS species j is a reactant and QSS species i is a product
+                    if self.QSS_SRnet[j][r] == -1 and self.QSS_SRnet[i][r] == 1:
+                        # Then QSS species i needs QSS species j; keep this connection in the coupling matrix
+                        count += 1
+                    # If QSS species j is a product and QSS species i is a reactant AND the reaction is reversible
+                    elif self.QSS_SRnet[j][r] == 1 and self.QSS_SRnet[i][r] == -1 and reaction.reversible:
+                        # Then QSS species i needs QSS species j; keep this connection in the coupling matrix
+                        count += 1
+                # If neither of the above two scenarios are met, then that means that QSS species i is a reactant and QSS species j is a product in a one-way reaction,
+                # which will be caught when this iteration's QSS species i is being read as QSS species j in a later iteration
+                if count == 0:
+                    self.QSS_SCnet[i,j] = 0
+                                
         self.QSS_SC_Si, self.QSS_SC_Sj = np.nonzero(self.QSS_SCnet)
         print("\n\n SC network for QSS: ")
         print(self.QSS_SCnet)
+        print
 
 
     # Components needed to set up QSS algebraic expressions from AX = B, 
