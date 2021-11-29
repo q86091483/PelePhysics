@@ -27,6 +27,8 @@ struct TurbParm
   amrex::Real turb_scale_loc = 1.;
   amrex::Real turb_scale_vel = 1.;
   amrex::Real turb_conv_vel = 1.;
+  //this variable is used when the case starts with velocity field from plt file produced in pervious run
+  amrex::Real restart_time = 0.0; 
   bool turbinflow_initialized = false;
   bool turbinflow_planes_initialized = false;
   int kmax;

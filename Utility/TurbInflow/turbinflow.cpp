@@ -276,7 +276,7 @@ add_turb(amrex::Box const& bx,
 
   // Get the turbulence
   v.setVal<amrex::RunOn::Device>(0);
-  amrex::Real z = time * tp.turb_conv_vel * tp.turb_scale_loc;
+  amrex::Real z = (time + tp.restart_time) * tp.turb_conv_vel * tp.turb_scale_loc;
   fill_turb_plane(x, y, z, v, tp);
   if (side == amrex::Orientation::high) {
     v.mult<amrex::RunOn::Device>(-tp.turb_scale_vel);
@@ -297,7 +297,6 @@ void set_turb(int normDir, int transDir1, int transDir2,
   const auto& box   = v.box();   // z-normal plane
   const auto& v_in  = v.array();
   const auto& v_out = data.array(dcomp);
-
   amrex::ParallelFor(box, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
                      // From z-normal box index to data box index
                      int idx[3] = {0};
@@ -307,6 +306,7 @@ void set_turb(int normDir, int transDir1, int transDir2,
                      v_out(idx[0],idx[1],idx[2],transDir1) =  v_in(i,j,k,0);  // transverse velocity 1
                      v_out(idx[0],idx[1],idx[2],transDir2) =  v_in(i,j,k,1);  // transverse velocity 2
                      v_out(idx[0],idx[1],idx[2],normDir)   =  v_in(i,j,k,2);  // normal velocity
+
   });
 }
 
