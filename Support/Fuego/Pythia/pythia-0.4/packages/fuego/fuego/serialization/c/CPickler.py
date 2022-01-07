@@ -6467,13 +6467,22 @@ class CPickler(CMill):
         visited[match].append(species)
         potential_cycle[match].append(species)
         parent = species
-        for need in self.needs_running[species]:
+                
+        for need in self.needs_running[parent]:
             child = need
             print "       x Start level of needs loop"
             print "       x Child is: "+child
             if child not in visited[match]:
-                #go a level further !
-                print "         xx Child is not already visited..."  
+
+                print "         xx Child is not already visited..."
+
+                # check if parent is also needed by child, and if multiple children exist, move this child to the front to check first
+                if ((child in self.is_needed_running[parent]) and len(self.needs_running[child]) > 1):
+                    self.needs_running[child].remove(parent)
+                    self.needs_running[child].insert(0, parent)
+                    
+                # then go a level further !
+        
                 self._findClosedCycle(mechanism, match, child, visited, potential_cycle, all_groups, good_path)
                 print "         We've finshed a recursion! The child that was passed in was: "+child
                 if good_path[child] == False:
