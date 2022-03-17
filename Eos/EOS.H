@@ -9,6 +9,7 @@
 
 #include "mechanism.H"
 #include "PhysicsConstants.H"
+#include "EosParams.H"
 #include "GammaLaw.H"
 #include "Fuego.H"
 #include "SRK.H"

@@ -1706,10 +1706,13 @@ ReactorCvode::cF_RHS(
   auto* rhoe_init = udata->rhoe_init;
   auto* rhoesrc_ext = udata->rhoesrc_ext;
   auto* rYsrc_ext = udata->rYsrc_ext;
+  // TODO HACK FIXME DELETE
+  const pele::physics::eos::EosParm<
+  pele::physics::PhysicsType::eos_type> * dummy_pointer;
   amrex::ParallelFor(ncells, [=] AMREX_GPU_DEVICE(int icell) noexcept {
     utils::fKernelSpec<Ordering>(
       icell, ncells, dt_save, reactor_type, yvec_d, ydot_d, rhoe_init,
-      rhoesrc_ext, rYsrc_ext);
+      rhoesrc_ext, rYsrc_ext, dummy_pointer);
   });
   amrex::Gpu::Device::streamSynchronize();
   return 0;

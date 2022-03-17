@@ -8,7 +8,7 @@
 namespace pele{
   namespace physics{
 
-    //class get_var_index {
+    /*
     AMREX_FORCE_INLINE
     int get_var_index(const char* varname, const char* varlist, const int nvar, const int len_str)
     {
@@ -22,6 +22,7 @@ namespace pele{
       if (ii == nvar) amrex::Abort("Requested variable not found in table");
       return ii;
     }
+    */
     
     // Struct to contain tabulated data
     class TabFuncParams {
@@ -32,18 +33,15 @@ namespace pele{
 
       void initialize()
       {
-	amrex::ParmParse pp("eos");
+	amrex::ParmParse pp("table");
 	std::string tablefile;
-	pp.get("tablefile", tablefile);
-	pp.get("table_ndim", m_h_tf_data.Ndim);
-	pp.query("nominal_pressure_cgs", m_h_tf_data.Pnom);
+	pp.get("filename", tablefile);
 	if (m_h_tf_data.Ndim > MAXD_TABLE) {
 	  amrex::Abort("Requesting too many table dimensions, need to increase MAXD_TABLE");
 	}
 	pp.query("v",m_verbose);
 	read_table(tablefile);
 	if (m_verbose >= 1) {
-	  amrex::Print() << "Table pressure is: " << m_h_tf_data.Pnom << " (cgs units)" << std::endl;
 	  print();
 	}
 	allocate();
@@ -58,6 +56,16 @@ namespace pele{
 	}
 	fi.seekg(0, std::ios::beg);
 
+	// Number of dimensions
+        fi.read(reinterpret_cast<char*>(&m_h_tf_data.Ndim), sizeof(int));
+	if (m_h_tf_data.Ndim > MAXD_TABLE) {
+	  amrex::Abort("Requesting too many table dimensions, need to increase MAXD_TABLE");
+	}
+
+	// Dimension names
+	m_h_tf_data.dimnames = static_cast<char*>(amrex::The_Pinned_Arena()->alloc(m_h_tf_data.Ndim*m_h_tf_data.len_str*sizeof(char)));
+	fi.read(m_h_tf_data.dimnames, m_h_tf_data.Ndim*m_h_tf_data.len_str*sizeof(char));
+	
 	// Dimension lengths 
 	m_h_tf_data.dimLengths = static_cast<int*>(amrex::The_Pinned_Arena()->alloc(m_h_tf_data.Ndim*sizeof(int)));
 	fi.read(reinterpret_cast<char*>(m_h_tf_data.dimLengths), m_h_tf_data.Ndim*sizeof(int));
@@ -88,21 +96,17 @@ namespace pele{
 	int Ndata = m_h_tf_data.varSpacing * m_h_tf_data.Nvar;
 	m_h_tf_data.values = static_cast<amrex::Real*>(amrex::The_Pinned_Arena()->alloc(Ndata*sizeof(amrex::Real)));
 	fi.read(reinterpret_cast<char*>(m_h_tf_data.values), sizeof(amrex::Real)*Ndata);
-
-	// Get some important indices
-	m_h_tf_data.idx_density = get_var_index("RHO", m_h_tf_data.varnames, m_h_tf_data.Nvar, m_h_tf_data.len_str );
-	m_h_tf_data.idx_T = get_var_index("T", m_h_tf_data.varnames, m_h_tf_data.Nvar, m_h_tf_data.len_str );
-	m_h_tf_data.idx_rhoD = get_var_index("DIFF", m_h_tf_data.varnames, m_h_tf_data.Nvar, m_h_tf_data.len_str );
-	m_h_tf_data.idx_mu = get_var_index("VISC", m_h_tf_data.varnames, m_h_tf_data.Nvar, m_h_tf_data.len_str );
       }
       
-
       void print()
       {
 	amrex::Print() << "TABULATED FUNCTION" << std::endl;
 	amrex::Print() << "Ndim: " << m_h_tf_data.Ndim << std::endl;
 	amrex::Print() << "Nxi : ";
-	for (int ii = 0; ii< m_h_tf_data.Ndim; ii++) {amrex::Print() << m_h_tf_data.dimLengths[ii] << " " ;}
+	for (int ii = 0; ii< m_h_tf_data.Ndim; ii++) {
+	  std::string dimname(&m_h_tf_data.dimnames[ii*m_h_tf_data.len_str], m_h_tf_data.len_str);
+	  amrex::Print() << dimname << " " << m_h_tf_data.dimLengths[ii] << " | " ;
+	}
 	amrex::Print() << std::endl;
 	amrex::Print() << "Nv: " << m_h_tf_data.Nvar << std::endl;
 	amrex::Print() << "Grids: " << std::endl;
@@ -131,25 +135,19 @@ namespace pele{
 	int Ndim;
 	int Nvar;
 	int varSpacing;
-	int idx_density{0};
-	int idx_T{0};
-	int idx_Wdot{0};
-	int idx_rhoD{0};
-	int idx_mu{0};
         int* dimLengths;
 	int* dimDataSpacing;
 	amrex::Real* grids;
 	amrex::Real* values;
 	char model_name[len_str+1];
 	char* varnames;
-	amrex::Real Pnom{1.01325e6};
+	char* dimnames;
       };
 
       void allocate()
       {
 	if (!m_device_allocated) {
 	  m_d_tf_data = static_cast<TabFuncData*>(amrex::The_Device_Arena()->alloc(sizeof(m_h_tf_data)));
-	  std::cout << sizeof(int) << " " << sizeof(amrex::Real) << " " << sizeof(m_h_tf_data.dimLengths) << " " << sizeof(m_h_tf_data.grids) << " " << sizeof(m_h_tf_data) << std::endl;
 	  m_device_allocated = true;
 	  sync_to_device();
 	}
@@ -172,6 +170,7 @@ namespace pele{
 	amrex::The_Pinned_Arena()->free(m_h_tf_data.grids);
 	amrex::The_Pinned_Arena()->free(m_h_tf_data.values);
 	amrex::The_Pinned_Arena()->free(m_h_tf_data.varnames);
+	amrex::The_Pinned_Arena()->free(m_h_tf_data.dimnames);
 	if (m_device_allocated)
 	  amrex::The_Device_Arena()->free(m_d_tf_data);
       }
@@ -204,14 +203,6 @@ namespace pele{
       AMREX_FORCE_INLINE
       TabFunc(TabFuncParams::TabFuncData* tf_data_in) {
 	tf_data = tf_data_in;
-
-	// TODO:  Convert to accessor functions?
-	idx_density = tf_data->idx_density;
-	idx_T = tf_data->idx_T;
-	idx_Wdot = tf_data->idx_Wdot;
-	idx_rhoD = tf_data->idx_rhoD;
-	idx_mu = tf_data->idx_mu;
-	Pnom = tf_data->Pnom;
       }    
       
       // Lookup directly if you already know index
@@ -245,13 +236,14 @@ namespace pele{
 	// finite differences from table
 	amrex::Real out = differentiate(indices, alphas, dxinv, &tf_data->values[ivar * tf_data->varSpacing], derivs);
       }
-
+      /*
       int idx_density;
       int idx_T;
       int idx_Wdot;
       int idx_rhoD;
       int idx_mu;
       amrex::Real Pnom;
+      */
 
     private:
       TabFuncParams::TabFuncData* tf_data;

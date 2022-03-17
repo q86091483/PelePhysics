@@ -31,7 +31,7 @@ struct ManifoldTransport
     pele::physics::TabFunc tabfunc(tparm->tf_data);
     
     if (wtr_get_mu) {
-      tabfunc.get_from_table(tabfunc.idx_mu, Yloc, mu);
+      tabfunc.get_from_table(tparm->idx_mu, Yloc, mu);
     }
 
     if (wtr_get_lam) {
@@ -46,10 +46,11 @@ struct ManifoldTransport
 
     if (wtr_get_Ddiag) {
       amrex::Real Dtemp{0.0};
-      tabfunc.get_from_table(tabfunc.idx_rhoD, Yloc, Dtemp);
-      for (int i = 0; i < NUM_SPECIES; ++i) {
+      tabfunc.get_from_table(tparm->idx_rhoD, Yloc, Dtemp);
+      for (int i = 0; i < NUM_SPECIES - 1; ++i) {
         Ddiag[i] = Dtemp; 
       }
+      Ddiag[NUM_SPECIES-1] = 0.0; // Placeholder for density
     }
   }
 

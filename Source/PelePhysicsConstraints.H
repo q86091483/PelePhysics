@@ -8,7 +8,7 @@ namespace eos {
 struct Fuego;
 struct GammaLaw;
 struct SRK;
-  struct Manifold;
+struct Manifold;
 } // namespace eos
 
 // Forward declarations

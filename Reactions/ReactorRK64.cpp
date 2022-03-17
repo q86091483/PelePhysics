@@ -103,7 +103,7 @@ ReactorRK64::react(
       for (int stage = 0; stage < rkp.nstages_rk64; stage++) {
         utils::fKernelSpec<Ordering>(
           0, 1, current_time - time_init, captured_reactor_type, soln_reg, rhs,
-          rhoe_init, rhoesrc_ext, rYsrc_ext);
+          rhoe_init, rhoesrc_ext, rYsrc_ext, m_eosparm);
 
         for (int sp = 0; sp < neq; sp++) {
           error_reg[sp] += rkp.err_rk64[stage] * dt_rk * rhs[sp];
@@ -222,7 +222,7 @@ ReactorRK64::react(
     amrex::Real temp = T_in(i, j, k, 0);
 
     amrex::Real Enrg_loc = rEner_in(i, j, k, 0) * rho_inv;
-    auto eos = pele::physics::PhysicsType::eos();
+    auto eos = pele::physics::PhysicsType::eos(m_eosparm);
     if (captured_reactor_type == ReactorTypes::e_reactor_type) {
       eos.REY2T(rho, Enrg_loc, mass_frac, temp);
     } else if (captured_reactor_type == ReactorTypes::h_reactor_type) {
@@ -253,7 +253,7 @@ ReactorRK64::react(
       for (int stage = 0; stage < rkp.nstages_rk64; stage++) {
         utils::fKernelSpec<Ordering>(
           0, 1, current_time - time_init, captured_reactor_type, soln_reg, rhs,
-          rhoe_init, rhoesrc_ext, rYsrc_ext);
+          rhoe_init, rhoesrc_ext, rYsrc_ext, m_eosparm);
 
         for (int sp = 0; sp < neq; sp++) {
           error_reg[sp] += rkp.err_rk64[stage] * dt_rk * rhs[sp];
