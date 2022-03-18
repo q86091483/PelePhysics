@@ -3,6 +3,47 @@
 
 #include "mechanism.H"
 
+const int rmap[21] =
+     {8,15,4,5,6,7,0,1,2,3,9,10,11,12,13,14,16,17,18,19,20};
+
+/*Returns 0-based map of reaction order */
+void GET_RMAP(int * _rmap)
+{
+    for (int j=0; j<21; ++j) {
+        _rmap[j] = rmap[j];
+    }
+}
+
+/*Returns a count of species in a reaction, and their indices */
+/*and stoichiometric coefficients. (Eq 50) */
+void CKINU(int * i, int * nspec, int * ki, int * nu)
+{
+    const int ns[21] =
+     {3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4};
+    const int kiv[84] =
+     {3,1,6,0,7,5,5,0,0,3,3,0,4,4,1,0,4,3,5,0,3,5,2,0,3,1,4,5,4,0,
+      3,5,0,5,2,3,4,2,5,5,6,3,0,1,6,3,5,5,6,4,1,5,6,5,2,1,6,6,7,1,
+      6,6,7,1,7,3,2,5,7,3,6,0,7,4,5,6,7,5,6,2,7,5,6,2};
+    const int nuv[84] =
+     {-1,-1,1,0,-1,1,1,0,-1,1,1,0,-1,-1,1,0,-1,-1,1,0,-1,-1,1,0,-1,
+      -1,1,1,-1,-1,1,1,-1,-1,1,1,-1,-1,1,1,-1,-1,1,1,-1,-1,1,1,-1,
+      -1,1,1,-1,-1,1,1,-1,-1,1,1,-1,-1,1,1,-1,-1,1,1,-1,-1,1,1,-1,
+      -1,1,1,-1,-1,1,1,-1,-1,1,1};
+    if (*i < 1) {
+        /*Return max num species per reaction */
+        *nspec = 4;
+    } else {
+        if (*i > 21) {
+            *nspec = -1;
+        } else {
+            *nspec = ns[*i-1];
+            for (int j=0; j<*nspec; ++j) {
+                ki[j] = kiv[(*i-1)*4 + j] + 1;
+                nu[j] = nuv[(*i-1)*4 + j];
+            }
+        }
+    }
+}
 
 
 /*save atomic weights into array */

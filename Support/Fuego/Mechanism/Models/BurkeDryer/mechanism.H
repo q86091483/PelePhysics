@@ -44,6 +44,8 @@ void CKAWT(amrex::Real *  awt);
 void CKNCF(int * ncf);
 void CKSYME_STR(amrex::Vector<std::string>& ename);
 void CKSYMS_STR(amrex::Vector<std::string>& kname);
+void GET_RMAP(int * _rmap);
+void CKINU(int * i, int * nspec, int * ki, int * nu);
 /* SPARSE INFORMATION  */
 void SPARSITY_INFO(int * nJdata, const int * consP, int NCELLS);
 void SPARSITY_INFO_SYST(int * nJdata, const int * consP, int NCELLS);
@@ -2871,37 +2873,27 @@ AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void comp_qfqr(amrex::Real *  qf, amrex
     amrex::Real k_f, k_r, Corr;
     amrex::Real redP, F, logPred, logFcent, troe_c, troe_n, troe, F_troe;
 
-    // (0):  H + O2 <=> O + OH
-    k_f = 104000000
-               * exp(-(7692.16995349094) * invT);
-    qf[6] *= k_f;
-    qr[6] *= k_f * exp(-(g_RT[0] - g_RT[2] - g_RT[3] + g_RT[5]));
-    // (1):  O + H2 <=> H + OH
-    k_f = 3818000
-               * exp(-(3999.56605981591) * invT);
-    qf[7] *= k_f;
-    qr[7] *= k_f * exp(-(-g_RT[0] + g_RT[1] + g_RT[2] - g_RT[3]));
+    // (10):  O + O + HE <=> O2 + HE
+    k_f = 18.86
+               * exp(-(-899.751398458839) * invT);
+    qf[14] *= k_f;
+    qr[14] *= k_f * exp(-(g_RT[2] + g_RT[2] - g_RT[5] + g_RT[10] - g_RT[10])) * (refC);
+    // (20):  HO2 + HO2 <=> H2O2 + O2
+    k_f = 130000
+               * exp(-(-819.89091359563) * invT);
+    qf[21] *= k_f;
+    qr[21] *= k_f * exp(-(-g_RT[5] + g_RT[6] + g_RT[6] - g_RT[7]));
+    // (12):  H2O + M <=> H + OH + M
+    k_f = 6.064e+21
+               * exp((-3.322) * tc[0] - (60783.5410625521) * invT);
+    Corr  = mixture + (2)*sc[1] + (-1)*sc[4] + (0.1)*sc[10] + sc[8] + (0.5)*sc[5] + (0.9)*sc[11] + (2.8)*sc[12];
+    qf[5] *= Corr * k_f;
+    qr[5] *= Corr * k_f * exp(-(-g_RT[0] - g_RT[3] + g_RT[4])) * (refCinv);
     // (2):  O + H2 <=> H + OH
     k_f = 879200000
                * exp(-(9646.66348347648) * invT);
     qf[8] *= k_f;
     qr[8] *= k_f * exp(-(-g_RT[0] + g_RT[1] + g_RT[2] - g_RT[3]));
-    // (3):  H2 + OH <=> H2O + H
-    k_f = 216
-               * exp((1.51) * tc[0] - (1726.03316371019) * invT);
-    qf[9] *= k_f;
-    qr[9] *= k_f * exp(-(-g_RT[0] + g_RT[1] + g_RT[3] - g_RT[4]));
-    // (4):  OH + OH <=> O + H2O
-    k_f = 0.0334
-               * exp((2.42) * tc[0] - (-971.208165003109) * invT);
-    qf[10] *= k_f;
-    qr[10] *= k_f * exp(-(-g_RT[2] + g_RT[3] + g_RT[3] - g_RT[4]));
-    // (5):  H2 + M <=> H + H + M
-    k_f = 45770000000000
-               * exp((-1.4) * tc[0] - (52525.7555766966) * invT);
-    Corr  = mixture + (1.5)*sc[1] + (11)*sc[4] + (0.9)*sc[11] + (2.8)*sc[12] + (-1)*sc[9] + (-1)*sc[10];
-    qf[2] *= Corr * k_f;
-    qr[2] *= Corr * k_f * exp(-(-g_RT[0] - g_RT[0] + g_RT[1])) * (refCinv);
     // (6):  H2 + AR <=> H + H + AR
     k_f = 5840000000000
                * exp((-1.1) * tc[0] - (52525.7555766966) * invT);
@@ -2912,39 +2904,6 @@ AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void comp_qfqr(amrex::Real *  qf, amrex
                * exp((-1.1) * tc[0] - (52525.7555766966) * invT);
     qf[12] *= k_f;
     qr[12] *= k_f * exp(-(-g_RT[0] - g_RT[0] + g_RT[1] + g_RT[10] - g_RT[10])) * (refCinv);
-    // (8):  O + O + M <=> O2 + M
-    k_f = 6165
-               * exp((-0.5) * tc[0]);
-    Corr  = mixture + (1.5)*sc[1] + (11)*sc[4] + (-1)*sc[9] + (-1)*sc[10] + (0.9)*sc[11] + (2.8)*sc[12];
-    qf[3] *= Corr * k_f;
-    qr[3] *= Corr * k_f * exp(-(g_RT[2] + g_RT[2] - g_RT[5])) * (refC);
-    // (9):  O + O + AR <=> O2 + AR
-    k_f = 18.86
-               * exp(-(-899.751398458839) * invT);
-    qf[13] *= k_f;
-    qr[13] *= k_f * exp(-(g_RT[2] + g_RT[2] - g_RT[5] + g_RT[9] - g_RT[9])) * (refC);
-    // (10):  O + O + HE <=> O2 + HE
-    k_f = 18.86
-               * exp(-(-899.751398458839) * invT);
-    qf[14] *= k_f;
-    qr[14] *= k_f * exp(-(g_RT[2] + g_RT[2] - g_RT[5] + g_RT[10] - g_RT[10])) * (refC);
-    // (11):  O + H + M <=> OH + M
-    k_f = 4714000
-               * exp((-1) * tc[0]);
-    Corr  = mixture + (1.5)*sc[1] + (11)*sc[4] + (-0.25)*sc[9] + (-0.25)*sc[10] + (0.9)*sc[11] + (2.8)*sc[12];
-    qf[4] *= Corr * k_f;
-    qr[4] *= Corr * k_f * exp(-(g_RT[0] + g_RT[2] - g_RT[3])) * (refC);
-    // (12):  H2O + M <=> H + OH + M
-    k_f = 6.064e+21
-               * exp((-3.322) * tc[0] - (60783.5410625521) * invT);
-    Corr  = mixture + (2)*sc[1] + (-1)*sc[4] + (0.1)*sc[10] + sc[8] + (0.5)*sc[5] + (0.9)*sc[11] + (2.8)*sc[12];
-    qf[5] *= Corr * k_f;
-    qr[5] *= Corr * k_f * exp(-(-g_RT[0] - g_RT[3] + g_RT[4])) * (refCinv);
-    // (13):  H2O + H2O <=> H + OH + H2O
-    k_f = 1.006e+20
-               * exp((-2.44) * tc[0] - (60476.5788964112) * invT);
-    qf[15] *= k_f;
-    qr[15] *= k_f * exp(-(-g_RT[0] - g_RT[3] + g_RT[4] + g_RT[4] - g_RT[4])) * (refCinv);
     // (14):  H + O2 (+M) <=> HO2 (+M)
     k_f = 4650840
                * exp((0.44) * tc[0]);
@@ -2964,6 +2923,73 @@ AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void comp_qfqr(amrex::Real *  qf, amrex
     Corr = F * F_troe;
     qf[0] *= Corr * k_f;
     qr[0] *= Corr * k_f * exp(-(g_RT[0] + g_RT[5] - g_RT[6])) * (refC);
+    // (21):  H2O2 (+M) <=> OH + OH (+M)
+    k_f = 2000000000000
+               * exp((0.9) * tc[0] - (24531.3092413143) * invT);
+    Corr  = mixture + (6.5)*sc[4] + (0.6)*sc[12] + (0.5)*sc[8] + (0.2)*sc[5] + (-0.35)*sc[10] + (6.7)*sc[7] + (2.7)*sc[1] + (1.8)*sc[11];
+    redP = Corr / k_f * 1e-6 * 2.49e+24 
+               * exp(-2.3  * tc[0] - 0.50321666580472  * (48749) *invT);
+    F = redP / (1.0 + redP);
+    logPred = log10(redP);
+    logFcent = log10(
+        (0.57)*exp(-tc[1] * 1e+30)
+        + 0.43 * exp(-tc[1] * 1e-30)
+        + 0.0);
+    troe_c = -0.4 - 0.67 * logFcent;
+    troe_n = 0.75 - 1.27 * logFcent;
+    troe = (troe_c + logPred) / (troe_n - 0.14*(troe_c + logPred));
+    F_troe = pow(10, logFcent / (1.0 + troe*troe));
+    Corr = F * F_troe;
+    qf[1] *= Corr * k_f;
+    qr[1] *= Corr * k_f * exp(-(-g_RT[3] - g_RT[3] + g_RT[7])) * (refCinv);
+    // (5):  H2 + M <=> H + H + M
+    k_f = 45770000000000
+               * exp((-1.4) * tc[0] - (52525.7555766966) * invT);
+    Corr  = mixture + (1.5)*sc[1] + (11)*sc[4] + (0.9)*sc[11] + (2.8)*sc[12] + (-1)*sc[9] + (-1)*sc[10];
+    qf[2] *= Corr * k_f;
+    qr[2] *= Corr * k_f * exp(-(-g_RT[0] - g_RT[0] + g_RT[1])) * (refCinv);
+    // (8):  O + O + M <=> O2 + M
+    k_f = 6165
+               * exp((-0.5) * tc[0]);
+    Corr  = mixture + (1.5)*sc[1] + (11)*sc[4] + (-1)*sc[9] + (-1)*sc[10] + (0.9)*sc[11] + (2.8)*sc[12];
+    qf[3] *= Corr * k_f;
+    qr[3] *= Corr * k_f * exp(-(g_RT[2] + g_RT[2] - g_RT[5])) * (refC);
+    // (11):  O + H + M <=> OH + M
+    k_f = 4714000
+               * exp((-1) * tc[0]);
+    Corr  = mixture + (1.5)*sc[1] + (11)*sc[4] + (-0.25)*sc[9] + (-0.25)*sc[10] + (0.9)*sc[11] + (2.8)*sc[12];
+    qf[4] *= Corr * k_f;
+    qr[4] *= Corr * k_f * exp(-(g_RT[0] + g_RT[2] - g_RT[3])) * (refC);
+    // (0):  H + O2 <=> O + OH
+    k_f = 104000000
+               * exp(-(7692.16995349094) * invT);
+    qf[6] *= k_f;
+    qr[6] *= k_f * exp(-(g_RT[0] - g_RT[2] - g_RT[3] + g_RT[5]));
+    // (1):  O + H2 <=> H + OH
+    k_f = 3818000
+               * exp(-(3999.56605981591) * invT);
+    qf[7] *= k_f;
+    qr[7] *= k_f * exp(-(-g_RT[0] + g_RT[1] + g_RT[2] - g_RT[3]));
+    // (3):  H2 + OH <=> H2O + H
+    k_f = 216
+               * exp((1.51) * tc[0] - (1726.03316371019) * invT);
+    qf[9] *= k_f;
+    qr[9] *= k_f * exp(-(-g_RT[0] + g_RT[1] + g_RT[3] - g_RT[4]));
+    // (4):  OH + OH <=> O + H2O
+    k_f = 0.0334
+               * exp((2.42) * tc[0] - (-971.208165003109) * invT);
+    qf[10] *= k_f;
+    qr[10] *= k_f * exp(-(-g_RT[2] + g_RT[3] + g_RT[3] - g_RT[4]));
+    // (9):  O + O + AR <=> O2 + AR
+    k_f = 18.86
+               * exp(-(-899.751398458839) * invT);
+    qf[13] *= k_f;
+    qr[13] *= k_f * exp(-(g_RT[2] + g_RT[2] - g_RT[5] + g_RT[9] - g_RT[9])) * (refC);
+    // (13):  H2O + H2O <=> H + OH + H2O
+    k_f = 1.006e+20
+               * exp((-2.44) * tc[0] - (60476.5788964112) * invT);
+    qf[15] *= k_f;
+    qr[15] *= k_f * exp(-(-g_RT[0] - g_RT[3] + g_RT[4] + g_RT[4] - g_RT[4])) * (refCinv);
     // (15):  HO2 + H <=> H2 + O2
     k_f = 2.75
                * exp((2.09) * tc[0] - (-730.167382082648) * invT);
@@ -2989,30 +3015,6 @@ AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void comp_qfqr(amrex::Real *  qf, amrex
                * exp(-(6029.54208967215) * invT);
     qf[20] *= k_f;
     qr[20] *= k_f * exp(-(-g_RT[5] + g_RT[6] + g_RT[6] - g_RT[7]));
-    // (20):  HO2 + HO2 <=> H2O2 + O2
-    k_f = 130000
-               * exp(-(-819.89091359563) * invT);
-    qf[21] *= k_f;
-    qr[21] *= k_f * exp(-(-g_RT[5] + g_RT[6] + g_RT[6] - g_RT[7]));
-    // (21):  H2O2 (+M) <=> OH + OH (+M)
-    k_f = 2000000000000
-               * exp((0.9) * tc[0] - (24531.3092413143) * invT);
-    Corr  = mixture + (6.5)*sc[4] + (0.6)*sc[12] + (0.5)*sc[8] + (0.2)*sc[5] + (-0.35)*sc[10] + (6.7)*sc[7] + (2.7)*sc[1] + (1.8)*sc[11];
-    redP = Corr / k_f * 1e-6 * 2.49e+24 
-               * exp(-2.3  * tc[0] - 0.50321666580472  * (48749) *invT);
-    F = redP / (1.0 + redP);
-    logPred = log10(redP);
-    logFcent = log10(
-        (0.57)*exp(-tc[1] * 1e+30)
-        + 0.43 * exp(-tc[1] * 1e-30)
-        + 0.0);
-    troe_c = -0.4 - 0.67 * logFcent;
-    troe_n = 0.75 - 1.27 * logFcent;
-    troe = (troe_c + logPred) / (troe_n - 0.14*(troe_c + logPred));
-    F_troe = pow(10, logFcent / (1.0 + troe*troe));
-    Corr = F * F_troe;
-    qf[1] *= Corr * k_f;
-    qr[1] *= Corr * k_f * exp(-(-g_RT[3] - g_RT[3] + g_RT[7])) * (refCinv);
     // (22):  H2O2 + H <=> H2O + OH
     k_f = 24100000
                * exp(-(1997.77016324474) * invT);

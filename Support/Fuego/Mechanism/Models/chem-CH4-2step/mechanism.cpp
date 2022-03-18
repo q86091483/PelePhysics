@@ -3,6 +3,42 @@
 
 #include "mechanism.H"
 
+const int rmap[3] =
+     {0,1,2};
+
+/*Returns 0-based map of reaction order */
+void GET_RMAP(int * _rmap)
+{
+    for (int j=0; j<3; ++j) {
+        _rmap[j] = rmap[j];
+    }
+}
+
+/*Returns a count of species in a reaction, and their indices */
+/*and stoichiometric coefficients. (Eq 50) */
+void CKINU(int * i, int * nspec, int * ki, int * nu)
+{
+    const int ns[3] =
+     {4,3,3};
+    const int kiv[12] =
+     {2,0,3,1,3,0,4,0,4,3,0,0};
+    const int nuv[12] =
+     {-2,-3,2,4,-2,-1,2,0,-2,2,1,0};
+    if (*i < 1) {
+        /*Return max num species per reaction */
+        *nspec = 4;
+    } else {
+        if (*i > 3) {
+            *nspec = -1;
+        } else {
+            *nspec = ns[*i-1];
+            for (int j=0; j<*nspec; ++j) {
+                ki[j] = kiv[(*i-1)*4 + j] + 1;
+                nu[j] = nuv[(*i-1)*4 + j];
+            }
+        }
+    }
+}
 
 
 /*save atomic weights into array */

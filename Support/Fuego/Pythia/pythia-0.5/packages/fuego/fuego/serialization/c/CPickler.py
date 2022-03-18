@@ -316,6 +316,9 @@ class CPickler(CMill):
             self._write()
 
         # Basic info
+        self._write_rmap(mechanism)
+        self._write_get_rmap(mechanism)
+        self._ckinu(mechanism)
         self._atomicWeight(mechanism)
         self._ckawt(mechanism)
         # self._ckxnum(mechanism)
@@ -513,7 +516,7 @@ class CPickler(CMill):
         #        self._write('                amrex::Real *  tc, amrex::Real *  invT, amrex::Real *  T);')
         # self._write(
         #    self.line(' MISC '))
-        # self._write('void CKINU(int * i, int * nspec, int * ki, int * nu);')
+        self._write('void CKINU(int * i, int * nspec, int * ki, int * nu);')
         self._write(self.line(" PROD RATE STUFF "))
         self._write(
             "void productionRate_cpu(amrex::Real *  wdot, amrex::Real *  sc, amrex::Real T);"
@@ -586,6 +589,8 @@ class CPickler(CMill):
         self._write("void CKSYME_STR(amrex::Vector<std::string>& ename);")
         # self._write('void CKSYME(int * kname, int * lenkname);')
         self._write("void CKSYMS_STR(amrex::Vector<std::string>& kname);")
+        self._write('void GET_RMAP(int * _rmap);')
+        self._write('void CKINU(int * i, int * nspec, int * ki, int * nu);')
         self._write(self.line(" SPARSE INFORMATION "))
         self._write(
             "void SPARSITY_INFO(int * nJdata, const int * consP, int NCELLS);"
@@ -1125,6 +1130,13 @@ class CPickler(CMill):
         self._outdent()
         self._write("}")
         return
+
+    def _rmap(self, mechanism):
+        rmap = []
+        nReactions = len(mechanism.reaction())
+        for i in range(nReactions):
+            rmap.append(mechanism.reaction()[i].orig_id-1)
+        return rmap
 
     def _ckcpbl(self, mechanism):
         self._write()
@@ -2159,11 +2171,7 @@ class CPickler(CMill):
             self._write()
 
             # build reverse reaction map
-            rmap = {}
-            for i, reaction in zip(
-                list(range(nReactions)), mechanism.reaction()
-            ):
-                rmap[reaction.orig_id - 1] = i
+            rmap = self._rmap(mechanism)
 
             # reacs are sorted here
             # for i in range(nReactions):
@@ -7738,10 +7746,86 @@ class CPickler(CMill):
             alpha.append("%s*%s" % (factor, conc))
         return " + ".join(alpha)
 
+    def _chopAtChar(self,inp,ch,N):
+        tokens = inp.split(ch)
+        res = []
+        res.append(tokens[0])
+        for s in tokens[1:]:
+            nres = res[-1] + ch + s
+            if (len(nres) > N):
+                res.append(s)
+            else:
+                res[-1] = nres
+        return res
+
+    def _write_rmap(self, mechanism):
+        rmap = self._rmap(mechanism)
+        nReaction = len(mechanism.reaction())
+        nL = 60
+        junk = ',\n      '.join(self._chopAtChar(','.join(str(x) for x in rmap),',',nL))
+        self._write("const int rmap[%d] =\n     {%s};" % (nReaction,junk))
+
+    def _write_get_rmap(self, mechanism):
+        rmap = self._rmap(mechanism)
+        nReactions = len(mechanism.reaction())
+        self._write()
+        self._write(
+            self.line(
+                "Returns 0-based map of reaction order"
+            )
+        )
+        self._write(
+            "void GET_RMAP" + sym + "(int * _rmap)"
+        )
+        self._write("{")
+        self._indent()
+
+        self._write("for (int j=0; j<%d; ++j) {" % (nReactions))
+        self._indent()
+        self._write("_rmap[j] = rmap[j];")
+        self._outdent()
+        self._write("}")
+
+        self._outdent()
+        self._write("}")
+        return
+
     # NEED TO DEAL WITH THIS WHEN QSS
     def _ckinu(self, mechanism):
         nSpecies = self.nSpecies
         nReaction = len(mechanism.reaction())
+
+        # build reverse reaction map
+        rmap = self._rmap(mechanism)
+
+        maxsp = 0
+        rmap = self._rmap(mechanism)
+
+        ns = [ 0 for _ in range(nReaction) ]
+        ki = [ [] for _ in range(nReaction) ]
+        nu = [ [] for _ in range(nReaction) ]
+
+        for j in range(nReaction):
+            reaction = mechanism.reaction()[rmap[j]]
+            id = reaction.id - 1
+
+            for symbol, coefficient in reaction.reactants:
+                ki[id].append(self.ordered_idx_map[symbol])
+                nu[id].append(-int(coefficient))
+            for symbol, coefficient in reaction.products:
+                ki[id].append(self.ordered_idx_map[symbol])
+                nu[id].append(int(coefficient))
+
+            maxsp = max(maxsp,len(ki[id]))
+
+        for j in range(nReaction):
+            reaction = mechanism.reaction()[rmap[j]]
+            id = reaction.id - 1
+
+            ns[id] = len(ki[id])
+            for i in range(ns[id],maxsp):
+                ki[id].append(0)
+                nu[id].append(0)
 
         self._write()
         self._write(
@@ -7756,14 +7840,18 @@ class CPickler(CMill):
         self._write("{")
         self._indent()
 
+        nL = 60
+        junk = ',\n      '.join(self._chopAtChar(','.join(str(x) for x in ns),',',nL))
+        self._write("const int ns[%d] =\n     {%s};" % (nReaction,junk))
+
+        junk = ',\n      '.join(self._chopAtChar(','.join( ','.join(str(x) for x in ki[j] ) for j in range(nReaction)),',',nL))
+        self._write("const int kiv[%d] =\n     {%s};" % (nReaction * maxsp,junk))
+
+        junk = ',\n      '.join(self._chopAtChar(','.join( ','.join(str(x) for x in nu[j] ) for j in range(nReaction)),',',nL))
+        self._write("const int nuv[%d] =\n     {%s};" % (nReaction * maxsp,junk))
+
         self._write("if (*i < 1) {")
         self._indent()
-
-        maxsp = 0
-        for reaction in mechanism.reaction():
-            maxsp = max(
-                maxsp, len(reaction.reactants) + len(reaction.products)
-            )
 
         self._write(self.line("Return max num species per reaction"))
         self._write("*nspec = %d;" % (maxsp))
@@ -7776,13 +7864,15 @@ class CPickler(CMill):
         self._outdent()
         self._write("} else {")
         self._indent()
-        self._write("*nspec = kiv[*i-1].size();")
+
+        self._write("*nspec = ns[*i-1];")
         self._write("for (int j=0; j<*nspec; ++j) {")
         self._indent()
-        self._write("ki[j] = kiv[*i-1][j] + 1;")
-        self._write("nu[j] = nuv[*i-1][j];")
+        self._write("ki[j] = kiv[(*i-1)*%d + j] + 1;" % maxsp)
+        self._write("nu[j] = nuv[(*i-1)*%d + j];" % maxsp)
         self._outdent()
         self._write("}")
+
         self._outdent()
         self._write("}")
         self._outdent()
@@ -12539,9 +12629,7 @@ class CPickler(CMill):
         self._indent()
 
         # build reverse reaction map
-        rmap = {}
-        for i, reaction in zip(list(range(nReactions)), mechanism.reaction()):
-            rmap[reaction.orig_id - 1] = i
+        rmap = self._rmap(mechanism)
 
         for j in range(nReactions):
             reaction = mechanism.reaction()[rmap[j]]
