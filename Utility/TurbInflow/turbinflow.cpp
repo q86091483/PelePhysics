@@ -14,10 +14,12 @@ TurbInflow::init(amrex::Geometry const& geom)
     pp.query("turb_file", m_turb_file);
     pp.query("turb_scale_loc", tp.turb_scale_loc);
     pp.query("turb_scale_vel", tp.turb_scale_vel);
+    pp.query("restart_time", tp.restart_time);
     amrex::Print() << "Initializing turbulence file: " << m_turb_file
                    << " (location coordinates in will be scaled by "
                    << tp.turb_scale_loc << " and velocity out to be scaled by "
                    << tp.turb_scale_vel << ")" << std::endl;
+    amrex::Print() << "Starting turbinflow at time = " << tp.restart_time << std::endl;
 
     const auto prob_lo = geom.ProbLoArray();
     const auto prob_hi = geom.ProbHiArray();
@@ -141,7 +143,7 @@ TurbInflow::add_turb(
 
   // Get the turbulence
   v.setVal<amrex::RunOn::Device>(0);
-  amrex::Real z = time * tp.turb_conv_vel * tp.turb_scale_loc;
+  amrex::Real z = (time + tp.restart_time) * tp.turb_conv_vel * tp.turb_scale_loc;
   fill_turb_plane(x, y, z, v);
   if (side == amrex::Orientation::high) {
     v.mult<amrex::RunOn::Device>(-tp.turb_scale_vel);
