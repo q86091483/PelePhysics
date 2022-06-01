@@ -3,12 +3,15 @@
 
 #include <AMReX_ParmParse.H>
 #include "PelePhysics.H"
+#include "Factory.H"
 #include "mechanism.H"
+#include "turbinflow.H"
+#include "PMFData.H"
 
 namespace pele {
 namespace physics {
 
-class ProblemHelper : 
+class ProblemHelper : public Factory<ProblemHelper>
 {
 public:
   static const std::string identifier() { return "ProblemHelper"; }
@@ -28,7 +31,7 @@ public:
 
 protected:
   PMF::PmfData pmf_data; 
-  TurbParm tp;
+  turbinflow::TurbInflow tp;
 };
 
 } // namespace physics

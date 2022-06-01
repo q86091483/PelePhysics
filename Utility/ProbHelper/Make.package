@@ -1,0 +1,5 @@
+CEXE_sources += ProblemHelper.cpp
+CEXE_headers += ProblemHelper.H
+
+VPATH_LOCATIONS += $(PELE_PHYSICS_HOME)/Utility/ProbHelper
+INCLUDE_LOCATIONS += $(PELE_PHYSICS_HOME)/Utility/ProbHelper

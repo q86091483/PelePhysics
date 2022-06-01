@@ -3,25 +3,25 @@
 namespace pele {
 namespace physics {
 
-void ProblemHelper::inidata()
+void ProblemHelper::initdata()
 {
-    Abort("ProblemHelper pure virtual called !");
+    amrex::Abort("ProblemHelper pure virtual called !");
 }
 
 void ProblemHelper::bcnormal()
 {
-    Abort("ProblemHelper pure virtual called !");
+    amrex::Abort("ProblemHelper pure virtual called !");
 }
 
 #ifdef AMREX_USE_EB
 void ProblemHelper::tagEBtype()
 {
-    Abort("ProblemHelper pure virtual called !");
+    amrex::Abort("ProblemHelper pure virtual called !");
 }
 
 void ProblemHelper::getEBState()
 {
-    Abort("ProblemHelper pure virtual called !");
+    amrex::Abort("ProblemHelper pure virtual called !");
 }
 #endif
 
