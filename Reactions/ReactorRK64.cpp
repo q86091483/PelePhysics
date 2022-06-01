@@ -63,6 +63,7 @@ ReactorRK64::react(
   const int captured_nsubsteps_guess = rk64_nsubsteps_guess;
   const int captured_nsubsteps_min = rk64_nsubsteps_min;
   const int captured_nsubsteps_max = rk64_nsubsteps_max;
+  const auto * leosparm = m_eosparm;
   const amrex::Real captured_abstol = absTol;
   RK64Params rkp;
 
@@ -103,7 +104,7 @@ ReactorRK64::react(
       for (int stage = 0; stage < rkp.nstages_rk64; stage++) {
         utils::fKernelSpec<Ordering>(
           0, 1, current_time - time_init, captured_reactor_type, soln_reg, rhs,
-          rhoe_init, rhoesrc_ext, rYsrc_ext, m_eosparm);
+          rhoe_init, rhoesrc_ext, rYsrc_ext, leosparm);
 
         for (int sp = 0; sp < neq; sp++) {
           error_reg[sp] += rkp.err_rk64[stage] * dt_rk * rhs[sp];
@@ -189,6 +190,7 @@ ReactorRK64::react(
   const int captured_nsubsteps_guess = rk64_nsubsteps_guess;
   const int captured_nsubsteps_min = rk64_nsubsteps_min;
   const int captured_nsubsteps_max = rk64_nsubsteps_max;
+  const auto * leosparm = m_eosparm;
   const amrex::Real captured_abstol = absTol;
   RK64Params rkp;
 
@@ -208,12 +210,22 @@ ReactorRK64::react(
     amrex::Real current_time = time_init;
     const int neq = (NUM_SPECIES + 1);
 
+    // TODO: Make more elegant
     amrex::Real rho = 0.0;
+#ifndef USE_MANIFOLD_EOS
     for (int sp = 0; sp < NUM_SPECIES; sp++) {
       soln_reg[sp] = rY_in(i, j, k, sp);
       carryover_reg[sp] = soln_reg[sp];
       rho += rY_in(i, j, k, sp);
     }
+#else
+    for (int sp = 0; sp < NUM_SPECIES; sp++) {
+      soln_reg[sp] = rY_in(i, j, k, sp);
+      carryover_reg[sp] = soln_reg[sp];
+    }
+    rho = rY_in(i, j, k, NUM_SPECIES-1);
+#endif
+
     amrex::Real rho_inv = 1.0 / rho;
     amrex::Real mass_frac[NUM_SPECIES] = {0.0};
     for (int sp = 0; sp < NUM_SPECIES; sp++) {
@@ -222,7 +234,7 @@ ReactorRK64::react(
     amrex::Real temp = T_in(i, j, k, 0);
 
     amrex::Real Enrg_loc = rEner_in(i, j, k, 0) * rho_inv;
-    auto eos = pele::physics::PhysicsType::eos(m_eosparm);
+    auto eos = pele::physics::PhysicsType::eos(leosparm);
     if (captured_reactor_type == ReactorTypes::e_reactor_type) {
       eos.REY2T(rho, Enrg_loc, mass_frac, temp);
     } else if (captured_reactor_type == ReactorTypes::h_reactor_type) {
@@ -253,7 +265,7 @@ ReactorRK64::react(
       for (int stage = 0; stage < rkp.nstages_rk64; stage++) {
         utils::fKernelSpec<Ordering>(
           0, 1, current_time - time_init, captured_reactor_type, soln_reg, rhs,
-          rhoe_init, rhoesrc_ext, rYsrc_ext, m_eosparm);
+          rhoe_init, rhoesrc_ext, rYsrc_ext, leosparm);
 
         for (int sp = 0; sp < neq; sp++) {
           error_reg[sp] += rkp.err_rk64[stage] * dt_rk * rhs[sp];
@@ -286,11 +298,20 @@ ReactorRK64::react(
     // copy data back
     int icell = (k - lo.z) * len.x * len.y + (j - lo.y) * len.x + (i - lo.x);
     d_nsteps[icell] = nsteps;
+    // TODO : make this more elegant
+#ifndef USE_MANIFOLD_EOS
     rho = 0.0;
     for (int sp = 0; sp < NUM_SPECIES; sp++) {
       rY_in(i, j, k, sp) = soln_reg[sp];
       rho += rY_in(i, j, k, sp);
     }
+#else
+    for (int sp = 0; sp < NUM_SPECIES; sp++) {
+      rY_in(i, j, k, sp) = soln_reg[sp];
+    }
+    rho = rY_in(i, j, k, NUM_SPECIES-1);
+#endif
+
     rho_inv = 1.0 / rho;
     for (int sp = 0; sp < NUM_SPECIES; sp++) {
       mass_frac[sp] = rY_in(i, j, k, sp) * rho_inv;
