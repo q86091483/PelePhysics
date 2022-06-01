@@ -1,5 +1,5 @@
 # AMReX
-DIM        = 2
+DIM        = 3
 PRECISION  = DOUBLE
 PROFILE    = FALSE
 VERBOSE    = FALSE
@@ -8,14 +8,14 @@ DEBUG      = FALSE
 # Compiler
 COMP       = gnu
 FCOMP      = gfortran
-USE_MPI    = FALSE
+USE_MPI    = TRUE
 USE_OMP    = FALSE
 USE_CUDA   = TRUE
 USE_HIP    = FALSE
 
 # PelePhysics
 FUEGO_GAS  = FALSE
-TINY_PROFILE = FALSE
+TINY_PROFILE = TRUE
 
 # define the location of the PELE_PHYSICS top directory
 PELE_PHYSICS_HOME    ?= ../../..
@@ -36,12 +36,12 @@ endif
 
 ifeq ($(FUEGO_GAS), TRUE)
   Eos_Model       = Fuego
-  Chemistry_Model = LiDryer
+  Chemistry_Model = grimech30-noArN
   Transport_Model = Constant
 else
-  Eos_Model       = GammaLaw
-  Chemistry_Model = Null
-  Transport_Model = Constant
+  Eos_Model       = Manifold
+  Chemistry_Model = Manifold3d
+  Transport_Model = Manifold
 endif
 
 Bpack   := ./Make.package
