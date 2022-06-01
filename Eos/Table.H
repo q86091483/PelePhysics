@@ -7,22 +7,6 @@
 
 namespace pele{
   namespace physics{
-
-    /*
-    AMREX_FORCE_INLINE
-    int get_var_index(const char* varname, const char* varlist, const int nvar, const int len_str)
-    {
-      std::string var(varname);
-      var.insert(var.end(), len_str - var.size(), ' ');
-      int ii;
-      for (ii = 0; ii < nvar; ii++) {
-	std::string vartest = std::string(&varlist[ii*len_str], len_str);
-	if (strcmp(var.c_str(), vartest.c_str())==0) break;
-      }
-      if (ii == nvar) amrex::Abort("Requested variable not found in table");
-      return ii;
-    }
-    */
     
     // Struct to contain tabulated data
     class TabFuncParams {
@@ -261,7 +245,7 @@ namespace pele{
 	  // TODO: test alternatives: lower_bound, find, home rolled while loop, home rolled fixed grid direct
 	  // SOFAR: lower_bound is much faster than home rolled while loop. Even then, finding indexes is ~50% of runtime
 
-#ifdef AMREX_USE_GPU
+#ifndef AMREX_USE_GPU
 	  auto beg = &tf_data->grids[start];
 	  int idx = std::lower_bound(beg+1, beg+dimLen-1, interpdata[dim]) - beg - 1;
 	  idx = std::min(std::max(idx,0),dimLen-2); // don't let idx be negative or out of bounds
@@ -291,9 +275,7 @@ namespace pele{
       // Inlining not supported for Ndim > 5, but that is unlikely to be used anyway
       // minor performance gain possible by modifying code so selecting dimensionality isn't neeeded for each lookup
       AMREX_GPU_HOST_DEVICE
-#if MAXD_TABLE <= 5
       AMREX_FORCE_INLINE
-#endif
       amrex::Real interpolate(const int indices[], const amrex::Real alphas[], const amrex::Real data[]){
 	amrex::Real out_value;
 	switch (tf_data->Ndim) {
@@ -319,6 +301,7 @@ namespace pele{
       {
 	return interpolate_ND(indices, alphas, data, tf_data->Ndim-1);
       }
+
       AMREX_GPU_HOST_DEVICE
       amrex::Real interpolate_ND(const int indices[], const amrex::Real alphas[], const amrex::Real data[],  const int dim)
       {
@@ -393,9 +376,7 @@ namespace pele{
       // Wrapper for interpolation process, chooses appropriate approach based on dimensionality
       // same caveats apply as for the interpolation process
       AMREX_GPU_HOST_DEVICE
-#if MAXD_TABLE <= 5
       AMREX_FORCE_INLINE
-#endif
       amrex::Real differentiate(const int indices[], const amrex::Real alphas[], const amrex::Real dxinv[],
 				const amrex::Real data[], amrex::Real derivs[]){
 	amrex::Real out_value;
@@ -416,13 +397,16 @@ namespace pele{
       }
 
       // Recursive functions
+      AMREX_GPU_HOST_DEVICE
+      AMREX_FORCE_INLINE
       amrex::Real differentiate_ND(const int indices[], const amrex::Real alphas[], const amrex::Real dxinv[],
 				  const amrex::Real data[], amrex::Real derivs[])
       {
 	amrex::Real outval = differentiate_ND(indices, alphas, dxinv, data, derivs, tf_data->Ndim-1);
 	return outval;
       }
-	
+
+      AMREX_GPU_HOST_DEVICE
       amrex::Real differentiate_ND(const int indices[], const amrex::Real alphas[], const amrex::Real dxinv[],
 					    const amrex::Real data[], amrex::Real derivs[], const int dim)
       {
@@ -434,8 +418,8 @@ namespace pele{
 	  value_left = data[idx];
 	  value_right = data[idx+1];
 	} else {
-	  amrex::Real derivs_left[dim];
-	  amrex::Real derivs_right[dim];
+	  amrex::Real derivs_left[MAXD_TABLE];
+	  amrex::Real derivs_right[MAXD_TABLE];
 	  // Exit recursion for performance when possible
 	  if (dim == 5) {
 	    value_left = differentiate_5D(indices, alphas, dxinv, &data[indices[dim]*tf_data->dimDataSpacing[dim]], derivs_left);
@@ -451,9 +435,11 @@ namespace pele{
 	}
 	derivs[dim] = (value_right - value_left)*dxinv[dim]; // take the derivative
 	return alpha * value_left + oneMinusAlpha * value_right; // interpolate
-      }
+	}
 
       // inlinable functions
+      AMREX_GPU_HOST_DEVICE
+      AMREX_FORCE_INLINE
       amrex::Real differentiate_5D(const int indices[], const amrex::Real alphas[], const amrex::Real dxinv[],
 				  const amrex::Real data[], amrex::Real derivs[])
       {
@@ -471,6 +457,8 @@ namespace pele{
 	derivs[dim] = (value_right - value_left)*dxinv[dim]; // take the derivative
 	return alpha * value_left + oneMinusAlpha * value_right; // interpolate	
       }
+      AMREX_GPU_HOST_DEVICE
+      AMREX_FORCE_INLINE
       amrex::Real differentiate_4D(const int indices[], const amrex::Real alphas[], const amrex::Real dxinv[],
 				  const amrex::Real data[], amrex::Real derivs[])
       {
@@ -488,6 +476,9 @@ namespace pele{
 	derivs[dim] = (value_right - value_left)*dxinv[dim]; // take the derivative
 	return alpha * value_left + oneMinusAlpha * value_right; // interpolate	
       }
+
+      AMREX_GPU_HOST_DEVICE
+      AMREX_FORCE_INLINE
       amrex::Real differentiate_3D(const int indices[], const amrex::Real alphas[], const amrex::Real dxinv[],
 				  const amrex::Real data[], amrex::Real derivs[])
       {
@@ -505,6 +496,9 @@ namespace pele{
 	derivs[dim] = (value_right - value_left)*dxinv[dim]; // take the derivative
 	return alpha * value_left + oneMinusAlpha * value_right; // interpolate	
       }
+
+      AMREX_GPU_HOST_DEVICE
+      AMREX_FORCE_INLINE
       amrex::Real differentiate_2D(const int indices[], const amrex::Real alphas[], const amrex::Real dxinv[],
 				  const amrex::Real data[], amrex::Real derivs[])
       {
@@ -522,6 +516,9 @@ namespace pele{
 	derivs[dim] = (value_right - value_left)*dxinv[dim]; // take the derivative
 	return alpha * value_left + oneMinusAlpha * value_right; // interpolate	
       }
+
+      AMREX_GPU_HOST_DEVICE
+      AMREX_FORCE_INLINE
       amrex::Real differentiate_1D(const int indices[], const amrex::Real alphas[], const amrex::Real dxinv[],
 				  const amrex::Real data[], amrex::Real derivs[])
       {
