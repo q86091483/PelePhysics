@@ -138,7 +138,13 @@ ReactorBase::set_sundials_solver_tols(
 
   N_VDestroy(atol);
 }
-
+  
+void
+ReactorBase::set_eos_parm(const pele::physics::eos::EosParm<
+    pele::physics::PhysicsType::eos_type> * eosparm)
+{
+  m_eosparm = eosparm;
+}
 } // namespace reactions
 } // namespace physics
 } // namespace pele

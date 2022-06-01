@@ -9,9 +9,11 @@
 
 #include "mechanism.H"
 #include "PhysicsConstants.H"
+#include "EosParams.H"
 #include "GammaLaw.H"
 #include "Fuego.H"
 #include "SRK.H"
+#include "Manifold.H"
 
 namespace pele {
 namespace physics {
@@ -21,6 +23,8 @@ using EosType = eos::GammaLaw;
 using EosType = eos::Fuego;
 #elif USE_SRK_EOS
 using EosType = eos::SRK;
+#elif USE_MANIFOLD_EOS
+  using EosType = eos::Manifold;
 #else
 static_assert(false, "Invalid EOS specified");
 #endif

@@ -1,0 +1,7 @@
+niter = 1
+size = 256
+do_plt = 0
+
+table.filename = peletable_3dim_14grid
+eos.nominal_pressure_cgs = 1013250.0
+table.v = 1

@@ -1,4 +1,4 @@
-AMREX_HOME        ?= ../../../../../amrex
+AMREX_HOME        ?= ../../../../..
 PELE_HOME         ?= ../../../..
 PELE_PHYSICS_HOME ?= $(PELE_HOME)/PelePhysics
 
@@ -46,6 +46,9 @@ ifeq ($(Eos_Model),$(filter $(Eos_Model),Fuego))
 endif
 ifeq ($(Eos_Model),$(filter $(Eos_Model),Soave-Redlich-Kwong))
    DEFINES += -DUSE_SRK_EOS
+endif
+ifeq ($(Eos_Model),$(filter $(Eos_Model),Manifold))
+   DEFINES += -DUSE_MANIFOLD_EOS
 endif
 INCLUDE_LOCATIONS += $(EOS_HOME)
 VPATH_LOCATIONS   += $(EOS_HOME)
@@ -98,6 +101,9 @@ ifeq ($(Transport_Model), Constant)
 endif
 ifeq ($(Transport_Model), Sutherland)
   DEFINES += -DUSE_SUTHERLAND_TRANSPORT
+endif
+ifeq ($(Transport_Model), Manifold)
+  DEFINES += -DUSE_MANIFOLD_TRANSPORT
 endif
 
 # Utilities

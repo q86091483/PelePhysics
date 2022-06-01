@@ -7,6 +7,7 @@
 #include "PelePhysicsConstraints.H"
 #include "EOS.H"
 #include "Transport.H"
+#include "Table.H"
 
 namespace pele {
 namespace physics {

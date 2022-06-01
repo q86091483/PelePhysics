@@ -90,11 +90,16 @@ public:
     const amrex::Real absTol,
     const std::string solvername);
 
+  void set_eos_parm(const pele::physics::eos::EosParm<
+		    pele::physics::PhysicsType::eos_type> * eosparm);
+
   ~ReactorBase() override = default;
 
 protected:
   int verbose{0};
   amrex::Array<amrex::Real, NUM_SPECIES + 1> m_typ_vals = {0.0};
+  const pele::physics::eos::EosParm<
+    pele::physics::PhysicsType::eos_type> * m_eosparm;
 };
 } // namespace reactions
 } // namespace physics

@@ -22,7 +22,7 @@ struct TransParm
 template <typename EOSType, typename TransportType>
 struct InitTransParm
 {
-  void operator()(TransParm<EOSType, TransportType> /*tparm*/) {}
+  void operator()(TransParm<EOSType, TransportType>* /*tparm*/) {}
 };
 
 template <typename EOSType>
@@ -70,6 +70,30 @@ struct InitTransParm<EOSType, SutherlandTransport>
     pp.query("viscosity_S", tparm->viscosity_S);
     pp.query("const_bulk_viscosity", tparm->const_bulk_viscosity);
     pp.query("const_diffusivity", tparm->const_diffusivity);
+  }
+};
+
+template <typename EOSType>
+struct TransParm<EOSType, ManifoldTransport>
+{
+  TabFuncParams::TabFuncData* tf_data;
+  int idx_rhoD{0};
+  int idx_mu{0};
+};
+
+template <typename EOSType>
+struct InitTransParm<EOSType, ManifoldTransport>
+{
+  void operator()(TransParm<EOSType, ManifoldTransport>* tparm)
+  {
+    amrex::Abort("For manifold transport tabulated data must be provided to transport parameters");
+  }
+  
+  void operator()(TransParm<EOSType, ManifoldTransport>* tparm, TabFuncParams::TabFuncData* tf_data_in)
+  {
+    tparm->tf_data = tf_data_in;
+    tparm->idx_rhoD = pele::physics::eos::get_var_index("DIFF", tf_data_in->varnames, tf_data_in->Nvar, tf_data_in->len_str);
+    tparm->idx_mu = pele::physics::eos::get_var_index("VISC", tf_data_in->varnames, tf_data_in->Nvar, tf_data_in->len_str);
   }
 };
 
@@ -321,6 +345,18 @@ public:
     }
   }
 
+  void allocate(TabFuncParams::TabFuncData* tf_data)
+  {
+    InitTransParm<EosType, TransportType>()(&m_h_trans_parm, tf_data);
+    if (!m_device_allocated) {
+      m_d_trans_parm =
+        (TransParm<EosType, TransportType>*)amrex::The_Device_Arena()->alloc(
+          sizeof(m_h_trans_parm));
+      m_device_allocated = true;
+      sync_to_device();
+    }
+  }
+
   void deallocate()
   {
     if (m_device_allocated) {
@@ -343,6 +379,7 @@ public:
   {
     return m_h_trans_parm;
   }
+  
   const TransParm<EosType, TransportType>* device_trans_parm()
   {
     return m_d_trans_parm;
@@ -353,6 +390,35 @@ private:
   TransParm<EosType, TransportType>* m_d_trans_parm;
   bool m_device_allocated{false};
 };
+
+/*
+template <typename TransportType>
+void TransportParams<ManifoldTransport>::allocate()
+  {
+    InitTransParm<EosType, TransportType>()(&m_h_trans_parm);
+    if (!m_device_allocated) {
+      m_d_trans_parm =
+        (TransParm<EosType, TransportType>*)amrex::The_Device_Arena()->alloc(
+          sizeof(m_h_trans_parm));
+      m_device_allocated = true;
+      sync_to_device();
+    }
+  }
+
+template <>
+void TransportParams<ManifoldTransport>::allocate()
+  {
+    InitTransParm<EosType, TransportType>()(&m_h_trans_parm);
+    if (!m_device_allocated) {
+      m_d_trans_parm =
+        (TransParm<EosType, TransportType>*)amrex::The_Device_Arena()->alloc(
+          sizeof(m_h_trans_parm));
+      m_device_allocated = true;
+      sync_to_device();
+    }
+  }
+*/
+
 } // namespace transport
 } // namespace physics
 } // namespace pele
