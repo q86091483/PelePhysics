@@ -1,0 +1,32 @@
+This is a small test code that tests the capbility to
+look up physical properties from a table in PelePhysics
+
+----------
+- To compile, in the GNUmakefile, add the line:
+
+AMREX_HOME = /absolute/path/to/amrex/directory
+
+  then run:
+
+make -j TPL
+make -j
+
+----------
+- Compile time options include:
+      - whether or not to use CUDA, MPI, etc
+      - Dimensionality of table (change Chemistry_Model to Manifold (for 1D), Manifold2d, Manifold3d, or Manifold4d)
+
+----------
+- To run, execute:
+
+./Pele3d.gnu.TPROF.MPI.CUDA.ex inputs.2d
+
+----------
+- To generate dummy tables for this exercise (requires python3, pandas, numpy)
+
+python create_chemtable.py ndim ngrid
+
+      where ndim is the number of dimensions and ngrid is the number of points
+      for each dimension of the table
+
+
