@@ -10,6 +10,8 @@ ReactorNull::init(int reactor_type, int /*ncells*/)
   BL_PROFILE("Pele::ReactorNull::init()");
   m_reactor_type = reactor_type;
   ReactorTypes::check_reactor_type(m_reactor_type);
+  amrex::ParmParse pp("ode");
+  pp.query("verbose", verbose);
   return (0);
 }
 
@@ -51,7 +53,7 @@ ReactorNull::react(
       rY_in(i, j, k, n) = rY_loc[n];
     }
     amrex::Real rho_loc = 0.0;
-    for (double n : rY_loc) {
+    for (amrex::Real n : rY_loc) {
       rho_loc += n;
     }
     amrex::Real Y_loc[NUM_SPECIES];

@@ -12,10 +12,12 @@ ReactorRK64::init(int reactor_type, int /*ncells*/)
   m_reactor_type = reactor_type;
   ReactorTypes::check_reactor_type(m_reactor_type);
   amrex::ParmParse pp("ode");
+  pp.query("verbose", verbose);
   pp.query("atol", absTol);
   pp.query("rk64_nsubsteps_guess", rk64_nsubsteps_guess);
   pp.query("rk64_nsubsteps_min", rk64_nsubsteps_min);
   pp.query("rk64_nsubsteps_max", rk64_nsubsteps_max);
+  pp.query("clean_init_massfrac", m_clean_init_massfrac);
   return (0);
 }
 
@@ -97,7 +99,7 @@ ReactorRK64::react(
     int nsteps = 0;
     amrex::Real change_factor;
     while (current_time < time_out) {
-      for (double& sp : error_reg) {
+      for (amrex::Real& sp : error_reg) {
         sp = 0.0;
       }
       for (int stage = 0; stage < rkp.nstages_rk64; stage++) {
@@ -118,7 +120,7 @@ ReactorRK64::react(
       nsteps++;
 
       amrex::Real max_err = tinyval;
-      for (double sp : error_reg) {
+      for (amrex::Real sp : error_reg) {
         max_err = fabs(sp) > max_err ? fabs(sp) : max_err;
       }
 
@@ -247,7 +249,7 @@ ReactorRK64::react(
     int nsteps = 0;
     amrex::Real change_factor;
     while (current_time < time_out) {
-      for (double& sp : error_reg) {
+      for (amrex::Real& sp : error_reg) {
         sp = 0.0;
       }
       for (int stage = 0; stage < rkp.nstages_rk64; stage++) {
@@ -268,7 +270,7 @@ ReactorRK64::react(
       nsteps++;
 
       amrex::Real max_err = tinyval;
-      for (double sp : error_reg) {
+      for (amrex::Real sp : error_reg) {
         max_err = fabs(sp) > max_err ? fabs(sp) : max_err;
       }
 

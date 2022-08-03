@@ -86,7 +86,6 @@ public:
     sundials::Context& sunctx,
     void* sundials_mem,
     const int ncells,
-    const int verbose,
     const amrex::Real relTol,
     const amrex::Real absTol,
     const std::string solvername);
@@ -94,6 +93,7 @@ public:
   ~ReactorBase() override = default;
 
 protected:
+  int verbose{0};
   amrex::Array<amrex::Real, NUM_SPECIES + 1> m_typ_vals = {0.0};
 };
 } // namespace reactions

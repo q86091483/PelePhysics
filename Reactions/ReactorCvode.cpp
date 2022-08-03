@@ -13,9 +13,11 @@ ReactorCvode::init(int reactor_type, int ncells)
   m_reactor_type = reactor_type;
   ReactorTypes::check_reactor_type(m_reactor_type);
   amrex::ParmParse pp("ode");
+  pp.query("verbose", verbose);
   pp.query("rtol", relTol);
   pp.query("atol", absTol);
   pp.query("atomic_reductions", atomic_reductions);
+  pp.query("clean_init_massfrac", m_clean_init_massfrac);
   checkCvodeOptions();
 
   amrex::Print() << "Initializing CVODE:\n";
@@ -69,7 +71,7 @@ ReactorCvode::init(int reactor_type, int ncells)
   // Setup tolerances
   set_sundials_solver_tols(
     *amrex::sundials::The_Sundials_Context(), cvode_mem, udata_g->ncells,
-    udata_g->verbose, relTol, absTol, "cvode");
+    relTol, absTol, "cvode");
 
   // Linear solver data
   if (
@@ -276,11 +278,6 @@ ReactorCvode::init(int reactor_type, int ncells)
 void
 ReactorCvode::checkCvodeOptions() const
 {
-  // Query options
-  amrex::ParmParse pp("ode");
-  int verbose = 0;
-  pp.query("verbose", verbose);
-
   if (verbose > 0) {
     amrex::Print() << "Number of species in mech is " << NUM_SPECIES << "\n";
   }
@@ -439,8 +436,9 @@ ReactorCvode::checkCvodeOptions() const
       amrex::Print()
         << "--> cuSparse AJ based matrix Preconditioner -- non zero entries: "
         << nJdata << ", which represents "
-        << static_cast<float>(nJdata) /
-             static_cast<float>((NUM_SPECIES + 1) * (NUM_SPECIES + 1)) * 100.0
+        << static_cast<amrex::Real>(nJdata) /
+             static_cast<amrex::Real>((NUM_SPECIES + 1) * (NUM_SPECIES + 1)) *
+             100.0
         << " % fill-in pattern\n";
     }
 #elif defined(AMREX_USE_HIP)
@@ -459,8 +457,9 @@ ReactorCvode::checkCvodeOptions() const
       amrex::Print()
         << "--> KLU sparse AJ based matrix Preconditioner -- non zero entries: "
         << nJdata << ", which represents "
-        << static_cast<float>(nJdata) /
-             static_cast<float>((NUM_SPECIES + 1) * (NUM_SPECIES + 1)) * 100.0
+        << static_cast<amrex::Real>(nJdata) /
+             static_cast<amrex::Real>((NUM_SPECIES + 1) * (NUM_SPECIES + 1)) *
+             100.0
         << " % fill-in pattern\n";
     }
 #endif
@@ -476,8 +475,9 @@ ReactorCvode::checkCvodeOptions() const
         << "--> custom sparse AJ based matrix Preconditioner -- non zero "
            "entries: "
         << nJdata << ", which represents "
-        << static_cast<float>(nJdata) /
-             static_cast<float>((NUM_SPECIES + 1) * (NUM_SPECIES + 1)) * 100.0
+        << static_cast<amrex::Real>(nJdata) /
+             static_cast<amrex::Real>((NUM_SPECIES + 1) * (NUM_SPECIES + 1)) *
+             100.0
         << " % fill-in pattern\n";
     }
 #endif
@@ -497,8 +497,9 @@ ReactorCvode::checkCvodeOptions() const
         amrex::Print()
           << "--> cuSparse based matrix Solver -- non zero entries: " << nJdata
           << ", which represents "
-          << static_cast<float>(nJdata) /
-               static_cast<float>((NUM_SPECIES + 1) * (NUM_SPECIES + 1)) * 100.0
+          << static_cast<amrex::Real>(nJdata) /
+               static_cast<amrex::Real>((NUM_SPECIES + 1) * (NUM_SPECIES + 1)) *
+               100.0
           << " % fill-in pattern\n";
       }
 #elif defined(AMREX_USE_HIP)
@@ -517,8 +518,9 @@ ReactorCvode::checkCvodeOptions() const
         amrex::Print()
           << "--> sparse AJ-based matrix custom Solver -- non zero entries: "
           << nJdata << ", which represents "
-          << static_cast<float>(nJdata) /
-               static_cast<float>((NUM_SPECIES + 1) * (NUM_SPECIES + 1)) * 100.0
+          << static_cast<amrex::Real>(nJdata) /
+               static_cast<amrex::Real>((NUM_SPECIES + 1) * (NUM_SPECIES + 1)) *
+               100.0
           << " % fill-in pattern\n";
       }
     } else if (solve_type == cvode::sparseDirect) {
@@ -528,8 +530,9 @@ ReactorCvode::checkCvodeOptions() const
         amrex::Print()
           << "--> KLU sparse AJ-based matrix Solver -- non zero entries: "
           << nJdata << ", which represents "
-          << static_cast<float>(nJdata) /
-               static_cast<float>((NUM_SPECIES + 1) * (NUM_SPECIES + 1)) * 100.0
+          << static_cast<amrex::Real>(nJdata) /
+               static_cast<amrex::Real>((NUM_SPECIES + 1) * (NUM_SPECIES + 1)) *
+               100.0
           << " % fill-in pattern\n";
       }
 #else
@@ -553,8 +556,8 @@ ReactorCvode::checkCvodeOptions() const
     SPARSITY_INFO(&nJdata, &HP, 1);
     amrex::Print() << "--> Chem. Jac -- non zero entries: " << nJdata
                    << ", which represents "
-                   << static_cast<float>(nJdata) /
-                        static_cast<float>(
+                   << static_cast<amrex::Real>(nJdata) /
+                        static_cast<amrex::Real>(
                           (NUM_SPECIES + 1) * (NUM_SPECIES + 1)) *
                         100.0
                    << " % fill-in pattern\n";
@@ -594,8 +597,8 @@ ReactorCvode::checkCvodeOptions() const
     SPARSITY_INFO_SYST(&nJdata, &HP, 1);
     amrex::Print() << "--> Syst. Jac -- non zero entries: " << nJdata
                    << ", which represents "
-                   << static_cast<float>(nJdata) /
-                        static_cast<float>(
+                   << static_cast<amrex::Real>(nJdata) /
+                        static_cast<amrex::Real>(
                           (NUM_SPECIES + 1) * (NUM_SPECIES + 1)) *
                         100.0
                    << " % fill-in pattern\n";
@@ -635,8 +638,9 @@ ReactorCvode::checkCvodeOptions() const
     amrex::Print()
       << "--> Simplified Syst Jac (for Precond) -- non zero entries: " << nJdata
       << ", which represents "
-      << static_cast<float>(nJdata) /
-           static_cast<float>((NUM_SPECIES + 1) * (NUM_SPECIES + 1)) * 100.0
+      << static_cast<amrex::Real>(nJdata) /
+           static_cast<amrex::Real>((NUM_SPECIES + 1) * (NUM_SPECIES + 1)) *
+           100.0
       << " % fill-in pattern\n";
     PS = SUNSparseMatrix(
       (NUM_SPECIES + 1), (NUM_SPECIES + 1), nJdata, CSR_MAT,
@@ -686,10 +690,6 @@ ReactorCvode::allocUserData(
 ) const
 {
   // Query options
-  amrex::ParmParse pp("ode");
-  int verbose = 0;
-  pp.query("verbose", verbose);
-
   std::string solve_type_str = "none";
   amrex::ParmParse ppcv("cvode");
   udata->maxOrder = 2;
@@ -1170,7 +1170,7 @@ ReactorCvode::react(
   // Setup tolerances with typical values
   set_sundials_solver_tols(
     *amrex::sundials::The_Sundials_Context(), cvode_mem, user_data->ncells,
-    user_data->verbose, relTol, absTol, "cvode");
+    relTol, absTol, "cvode");
 
   // Linear solver data
   SUNLinearSolver LS = NULL;
@@ -1318,12 +1318,13 @@ ReactorCvode::react(
   // Update TypicalValues
   set_sundials_solver_tols(
     *amrex::sundials::The_Sundials_Context(), cvode_mem, udata_g->ncells,
-    udata_g->verbose, relTol, absTol, "cvode");
+    relTol, absTol, "cvode");
 
   // Perform integration one cell at a time
   const int icell = 0;
   const int ncells = 1;
   const auto captured_reactor_type = m_reactor_type;
+  const auto captured_clean_init_massfrac = m_clean_init_massfrac;
   ParallelFor(
     box, [=, &CvodeActual_time_final] AMREX_GPU_DEVICE(
            int i, int j, int k) noexcept {
@@ -1331,9 +1332,10 @@ ReactorCvode::react(
 
         amrex::Real* yvec_d = N_VGetArrayPointer(y);
         utils::box_flatten<Ordering>(
-          icell, i, j, k, ncells, captured_reactor_type, rY_in, rYsrc_in, T_in,
-          rEner_in, rEner_src_in, yvec_d, udata_g->rYsrc_ext,
-          udata_g->rhoe_init, udata_g->rhoesrc_ext);
+          icell, i, j, k, ncells, captured_reactor_type,
+          captured_clean_init_massfrac, rY_in, rYsrc_in, T_in, rEner_in,
+          rEner_src_in, yvec_d, udata_g->rYsrc_ext, udata_g->rhoe_init,
+          udata_g->rhoesrc_ext);
 
         // ReInit CVODE is faster
         CVodeReInit(cvode_mem, time_start, y);
@@ -1358,8 +1360,9 @@ ReactorCvode::react(
         const long int nfe_tot = nfe + nfeLS;
 
         utils::box_unflatten<Ordering>(
-          icell, i, j, k, ncells, captured_reactor_type, rY_in, T_in, rEner_in,
-          rEner_src_in, FC_in, yvec_d, udata_g->rhoe_init, nfe_tot, dt_react);
+          icell, i, j, k, ncells, captured_reactor_type,
+          captured_clean_init_massfrac, rY_in, T_in, rEner_in, rEner_src_in,
+          FC_in, yvec_d, udata_g->rhoe_init, nfe_tot, dt_react);
 
         if ((udata_g->verbose > 3) && (omp_thread == 0)) {
           amrex::Print() << "END : time curr is " << CvodeActual_time_final
@@ -1465,7 +1468,7 @@ ReactorCvode::react(
   // Setup tolerances with typical values
   set_sundials_solver_tols(
     *amrex::sundials::The_Sundials_Context(), cvode_mem, user_data->ncells,
-    user_data->verbose, relTol, absTol, "cvode");
+    relTol, absTol, "cvode");
 
   // Linear solver data
   if (user_data->solve_type == cvode::sparseDirect) {
@@ -1637,7 +1640,7 @@ ReactorCvode::react(
   // Update TypicalValues
   set_sundials_solver_tols(
     *amrex::sundials::The_Sundials_Context(), cvode_mem, udata_g->ncells,
-    udata_g->verbose, relTol, absTol, "cvode");
+    relTol, absTol, "cvode");
 
 #ifdef MOD_REACTOR
   dt_react =

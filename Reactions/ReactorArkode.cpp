@@ -11,12 +11,14 @@ ReactorArkode::init(int reactor_type, int /*ncells*/)
   m_reactor_type = reactor_type;
   ReactorTypes::check_reactor_type(m_reactor_type);
   amrex::ParmParse pp("ode");
+  pp.query("verbose", verbose);
   pp.query("use_erkstep", use_erkstep);
   pp.query("rtol", relTol);
   pp.query("atol", absTol);
   pp.query("atomic_reductions", atomic_reductions);
   pp.query("rk_method", rk_method);
   pp.query("rk_controller", rk_controller);
+  pp.query("clean_init_massfrac", m_clean_init_massfrac);
   std::string method_string = "ARKODE_ZONNEVELD_5_3_4";
   std::string controller_string = "PID";
 
@@ -171,9 +173,6 @@ ReactorArkode::react(
   realtype* yvec_d = N_VGetArrayPointer(y);
 #endif
 
-  amrex::ParmParse pp("ode");
-  int verbose = 0;
-  pp.query("verbose", verbose);
   const auto captured_reactor_type = m_reactor_type;
   auto* user_data = new ARKODEUserData{};
   amrex::Gpu::DeviceVector<amrex::Real> v_rhoe_init(ncells, 0);
@@ -201,7 +200,7 @@ ReactorArkode::react(
     ARKStepSetUserData(arkode_mem, static_cast<void*>(user_data));
     set_sundials_solver_tols(
       *amrex::sundials::The_Sundials_Context(), arkode_mem, user_data->ncells,
-      user_data->verbose, relTol, absTol, "arkstep");
+      relTol, absTol, "arkstep");
     ARKStepSetTableNum(
       arkode_mem, ARKODE_DIRK_NONE, static_cast<ARKODE_ERKTableID>(rk_method));
     ARKStepSetAdaptivityMethod(arkode_mem, rk_controller, 1, 0, nullptr);
@@ -215,7 +214,7 @@ ReactorArkode::react(
     ERKStepSetUserData(arkode_mem, static_cast<void*>(user_data));
     set_sundials_solver_tols(
       *amrex::sundials::The_Sundials_Context(), arkode_mem, user_data->ncells,
-      user_data->verbose, relTol, absTol, "erkstep");
+      relTol, absTol, "erkstep");
     ERKStepSetTableNum(arkode_mem, static_cast<ARKODE_ERKTableID>(rk_method));
     ERKStepSetAdaptivityMethod(arkode_mem, rk_controller, 1, 0, nullptr);
     BL_PROFILE_VAR(
@@ -297,9 +296,6 @@ ReactorArkode::react(
   realtype* yvec_d = N_VGetArrayPointer(y);
 #endif
 
-  amrex::ParmParse pp("ode");
-  int verbose = 0;
-  pp.query("verbose", verbose);
   const auto captured_reactor_type = m_reactor_type;
   auto* user_data = new ARKODEUserData{};
   amrex::Gpu::DeviceVector<amrex::Real> v_rhoe_init(ncells, 0);
@@ -340,7 +336,7 @@ ReactorArkode::react(
     ARKStepSetUserData(arkode_mem, static_cast<void*>(user_data));
     set_sundials_solver_tols(
       *amrex::sundials::The_Sundials_Context(), arkode_mem, user_data->ncells,
-      user_data->verbose, relTol, absTol, "arkstep");
+      relTol, absTol, "arkstep");
     BL_PROFILE_VAR(
       "Pele::ReactorArkode::react():ARKStepEvolve", AroundARKEvolve);
     ARKStepEvolve(arkode_mem, time_out, y, &time_init, ARK_NORMAL);
@@ -351,7 +347,7 @@ ReactorArkode::react(
     ERKStepSetUserData(arkode_mem, static_cast<void*>(user_data));
     set_sundials_solver_tols(
       *amrex::sundials::The_Sundials_Context(), arkode_mem, user_data->ncells,
-      user_data->verbose, relTol, absTol, "erkstep");
+      relTol, absTol, "erkstep");
     BL_PROFILE_VAR(
       "Pele::ReactorArkode::react():ERKStepEvolve", AroundERKEvolve);
     ERKStepEvolve(arkode_mem, time_out, y, &time_init, ARK_NORMAL);
