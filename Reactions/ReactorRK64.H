@@ -1,5 +1,5 @@
-#ifndef _REACTORRK64_H_
-#define _REACTORRK64_H_
+#ifndef REACTORRK64_H
+#define REACTORRK64_H
 
 #include "ReactorBase.H"
 
@@ -86,7 +86,7 @@ public:
     ) override;
 
   void flatten(
-    const amrex::Box box,
+    const amrex::Box& box,
     const int ncells,
     amrex::Array4<const amrex::Real> const& rhoY,
     amrex::Array4<const amrex::Real> const& frcExt,
@@ -105,7 +105,7 @@ public:
   }
 
   void unflatten(
-    const amrex::Box box,
+    const amrex::Box& box,
     const int ncells,
     amrex::Array4<amrex::Real> const& rhoY,
     amrex::Array4<amrex::Real> const& temperature,

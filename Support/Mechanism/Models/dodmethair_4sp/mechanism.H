@@ -19,6 +19,7 @@
 
 #define NUM_ELEMENTS 4
 #define NUM_SPECIES 4
+#define NUM_IONS 0
 #define NUM_REACTIONS 0
 
 #define NUM_FIT 4
@@ -1550,6 +1551,31 @@ CKWXR(amrex::Real* rho, amrex::Real* T, amrex::Real* x, amrex::Real* wdot)
   }
 }
 
+//  species unit charge number
+AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void
+CKCHRG(int* kcharge)
+{
+  kcharge[0] = 0; // NC12H26
+  kcharge[1] = 0; // CH4
+  kcharge[2] = 0; // O2
+  kcharge[3] = 0; // N2
+}
+
+//  species charge per unit mass
+AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void
+CKCHRGMASS(amrex::Real* zk)
+{
+  amrex::Real imw[4];
+  get_imw(imw);
+
+  int kchrg[4];
+  CKCHRG(kchrg);
+
+  for (int id = 0; id < 4; ++id) {
+    zk[id] = 6.02214076e+23 * 1.60217663e-19 * kchrg[id] * imw[id];
+  }
+}
+
 // compute d(Cp/R)/dT and d(Cv/R)/dT at the given temperature
 // tc contains precomputed powers of T, tc[0] = log(T)
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void
@@ -1597,8 +1623,9 @@ dcvpRdT(amrex::Real* species, const amrex::Real* tc)
 
 // compute an approx to the reaction Jacobian
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void
-aJacobian_precond(amrex::Real* J, amrex::Real* sc, amrex::Real T, int HP)
+aJacobian_precond(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int HP)
 {
+
   for (int i = 0; i < 25; i++) {
     J[i] = 0.0;
   }
@@ -1702,7 +1729,7 @@ DWDOT_SIMPLIFIED(
   return;
 }
 
-// compute the reaction Jacobian on GPU
+// compute the reaction Jacobian
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void
 aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
 {
@@ -1785,8 +1812,6 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   }
   // dTdot/dT
   J[24] = -tmp1 + tmp2 * dcmixdT - tmp3 * dehmixdT;
-
-  return;
 }
 
 // compute the reaction Jacobian
@@ -2065,10 +2090,10 @@ GET_CRITPARAMS(
 
   // species 0: NC12H26
   Tci[0] = 1.316 * EPS[0];
-  ai[0] = (5.55 * avogadro * avogadro * EPS[0] * boltzmann *
-           pow(1e-8 * SIG[0], 3.0)) /
+  ai[0] = (5.55 * avogadro * avogadro * EPS[0] * boltzmann * 1e-24 * SIG[0] *
+           SIG[0] * SIG[0]) /
           (wt[0] * wt[0]);
-  bi[0] = 0.855 * avogadro * pow(1e-8 * SIG[0], 3.0) / (wt[0]);
+  bi[0] = 0.855 * avogadro * 1e-24 * SIG[0] * SIG[0] * SIG[0] / (wt[0]);
   acentric_i[0] = 0.0;
 
   // species 1: CH4

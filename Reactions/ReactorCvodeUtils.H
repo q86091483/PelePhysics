@@ -1,5 +1,5 @@
-#ifndef _REACTORUTILSCVODE_H_
-#define _REACTORUTILSCVODE_H_
+#ifndef REACTORUTILSCVODE_H
+#define REACTORUTILSCVODE_H
 #include "ReactorTypes.H"
 
 #include <AMReX.H>
@@ -94,10 +94,18 @@ struct CVODEUserData
 namespace cvode {
 
 #ifdef AMREX_USE_GPU
-enum linSolveType { sparseDirect, customDirect, magmaDirect, GMRES, precGMRES };
+enum linSolveType {
+  fixedPoint,
+  sparseDirect,
+  customDirect,
+  magmaDirect,
+  GMRES,
+  precGMRES
+};
 enum precondType { sparseSimpleAJac };
 #else
 enum linSolveType {
+  fixedPoint,
   denseFDDirect,
   denseDirect,
   sparseDirect,
