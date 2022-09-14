@@ -22,12 +22,12 @@ GotoNextLine(std::istream& is)
   is.ignore(bl_ignore_max, '\n');
 }
 
-PltFileManager::PltFileManager(std::string a_pltFile)
+PltFileManager::PltFileManager(std::string a_pltFile, bool lm_to_c)
   : m_pltFile{std::move(a_pltFile)}
 {
   // Get the plt metadata and resize part of the data vectors
   std::string pltFileHeader(m_pltFile + "/Header");
-  readGenericPlotfileHeader(pltFileHeader);
+  readGenericPlotfileHeader(pltFileHeader,lm_to_c);
 
   // Resize the actual data container
   m_dmaps.resize(m_nlevels);
@@ -38,7 +38,7 @@ PltFileManager::PltFileManager(std::string a_pltFile)
 }
 
 void
-PltFileManager::readGenericPlotfileHeader(const std::string& a_pltFileHeader)
+PltFileManager::readGenericPlotfileHeader(const std::string& a_pltFileHeader, bool lm_to_c)
 {
   Vector<char> fileCharPtr;
   ParallelDescriptor::ReadAndBcastFile(a_pltFileHeader, fileCharPtr);
@@ -91,7 +91,11 @@ PltFileManager::readGenericPlotfileHeader(const std::string& a_pltFileHeader)
     std::istringstream lis(line);
     int i = 0;
     while (lis >> word) {
-      prob_lo[i++] = std::stod(word);
+      if (lm_to_c) {
+          prob_lo[i++] = std::stod(word)*1e2;
+      }else{
+          prob_lo[i++] = std::stod(word);
+      }
     }
   }
 
@@ -101,7 +105,11 @@ PltFileManager::readGenericPlotfileHeader(const std::string& a_pltFileHeader)
     std::istringstream lis(line);
     int i = 0;
     while (lis >> word) {
-      prob_hi[i++] = std::stod(word);
+      if (lm_to_c) {
+        prob_hi[i++] = std::stod(word)*1e2;
+      }else{
+        prob_hi[i++] = std::stod(word);
+      }
     }
   }
 

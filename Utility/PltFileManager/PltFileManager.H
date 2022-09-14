@@ -12,9 +12,9 @@ namespace pltfilemanager {
 class PltFileManager
 {
 public:
-  explicit PltFileManager(std::string a_pltFile);
+  explicit PltFileManager(std::string a_pltFile, bool lm_to_c=false);
 
-  void readGenericPlotfileHeader(const std::string& a_pltFileHeader);
+  void readGenericPlotfileHeader(const std::string& a_pltFileHeader, bool lm_to_c=false);
 
   void readPlotFile();
   void readLevelBoxArray(int a_lev, amrex::BoxArray& a_grid);
