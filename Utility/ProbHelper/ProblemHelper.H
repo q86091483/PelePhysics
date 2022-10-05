@@ -1,7 +1,6 @@
-#ifndef _PROBLEMHELPER_H_
-#define _PROBLEMHELPER_H_
+#ifndef PROBLEMHELPER_H
+#define PROBLEMHELPER_H
 
-#include <AMReX_ParmParse.H>
 #include "PelePhysics.H"
 #include "Factory.H"
 #include "mechanism.H"
@@ -14,13 +13,49 @@ namespace physics {
 class ProblemHelper : public Factory<ProblemHelper>
 {
 public:
-  static const std::string identifier() { return "ProblemHelper"; }
+  static std::string base_identifier() { return "ProblemHelper"; }
 
-  virtual void initdata() = 0;
+  void init();
 
-  virtual void bcnormal() = 0;
+  void init(amrex::Real &a_pInit);
 
-  virtual ~ProblemHelper() = default;
+  void initData(amrex::MultiFab &a_state,
+                amrex::GeometryData const& a_geomdata);
+
+  void initData(amrex::MultiFab &a_state,
+                amrex::GeometryData const& a_geomdata,
+                amrex::Real &a_pInit);
+
+  pele::physics::PMF::PmfData::DataContainer const* getPmfData() {return pmf_data.getDeviceData();};
+
+  ~ProblemHelper() override = default;
+
+  virtual void initParams(void **a_params, void **a_params_d);
+  virtual void initParams(void **a_params, void **a_params_d, amrex::Real &a_pInit);
+
+  virtual void bcnormal(const amrex::Real* x,
+                        const int m_nAux,
+                        amrex::Vector<amrex::Real> &s_ext,
+                        const int idir,
+                        const int sgn,
+                        const amrex::Real time,
+                        amrex::GeometryData const& geomdata,
+                        void* a_params,
+                        pele::physics::PMF::PmfData::DataContainer const * pmf_data);
+
+  virtual void initdata_k(int i, int j, int k,
+                          amrex::Array4<amrex::Real> const& state,
+                          amrex::GeometryData const& geomdata,
+                          void* a_params,
+                          pele::physics::PMF::PmfData::DataContainer const * pmf_data) = 0;
+
+  virtual void zero_visc(int i, int j, int k,
+                         amrex::Array4<amrex::Real> const& beta,
+                         amrex::GeometryData const& geomdata,
+                         amrex::Box const& domainBox,
+                         const int  dir,
+                         const int  beta_comp,
+                         const int  nComp);
 
 #ifdef AMREX_USE_EB
   // Tag cut cells type: dirichlet, Neumann & what not 
@@ -29,9 +64,9 @@ public:
   virtual void getEBState() = 0;
 #endif
 
-protected:
-  PMF::PmfData pmf_data; 
-  turbinflow::TurbInflow tp;
+  void *m_baseParams = nullptr;
+  void *m_baseParams_d = nullptr;
+  pele::physics::PMF::PmfData pmf_data;
 };
 
 } // namespace physics
