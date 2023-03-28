@@ -1082,6 +1082,11 @@ def production_rate(
                 agents,
                 key=lambda v, dict_species=dict_species: dict_species[v[0]],
             )
+            # Check for duplicates
+            if len(agents) != len(set(agents)):
+                message = f"Reaction {reaction} contains duplicate agents\n"
+                message += "This will create an issue for productionRate(\n"
+                sys.exit(message)
             # note that a species might appear as both reactant and product
             # a species might also appear twice or more on on each side
             # agents is a set that contains unique (symbol, coefficient)
@@ -1624,6 +1629,11 @@ def production_rate_light(fstream, mechanism, species_info, reaction_info):
                 agents,
                 key=lambda v, dict_species=dict_species: dict_species[v[0]],
             )
+            # Check for duplicates
+            if len(agents) != len(set(agents)):
+                message = f"Reaction {reaction} contains duplicate agents\n"
+                message += "This will create an issue for productionRate_light(\n"
+                sys.exit(message)
             # note that a species might appear as both reactant and product
             # a species might also appear twice or more on on each side
             # agents is a set that contains unique (symbol, coefficient)
