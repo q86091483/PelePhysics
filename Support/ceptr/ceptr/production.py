@@ -1088,7 +1088,7 @@ def production_rate(
             for a in agents:
                 symbol, coefficient = a
                 for b in reaction.reactants:
-                    if b == a[0]:
+                    if b == a[0] and reaction.reactants[b] == a[1]:
                         if coefficient == 1.0:
                             cw.writer(
                                 fstream,
@@ -1115,7 +1115,7 @@ def production_rate(
                                 species_info.ordered_idx_map[symbol]
                             ] -= (coefficient * qdot_smp)
                 for b in reaction.products:
-                    if b == a[0]:
+                    if b == a[0] and reaction.products[b] == a[1]:
                         if coefficient == 1.0:
                             cw.writer(
                                 fstream,
@@ -1630,7 +1630,7 @@ def production_rate_light(fstream, mechanism, species_info, reaction_info):
             for a in agents:
                 symbol, coefficient = a
                 for b in reaction.reactants:
-                    if b == a[0]:
+                    if b == a[0] and reaction.reactants[b] == a[1]:
                         if coefficient == 1.0:
                             cw.writer(
                                 fstream,
@@ -1648,7 +1648,7 @@ def production_rate_light(fstream, mechanism, species_info, reaction_info):
                                 ),
                             )
                 for b in reaction.products:
-                    if b == a[0]:
+                    if b == a[0] and reaction.products[b] == a[1]:
                         if coefficient == 1.0:
                             cw.writer(
                                 fstream,
