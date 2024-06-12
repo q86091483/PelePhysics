@@ -227,9 +227,10 @@ progressRateFR(
 void
 atomicWeight(amrex::Real* awt)
 {
-  awt[0] = 14.007000; // N
+  awt[0] = 12.011000; // C
   awt[1] = 1.008000;  // H
-  awt[2] = 15.999000; // O
+  awt[2] = 14.007000; // N
+  awt[3] = 15.999000; // O
 }
 
 // get atomic weight for all elements
@@ -244,14 +245,14 @@ CKAWT(amrex::Real* awt)
 void
 CKNCF(int* ncf)
 {
-  int kd = 3;
+  int kd = 4;
   // Zero ncf
   for (int id = 0; id < kd * 32; ++id) {
     ncf[id] = 0;
   }
 
   // N2
-  ncf[0 * kd + 0] = 2; // N
+  ncf[0 * kd + 2] = 2; // N
 
   // H2
   ncf[1 * kd + 1] = 2; // H
@@ -260,136 +261,137 @@ CKNCF(int* ncf)
   ncf[2 * kd + 1] = 1; // H
 
   // O2
-  ncf[3 * kd + 2] = 2; // O
+  ncf[3 * kd + 3] = 2; // O
 
   // O
-  ncf[4 * kd + 2] = 1; // O
+  ncf[4 * kd + 3] = 1; // O
 
   // H2O
   ncf[5 * kd + 1] = 2; // H
-  ncf[5 * kd + 2] = 1; // O
+  ncf[5 * kd + 3] = 1; // O
 
   // OH
   ncf[6 * kd + 1] = 1; // H
-  ncf[6 * kd + 2] = 1; // O
+  ncf[6 * kd + 3] = 1; // O
 
   // OHV
   ncf[7 * kd + 1] = 1; // H
-  ncf[7 * kd + 2] = 1; // O
+  ncf[7 * kd + 3] = 1; // O
 
   // H2O2
   ncf[8 * kd + 1] = 2; // H
-  ncf[8 * kd + 2] = 2; // O
+  ncf[8 * kd + 3] = 2; // O
 
   // HO2
   ncf[9 * kd + 1] = 1; // H
-  ncf[9 * kd + 2] = 2; // O
+  ncf[9 * kd + 3] = 2; // O
 
   // NO
-  ncf[10 * kd + 0] = 1; // N
-  ncf[10 * kd + 2] = 1; // O
+  ncf[10 * kd + 2] = 1; // N
+  ncf[10 * kd + 3] = 1; // O
 
   // NH3
   ncf[11 * kd + 1] = 3; // H
-  ncf[11 * kd + 0] = 1; // N
+  ncf[11 * kd + 2] = 1; // N
 
   // NH2
   ncf[12 * kd + 1] = 2; // H
-  ncf[12 * kd + 0] = 1; // N
+  ncf[12 * kd + 2] = 1; // N
 
   // NH
   ncf[13 * kd + 1] = 1; // H
-  ncf[13 * kd + 0] = 1; // N
+  ncf[13 * kd + 2] = 1; // N
 
   // N
-  ncf[14 * kd + 0] = 1; // N
+  ncf[14 * kd + 2] = 1; // N
 
   // NNH
   ncf[15 * kd + 1] = 1; // H
-  ncf[15 * kd + 0] = 2; // N
+  ncf[15 * kd + 2] = 2; // N
 
   // N2H4
   ncf[16 * kd + 1] = 4; // H
-  ncf[16 * kd + 0] = 2; // N
+  ncf[16 * kd + 2] = 2; // N
 
   // N2H3
   ncf[17 * kd + 1] = 3; // H
-  ncf[17 * kd + 0] = 2; // N
+  ncf[17 * kd + 2] = 2; // N
 
   // N2H2
   ncf[18 * kd + 1] = 2; // H
-  ncf[18 * kd + 0] = 2; // N
+  ncf[18 * kd + 2] = 2; // N
 
   // H2NN
   ncf[19 * kd + 1] = 2; // H
-  ncf[19 * kd + 0] = 2; // N
+  ncf[19 * kd + 2] = 2; // N
 
   // NH2OH
   ncf[20 * kd + 1] = 3; // H
-  ncf[20 * kd + 0] = 1; // N
-  ncf[20 * kd + 2] = 1; // O
+  ncf[20 * kd + 2] = 1; // N
+  ncf[20 * kd + 3] = 1; // O
 
   // H2NO
   ncf[21 * kd + 1] = 2; // H
-  ncf[21 * kd + 0] = 1; // N
-  ncf[21 * kd + 2] = 1; // O
+  ncf[21 * kd + 2] = 1; // N
+  ncf[21 * kd + 3] = 1; // O
 
   // HNOH
   ncf[22 * kd + 1] = 2; // H
-  ncf[22 * kd + 0] = 1; // N
-  ncf[22 * kd + 2] = 1; // O
+  ncf[22 * kd + 2] = 1; // N
+  ncf[22 * kd + 3] = 1; // O
 
   // HNO
   ncf[23 * kd + 1] = 1; // H
-  ncf[23 * kd + 0] = 1; // N
-  ncf[23 * kd + 2] = 1; // O
+  ncf[23 * kd + 2] = 1; // N
+  ncf[23 * kd + 3] = 1; // O
 
   // HON
   ncf[24 * kd + 1] = 1; // H
-  ncf[24 * kd + 0] = 1; // N
-  ncf[24 * kd + 2] = 1; // O
+  ncf[24 * kd + 2] = 1; // N
+  ncf[24 * kd + 3] = 1; // O
 
   // NO2
-  ncf[25 * kd + 0] = 1; // N
-  ncf[25 * kd + 2] = 2; // O
+  ncf[25 * kd + 2] = 1; // N
+  ncf[25 * kd + 3] = 2; // O
 
   // HONO
   ncf[26 * kd + 1] = 1; // H
-  ncf[26 * kd + 0] = 1; // N
-  ncf[26 * kd + 2] = 2; // O
+  ncf[26 * kd + 2] = 1; // N
+  ncf[26 * kd + 3] = 2; // O
 
   // HNO2
   ncf[27 * kd + 1] = 1; // H
-  ncf[27 * kd + 0] = 1; // N
-  ncf[27 * kd + 2] = 2; // O
+  ncf[27 * kd + 2] = 1; // N
+  ncf[27 * kd + 3] = 2; // O
 
   // NO3
-  ncf[28 * kd + 0] = 1; // N
-  ncf[28 * kd + 2] = 3; // O
+  ncf[28 * kd + 2] = 1; // N
+  ncf[28 * kd + 3] = 3; // O
 
   // HONO2
   ncf[29 * kd + 1] = 1; // H
-  ncf[29 * kd + 0] = 1; // N
-  ncf[29 * kd + 2] = 3; // O
+  ncf[29 * kd + 2] = 1; // N
+  ncf[29 * kd + 3] = 3; // O
 
   // N2O
-  ncf[30 * kd + 0] = 2; // N
-  ncf[30 * kd + 2] = 1; // O
+  ncf[30 * kd + 2] = 2; // N
+  ncf[30 * kd + 3] = 1; // O
 
   // HNO3
   ncf[31 * kd + 1] = 1; // H
-  ncf[31 * kd + 0] = 1; // N
-  ncf[31 * kd + 2] = 3; // O
+  ncf[31 * kd + 2] = 1; // N
+  ncf[31 * kd + 3] = 3; // O
 }
 
 // Returns the vector of strings of element names
 void
 CKSYME_STR(amrex::Vector<std::string>& ename)
 {
-  ename.resize(3);
-  ename[0] = "N";
+  ename.resize(4);
+  ename[0] = "C";
   ename[1] = "H";
-  ename[2] = "O";
+  ename[2] = "N";
+  ename[3] = "O";
 }
 
 // Returns the vector of strings of species names
