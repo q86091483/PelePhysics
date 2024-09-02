@@ -8,6 +8,7 @@
 #include "PelePhysics.H"
 #include "mechanism.H"
 #include "ReactorUtils.H"
+#include "PeleLMeX_Index.H"
 
 namespace pele::physics::reactions {
 
