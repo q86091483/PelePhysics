@@ -22,6 +22,10 @@ ReactorNull::react(
   amrex::Array4<amrex::Real> const& T_in,
   amrex::Array4<amrex::Real> const& rEner_in,
   amrex::Array4<amrex::Real> const& rEner_src_in,
+#if (NUMAUX > 0)
+  amrex::Array4<amrex::Real> const& rAux_in,
+  amrex::Array4<amrex::Real> const& rAux_src_in,
+#endif
   amrex::Array4<amrex::Real> const& FC_in,
   amrex::Array4<int> const& /*mask*/,
   amrex::Real& dt_react,

@@ -7,6 +7,7 @@
 #include "PelePhysics.H"
 #include "ReactorTypes.H"
 #include "AMReX_Sundials.H"
+#include "PeleLMeX_Index.H"
 
 #include <arkode/arkode_arkstep.h>
 #include <arkode/arkode_erkstep.h>
@@ -85,7 +86,7 @@ set_sundials_solver_tols(
   const int ncells,
   const amrex::Real relTol,
   const amrex::Real absTol,
-  const amrex::GpuArray<amrex::Real, NUM_SPECIES + 1>& typ_vals,
+  const amrex::GpuArray<amrex::Real, NUM_SPECIES + 1 + NUMAUX>& typ_vals,
   const std::string& solvername,
   const int verbose)
 {
@@ -94,7 +95,7 @@ set_sundials_solver_tols(
   omp_thread = omp_get_thread_num();
 #endif
 
-  const int neq_tot = (NUM_SPECIES + 1) * ncells;
+  const int neq_tot = (NUM_SPECIES + 1 + NUMAUX) * ncells;
 
 #if defined(AMREX_USE_CUDA)
   N_Vector atol = N_VNewWithMemHelp_Cuda(
@@ -126,7 +127,7 @@ set_sundials_solver_tols(
     }
 
     amrex::ParallelFor(ncells, [=] AMREX_GPU_DEVICE(int icell) {
-      for (int k = 0; k < NUM_SPECIES + 1; k++) {
+      for (int k = 0; k < NUM_SPECIES + 1 + NUMAUX; k++) {
         ratol[vec_index<OrderType>(k, icell, ncells)] = typ_vals[k] * absTol;
       }
     });
