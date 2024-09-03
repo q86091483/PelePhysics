@@ -370,7 +370,11 @@ fKernelSpec(
   amrex::Real* ydot_d, // NOLINT(readability-non-const-parameter)
   const amrex::Real* rhoe_init,
   const amrex::Real* rhoesrc_ext,
-  const amrex::Real* rYs)
+  const amrex::Real* rYs
+#if (NUMAUX > 0)
+  , const amrex::Real* rhoAuxsrc_ext
+#endif
+  )
 {
   amrex::Real rho_pt = 0.0;
   amrex::GpuArray<amrex::Real, NUM_SPECIES> massfrac = {0.0};
