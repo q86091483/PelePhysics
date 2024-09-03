@@ -238,7 +238,7 @@ ReactorCvode::initCvode(
   const int ncells)
 {
   // Solution vector
-  int neq_tot = (NUM_SPECIES + 1) * ncells;
+  int neq_tot = (NUM_SPECIES + 1 + NUMAUX) * ncells;
   a_y = N_VNew_Serial(neq_tot, *amrex::sundials::The_Sundials_Context());
   if (utils::check_flag(static_cast<void*>(a_y), "N_VNew_Serial", 0) != 0) {
     return (1);
@@ -972,6 +972,10 @@ ReactorCvode::allocUserData(
     amrex::The_Arena()->alloc(a_ncells * sizeof(amrex::Real)));
   udata->rhoesrc_ext = static_cast<amrex::Real*>(
     amrex::The_Arena()->alloc(a_ncells * sizeof(amrex::Real)));
+#if (NUMAUX > 0)
+  udata->rhoAuxsrc_ext = static_cast<amrex::Real*>(
+    amrex::The_Arena()->alloc(a_ncells * sizeof(amrex::Real)));
+#endif
   udata->mask =
     static_cast<int*>(amrex::The_Arena()->alloc(a_ncells * sizeof(int)));
 
@@ -1732,6 +1736,9 @@ ReactorCvode::freeUserData(CVODEUserData* data_wk)
   amrex::The_Arena()->free(data_wk->rYsrc_ext);
   amrex::The_Arena()->free(data_wk->rhoe_init);
   amrex::The_Arena()->free(data_wk->rhoesrc_ext);
+#if (NUMAUX > 0)
+  amrex::The_Arena()->free(data_wk->rhoAuxsrc_ext);
+#endif
   amrex::The_Arena()->free(data_wk->mask);
 
 #ifdef AMREX_USE_GPU
