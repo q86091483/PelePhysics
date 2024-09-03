@@ -53,7 +53,7 @@ template <typename OrderType>
 AMREX_GPU_DEVICE AMREX_FORCE_INLINE int
 vec_index(const int specie_idx, const int icell, const int /*ncells*/)
 {
-  return icell * (NUM_SPECIES + 1) + specie_idx;
+  return icell * (NUM_SPECIES + 1 + NUMAUX) + specie_idx;
 }
 
 template <typename OrderType>
@@ -61,6 +61,13 @@ AMREX_GPU_DEVICE AMREX_FORCE_INLINE int
 spec_index(const int specie_idx, const int icell, const int /*ncells*/)
 {
   return icell * NUM_SPECIES + specie_idx;
+}
+
+template <typename OrderType>
+AMREX_GPU_DEVICE AMREX_FORCE_INLINE int
+aux_index(const int aux_idx, const int icell, const int /*ncells*/)
+{
+  return icell * NUMAUX + aux_idx;
 }
 
 template <>
@@ -176,10 +183,18 @@ box_flatten(
   amrex::Array4<const amrex::Real> const& temperature,
   amrex::Array4<const amrex::Real> const& rhoE,
   amrex::Array4<const amrex::Real> const& frcEExt,
+#if (NUMAUX > 0)
+  amrex::Array4<const amrex::Real> const& rhoAux,
+  amrex::Array4<const amrex::Real> const& frcAuxExt,
+#endif
   amrex::Real* y_vect,
   amrex::Real* src_vect,
   amrex::Real* vect_energy,
-  amrex::Real* src_vect_energy)
+  amrex::Real* src_vect_energy
+#if (NUMAUX > 0)
+  , amrex::Real* src_vec_aux
+#endif
+  )
 {
   amrex::Real mass_frac[NUM_SPECIES];
   amrex::Real rho = 0.0;
@@ -221,6 +236,15 @@ box_flatten(
     amrex::Abort("Wrong reactor type. Choose between 1 (e) or 2 (h).");
   }
   y_vect[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] = temp;
+
+#if (NUMAUX > 0)
+  for (int n = 0; n < NUMAUX; n++) {
+    int idx_y = vec_index<OrderType>(NUM_SPECIES + n, icell, ncells);
+    int idx_src = aux_index<OrderType>(n, icell, ncells);
+    y_vect[idx_y] = rhoAux(i, j, k, n);
+    src_vec_aux[idx_src] = frcAuxExt(i, j, k, n);
+  }
+#endif
 }
 
 template <typename OrderType>
@@ -237,6 +261,9 @@ box_unflatten(
   amrex::Array4<amrex::Real> const& temperature,
   amrex::Array4<amrex::Real> const& rhoE,
   amrex::Array4<amrex::Real> const& frcEExt,
+#if (NUMAUX > 0)
+  amrex::Array4<amrex::Real> const& rhoAux,
+#endif
   amrex::Array4<amrex::Real> const& FC_in,
   const amrex::Real* y_vect,
   const amrex::Real* vect_energy,
@@ -312,10 +339,18 @@ public:
     amrex::Array4<const amrex::Real> const& temperature,
     amrex::Array4<const amrex::Real> const& rhoE,
     amrex::Array4<const amrex::Real> const& frcEExt,
+#if (NUMAUX > 0)
+    amrex::Array4<const amrex::Real> const& rhoAux,
+    amrex::Array4<const amrex::Real> const& frcAuxExt,
+#endif
     amrex::Real* y_vect,
     amrex::Real* src_vect,
     amrex::Real* vect_energy,
-    amrex::Real* src_vect_energy)
+    amrex::Real* src_vect_energy
+#if (NUMAUX > 0)
+    , amrex::Real* src_vect_aux
+#endif
+    )
   {
     BL_PROFILE("Pele::flatten()");
     const auto len = amrex::length(box);
@@ -325,8 +360,15 @@ public:
         (k - lo.z) * len.x * len.y + (j - lo.y) * len.x + (i - lo.x);
       box_flatten<OrderType>(
         icell, i, j, k, ncells, reactor_type, clean_init_massfrac, rhoY, frcExt,
-        temperature, rhoE, frcEExt, y_vect, src_vect, vect_energy,
-        src_vect_energy);
+        temperature, rhoE, frcEExt,
+#if (NUMAUX > 0)
+        rhoAux, frcAuxExt,
+#endif
+        y_vect, src_vect, vect_energy, src_vect_energy
+#if (NUMAUX > 0)
+        , src_vect_aux
+#endif
+        );
     });
   }
 
@@ -339,6 +381,9 @@ public:
     amrex::Array4<amrex::Real> const& temperature,
     amrex::Array4<amrex::Real> const& rhoE,
     amrex::Array4<amrex::Real> const& frcEExt,
+#if (NUMAUX > 0)
+    amrex::Array4<amrex::Real> const& rhoAux,
+#endif
     amrex::Array4<amrex::Real> const& FC_in,
     amrex::Real* y_vect,
     amrex::Real* vect_energy,
@@ -353,7 +398,11 @@ public:
         (k - lo.z) * len.x * len.y + (j - lo.y) * len.x + (i - lo.x);
       box_unflatten<OrderType>(
         icell, i, j, k, ncells, reactor_type, clean_init_massfrac, rhoY,
-        temperature, rhoE, frcEExt, FC_in, y_vect, vect_energy, FCunt[icell],
+        temperature, rhoE, frcEExt,
+#if (NUMAUX > 0)
+        rhoAux,
+#endif
+        FC_in, y_vect, vect_energy, FCunt[icell],
         dt);
     });
   }

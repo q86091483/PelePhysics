@@ -73,7 +73,11 @@ public:
     amrex::Real* y_vect,
     amrex::Real* src_vect,
     amrex::Real* vect_energy,
-    amrex::Real* src_vect_energy) = 0;
+    amrex::Real* src_vect_energy
+#if (NUMAUX > 0)
+    , amrex::Real* src_vect_aux
+#endif
+    ) = 0;
 
   virtual void unflatten(
     const amrex::Box& box,

@@ -1419,10 +1419,17 @@ ReactorCvode::react(
 
         amrex::Real* yvec_d = N_VGetArrayPointer(y);
         utils::box_flatten<Ordering>(
-          icell, i, j, k, ncells, captured_reactor_type,
-          captured_clean_init_massfrac, rY_in, rYsrc_in, T_in, rEner_in,
-          rEner_src_in, yvec_d, udata->rYsrc_ext, udata->rhoe_init,
-          udata->rhoesrc_ext);
+          icell, i, j, k, ncells,
+          captured_reactor_type, captured_clean_init_massfrac,
+          rY_in, rYsrc_in, T_in, rEner_in, rEner_src_in,
+#if (NUMAUX > 0)
+          rAux_in, rAux_src_in,
+#endif
+          yvec_d, udata->rYsrc_ext, udata->rhoe_init, udata->rhoesrc_ext
+#if (NUMAUX > 0)
+          , udata->rhoAuxsrc_ext
+#endif
+          );
 
         // ReInit CVODE is faster
         CVodeReInit(cvode_mem, time_start, y);
@@ -1452,6 +1459,9 @@ ReactorCvode::react(
         utils::box_unflatten<Ordering>(
           icell, i, j, k, ncells, captured_reactor_type,
           captured_clean_init_massfrac, rY_in, T_in, rEner_in, rEner_src_in,
+#if (NUMAUX > 0)
+          rAux_in,
+#endif
           FC_in, yvec_d, udata->rhoe_init, nfe_tot, dt_react);
 
         // cppcheck-suppress knownConditionTrueFalse
