@@ -245,6 +245,7 @@ box_flatten(
     y_vect[idx] = rhoAux(i, j, k, idx_src);
     src_vec_aux[idx_src] = frcAuxExt(i, j, k, idx_src);
   }
+  amrex::Print() << " rho = " << rho << std::endl;
   for (int n = 0; n < NUM_SPECIES; n++) {
     const int idx = vec_index<OrderType>(n, icell, ncells);
     const int idx_src = spec_index<OrderType>(n, icell, ncells);
@@ -498,6 +499,7 @@ fKernelSpec(
   //amrex::Print() << "MIXF_IN_AUX, " << MIXF_IN_AUX << ", " << NUMMIXF << std::endl;
   //amrex::Print() << "AGE_IN_AUX, " << AGE_IN_AUX << ", " << NUMAGE << std::endl;
   //amrex::Print() << "AGEPV_IN_AUX, " << AGEPV_IN_AUX << ", " << NUMAGEPV << std::endl;
+  amrex::Print() << " rho = " << rho_pt << std::endl;
   for (int n = 0; n < NUM_SPECIES; n++) {
     const int idx = vec_index<OrderType>(n, icell, ncells);
     const int idx_src = spec_index<OrderType>(n, icell, ncells);
