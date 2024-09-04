@@ -245,7 +245,7 @@ box_flatten(
     src_vec_aux[idx_src] = frcAuxExt(i, j, k, idx_src);
   }
 
-  if (true) {
+  if (false) {
     amrex::Print() << "In box_flatten: ----------------" << std::endl;
     amrex::Print() << " rho = " << rho << std::endl;
     for (int n = 0; n < NUM_SPECIES; n++) {
@@ -504,7 +504,7 @@ fKernelSpec(
     ydot_d[idx] = rhoAuxsrc_ext[idx_src];
   }
 
-  if (true) {
+  if (false) {
     amrex::Print() << "In fKernelSpec: ----------------" << std::endl;
     //amrex::Print() << "MIXF_IN_AUX, " << MIXF_IN_AUX << ", " << NUMMIXF << std::endl;
     //amrex::Print() << "AGE_IN_AUX, " << AGE_IN_AUX << ", " << NUMAGE << std::endl;
