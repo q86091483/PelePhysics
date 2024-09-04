@@ -479,9 +479,9 @@ fKernelSpec(
 #if (NUMAUX > 0)
   for (int n = 0; n < NUMAUX; n++) {
     amrex::Print() << "fkKernel: n = " << n << ", " << rhoAuxsrc_ext[vec_index<OrderType>(n, icell, ncells)] << std::endl;
-    amrex::Print() << "MIXF_IN_AUX, " << MIXF_IN_AUX <<
-                      "AGE_IN_AUX, " << AGE_IN_AUX <<
-                      "AGEPV_IN_AUX" << AGEPV_IN_AUX << std::endl;
+    amrex::Print() << "MIXF_IN_AUX, " << MIXF_IN_AUX << ", " << NUMMIXF << std::endl;
+    amrex::Print() << "AGE_IN_AUX, " << AGE_IN_AUX << ", " << NUMAGE << std::endl;
+    amrex::Print() << "AGEPV_IN_AUX, " << AGEPV_IN_AUX << ", " << NUMAGEPV << std::endl;
     ydot_d[vec_index<OrderType>(n, icell, ncells)] =
       rhoAuxsrc_ext[vec_index<OrderType>(n, icell, ncells)];
   }
