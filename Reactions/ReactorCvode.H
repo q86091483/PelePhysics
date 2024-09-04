@@ -156,7 +156,6 @@ public:
     amrex::Array4<amrex::Real> const& frcEExt,
 #if (NUMAUX > 0)
     amrex::Array4<amrex::Real> const& rhoAux,
-    amrex::Array4<amrex::Real> const& frcAuxExt,
 #endif
     amrex::Array4<amrex::Real> const& FC_in,
     amrex::Real* y_vect,

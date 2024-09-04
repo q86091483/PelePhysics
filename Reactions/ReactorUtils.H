@@ -318,6 +318,11 @@ box_unflatten(
     amrex::Abort("Wrong reactor type. Choose between 1 (e) or 2 (h).");
   }
   temperature(i, j, k, 0) = temp;
+#if (NUMAUX > 0)
+  for (int n = 0; n < NUMAUX; n++) {
+    rhoAux(i, j, k, n) = y_vect[vec_index<OrderType>(NUM_SPECIES + n, icell, ncells)];
+  }
+#endif
   FC_in(i, j, k, 0) = static_cast<amrex::Real>(FCunt);
 }
 
@@ -359,8 +364,8 @@ public:
       const int icell =
         (k - lo.z) * len.x * len.y + (j - lo.y) * len.x + (i - lo.x);
       box_flatten<OrderType>(
-        icell, i, j, k, ncells, reactor_type, clean_init_massfrac, rhoY, frcExt,
-        temperature, rhoE, frcEExt,
+        icell, i, j, k, ncells, reactor_type, clean_init_massfrac,
+        rhoY, frcExt, temperature, rhoE, frcEExt,
 #if (NUMAUX > 0)
         rhoAux, frcAuxExt,
 #endif
@@ -470,6 +475,13 @@ fKernelSpec(
   }
   ydot_d[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] =
     rhoesrc * (rho_pt_inv / Cv_pt);
+
+#if (NUMAUX > 0)
+  for (int n = 0; n < NUMAUX; n++) {
+    ydot_d[vec_index<OrderType>(n, icell, ncells)] =
+      rhoAuxsrc_ext[vec_index<OrderType>(n, icell, ncells)];
+  }
+#endif
 }
 
 #ifdef AMREX_USE_GPU
