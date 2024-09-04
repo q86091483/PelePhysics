@@ -243,6 +243,11 @@ box_flatten(
     int idx_src = aux_index<OrderType>(n, icell, ncells);
     y_vect[idx_y] = rhoAux(i, j, k, n);
     src_vec_aux[idx_src] = frcAuxExt(i, j, k, n);
+
+    amrex::Print() << "In box_flatten" << std::endl;
+    amrex::Print() << " yvect_d[FIRSTAUX+" << n << "] = " << y_vect[n] << std::endl;
+    amrex::Print() << " src_vec_aux[FIRSTAUX+" << n << "] = " << src_vec_aux[n] << std::endl;
+    amrex::Print() << " " << std::endl;
   }
 #endif
 }
