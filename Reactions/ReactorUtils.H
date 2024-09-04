@@ -484,7 +484,10 @@ fKernelSpec(
     amrex::Print() << "fkKernel: n = " << n << ", " << rhoAuxsrc_ext[vec_index<OrderType>(n, icell, ncells)] << std::endl;
    ydot_d[vec_index<OrderType>(n, icell, ncells)] =
       rhoAuxsrc_ext[vec_index<OrderType>(n, icell, ncells)];
-    amrex::Print() << "ydot_d[FIRSTAUX+" << n << "] = " << ydot_d[n] << std::endl;
+    amrex::Print() << " ydot_d[FIRSTAUX+" << n << "] = " << ydot_d[n] << std::endl;
+    amrex::Print() << " yvec_d[FIRSTAUX+" << n << "] = " << yvec_d[n] << std::endl;
+
+    amrex::Print() << " " << std::endl;
 
   }
 #endif
