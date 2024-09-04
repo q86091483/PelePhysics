@@ -240,7 +240,7 @@ box_flatten(
 #if (NUMAUX > 0)
   amrex::Print() << "In box_flatten: ----------------" << std::endl;
   for (int n = 0; n < NUMAUX; n++) {
-    const int idx = vec_index<OrderType>(NUM_SPECIES + n, icell, ncells);
+    const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
     y_vect[idx] = rhoAux(i, j, k, idx_src);
     src_vec_aux[idx_src] = frcAuxExt(i, j, k, idx_src);
@@ -252,10 +252,10 @@ box_flatten(
     amrex::Print() << ", ydot[" << n << "] = " << src_vect[idx_src] << ", idx_src=" << idx_src << std::endl;
   }
   amrex::Print() << " y[NUM_SPECIES] = " << y_vect[vec_index<OrderType>(NUM_SPECIES, icell, ncells)]
-                  << ", idx=", vec_index<OrderType>(NUM_SPECIES, icell, ncells);
+                  << ", idx=" << vec_index<OrderType>(NUM_SPECIES, icell, ncells);
   amrex::Print() << ", ydot[NUM_SPECIES] = " << src_vect_energy[icell] << ", idx_src=" << icell << std::endl;
   for (int n = 0; n < NUMAUX; n++) {
-    const int idx = vec_index<OrderType>(NUM_SPECIES + n, icell, ncells);
+    const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
     amrex::Print() << " y[NUM_SPECIES + " << n << "] = " << y_vect[idx] << ", idx=" << idx;
     amrex::Print() << ", ydot[NUM_SPECIES + " << n << "] = " << src_vec_aux[idx_src] << ", idx_src=" << idx_src << std::endl;
@@ -337,7 +337,7 @@ box_unflatten(
   temperature(i, j, k, 0) = temp;
 #if (NUMAUX > 0)
   for (int n = 0; n < NUMAUX; n++) {
-    rhoAux(i, j, k, n) = y_vect[vec_index<OrderType>(NUM_SPECIES + n, icell, ncells)];
+    rhoAux(i, j, k, n) = y_vect[vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells)];
   }
 #endif
   FC_in(i, j, k, 0) = static_cast<amrex::Real>(FCunt);
@@ -501,17 +501,17 @@ fKernelSpec(
   for (int n = 0; n < NUM_SPECIES; n++) {
     const int idx = vec_index<OrderType>(n, icell, ncells);
     const int idx_src = spec_index<OrderType>(n, icell, ncells);
-    amrex::Print() << " y[" << n << "] = " << yvec_d[idx];
-    amrex::Print() << ", ydot[" << n << "] = " << ydot_d[idx] << std::endl;
+    amrex::Print() << " y[" << n << "] = " << yvec_d[idx] << ", idx=" << idx;
+    amrex::Print() << ", ydot[" << n << "] = " << ydot_d[idx_src] << ", idx_src=" << idx_src << std::endl;
   }
-  amrex::Print() << " y[NUM_SPECIES] = " << yvec_d[NUM_SPECIES];
-  amrex::Print() << ", ydot[NUM_SPECIES] = " << ydot_d[NUM_SPECIES] << std::endl;
+  amrex::Print() << " y[NUM_SPECIES] = " << yvec_d[NUM_SPECIES] << ", idx=" << NUM_SPECIES;
+  amrex::Print() << ", ydot[NUM_SPECIES] = " << ydot_d[NUM_SPECIES] << ", idx_src=" << NUM_SPECIES << std::endl;
   for (int n = 0; n < NUMAUX; n++) {
-    const int idx = vec_index<OrderType>(NUM_SPECIES + n, icell, ncells);
+    const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
     ydot_d[idx] = rhoAuxsrc_ext[idx_src];
-    amrex::Print() << " y[FIRSTAUX + " << n << "] = " << yvec_d[idx];
-    amrex::Print() << ", ydot[FIRSTAUX + " << n << "] = " << ydot_d[idx_src] << std::endl;
+    amrex::Print() << " y[FIRSTAUX + " << n << "] = " << yvec_d[idx] << ", idx=" << idx;
+    amrex::Print() << ", ydot[FIRSTAUX + " << n << "] = " << ydot_d[idx_src] << ", idx_src=" << idx_src << std::endl;
   }
   amrex::Print() << " " << std::endl;
 #endif
