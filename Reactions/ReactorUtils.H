@@ -478,6 +478,7 @@ fKernelSpec(
 
 #if (NUMAUX > 0)
   for (int n = 0; n < NUMAUX; n++) {
+    amrex::Print() << "fkKernel: n = " << n << t ", " << rhoAuxsrc_ext[vec_index<OrderType>(n, icell, ncells)] << std::endl;
     ydot_d[vec_index<OrderType>(n, icell, ncells)] =
       rhoAuxsrc_ext[vec_index<OrderType>(n, icell, ncells)];
   }
