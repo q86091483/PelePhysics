@@ -498,10 +498,18 @@ fKernelSpec(
     rhoesrc * (rho_pt_inv / Cv_pt);
 
 #if (NUMAUX > 0)
+  // Add g to rhs (dU/dt = f(U) + g)
   for (int n = 0; n < NUMAUX; n++) {
     const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
-    ydot_d[idx] = rhoAuxsrc_ext[idx_src];
+    ydot_d[idx] = 0.0;
+    ydot_d[idx] += rhoAuxsrc_ext[idx_src];
+  }
+
+  for (int n = 0; n < NUMAGE; n++) {
+     const int idx_rhoAge = vec_index<OrderType>(NUM_SPECIES + 1 + AGE_IN_AUX + n, icell, ncells);
+     const int idx_rhoZ = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
+     ydot_d[idx_rhoAge] += yvec_d[idx_rhoZ];
   }
 
   if (false) {
