@@ -1,4 +1,5 @@
 #include "ReactorCvodeJacobian.H"
+#include "PeleLMeX_Index.H"
 
 namespace pele::physics::reactions::cvode {
 #ifdef AMREX_USE_GPU
@@ -103,10 +104,13 @@ cJac(
   auto* udata = static_cast<CVODEUserData*>(user_data);
   auto ncells = udata->ncells;
   auto reactor_type = udata->reactor_type;
+#if (NUMAUX > 0)
+  auto* rhoAuxsrc_ext = udata->rhoAuxsrc_ext;
+#endif
 
   for (int tid = 0; tid < ncells; tid++) {
     // Offset in case several cells
-    int offset = tid * (NUM_SPECIES + 1);
+    int offset = tid * (NUM_SPECIES + 1 + NUMAUX);
 
     // rho MKS
     amrex::Real rho = 0.0;
@@ -146,6 +150,19 @@ cJac(
       J_col[offset + i] = Jmat_tmp[NUM_SPECIES * (NUM_SPECIES + 1) + i] * mw(i);
     }
     // J_col = SM_COLUMN_D(J, offset); // Never read
+
+#if (NUMAUX > 0)
+#if (NUMAGE > 0)
+    for (int i = 0; i < NUMAGE; i++) {
+      const int MIXF_IN_J = offset + NUM_SPECIES + 1 + MIXF_IN_AUX + i;
+      const int AGE_IN_J  = offset + NUM_SPECIES + 1 + AGE_IN_AUX  + i;
+      amrex::Real* J_col_mixf = SM_COLUMN_D(J, MIXF_IN_J);
+      amrex::Real* J_col_age  = SM_COLUMN_D(J, AGE_IN_J);
+      J_col_mixf[AGE_IN_J] = 1 - (ydata[AGE_IN_J]/ydata[MIXF_IN_J]/ydata[MIXF_IN_J]) * rhoAuxsrc_ext[MIXF_IN_AUX+i];
+      J_col_age[AGE_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
+    }
+#endif // #if (NUMAGE > 0)
+#endif // #if (NUMAUX > 0)
   }
 
   return (0);
