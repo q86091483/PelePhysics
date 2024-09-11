@@ -511,7 +511,7 @@ fKernelSpec(
     const int idx_rhoAge = vec_index<OrderType>(NUM_SPECIES + 1 + AGE_IN_AUX + n, icell, ncells);
     const int idx_rhoZ = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
     if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
-      ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + (yvec_d[idx_rhoAge] / yvec_d[idx_rhoZ]) * ydot_d[idx_rhoZ];
+      ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ]; // + (yvec_d[idx_rhoAge] / yvec_d[idx_rhoZ]) * ydot_d[idx_rhoZ];
     } else {
       ydot_d[idx_rhoAge] = 0.0;
     }
