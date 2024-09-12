@@ -516,7 +516,7 @@ fKernelSpec(
     const int idx_rhoAge = vec_index<OrderType>(NUM_SPECIES + 1 + AGE_IN_AUX + n, icell, ncells);
     const int idx_rhoZ = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
     amrex::Real alpha_1 = yvec_d[idx_rhoAge] / yvec_d[idx_rhoZ];
-    amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAge] / (rhoAux_init[idx_rhoZ] + 1E-12);
+    amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAge] / rhoAux_init[idx_rhoZ];
     amrex::Real alpha_min = std::min(alpha_1, alpha_2);
     amrex::Print() << "alpha_1: " << alpha_1 << ", alpha_2: " << alpha_2 << std::endl;
     if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
