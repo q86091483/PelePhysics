@@ -244,6 +244,7 @@ box_flatten(
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
     y_vect[idx] = rhoAux(i, j, k, idx_src);
     src_vec_aux[idx_src] = frcAuxExt(i, j, k, idx_src);
+    vec_aux_init[idx_src] = rhoAux(i, j, k, idx_src);
   }
 
   if (false) {
@@ -451,6 +452,7 @@ fKernelSpec(
   const amrex::Real* rYs
 #if (NUMAUX > 0)
   , const amrex::Real* rhoAuxsrc_ext
+  , const amrex::Real* rhoAux_init
 #endif
   )
 {
@@ -513,8 +515,11 @@ fKernelSpec(
   for (int n = 0; n < NUMAGE; n++) {
     const int idx_rhoAge = vec_index<OrderType>(NUM_SPECIES + 1 + AGE_IN_AUX + n, icell, ncells);
     const int idx_rhoZ = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
+    amrex::Real alpha_1 = yvec_d[idx_rhoAge] / yvec_d[idx_rhoZ];
+    amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAge] / (rhoAux_init[idx_rhoZ] + 1E-12);
+    amrex::Real alpha_min = std::min(alpha_1, alpha_2);
     if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
-      ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + (yvec_d[idx_rhoAge] / yvec_d[idx_rhoZ]) * ydot_d[idx_rhoZ];
+      ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
     } else {
       ydot_d[idx_rhoAge] = 0.0;
     }

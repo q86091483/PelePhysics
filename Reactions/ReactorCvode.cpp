@@ -1744,6 +1744,7 @@ ReactorCvode::cF_RHS(
       rhoesrc_ext, rYsrc_ext
 #if (NUMAUX > 0)
       , rhoAuxsrc_ext
+      , rhoAux_init
 #endif
       );
   });
