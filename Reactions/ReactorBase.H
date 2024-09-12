@@ -76,6 +76,7 @@ public:
     amrex::Real* src_vect_energy
 #if (NUMAUX > 0)
     , amrex::Real* src_vect_aux
+    , amrex::Real* vec_aux_init
 #endif
     ) = 0;
 

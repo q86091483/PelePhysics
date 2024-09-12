@@ -131,6 +131,7 @@ public:
     amrex::Real* src_vect_energy
 #if (NUMAUX > 0)
     , amrex::Real* src_vect_aux
+    , amrex::Real* vec_aux_init
 #endif
     ) override
   {
@@ -142,7 +143,8 @@ public:
 #endif
       y_vect, src_vect, vect_energy, src_vect_energy
 #if (NUMAUX > 0)
-      , src_vect_energy
+      , src_vect_aux
+      , vec_aux_init
 #endif
     );
   }

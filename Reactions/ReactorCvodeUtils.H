@@ -48,6 +48,7 @@ struct CVODEUserData
   amrex::Real* rYsrc_ext = nullptr;   // External species forcing
 #if (NUMAUX > 0)
   amrex::Real* rhoAuxsrc_ext = nullptr;   // External species forcing
+  amrex::Real* rhoAux_init = nullptr;
 #endif
 
   int* mask =

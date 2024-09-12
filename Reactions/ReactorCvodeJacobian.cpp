@@ -106,6 +106,7 @@ cJac(
   auto reactor_type = udata->reactor_type;
 #if (NUMAUX > 0)
   auto* rhoAuxsrc_ext = udata->rhoAuxsrc_ext;
+  auto* rhoAux_init = udata->rhoAux_init;
 #endif
 
   for (int tid = 0; tid < ncells; tid++) {

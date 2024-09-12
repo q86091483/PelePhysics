@@ -975,6 +975,8 @@ ReactorCvode::allocUserData(
 #if (NUMAUX > 0)
   udata->rhoAuxsrc_ext = static_cast<amrex::Real*>(
     amrex::The_Arena()->alloc(NUMAUX * a_ncells * sizeof(amrex::Real)));
+  udata->rhoAux_init = static_cast<amrex::Real*>(
+    amrex::The_Arena()->alloc(NUMAUX * a_ncells * sizeof(amrex::Real)));
 #endif
   udata->mask =
     static_cast<int*>(amrex::The_Arena()->alloc(a_ncells * sizeof(int)));
@@ -1428,6 +1430,7 @@ ReactorCvode::react(
           yvec_d, udata->rYsrc_ext, udata->rhoe_init, udata->rhoesrc_ext
 #if (NUMAUX > 0)
           , udata->rhoAuxsrc_ext
+          , udata->rhoAux_init
 #endif
           );
 
@@ -1733,6 +1736,7 @@ ReactorCvode::cF_RHS(
   auto* rYsrc_ext = udata->rYsrc_ext;
 #if (NUMAUX > 0)
   auto* rhoAuxsrc_ext = udata->rhoAuxsrc_ext;
+  auto* rhoAux_init = udata->rhoAux_init;
 #endif
   amrex::ParallelFor(ncells, [=] AMREX_GPU_DEVICE(int icell) noexcept {
     utils::fKernelSpec<Ordering>(
@@ -1755,6 +1759,7 @@ ReactorCvode::freeUserData(CVODEUserData* data_wk)
   amrex::The_Arena()->free(data_wk->rhoesrc_ext);
 #if (NUMAUX > 0)
   amrex::The_Arena()->free(data_wk->rhoAuxsrc_ext);
+  amrex::The_Arena()->free(data_wk->rhoAux_init);
 #endif
   amrex::The_Arena()->free(data_wk->mask);
 
