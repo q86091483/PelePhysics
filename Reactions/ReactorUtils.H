@@ -527,6 +527,8 @@ fKernelSpec(
   }
 
   for (int n = 0; n < NUMAGEPV; n++) {
+    const amrex::Real Tx = std::tanh((1900 - 1750) / 10.);
+    amrex::Print() << Tx << std::endl;
     const int idx_rhoZ = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
     const int idx_rhoAge = vec_index<OrderType>(NUM_SPECIES + 1 + AGE_IN_AUX + n, icell, ncells);
     const int idx_rhoAgePV = vec_index<OrderType>(NUM_SPECIES + 1 + AGEPV_IN_AUX + n, icell, ncells);
