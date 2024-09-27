@@ -972,7 +972,7 @@ ReactorCvode::allocUserData(
     amrex::The_Arena()->alloc(a_ncells * sizeof(amrex::Real)));
   udata->rhoesrc_ext = static_cast<amrex::Real*>(
     amrex::The_Arena()->alloc(a_ncells * sizeof(amrex::Real)));
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   udata->rhoAuxsrc_ext = static_cast<amrex::Real*>(
     amrex::The_Arena()->alloc(NUMAUX * a_ncells * sizeof(amrex::Real)));
   udata->rhoAux_init = static_cast<amrex::Real*>(
@@ -1281,7 +1281,7 @@ ReactorCvode::react(
   amrex::Array4<amrex::Real> const& T_in,
   amrex::Array4<amrex::Real> const& rEner_in,
   amrex::Array4<amrex::Real> const& rEner_src_in,
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   amrex::Array4<amrex::Real> const& rAux_in,
   amrex::Array4<amrex::Real> const& rAux_src_in,
 #endif
@@ -1424,11 +1424,11 @@ ReactorCvode::react(
           icell, i, j, k, ncells,
           captured_reactor_type, captured_clean_init_massfrac,
           rY_in, rYsrc_in, T_in, rEner_in, rEner_src_in,
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
           rAux_in, rAux_src_in,
 #endif
           yvec_d, udata->rYsrc_ext, udata->rhoe_init, udata->rhoesrc_ext
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
           , udata->rhoAuxsrc_ext
           , udata->rhoAux_init
 #endif
@@ -1462,7 +1462,7 @@ ReactorCvode::react(
         utils::box_unflatten<Ordering>(
           icell, i, j, k, ncells, captured_reactor_type,
           captured_clean_init_massfrac, rY_in, T_in, rEner_in, rEner_src_in,
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
           rAux_in,
 #endif
           FC_in, yvec_d, udata->rhoe_init, nfe_tot, dt_react);
@@ -1734,7 +1734,7 @@ ReactorCvode::cF_RHS(
   auto* rhoe_init = udata->rhoe_init;
   auto* rhoesrc_ext = udata->rhoesrc_ext;
   auto* rYsrc_ext = udata->rYsrc_ext;
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   auto* rhoAuxsrc_ext = udata->rhoAuxsrc_ext;
   auto* rhoAux_init = udata->rhoAux_init;
 #endif
@@ -1742,7 +1742,7 @@ ReactorCvode::cF_RHS(
     utils::fKernelSpec<Ordering>(
       icell, ncells, dt_save, reactor_type, yvec_d, ydot_d, rhoe_init,
       rhoesrc_ext, rYsrc_ext
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
       , rhoAuxsrc_ext
       , rhoAux_init
 #endif
@@ -1758,7 +1758,7 @@ ReactorCvode::freeUserData(CVODEUserData* data_wk)
   amrex::The_Arena()->free(data_wk->rYsrc_ext);
   amrex::The_Arena()->free(data_wk->rhoe_init);
   amrex::The_Arena()->free(data_wk->rhoesrc_ext);
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   amrex::The_Arena()->free(data_wk->rhoAuxsrc_ext);
   amrex::The_Arena()->free(data_wk->rhoAux_init);
 #endif

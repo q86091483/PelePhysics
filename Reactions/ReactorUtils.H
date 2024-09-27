@@ -183,7 +183,7 @@ box_flatten(
   amrex::Array4<const amrex::Real> const& temperature,
   amrex::Array4<const amrex::Real> const& rhoE,
   amrex::Array4<const amrex::Real> const& frcEExt,
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   amrex::Array4<const amrex::Real> const& rhoAux,
   amrex::Array4<const amrex::Real> const& frcAuxExt,
 #endif
@@ -191,7 +191,7 @@ box_flatten(
   amrex::Real* src_vect,
   amrex::Real* vect_energy,
   amrex::Real* src_vect_energy
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   , amrex::Real* src_vec_aux
   , amrex::Real* vec_aux_init
 #endif
@@ -238,7 +238,7 @@ box_flatten(
   }
   y_vect[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] = temp;
 
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   for (int n = 0; n < NUMAUX; n++) {
     const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
@@ -284,7 +284,7 @@ box_unflatten(
   amrex::Array4<amrex::Real> const& temperature,
   amrex::Array4<amrex::Real> const& rhoE,
   amrex::Array4<amrex::Real> const& frcEExt,
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   amrex::Array4<amrex::Real> const& rhoAux,
 #endif
   amrex::Array4<amrex::Real> const& FC_in,
@@ -341,7 +341,7 @@ box_unflatten(
     amrex::Abort("Wrong reactor type. Choose between 1 (e) or 2 (h).");
   }
   temperature(i, j, k, 0) = temp;
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   for (int n = 0; n < NUMAUX; n++) {
     rhoAux(i, j, k, n) = y_vect[vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells)];
   }
@@ -367,7 +367,7 @@ public:
     amrex::Array4<const amrex::Real> const& temperature,
     amrex::Array4<const amrex::Real> const& rhoE,
     amrex::Array4<const amrex::Real> const& frcEExt,
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
     amrex::Array4<const amrex::Real> const& rhoAux,
     amrex::Array4<const amrex::Real> const& frcAuxExt,
 #endif
@@ -375,7 +375,7 @@ public:
     amrex::Real* src_vect,
     amrex::Real* vect_energy,
     amrex::Real* src_vect_energy
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
     , amrex::Real* src_vect_aux
     , amrex::Real* vec_aux_init
 #endif
@@ -390,11 +390,11 @@ public:
       box_flatten<OrderType>(
         icell, i, j, k, ncells, reactor_type, clean_init_massfrac,
         rhoY, frcExt, temperature, rhoE, frcEExt,
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
         rhoAux, frcAuxExt,
 #endif
         y_vect, src_vect, vect_energy, src_vect_energy
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
         , src_vect_aux
         , vec_aux_init
 #endif
@@ -411,7 +411,7 @@ public:
     amrex::Array4<amrex::Real> const& temperature,
     amrex::Array4<amrex::Real> const& rhoE,
     amrex::Array4<amrex::Real> const& frcEExt,
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
     amrex::Array4<amrex::Real> const& rhoAux,
 #endif
     amrex::Array4<amrex::Real> const& FC_in,
@@ -429,7 +429,7 @@ public:
       box_unflatten<OrderType>(
         icell, i, j, k, ncells, reactor_type, clean_init_massfrac, rhoY,
         temperature, rhoE, frcEExt,
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
         rhoAux,
 #endif
         FC_in, y_vect, vect_energy, FCunt[icell],
@@ -450,7 +450,7 @@ fKernelSpec(
   const amrex::Real* rhoe_init,
   const amrex::Real* rhoesrc_ext,
   const amrex::Real* rYs
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   , const amrex::Real* rhoAuxsrc_ext
   , const amrex::Real* rhoAux_init
 #endif
@@ -502,7 +502,7 @@ fKernelSpec(
   ydot_d[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] =
     rhoesrc * (rho_pt_inv / Cv_pt);
 
-#if (NUMAUX > 0) // Advance ODE dU/dt = f(U) + g
+#if defined (PELE_USE_AUX) && (NUMAUX > 0) // Advance ODE dU/dt = f(U) + g
 
   // Add g to r.h.s.
   for (int n = 0; n < NUMAUX; n++) {
@@ -511,7 +511,7 @@ fKernelSpec(
     ydot_d[idx] = rhoAuxsrc_ext[idx_src];
   }
 
-  // Ad f(U) to r.h.s.
+  // Add f(U) to r.h.s.
   for (int n = 0; n < NUMAGE; n++) {
     const int idx_rhoAge = vec_index<OrderType>(NUM_SPECIES + 1 + AGE_IN_AUX + n, icell, ncells);
     const int idx_rhoZ = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
@@ -523,6 +523,21 @@ fKernelSpec(
       ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
     } else {
       ydot_d[idx_rhoAge] = 0.0;
+    }
+  }
+
+  for (int n = 0; n < NUMAGEPV; n++) {
+    const int idx_rhoZ = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
+    const int idx_rhoAge = vec_index<OrderType>(NUM_SPECIES + 1 + AGE_IN_AUX + n, icell, ncells);
+    const int idx_rhoAgePV = vec_index<OrderType>(NUM_SPECIES + 1 + AGEPV_IN_AUX + n, icell, ncells);
+    amrex::Real alpha_1 = yvec_d[idx_rhoAge] / yvec_d[idx_rhoZ];
+    amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAge] / rhoAux_init[idx_rhoZ];
+    amrex::Real alpha_min = std::min(std::max(0.0, alpha_1), std::max(0.0, alpha_2));
+    //amrex::Print() << "alpha_1: " << alpha_1 << ", alpha_2: " << alpha_2 << "dt_save: " << dt_save << std::endl;
+    if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
+      ydot_d[idx_rhoAgePV] = yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
+    } else {
+      ydot_d[idx_rhoAgePV] = 0.0;
     }
   }
 

@@ -30,7 +30,7 @@ public:
     amrex::Array4<amrex::Real> const& T_in,
     amrex::Array4<amrex::Real> const& rEner_in,
     amrex::Array4<amrex::Real> const& rEner_src_in,
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
     amrex::Array4<amrex::Real> const& rAux_in,
     amrex::Array4<amrex::Real> const& rAux_src_in,
 #endif
@@ -66,7 +66,7 @@ public:
     amrex::Array4<const amrex::Real> const& temperature,
     amrex::Array4<const amrex::Real> const& rhoE,
     amrex::Array4<const amrex::Real> const& frcEExt,
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
     amrex::Array4<const amrex::Real> const& rhoAux,
     amrex::Array4<const amrex::Real> const& frcAuxExt,
 #endif
@@ -74,7 +74,7 @@ public:
     amrex::Real* src_vect,
     amrex::Real* vect_energy,
     amrex::Real* src_vect_energy
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
     , amrex::Real* src_vect_aux
     , amrex::Real* vec_aux_init
 #endif
@@ -87,7 +87,7 @@ public:
     amrex::Array4<amrex::Real> const& temperature,
     amrex::Array4<amrex::Real> const& rhoE,
     amrex::Array4<amrex::Real> const& frcEExt,
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
     amrex::Array4<amrex::Real> const& rhoAux,
 #endif
     amrex::Array4<amrex::Real> const& FC_in,

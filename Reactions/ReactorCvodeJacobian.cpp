@@ -104,7 +104,7 @@ cJac(
   auto* udata = static_cast<CVODEUserData*>(user_data);
   auto ncells = udata->ncells;
   auto reactor_type = udata->reactor_type;
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   auto* rhoAuxsrc_ext = udata->rhoAuxsrc_ext;
   auto* rhoAux_init = udata->rhoAux_init;
 #endif
@@ -152,7 +152,7 @@ cJac(
     }
     // J_col = SM_COLUMN_D(J, offset); // Never read
 
-#if (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
 #if (NUMAGE > 0)
     for (int i = 0; i < NUMAGE; i++) {
       const int MIXF_IN_J = offset + NUM_SPECIES + 1 + MIXF_IN_AUX + i;
@@ -163,6 +163,21 @@ cJac(
       J_col_age[AGE_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
     }
 #endif // #if (NUMAGE > 0)
+#if (NUMAGEPV > 0)
+    for (int i = 0; i < NUMAGEPV; i++) {
+      const int MIXF_IN_J   = offset + NUM_SPECIES + 1 + MIXF_IN_AUX  + i;
+      const int AGE_IN_J    = offset + NUM_SPECIES + 1 + AGE_IN_AUX   + i;
+      const int AGEPV_IN_J  = offset + NUM_SPECIES + 1 + AGEPV_IN_AUX + i;
+      amrex::Real* J_col_mixf   = SM_COLUMN_D(J,  MIXF_IN_J);
+      amrex::Real* J_col_age    = SM_COLUMN_D(J,   AGE_IN_J);
+      amrex::Real* J_col_agepv  = SM_COLUMN_D(J, AGEPV_IN_J);
+      J_col_agepv[AGE_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
+
+      J_col_mixf[AGEPV_IN_J]  = 1 - (ydata[AGE_IN_J]/ydata[MIXF_IN_J]/ydata[MIXF_IN_J]) * rhoAuxsrc_ext[MIXF_IN_AUX+i];
+      J_col_age[AGEPV_IN_J]   = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
+      J_col_agepv[AGEPV_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
+    }
+#endif // #if (NUMAGEPV > 0)
 #endif // #if (NUMAUX > 0)
   }
 
