@@ -526,9 +526,12 @@ fKernelSpec(
     }
   }
 
+#if (NUMAGEPV > 0)
+  const amrex::Real Tc = 1750.;
+  const amrex::Real dT = 10.;
+  const amrex::Real tanh_T = std::tanh((temp_pt - Tc) / dT);
+  const amrex::Real f_T = 0.5 * (1 + tanh_T);
   for (int n = 0; n < NUMAGEPV; n++) {
-    const amrex::Real Tx = std::tanh((1760. - 1750) / 10.);
-    amrex::Print() << Tx << std::endl;
     const int idx_rhoZ = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
     const int idx_rhoAge = vec_index<OrderType>(NUM_SPECIES + 1 + AGE_IN_AUX + n, icell, ncells);
     const int idx_rhoAgePV = vec_index<OrderType>(NUM_SPECIES + 1 + AGEPV_IN_AUX + n, icell, ncells);
@@ -537,11 +540,12 @@ fKernelSpec(
     amrex::Real alpha_min = std::min(std::max(0.0, alpha_1), std::max(0.0, alpha_2));
     //amrex::Print() << "alpha_1: " << alpha_1 << ", alpha_2: " << alpha_2 << "dt_save: " << dt_save << std::endl;
     if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
-      ydot_d[idx_rhoAgePV] = yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
+      ydot_d[idx_rhoAgePV] = f_T * yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
     } else {
       ydot_d[idx_rhoAgePV] = 0.0;
     }
   }
+#endif
 
   if (false) {
     amrex::Print() << "In fKernelSpec: ----------------" << std::endl;
