@@ -504,7 +504,6 @@ fKernelSpec(
 
 #if defined (PELE_USE_AUX) && (NUMAUX > 0) // Advance ODE dU/dt = f(U) + g
 
-  /* STAR
   // Add g to r.h.s.
   for (int n = 0; n < NUMAUX; n++) {
     const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
@@ -526,7 +525,6 @@ fKernelSpec(
       ydot_d[idx_rhoAge] = 0.0;
     }
   }
-  */
 
 #if (NUMAGEPV > 0)
   const amrex::Real Tc = 1750.;
