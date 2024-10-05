@@ -511,6 +511,7 @@ fKernelSpec(
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
     ydot_d[idx] = 0.0; //STARrhoAuxsrc_ext[idx_src];
   }
+  */
 
   // Add f(U) to r.h.s.
   for (int n = 0; n < NUMAGE; n++) {
@@ -526,7 +527,6 @@ fKernelSpec(
       ydot_d[idx_rhoAge] = 0.0;
     }
   }
-  */
 
 #if (NUMAGEPV > 0)
   const amrex::Real Tc = 1750.;
