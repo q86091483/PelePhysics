@@ -1,5 +1,6 @@
 #include "ReactorCvodeJacobian.H"
 #include "PeleLMeX_Index.H"
+#include "mechanism.H"
 
 namespace pele::physics::reactions::cvode {
 #ifdef AMREX_USE_GPU
@@ -153,6 +154,15 @@ cJac(
     // J_col = SM_COLUMN_D(J, offset); // Never read
 
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    for (int i = 0; i < NUMMIXF; i++) {
+      const int MIXF_IN_J = offset + NUM_SPECIES + 1 + MIXF_IN_AUX + i;
+      amrex::Real* J_col_mixf = SM_COLUMN_D(J, MIXF_IN_J);
+      amrex::Print() << MIXF_IN_J << ": ";
+      for (int kk = 0; kk < NUM_SPECIES+1+NUMMIXF; kk++) {
+        amrex::Print() << J_col_mixf[kk];
+      }
+      amrex::Print() << std::endl;
+    }
 #if (NUMAGE > 0)
     for (int i = 0; i < NUMAGE; i++) {
       const int MIXF_IN_J = offset + NUM_SPECIES + 1 + MIXF_IN_AUX + i;
