@@ -504,11 +504,11 @@ fKernelSpec(
 
 #if defined (PELE_USE_AUX) && (NUMAUX > 0) // Advance ODE dU/dt = f(U) + g
 
-  for (int ii = 0; ii < NUMAUX; ii++) {
-    const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + ii, icell, ncells);
-    amrex::Print() << ydot_d[idx];
-  }
-  amrex::Print() << std::endl;
+  //for (int ii = 0; ii < NUMAUX; ii++) {
+  //  const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + ii, icell, ncells);
+  //  amrex::Print() << ydot_d[idx] << ", ";
+  //}
+  //amrex::Print() << std::endl;
 
   /*STAR
   // Add g to r.h.s.
