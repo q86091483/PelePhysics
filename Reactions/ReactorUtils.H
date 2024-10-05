@@ -504,14 +504,13 @@ fKernelSpec(
 
 #if defined (PELE_USE_AUX) && (NUMAUX > 0) // Advance ODE dU/dt = f(U) + g
 
-  /* STAR
   // Add g to r.h.s.
   for (int n = 0; n < NUMAUX; n++) {
     const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
     ydot_d[idx] = 0.0; //STARrhoAuxsrc_ext[idx_src];
   }
-  */
+
 
   // Add f(U) to r.h.s.
   for (int n = 0; n < NUMAGE; n++) {
