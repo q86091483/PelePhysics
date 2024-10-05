@@ -154,6 +154,7 @@ cJac(
     // J_col = SM_COLUMN_D(J, offset); // Never read
 
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    /*STAR
     for (int ii = 0; ii < NUM_SPECIES + 1 + NUMAUX ; ii++) {
       amrex::Print() << "Line ii = " << ii << ", offset = "  << offset << std::endl;
       amrex::Print() << "  ";
@@ -164,6 +165,7 @@ cJac(
       }
       amrex::Print() << std::endl;
     }
+    */
 #if (NUMAGE > 0)
     for (int i = 0; i < NUMAGE; i++) {
       const int MIXF_IN_J = offset + NUM_SPECIES + 1 + MIXF_IN_AUX + i;
