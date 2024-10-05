@@ -111,6 +111,7 @@ cJac(
 #endif
 
   for (int tid = 0; tid < ncells; tid++) {
+    amrex::Print() << "tid: " << tid << ", ncells: " << ncells << std::endl;
     // Offset in case several cells
     int offset = tid * (NUM_SPECIES + 1 + NUMAUX);
 
