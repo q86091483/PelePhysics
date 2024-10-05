@@ -521,7 +521,7 @@ fKernelSpec(
   }
 
   // Add f(U) to r.h.s.
-#if (NUMAGE > 0)
+//#if (NUMAGE > 0)
   for (int n = 0; n < NUMAGE; n++) {
     const int idx_rhoAge = vec_index<OrderType>(NUM_SPECIES + 1 + AGE_IN_AUX + n, icell, ncells);
     const int idx_rhoZ = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
@@ -535,7 +535,7 @@ fKernelSpec(
       ydot_d[idx_rhoAge] = 0.0;
     }
   }
-#endif
+//#endif
 
 #if (NUMAGEPV > 0)
   const amrex::Real Tc = 1750.;
