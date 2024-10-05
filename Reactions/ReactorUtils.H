@@ -508,6 +508,8 @@ fKernelSpec(
   for (int n = 0; n < NUMAUX; n++) {
     const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
+    amrex::Print() << "n: " << n << ", idx: " << idx << ", idx_src: " << idx_src << std::endl;
+    amrex::Print() << "MIXF_IN_AUX: " << MIXF_IN_AUX << std::endl;
     ydot_d[idx] = 0.0; //STARrhoAuxsrc_ext[idx_src];
   }
 
