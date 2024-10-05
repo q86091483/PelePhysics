@@ -506,7 +506,7 @@ fKernelSpec(
 
   for (int ii = 0; ii < NUMAUX; ii++) {
     const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + ii, icell, ncells);
-    amrex::Print() << ydot_d[idx] << ", ";
+    amrex::Print() << "ydot_d[" << idx << "]=" << ydot_d[idx] << ", ";
   }
   amrex::Print() << std::endl;
 
