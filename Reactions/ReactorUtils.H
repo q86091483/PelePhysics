@@ -239,6 +239,7 @@ box_flatten(
   y_vect[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] = temp;
 
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
+  amrex::Print() << "Here ......" << std::endl;
   for (int n = 0; n < NUMAUX; n++) {
     const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
