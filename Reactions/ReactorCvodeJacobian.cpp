@@ -105,7 +105,7 @@ cJac(
   auto* udata = static_cast<CVODEUserData*>(user_data);
   auto ncells = udata->ncells;
   auto reactor_type = udata->reactor_type;
-#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMUDA > 0)
   auto* rhoAuxsrc_ext = udata->rhoAuxsrc_ext;
   auto* rhoAux_init = udata->rhoAux_init;
 #endif

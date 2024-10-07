@@ -74,7 +74,7 @@ public:
     amrex::Real* src_vect,
     amrex::Real* vect_energy,
     amrex::Real* src_vect_energy
-#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMUDA > 0)
     , amrex::Real* src_vect_aux
     , amrex::Real* vec_aux_init
 #endif

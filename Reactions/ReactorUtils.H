@@ -191,7 +191,7 @@ box_flatten(
   amrex::Real* src_vect,
   amrex::Real* vect_energy,
   amrex::Real* src_vect_energy
-#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMUDA > 0)
   , amrex::Real* src_vec_aux
   , amrex::Real* vec_aux_init
 #endif
@@ -243,8 +243,10 @@ box_flatten(
     const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
     y_vect[idx] = rhoAux(i, j, k, idx_src);
+    #if (NUMUDA > 0)
     src_vec_aux[idx_src] = frcAuxExt(i, j, k, idx_src);
     vec_aux_init[idx_src] = rhoAux(i, j, k, idx_src);
+    #endif
   }
 
   if (false) {
@@ -263,7 +265,7 @@ box_flatten(
       const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
       const int idx_src = aux_index<OrderType>(n, icell, ncells);
       amrex::Print() << " y[NUM_SPECIES + " << n << "] = " << y_vect[idx] << ", idx=" << idx;
-      amrex::Print() << ", ydot[NUM_SPECIES + " << n << "] = " << src_vec_aux[idx_src] << ", idx_src=" << idx_src << std::endl;
+      //amrex::Print() << ", ydot[NUM_SPECIES + " << n << "] = " << src_vec_aux[idx_src] << ", idx_src=" << idx_src << std::endl;
     }
     amrex::Print() << " " << std::endl;
   } // if(true or false) for output
@@ -375,7 +377,7 @@ public:
     amrex::Real* src_vect,
     amrex::Real* vect_energy,
     amrex::Real* src_vect_energy
-#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMUDA > 0)
     , amrex::Real* src_vect_aux
     , amrex::Real* vec_aux_init
 #endif
@@ -394,7 +396,7 @@ public:
         rhoAux, frcAuxExt,
 #endif
         y_vect, src_vect, vect_energy, src_vect_energy
-#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMUDA > 0)
         , src_vect_aux
         , vec_aux_init
 #endif
@@ -450,7 +452,7 @@ fKernelSpec(
   const amrex::Real* rhoe_init,
   const amrex::Real* rhoesrc_ext,
   const amrex::Real* rYs
-#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMUDA > 0)
   , const amrex::Real* rhoAuxsrc_ext
   , const amrex::Real* rhoAux_init
 #endif
@@ -521,7 +523,7 @@ fKernelSpec(
   }
 
   // Add f(U) to r.h.s.
-//#if (NUMAGE > 0)
+#if (NUMAGE > 0)
   for (int n = 0; n < NUMAGE; n++) {
     const int idx_rhoAge = vec_index<OrderType>(NUM_SPECIES + 1 + AGE_IN_AUX + n, icell, ncells);
     const int idx_rhoZ = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
@@ -535,7 +537,7 @@ fKernelSpec(
       ydot_d[idx_rhoAge] = 0.0;
     }
   }
-//#endif
+#endif
 
 #if (NUMAGEPV > 0)
   const amrex::Real Tc = 1750.;
