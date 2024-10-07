@@ -238,8 +238,7 @@ box_flatten(
   }
   y_vect[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] = temp;
 
-#if defined (PELE_USE_AUX) && (NUMFOO > 0)
-  amrex::Print() << "In utils::box_flatten." << std::endl;
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   for (int n = 0; n < NUMAUX; n++) {
     const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
@@ -342,8 +341,7 @@ box_unflatten(
     amrex::Abort("Wrong reactor type. Choose between 1 (e) or 2 (h).");
   }
   temperature(i, j, k, 0) = temp;
-#if defined (PELE_USE_AUX) && (NUMFOO > 0)
-  amrex::Print() << "In utils::box_unflatten." << std::endl;
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   for (int n = 0; n < NUMAUX; n++) {
     rhoAux(i, j, k, n) = y_vect[vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells)];
   }
