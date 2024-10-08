@@ -437,7 +437,6 @@ ReactorCvode::initCvode(
   amrex::Print() << "udata->precond_type: " << a_udata->precond_type << " vs. "
     << "cvode::denseSimpleAJac = " << cvode::denseSimpleAJac << ", "
     << "cvode::sparseSimpleAJac = " << cvode::sparseSimpleAJac << ", "
-    << "cvode::sparseSimpleAJac = " << cvode::sparseSimpleAJac << ", "
     << "cvode::customSimpleAJac = " << cvode::customSimpleAJac << std::endl;
   // Analytical Jac. data for iterative solver preconditioner
   if (a_udata->precond_type == cvode::denseSimpleAJac) {
