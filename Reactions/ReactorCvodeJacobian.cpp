@@ -112,7 +112,7 @@ cJac(
 
   for (int tid = 0; tid < ncells; tid++) {
     // Offset in case several cells
-    int offset = tid * (NUM_SPECIES + 1 + NUMAUX);
+    int offset = tid * (NUM_SPECIES + 1 + NUMODE);
 
     // rho MKS
     amrex::Real rho = 0.0;

@@ -102,7 +102,7 @@ public:
 
 protected:
   int verbose{0};
-  amrex::GpuArray<amrex::Real, NUM_SPECIES + 1 + NUMAUX> m_typ_vals = {0.0};
+  amrex::GpuArray<amrex::Real, NUM_SPECIES + 1 + NUMODE> m_typ_vals = {0.0};
 };
 } // namespace pele::physics::reactions
 #endif

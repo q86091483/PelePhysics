@@ -53,7 +53,7 @@ template <typename OrderType>
 AMREX_GPU_DEVICE AMREX_FORCE_INLINE int
 vec_index(const int specie_idx, const int icell, const int /*ncells*/)
 {
-  return icell * (NUM_SPECIES + 1 + NUMAUX) + specie_idx;
+  return icell * (NUM_SPECIES + 1 + NUMODE) + specie_idx;
 }
 
 template <typename OrderType>
@@ -67,7 +67,7 @@ template <typename OrderType>
 AMREX_GPU_DEVICE AMREX_FORCE_INLINE int
 aux_index(const int aux_idx, const int icell, const int /*ncells*/)
 {
-  return icell * NUMAUX + aux_idx;
+  return icell * NUMODE + aux_idx;
 }
 
 template <>
@@ -93,7 +93,7 @@ set_sundials_solver_tols(
   const int ncells,
   const amrex::Real relTol,
   const amrex::Real absTol,
-  const amrex::GpuArray<amrex::Real, NUM_SPECIES + 1 + NUMAUX>& typ_vals,
+  const amrex::GpuArray<amrex::Real, NUM_SPECIES + 1 + NUMODE>& typ_vals,
   const std::string& solvername,
   const int verbose)
 {
@@ -102,7 +102,7 @@ set_sundials_solver_tols(
   omp_thread = omp_get_thread_num();
 #endif
 
-  const int neq_tot = (NUM_SPECIES + 1 + NUMAUX) * ncells;
+  const int neq_tot = (NUM_SPECIES + 1 + NUMODE) * ncells;
 
 #if defined(AMREX_USE_CUDA)
   N_Vector atol = N_VNewWithMemHelp_Cuda(
@@ -134,7 +134,7 @@ set_sundials_solver_tols(
     }
 
     amrex::ParallelFor(ncells, [=] AMREX_GPU_DEVICE(int icell) {
-      for (int k = 0; k < NUM_SPECIES + 1 + NUMAUX; k++) {
+      for (int k = 0; k < NUM_SPECIES + 1 + NUMODE; k++) {
         ratol[vec_index<OrderType>(k, icell, ncells)] = typ_vals[k] * absTol;
       }
     });
@@ -238,8 +238,8 @@ box_flatten(
   }
   y_vect[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] = temp;
 
-#if defined (PELE_USE_AUX) && (NUMAUX > 0)
-  for (int n = 0; n < NUMAUX; n++) {
+#if defined (PELE_USE_AUX) && (NUMODE > 0)
+  for (int n = 0; n < NUMODE; n++) {
     const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
     y_vect[idx] = rhoAux(i, j, k, idx_src);
@@ -261,7 +261,7 @@ box_flatten(
     amrex::Print() << " y[NUM_SPECIES] = " << y_vect[vec_index<OrderType>(NUM_SPECIES, icell, ncells)]
                     << ", idx=" << vec_index<OrderType>(NUM_SPECIES, icell, ncells);
     amrex::Print() << ", ydot[NUM_SPECIES] = " << src_vect_energy[icell] << ", idx_src=" << icell << std::endl;
-    for (int n = 0; n < NUMAUX; n++) {
+    for (int n = 0; n < NUMODE; n++) {
       const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
       const int idx_src = aux_index<OrderType>(n, icell, ncells);
       amrex::Print() << " y[NUM_SPECIES + " << n << "] = " << y_vect[idx] << ", idx=" << idx;
@@ -343,8 +343,8 @@ box_unflatten(
     amrex::Abort("Wrong reactor type. Choose between 1 (e) or 2 (h).");
   }
   temperature(i, j, k, 0) = temp;
-#if defined (PELE_USE_AUX) && (NUMAUX > 0)
-  for (int n = 0; n < NUMAUX; n++) {
+#if defined (PELE_USE_AUX) && (NUMODE > 0)
+  for (int n = 0; n < NUMODE; n++) {
     rhoAux(i, j, k, n) = y_vect[vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells)];
   }
 #endif
@@ -504,7 +504,7 @@ fKernelSpec(
   ydot_d[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] =
     rhoesrc * (rho_pt_inv / Cv_pt);
 
-#if defined (PELE_USE_AUX) && (NUMAUX > 0) // Advance ODE dU/dt = f(U) + g
+#if defined (PELE_USE_AUX) && (NUMODE > 0) // Advance ODE dU/dt = f(U) + g
 
   /*STAR - debug output
   for (int ii = 0; ii < NUMAUX; ii++) {
@@ -516,7 +516,7 @@ fKernelSpec(
 
   // Add g to r.h.s.
   // ydot_d may have non-zero values, so it is more safe to explicitly initialize the ydot_d vector.
-  for (int n = 0; n < NUMAUX; n++) {
+  for (int n = 0; n < NUMODE; n++) {
     const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
     ydot_d[idx] = 0.0; //STARrhoAuxsrc_ext[idx_src];
@@ -574,7 +574,7 @@ fKernelSpec(
     }
     amrex::Print() << " y[NUM_SPECIES] = " << yvec_d[NUM_SPECIES] << ", idx=" << NUM_SPECIES;
     amrex::Print() << ", ydot[NUM_SPECIES] = " << ydot_d[NUM_SPECIES] << ", idx_src=" << NUM_SPECIES << std::endl;
-    for (int n = 0; n < NUMAUX; n++) {
+    for (int n = 0; n < NUMODE; n++) {
       const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
       const int idx_src = aux_index<OrderType>(n, icell, ncells);
       amrex::Print() << " y[FIRSTAUX + " << n << "] = " << yvec_d[idx] << ", idx=" << idx;

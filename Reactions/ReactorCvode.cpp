@@ -238,7 +238,7 @@ ReactorCvode::initCvode(
   const int ncells)
 {
   // Solution vector
-  int neq_tot = (NUM_SPECIES + 1 + NUMAUX) * ncells;
+  int neq_tot = (NUM_SPECIES + 1 + NUMODE) * ncells;
   a_y = N_VNew_Serial(neq_tot, *amrex::sundials::The_Sundials_Context());
   if (utils::check_flag(static_cast<void*>(a_y), "N_VNew_Serial", 0) != 0) {
     return (1);
