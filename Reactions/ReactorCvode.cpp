@@ -37,6 +37,10 @@ ReactorCvode::init(int reactor_type, int /*ncells*/)
   checkCvodeOptions(
     linear_solve_type, precondJFNK_type, m_solve_type, m_analytical_jacobian,
     m_precond_type);
+  amrex::Print() << "After checkCvodeOptions:" << std::endl;
+  amrex::Print() << "m_solve_type: " <<  m_solve_type << std::endl;
+  amrex::Print() << "m_analytical_jacobian: " <<  m_analytical_jacobian << std::endl;
+  amrex::Print() << "m_precond_type: " <<  m_precond_type << std::endl;
 
   if (verbose > 0) {
     if (atomic_reductions != 0) {
