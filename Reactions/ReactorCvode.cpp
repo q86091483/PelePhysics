@@ -37,10 +37,6 @@ ReactorCvode::init(int reactor_type, int /*ncells*/)
   checkCvodeOptions(
     linear_solve_type, precondJFNK_type, m_solve_type, m_analytical_jacobian,
     m_precond_type);
-  amrex::Print() << "After checkCvodeOptions:" << std::endl;
-  amrex::Print() << "m_solve_type: " <<  m_solve_type << std::endl;
-  amrex::Print() << "m_analytical_jacobian: " <<  m_analytical_jacobian << std::endl;
-  amrex::Print() << "m_precond_type: " <<  m_precond_type << std::endl;
 
   if (verbose > 0) {
     if (atomic_reductions != 0) {
@@ -242,7 +238,7 @@ ReactorCvode::initCvode(
   const int ncells)
 {
   // Solution vector
-  int neq_tot = (NUM_SPECIES + 1 + NUMAUX) * ncells;
+  int neq_tot = (NUM_SPECIES + 1 + NUMODE) * ncells;
   a_y = N_VNew_Serial(neq_tot, *amrex::sundials::The_Sundials_Context());
   if (utils::check_flag(static_cast<void*>(a_y), "N_VNew_Serial", 0) != 0) {
     return (1);
@@ -434,10 +430,6 @@ ReactorCvode::initCvode(
 #endif
   }
 
-  amrex::Print() << "udata->precond_type: " << a_udata->precond_type << " vs. "
-    << "cvode::denseSimpleAJac = " << cvode::denseSimpleAJac << ", "
-    << "cvode::sparseSimpleAJac = " << cvode::sparseSimpleAJac << ", "
-    << "cvode::customSimpleAJac = " << cvode::customSimpleAJac << std::endl;
   // Analytical Jac. data for iterative solver preconditioner
   if (a_udata->precond_type == cvode::denseSimpleAJac) {
 #ifdef PELE_CVODE_FORCE_YCORDER
