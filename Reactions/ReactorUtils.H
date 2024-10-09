@@ -168,6 +168,92 @@ set_sundials_solver_tols(
   N_VDestroy(atol);
 }
 
+#if defined(PELE_USE_AUX) && (NUMNEW > 0)
+template <typename OrderType>
+void
+set_sundials_solver_tols_aux(
+  // cppcheck-suppress constParameter
+  sundials::Context& sunctx,
+  void* sundials_mem,
+  const int ncells,
+  const amrex::Real relTol,
+  const amrex::Real absTol,
+  const amrex::GpuArray<amrex::Real, NUMNEW>& typ_vals,
+  const std::string& solvername,
+  const int verbose)
+{
+  int omp_thread = 0;
+#ifdef AMREX_USE_OMP
+  omp_thread = omp_get_thread_num();
+#endif
+
+  const int neq_tot = (NUMNEW) * ncells;
+
+#if defined(AMREX_USE_CUDA)
+  N_Vector atol = N_VNewWithMemHelp_Cuda(
+    neq_tot, /*use_managed_mem=*/false,
+    *amrex::sundials::The_SUNMemory_Helper(), sunctx);
+  amrex::Real* ratol = N_VGetDeviceArrayPointer_Cuda(atol);
+#elif defined(AMREX_USE_HIP)
+  N_Vector atol = N_VNewWithMemHelp_Hip(
+    neq_tot, /*use_managed_mem=*/false,
+    *amrex::sundials::The_SUNMemory_Helper(), sunctx);
+  amrex::Real* ratol = N_VGetDeviceArrayPointer_Hip(atol);
+#elif defined(AMREX_USE_SYCL)
+  N_Vector atol = N_VNewWithMemHelp_Sycl(
+    neq_tot, /*use_managed_mem=*/false,
+    *amrex::sundials::The_SUNMemory_Helper(),
+    &amrex::Gpu::Device::streamQueue(), sunctx);
+  amrex::Real* ratol = N_VGetDeviceArrayPointer_Sycl(atol);
+#else
+  N_Vector atol = N_VNew_Serial(neq_tot, sunctx);
+  amrex::Real* ratol = N_VGetArrayPointer(atol);
+#endif
+
+  if (typ_vals[0] > 0.0) {
+    // cppcheck-suppress knownConditionTrueFalse
+    if ((verbose > 0) && (omp_thread == 0)) {
+      amrex::Print() << " Setting " << solvername
+                     << " tolerances for aux with TypVals rtol = " << relTol
+                     << " atolfact = " << absTol << " in PelePhysics \n";
+    }
+
+    amrex::ParallelFor(ncells, [=] AMREX_GPU_DEVICE(int icell) {
+      for (int k = 0; k < NUMNEW; k++) {
+        ratol[aux_index<OrderType>(k, icell, ncells)] = typ_vals[k] * absTol;
+      }
+    });
+  } else {
+    // cppcheck-suppress knownConditionTrueFalse
+    if ((verbose > 0) && (omp_thread == 0)) {
+      amrex::Print() << " Setting " << solvername
+                     << " tolerances rtol = " << relTol << " atol = " << absTol
+                     << " in PelePhysics \n";
+    }
+    amrex::ParallelFor(
+      neq_tot, [=] AMREX_GPU_DEVICE(int i) { ratol[i] = absTol; });
+  }
+
+  // Call CVodeSVtolerances to specify the scalar relative tolerance
+  // and vector absolute tolerances
+  int flag;
+  if (solvername == "cvode") {
+    flag = CVodeSVtolerances(sundials_mem, relTol, atol);
+  } else if (solvername == "arkstep") {
+    flag = ARKStepSVtolerances(sundials_mem, relTol, atol);
+  } else if (solvername == "erkstep") {
+    flag = ERKStepSVtolerances(sundials_mem, relTol, atol);
+  } else {
+    amrex::Abort("setSundialsSolverTols not implemented for this solver type");
+  }
+  if (utils::check_flag(&flag, "SVtolerances", 1) != 0) {
+    amrex::Abort("Problem in setSundialsSolverTols");
+  }
+
+  N_VDestroy(atol);
+}
+#endif
+
 template <typename OrderType>
 AMREX_GPU_DEVICE AMREX_FORCE_INLINE void
 box_flatten(
@@ -584,6 +670,154 @@ fKernelSpec(
   } // if (true or not) for output
 #endif
 }
+
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+template <typename OrderType>
+AMREX_GPU_DEVICE AMREX_FORCE_INLINE void
+fKernelSpec_aux(
+  const int icell,
+  const int ncells,
+  const amrex::Real dt_save,
+  const int reactor_type,
+  const amrex::Real* yvec_d,
+  amrex::Real* ydot_d, // NOLINT(readability-non-const-parameter)
+  const amrex::Real* rhoe_init,
+  const amrex::Real* rhoesrc_ext,
+  const amrex::Real* rYs
+#if defined (PELE_USE_AUX) && (NUMUDA > 0)
+  , const amrex::Real* rhoAuxsrc_ext
+  , const amrex::Real* rhoAux_init
+#endif
+  )
+{
+  /*
+  amrex::Real rho_pt = 0.0;
+  amrex::GpuArray<amrex::Real, NUM_SPECIES> massfrac = {0.0};
+  for (int n = 0; n < NUM_SPECIES; n++) {
+    massfrac[n] = yvec_d[vec_index<OrderType>(n, icell, ncells)];
+    rho_pt += massfrac[n];
+  }
+  const amrex::Real rho_pt_inv = 1.0 / rho_pt;
+
+  for (int n = 0; n < NUM_SPECIES; n++) {
+    massfrac[n] *= rho_pt_inv;
+  }
+
+  const amrex::Real nrg_pt =
+    (rhoe_init[icell] + rhoesrc_ext[icell] * dt_save) * rho_pt_inv;
+
+  amrex::Real temp_pt =
+    yvec_d[vec_index<OrderType>(NUM_SPECIES, icell, ncells)];
+
+  amrex::Real Cv_pt = 0.0;
+  amrex::GpuArray<amrex::Real, NUM_SPECIES> ei_pt = {0.0};
+  auto eos = pele::physics::PhysicsType::eos();
+  if (reactor_type == ReactorTypes::e_reactor_type) {
+    eos.REY2T(rho_pt, nrg_pt, massfrac.arr, temp_pt);
+    eos.RTY2Ei(rho_pt, temp_pt, massfrac.arr, ei_pt.arr);
+    eos.RTY2Cv(rho_pt, temp_pt, massfrac.arr, Cv_pt);
+  } else if (reactor_type == ReactorTypes::h_reactor_type) {
+    eos.RHY2T(rho_pt, nrg_pt, massfrac.arr, temp_pt);
+    eos.RTY2Hi(rho_pt, temp_pt, massfrac.arr, ei_pt.arr);
+    eos.RTY2Cp(rho_pt, temp_pt, massfrac.arr, Cv_pt);
+  } else {
+    amrex::Abort("Wrong reactor type. Choose between 1 (e) or 2 (h).");
+  }
+
+  amrex::GpuArray<amrex::Real, NUM_SPECIES> cdots_pt = {0.0};
+  eos.RTY2WDOT(rho_pt, temp_pt, massfrac.arr, cdots_pt.arr);
+
+  amrex::Real rhoesrc = rhoesrc_ext[icell];
+  for (int n = 0; n < NUM_SPECIES; n++) {
+    const amrex::Real cdot_rYs =
+      cdots_pt[n] + rYs[spec_index<OrderType>(n, icell, ncells)];
+    ydot_d[vec_index<OrderType>(n, icell, ncells)] = cdot_rYs;
+    rhoesrc -= cdot_rYs * ei_pt[n];
+  }
+  ydot_d[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] =
+    rhoesrc * (rho_pt_inv / Cv_pt);
+  */
+#if defined (PELE_USE_AUX) && (NUMODE > 0) // Advance ODE dU/dt = f(U) + g
+
+  /*STAR - debug output
+  for (int ii = 0; ii < NUMAUX; ii++) {
+    const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + ii, icell, ncells);
+    amrex::Print() << "ydot_d[" << idx << "]=" << ydot_d[idx] << ", ";
+  }
+  amrex::Print() << std::endl;
+  */
+
+  // Add g to r.h.s.
+  // ydot_d may have non-zero values, so it is more safe to explicitly initialize the ydot_d vector.
+  for (int n = 0; n < NUMODE; n++) {
+    const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
+    const int idx_src = aux_index<OrderType>(n, icell, ncells);
+    ydot_d[idx] = 0.0; //STARrhoAuxsrc_ext[idx_src];
+  }
+
+  // Add f(U) to r.h.s.
+#if (NUMAGE > 0)
+  for (int n = 0; n < NUMAGE; n++) {
+    const int idx_rhoAge = vec_index<OrderType>(NUM_SPECIES + 1 + AGE_IN_AUX + n, icell, ncells);
+    const int idx_rhoZ = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
+    amrex::Real alpha_1 = yvec_d[idx_rhoAge] / yvec_d[idx_rhoZ];
+    amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAge] / rhoAux_init[idx_rhoZ];
+    amrex::Real alpha_min = std::min(std::max(0.0, alpha_1), std::max(0.0, alpha_2));
+    //amrex::Print() << "alpha_1: " << alpha_1 << ", alpha_2: " << alpha_2 << "dt_save: " << dt_save << std::endl;
+    if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
+      ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
+    } else {
+      ydot_d[idx_rhoAge] = 0.0;
+    }
+  }
+#endif
+
+#if (NUMAGEPV > 0)
+  const amrex::Real Tc = 1750.;
+  const amrex::Real dT = 10.;
+  const amrex::Real tanh_T = std::tanh((temp_pt - Tc) / dT);
+  const amrex::Real f_T = 0.5 * (1 + tanh_T);
+  for (int n = 0; n < NUMAGEPV; n++) {
+    const int idx_rhoZ = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
+    const int idx_rhoAge = vec_index<OrderType>(NUM_SPECIES + 1 + AGE_IN_AUX + n, icell, ncells);
+    const int idx_rhoAgePV = vec_index<OrderType>(NUM_SPECIES + 1 + AGEPV_IN_AUX + n, icell, ncells);
+    amrex::Real alpha_1 = yvec_d[idx_rhoAgePV] / yvec_d[idx_rhoZ];
+    amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAgePV] / rhoAux_init[idx_rhoZ];
+    amrex::Real alpha_min = std::min(std::max(0.0, alpha_1), std::max(0.0, alpha_2));
+    //amrex::Print() << "alpha_1: " << alpha_1 << ", alpha_2: " << alpha_2 << "dt_save: " << dt_save << std::endl;
+    if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
+      ydot_d[idx_rhoAgePV] = f_T * yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
+    } else {
+      ydot_d[idx_rhoAgePV] = 0.0;
+    }
+  }
+#endif
+
+  if (false) {
+    amrex::Print() << "In fKernelSpec: ----------------" << std::endl;
+    //amrex::Print() << "MIXF_IN_AUX, " << MIXF_IN_AUX << ", " << NUMMIXF << std::endl;
+    //amrex::Print() << "AGE_IN_AUX, " << AGE_IN_AUX << ", " << NUMAGE << std::endl;
+    //amrex::Print() << "AGEPV_IN_AUX, " << AGEPV_IN_AUX << ", " << NUMAGEPV << std::endl;
+    amrex::Print() << " rho = " << rho_pt << std::endl;
+    for (int n = 0; n < NUM_SPECIES; n++) {
+      const int idx = vec_index<OrderType>(n, icell, ncells);
+      const int idx_src = spec_index<OrderType>(n, icell, ncells);
+      amrex::Print() << " y[" << n << "] = " << yvec_d[idx] << ", idx=" << idx;
+      amrex::Print() << ", ydot[" << n << "] = " << ydot_d[idx_src] << ", idx_src=" << idx_src << std::endl;
+    }
+    amrex::Print() << " y[NUM_SPECIES] = " << yvec_d[NUM_SPECIES] << ", idx=" << NUM_SPECIES;
+    amrex::Print() << ", ydot[NUM_SPECIES] = " << ydot_d[NUM_SPECIES] << ", idx_src=" << NUM_SPECIES << std::endl;
+    for (int n = 0; n < NUMODE; n++) {
+      const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
+      const int idx_src = aux_index<OrderType>(n, icell, ncells);
+      amrex::Print() << " y[FIRSTAUX + " << n << "] = " << yvec_d[idx] << ", idx=" << idx;
+      amrex::Print() << ", ydot[FIRSTAUX + " << n << "] = " << ydot_d[idx_src] << ", idx_src=" << idx_src << std::endl;
+    }
+    amrex::Print() << " " << std::endl;
+  } // if (true or not) for output
+#endif
+}
+#endif
 
 #ifdef AMREX_USE_GPU
 N_Vector

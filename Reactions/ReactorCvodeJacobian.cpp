@@ -206,6 +206,129 @@ cJac(
   return (0);
 }
 
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+int
+cJac_aux(
+  amrex::Real /* tn */,
+  N_Vector u,
+  N_Vector /* fu */,
+  SUNMatrix J,
+  void* user_data,
+  N_Vector /* tmp1 */,
+  N_Vector /* tmp2 */,
+  N_Vector /* tmp3 */)
+{
+  BL_PROFILE("Pele::ReactorCvode::cJacDense()");
+
+  // Make local copies of pointers to input data
+  amrex::Real* ydata = N_VGetArrayPointer(u);
+  /*
+  // Make local copies of pointers in user_data
+  auto* udata = static_cast<CVODEUserData*>(user_data);
+  auto ncells = udata->ncells;
+  auto reactor_type = udata->reactor_type;
+#if defined (PELE_USE_AUX) && (NUMUDA > 0)
+  auto* rhoAuxsrc_ext = udata->rhoAuxsrc_ext;
+  auto* rhoAux_init = udata->rhoAux_init;
+#endif
+
+  for (int tid = 0; tid < ncells; tid++) {
+    // Offset in case several cells
+    int offset = tid * (NUM_SPECIES + 1 + NUMODE);
+
+    // rho MKS
+    amrex::Real rho = 0.0;
+    for (int i = 0; i < NUM_SPECIES; i++) {
+      rho = rho + ydata[offset + i];
+    }
+
+    amrex::Real temp = ydata[offset + NUM_SPECIES];
+
+    amrex::Real massfrac[NUM_SPECIES] = {0.0};
+    // Yks
+    for (int i = 0; i < NUM_SPECIES; i++) {
+      massfrac[i] = ydata[offset + i] / rho;
+    }
+
+    // Jac
+    amrex::Real Jmat_tmp[(NUM_SPECIES + 1) * (NUM_SPECIES + 1)] = {0.0};
+    const int consP =
+      static_cast<int>(reactor_type == ReactorTypes::h_reactor_type);
+    auto eos = pele::physics::PhysicsType::eos();
+    eos.RTY2JAC(rho, temp, massfrac, Jmat_tmp, consP);
+
+    // fill the sunMat and scale
+    for (int i = 0; i < NUM_SPECIES; i++) {
+      // cppcheck-suppress cstyleCast
+      amrex::Real* J_col = SM_COLUMN_D(J, offset + i);
+      for (int k = 0; k < NUM_SPECIES; k++) {
+        J_col[offset + k] =
+          Jmat_tmp[i * (NUM_SPECIES + 1) + k] * mw(k) * imw(i);
+      }
+      J_col[offset + NUM_SPECIES] =
+        Jmat_tmp[i * (NUM_SPECIES + 1) + NUM_SPECIES] * imw(i);
+    }
+    // cppcheck-suppress cstyleCast
+    amrex::Real* J_col = SM_COLUMN_D(J, offset + NUM_SPECIES);
+    for (int i = 0; i < NUM_SPECIES; i++) {
+      J_col[offset + i] = Jmat_tmp[NUM_SPECIES * (NUM_SPECIES + 1) + i] * mw(i);
+    }
+    // J_col = SM_COLUMN_D(J, offset); // Never read
+
+#if defined (PELE_USE_AUX) && (NUMFOO > 0)
+    /*STAR
+    for (int ii = 0; ii < NUM_SPECIES + 1 + NUMAUX ; ii++) {
+      amrex::Print() << "Line ii = " << ii << ", offset = "  << offset << std::endl;
+      amrex::Print() << "  ";
+      for (int kk = offset; kk < offset + NUM_SPECIES + 1 + NUMAUX; kk++) {
+        amrex::Real* J_col_temp = SM_COLUMN_D(J, kk);
+        const int ROW_J = offset + ii;
+        amrex::Print() << J_col_temp[ROW_J] << ", ";
+      }
+      amrex::Print() << std::endl;
+    }
+
+#if (NUMAGE > 0)
+    for (int i = 0; i < NUMAGE; i++) {
+      const int MIXF_IN_J = offset + NUM_SPECIES + 1 + MIXF_IN_AUX + i;
+      const int AGE_IN_J  = offset + NUM_SPECIES + 1 + AGE_IN_AUX  + i;
+      amrex::Real* J_col_mixf = SM_COLUMN_D(J, MIXF_IN_J);
+      amrex::Real* J_col_age  = SM_COLUMN_D(J, AGE_IN_J);
+      J_col_mixf[AGE_IN_J] = 1 - (ydata[AGE_IN_J]/ydata[MIXF_IN_J]/ydata[MIXF_IN_J]) * rhoAuxsrc_ext[MIXF_IN_AUX+i];
+      J_col_age[AGE_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
+    }
+#endif // #if (NUMAGE > 0)
+#if (NUMAGEPV > 0)
+    const amrex::Real Tc      = 1750.;
+    const amrex::Real dT      = 10.;
+    const amrex::Real tanh_T  = std::tanh((temp - Tc) / dT);
+    const amrex::Real f_T     = 0.5 * (1 + tanh_T);
+    const amrex::Real dfdT    = 0.5 * (1 - tanh_T * tanh_T) / dT;
+    for (int i = 0; i < NUMAGEPV; i++) {
+
+      const int TEMP_IN_J   = offset + NUM_SPECIES;
+      const int MIXF_IN_J   = offset + NUM_SPECIES + 1 + MIXF_IN_AUX  + i;
+      const int AGE_IN_J    = offset + NUM_SPECIES + 1 + AGE_IN_AUX   + i;
+      const int AGEPV_IN_J  = offset + NUM_SPECIES + 1 + AGEPV_IN_AUX + i;
+
+      amrex::Real* J_col_temp   = SM_COLUMN_D(J,  TEMP_IN_J);
+      amrex::Real* J_col_mixf   = SM_COLUMN_D(J,  MIXF_IN_J);
+      amrex::Real* J_col_age    = SM_COLUMN_D(J,   AGE_IN_J);
+      amrex::Real* J_col_agepv  = SM_COLUMN_D(J, AGEPV_IN_J);
+
+      J_col_temp[AGEPV_IN_J]  = ydata[MIXF_IN_J] * dfdT;
+      J_col_mixf[AGEPV_IN_J]  = f_T - (ydata[AGEPV_IN_J]/ydata[MIXF_IN_J]/ydata[MIXF_IN_J]) * rhoAuxsrc_ext[MIXF_IN_AUX+i];
+      J_col_age[AGEPV_IN_J]   = 0.0;
+      J_col_agepv[AGEPV_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
+    }
+#endif // #if (NUMAGEPV > 0)
+#endif // #if (NUMAUX > 0)
+  }
+  */
+  return (0);
+}
+#endif // #if (NUMNEW > 0) cJac_aux
+
 // Analytical SPARSE CSR Jacobian evaluation
 int
 cJac_sps(

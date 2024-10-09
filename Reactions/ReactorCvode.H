@@ -113,6 +113,11 @@ public:
   static int
   cF_RHS(amrex::Real t, N_Vector y_in, N_Vector ydot, void* user_data);
 
+#if defined(PELE_USE_AUX) && (NUMNEW > 0)
+  static int
+  cF_RHS_aux(amrex::Real t, N_Vector y_in, N_Vector ydot, void* user_data);
+#endif
+
   void flatten(
     const amrex::Box& box,
     const int ncells,
@@ -193,6 +198,20 @@ private:
 #endif
     const amrex::Real& a_time,
     int ncells);
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+  int initCvode_aux(
+    N_Vector& a_y,
+    SUNMatrix& a_A,
+    CVODEUserData* a_udata,
+    SUNNonlinearSolver& a_NLS,
+    SUNLinearSolver& a_LS,
+    void* a_cvode_mem,
+#ifdef AMREX_USE_GPU
+    amrex::gpuStream_t stream,
+#endif
+    const amrex::Real& a_time,
+    int ncells);
+#endif // #if (NUMAUX > 0)
   void allocUserData(
     CVODEUserData* udata,
     int a_ncells

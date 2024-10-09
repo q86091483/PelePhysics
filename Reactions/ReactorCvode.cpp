@@ -506,6 +506,288 @@ ReactorCvode::initCvode(
   return (0);
 }
 
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+int
+ReactorCvode::initCvode_aux(
+  N_Vector& a_y,
+  SUNMatrix& a_A,
+  CVODEUserData* a_udata,
+  SUNNonlinearSolver& a_NLS,
+  SUNLinearSolver& a_LS,
+  void* a_cvode_mem,
+  const amrex::Real& a_time,
+  const int ncells)
+{
+  // Solution vector
+  int neq_tot = NUMNEW * ncells;
+  a_y = N_VNew_Serial(neq_tot, *amrex::sundials::The_Sundials_Context());
+  if (utils::check_flag(static_cast<void*>(a_y), "N_VNew_Serial_aux", 0) != 0) {
+    return (1);
+  }
+
+  // We don't need to populate the userData for aux since this has been done in initCvode.
+  //allocUserData(a_udata, ncells);
+  //if (utils::check_flag(static_cast<void*>(a_udata), "allocUserData", 2) != 0) {
+  //  return (1);
+  //}
+
+  // Set the pointer to user-defined data
+  int flag = CVodeSetUserData(a_cvode_mem, a_udata);
+  if (utils::check_flag(&flag, "CVodeSetUserData_aux", 1) != 0) {
+    return (1);
+  }
+
+  // Call CVodeInit to initialize the integrator memory and specify the user's
+  // right hand side function, the initial time, and initial dependent variable
+  // vector a_y.
+  flag = CVodeInit(a_cvode_mem, cF_RHS_aux, a_time, a_y);
+  if (utils::check_flag(&flag, "CVodeInit_aux", 1) != 0) {
+    return (1);
+  }
+
+  // Linear solver data
+  if (a_udata->solve_type == cvode::fixedPoint) {
+#ifdef PELE_CVODE_FORCE_YCORDER
+    a_NLS = SUNNonlinSol_FixedPoint(
+      a_y, max_fp_accel, *amrex::sundials::The_Sundials_Context());
+    if (static_cast<bool>(utils::check_flag(
+          static_cast<void*>(a_NLS), "SUNNonlinSol_FixedPoint", 0))) {
+      return (1);
+    }
+
+    flag = CVodeSetNonlinearSolver(a_cvode_mem, a_NLS);
+    if (static_cast<bool>(
+          utils::check_flag(&flag, "CVodeSetNonlinearSolver", 1))) {
+      return (1);
+    }
+#else
+    amrex::Abort("solve_type=fixed_point only available with YCOrder");
+#endif
+  } else if (
+    a_udata->solve_type == cvode::denseFDDirect ||
+    a_udata->solve_type == cvode::denseDirect) {
+#ifdef PELE_CVODE_FORCE_YCORDER
+    // Create dense SUNMatrix for use in linear solves
+    a_A = SUNDenseMatrix(
+      neq_tot, neq_tot, *amrex::sundials::The_Sundials_Context());
+    if (utils::check_flag(static_cast<void*>(a_A), "SUNDenseMatrix_aux", 0) != 0) {
+      return (1);
+    }
+
+    // Create dense SUNLinearSolver object for use by CVode
+    a_LS = SUNLinSol_Dense(a_y, a_A, *amrex::sundials::The_Sundials_Context());
+    if (
+      utils::check_flag(static_cast<void*>(a_LS), "SUNLinSol_Dense_aux", 0) != 0) {
+      return (1);
+    }
+
+    // Call CVodeSetLinearSolver to attach the matrix and linear solver to CVode
+    flag = CVodeSetLinearSolver(a_cvode_mem, a_LS, a_A);
+    if (utils::check_flag(&flag, "CVodeSetLinearSolver_aux", 1) != 0) {
+      return (1);
+    }
+#else
+    amrex::Abort(
+      "solve_type=dense_direct||dense_fddirect only available with YCOrder");
+#endif
+  } else if (a_udata->solve_type == cvode::sparseDirect) {
+#if defined(PELE_USE_KLU) && defined(PELE_CVODE_FORCE_YCORDER)
+    // Create sparse SUNMatrix for use in linear solves
+    a_A = SUNSparseMatrix(
+      neq_tot, neq_tot, (a_udata->NNZ) * a_udata->ncells, CSC_MAT,
+      *amrex::sundials::The_Sundials_Context());
+    if (utils::check_flag(static_cast<void*>(A), "SUNSparseMatrix", 0))
+      return (1);
+
+    // Create KLU solver object for use by CVode
+    a_LS = SUNLinSol_KLU(a_y, a_A, *amrex::sundials::The_Sundials_Context());
+    if (utils::check_flag(static_cast<void*>(a_LS), "SUNLinSol_KLU", 0))
+      return (1);
+
+    // Call CVodeSetLinearSolver to attach the matrix and linear solver to CVode
+    flag = CVodeSetLinearSolver(a_cvode_mem, a_LS, a_A);
+    if (utils::check_flag(&flag, "CVodeSetLinearSolver", 1))
+      return (1);
+#else
+    amrex::Abort(
+      "solve_type=sparse_direct not valid without KLU library and YCOrder");
+#endif
+
+  } else if (a_udata->solve_type == cvode::customDirect) {
+#ifdef PELE_CVODE_FORCE_YCORDER
+    // Create dense SUNMatrix for use in linear solves
+    a_A = SUNSparseMatrix(
+      neq_tot, neq_tot, (a_udata->NNZ) * a_udata->ncells, CSR_MAT,
+      *amrex::sundials::The_Sundials_Context());
+    if (utils::check_flag(static_cast<void*>(a_A), "SUNDenseMatrix", 0) != 0) {
+      return (1);
+    }
+
+    // Create dense SUNLinearSolver object for use by CVode
+    a_LS = cvode::SUNLinSol_sparse_custom(
+      a_y, a_A, m_reactor_type, a_udata->ncells, (NUM_SPECIES + 1),
+      a_udata->NNZ, *amrex::sundials::The_Sundials_Context());
+    if (
+      utils::check_flag(
+        static_cast<void*>(a_LS), "SUNLinSol_sparse_custom", 0) != 0) {
+      return (1);
+    }
+
+    // Call CVodeSetLinearSolver to attach the matrix and linear solver to CVode
+    flag = CVodeSetLinearSolver(a_cvode_mem, a_LS, a_A);
+    if (utils::check_flag(&flag, "CVodeSetLinearSolver", 1) != 0) {
+      return (1);
+    }
+#else
+    amrex::Abort("solve_type=custom_direct only available with YCOrder");
+#endif
+  } else if (a_udata->solve_type == cvode::GMRES) {
+    // Create the GMRES linear solver object
+    a_LS = SUNLinSol_SPGMR(
+      a_y, SUN_PREC_NONE, 0, *amrex::sundials::The_Sundials_Context());
+    if (
+      utils::check_flag(static_cast<void*>(a_LS), "SUNLinSol_SPGMR", 0) != 0) {
+      return (1);
+    }
+
+    // Set CVode linear solver to LS
+    flag = CVodeSetLinearSolver(a_cvode_mem, a_LS, nullptr);
+    if (utils::check_flag(&flag, "CVodeSetLinearSolver", 1) != 0) {
+      return (1);
+    }
+  } else if (a_udata->solve_type == cvode::precGMRES) {
+#ifdef PELE_CVODE_FORCE_YCORDER
+    // Create the GMRES linear solver object
+    a_LS = SUNLinSol_SPGMR(
+      a_y, SUN_PREC_LEFT, 0, *amrex::sundials::The_Sundials_Context());
+    if (
+      utils::check_flag(static_cast<void*>(a_LS), "SUNLinSol_SPGMR", 0) != 0) {
+      return (1);
+    }
+    // Set CVode linear solver to LS
+    flag = CVodeSetLinearSolver(a_cvode_mem, a_LS, nullptr);
+    if (utils::check_flag(&flag, "CVodeSetLinearSolver", 1) != 0) {
+      return (1);
+    }
+#else
+    amrex::Abort("solve_type=precGMRES only available with YCOrder");
+#endif
+  } else {
+    amrex::Abort("Wrong choice of linear solver in aux");
+  }
+
+  // Analytical Jac. data for direct solver
+  if (a_udata->analytical_jacobian == 1) {
+#ifdef PELE_CVODE_FORCE_YCORDER
+    if (a_udata->solve_type == cvode::denseDirect) {
+      // Set the user-supplied Jacobian routine Jac
+      flag = CVodeSetJacFn(a_cvode_mem, cvode::cJac_aux);
+      if (utils::check_flag(&flag, "CVodeSetJacFn_aux", 1) != 0) {
+        return (1);
+      }
+    }
+#else
+    amrex::Abort("analytical_jacobian only available with YCOrder");
+#endif
+  } else if (a_udata->solve_type == cvode::sparseDirect) {
+#if defined(PELE_USE_KLU) && defined(PELE_CVODE_FORCE_YCORDER)
+    // Set the user-supplied KLU Jacobian routine Jac
+    flag = CVodeSetJacFn(a_cvode_mem, cvode::cJac_KLU);
+    if (utils::check_flag(&flag, "CVodeSetJacFn", 1))
+      return (1);
+#else
+    amrex::Abort(
+      "solve_type=sparse_direct not valid without KLU library and YCOrder");
+#endif
+  } else if (a_udata->solve_type == cvode::customDirect) {
+#ifdef PELE_CVODE_FORCE_YCORDER
+    // Set the user-supplied Jacobian routine Jac
+    flag = CVodeSetJacFn(a_cvode_mem, cvode::cJac_sps);
+    if (utils::check_flag(&flag, "CVodeSetJacFn", 1) != 0) {
+      return (1);
+    }
+#else
+    amrex::Abort("solve_type=custom_direct only available with YCOrder");
+#endif
+  }
+
+  // Analytical Jac. data for iterative solver preconditioner
+  if (a_udata->precond_type == cvode::denseSimpleAJac) {
+#ifdef PELE_CVODE_FORCE_YCORDER
+    // Set the JAcobian-times-vector function
+    flag = CVodeSetJacTimes(a_cvode_mem, nullptr, nullptr);
+    if (utils::check_flag(&flag, "CVodeSetJacTimes", 1) != 0) {
+      return (1);
+    }
+    // Set the preconditioner plain dense solve and setup functions
+    flag = CVodeSetPreconditioner(a_cvode_mem, cvode::Precond, cvode::PSolve);
+    if (utils::check_flag(&flag, "CVodeSetPreconditioner", 1) != 0) {
+      return (1);
+    }
+#else
+    amrex::Abort("precond_type=denseSimpleAJac only available with YCOrder");
+#endif
+  } else if (a_udata->precond_type == cvode::sparseSimpleAJac) {
+#if defined(PELE_USE_KLU) && defined(PELE_CVODE_FORCE_YCORDER)
+    // Set the JAcobian-times-vector function
+    flag = CVodeSetJacTimes(a_cvode_mem, nullptr, nullptr);
+    if (utils::check_flag(&flag, "CVodeSetJacTimes", 1))
+      return (1);
+    // Set the preconditioner KLU sparse solve and setup functions
+    flag = CVodeSetPreconditioner(
+      a_cvode_mem, cvode::Precond_sparse, cvode::PSolve_sparse);
+    if (utils::check_flag(&flag, "CVodeSetPreconditioner", 1))
+      return (1);
+#else
+    amrex::Abort("precond_type=sparseSimpleAJac not valid without KLU library "
+                 "and YCOrder");
+#endif
+  } else if (a_udata->precond_type == cvode::customSimpleAJac) {
+    // Set the JAcobian-times-vector function
+    flag = CVodeSetJacTimes(a_cvode_mem, nullptr, nullptr);
+    if (utils::check_flag(&flag, "CVodeSetJacTimes", 1) != 0) {
+      return (1);
+    }
+    // Set the preconditioner to custom solve and setup functions
+    flag = CVodeSetPreconditioner(
+      a_cvode_mem, cvode::Precond_custom, cvode::PSolve_custom);
+    if (utils::check_flag(&flag, "CVodeSetPreconditioner", 1) != 0) {
+      return (1);
+    }
+  }
+
+  // CVODE runtime options
+  flag = CVodeSetMaxNonlinIters(a_cvode_mem, max_nls_iters); // Max newton iter.
+  if (utils::check_flag(&flag, "CVodeSetMaxNonlinIters", 1) != 0) {
+    return (1);
+  }
+  flag = CVodeSetMaxErrTestFails(a_cvode_mem, 100); // Max Err.test failure
+  if (utils::check_flag(&flag, "CVodeSetMaxErrTestFails", 1) != 0) {
+    return (1);
+  }
+  flag = CVodeSetErrHandlerFn(
+    a_cvode_mem, cvode::cvodeErrHandler, nullptr); // Err. handler funct.
+  if (utils::check_flag(&flag, "CVodeSetErrHandlerFn", 1) != 0) {
+    return (1);
+  }
+  flag = CVodeSetMaxNumSteps(a_cvode_mem, 10000); // Max substeps
+  if (utils::check_flag(&flag, "CVodeSetMaxNumSteps", 1) != 0) {
+    return (1);
+  }
+  flag = CVodeSetMaxOrd(a_cvode_mem, m_cvode_maxorder); // Max order
+  if (utils::check_flag(&flag, "CVodeSetMaxOrd", 1) != 0) {
+    return (1);
+  }
+  if (a_LS != nullptr) {
+    flag = CVodeSetJacEvalFrequency(a_cvode_mem, 100); // Max Jac age
+    if (utils::check_flag(&flag, "CVodeSetJacEvalFrequency", 1) != 0) {
+      return (1);
+    }
+  }
+  return (0);
+}
+#endif // #if (NUMNEW > 0) initCvode_aux
+
 #endif // End check GPU for initCvode method
 
 void
@@ -1322,6 +1604,15 @@ ReactorCvode::react(
     CVodeCreate(CV_BDF, *amrex::sundials::The_Sundials_Context());
   ; // Internal Cvode memory
 
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+  SUNMatrix A_aux = nullptr;            // Jacobian matrix for aux
+  SUNNonlinearSolver NLS_aux = nullptr; // Non-linear solver for aux
+  SUNLinearSolver LS_aux = nullptr;     // Linear solver for aux
+
+  void* cvode_mem_aux =
+    CVodeCreate(CV_BDF, *amrex::sundials::The_Sundials_Context());
+#endif
+
   //----------------------------------------------------------
   // GPU Region
   //----------------------------------------------------------
@@ -1396,6 +1687,10 @@ ReactorCvode::react(
 
   N_Vector y = nullptr; // Solution vector
 
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+  N_Vector y_aux = nullptr; // Solution vector for aux
+#endif
+
   // Perform integration one cell at a time
   const int icell = 0;
   const int ncells = 1;
@@ -1411,6 +1706,14 @@ ReactorCvode::react(
   utils::set_sundials_solver_tols<Ordering>(
     *amrex::sundials::The_Sundials_Context(), cvode_mem, udata->ncells, relTol,
     absTol, m_typ_vals, "cvode", verbose);
+
+#if defined(PELE_USE_AUX) && (NUMNEW > 0)
+  initCvode_aux(y_aux, A_aux, udata, NLS_aux, LS_aux, cvode_mem_aux, time_start, ncells);
+
+  utils::set_sundials_solver_tols_aux<Ordering>(
+    *amrex::sundials::The_Sundials_Context(), cvode_mem_aux, udata->ncells, relTol,
+    absTol, m_typ_vals_aux, "cvode", verbose);
+#endif
 
   const auto captured_reactor_type = m_reactor_type;
   const auto captured_clean_init_massfrac = m_clean_init_massfrac;
@@ -1508,6 +1811,20 @@ ReactorCvode::react(
     SUNMatDestroy(A);
   }
   freeUserData(udata);
+
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+  N_VDestroy(y_aux);
+  CVodeFree(&cvode_mem_aux);
+  if (LS_aux != nullptr) {
+    SUNLinSolFree(LS_aux);
+  }
+  if (NLS_aux != nullptr) {
+    SUNNonlinSolFree(NLS_aux);
+  }
+  if (A_aux != nullptr) {
+    SUNMatDestroy(A_aux);
+  }
+#endif
 
   return static_cast<int>(nfe);
 }
@@ -1751,6 +2068,48 @@ ReactorCvode::cF_RHS(
   amrex::Gpu::Device::streamSynchronize();
   return 0;
 }
+
+#if defined(PELE_USE_AUX) && (NUMNEW > 0)
+int
+ReactorCvode::cF_RHS_aux(
+  realtype t, N_Vector y_in, N_Vector ydot_in, void* user_data)
+{
+  BL_PROFILE("Pele::ReactorCvode::cF_RHS_aux()");
+#ifdef AMREX_USE_GPU
+  amrex::Real* yvec_d = N_VGetDeviceArrayPointer(y_in);
+  amrex::Real* ydot_d = N_VGetDeviceArrayPointer(ydot_in);
+#else
+  amrex::Real* yvec_d = N_VGetArrayPointer(y_in);
+  amrex::Real* ydot_d = N_VGetArrayPointer(ydot_in);
+#endif
+
+  auto* udata = static_cast<CVODEUserData*>(user_data);
+  udata->dt_save = t;
+
+  const auto ncells = udata->ncells;
+  const auto dt_save = udata->dt_save;
+  const auto reactor_type = udata->reactor_type;
+  auto* rhoe_init = udata->rhoe_init;
+  auto* rhoesrc_ext = udata->rhoesrc_ext;
+  auto* rYsrc_ext = udata->rYsrc_ext;
+#if defined (PELE_USE_AUX) && (NUMUDA > 0)
+  auto* rhoAuxsrc_ext = udata->rhoAuxsrc_ext;
+  auto* rhoAux_init = udata->rhoAux_init;
+#endif
+  amrex::ParallelFor(ncells, [=] AMREX_GPU_DEVICE(int icell) noexcept {
+    utils::fKernelSpec_aux<Ordering>(
+      icell, ncells, dt_save, reactor_type, yvec_d, ydot_d, rhoe_init,
+      rhoesrc_ext, rYsrc_ext
+#if defined (PELE_USE_AUX) && (NUMUDA > 0)
+      , rhoAuxsrc_ext
+      , rhoAux_init
+#endif
+      );
+  });
+  amrex::Gpu::Device::streamSynchronize();
+  return 0;
+}
+#endif // #if (NUMNEW > 0) cF_RHS_aux
 
 void
 ReactorCvode::freeUserData(CVODEUserData* data_wk)

@@ -42,6 +42,18 @@ int cJac(
   N_Vector tmp2,
   N_Vector tmp3);
 
+#if defined(PELE_USE_AUX) && (NUMNEW > 0)
+int cJac_aux(
+  amrex::Real tn,
+  N_Vector u,
+  N_Vector fy,
+  SUNMatrix J,
+  void* user_data,
+  N_Vector tmp1,
+  N_Vector tmp2,
+  N_Vector tmp3);
+#endif
+
 #ifndef AMREX_USE_GPU
 int cJac_sps(
   amrex::Real tn,
