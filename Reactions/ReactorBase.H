@@ -74,7 +74,8 @@ public:
     amrex::Real* src_vect,
     amrex::Real* vect_energy,
     amrex::Real* src_vect_energy
-#if defined (PELE_USE_AUX) && (NUMUDA > 0)
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+    , amrex::Real* y_vect_aux
     , amrex::Real* src_vect_aux
     , amrex::Real* vec_aux_init
 #endif
@@ -93,6 +94,9 @@ public:
     amrex::Array4<amrex::Real> const& FC_in,
     amrex::Real* y_vect,
     amrex::Real* vect_energy,
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+    amrex::Real* y_vect_aux,
+#endif
     long int* FCunt,
     amrex::Real dt) = 0;
 

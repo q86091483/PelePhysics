@@ -134,7 +134,8 @@ public:
     amrex::Real* src_vect,
     amrex::Real* vect_energy,
     amrex::Real* src_vect_energy
-#if defined (PELE_USE_AUX) && (NUMUDA > 0)
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+    , amrex::Real* y_vect_aux
     , amrex::Real* src_vect_aux
     , amrex::Real* vec_aux_init
 #endif
@@ -147,7 +148,8 @@ public:
       rhoAux, frcAuxExt,
 #endif
       y_vect, src_vect, vect_energy, src_vect_energy
-#if defined (PELE_USE_AUX) && (NUMUDA > 0)
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+      , y_vect_aux
       , src_vect_aux
       , vec_aux_init
 #endif
@@ -167,6 +169,9 @@ public:
     amrex::Array4<amrex::Real> const& FC_in,
     amrex::Real* y_vect,
     amrex::Real* vect_energy,
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+    amrex::Real* y_vect_aux,
+#endif
     long int* FCunt,
     amrex::Real dt) override
   {
@@ -176,7 +181,11 @@ public:
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
       rhoAux,
 #endif
-      FC_in, y_vect, vect_energy, FCunt, dt);
+      FC_in, y_vect, vect_energy,
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+      y_vect_aux,
+#endif
+      FCunt, dt);
   }
 
 private:

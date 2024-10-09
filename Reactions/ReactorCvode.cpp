@@ -1254,7 +1254,7 @@ ReactorCvode::allocUserData(
     amrex::The_Arena()->alloc(a_ncells * sizeof(amrex::Real)));
   udata->rhoesrc_ext = static_cast<amrex::Real*>(
     amrex::The_Arena()->alloc(a_ncells * sizeof(amrex::Real)));
-#if defined (PELE_USE_AUX) && (NUMUDA > 0)
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
   udata->rhoAuxsrc_ext = static_cast<amrex::Real*>(
     amrex::The_Arena()->alloc(NUMAUX * a_ncells * sizeof(amrex::Real)));
   udata->rhoAux_init = static_cast<amrex::Real*>(
@@ -1723,6 +1723,10 @@ ReactorCvode::react(
       if (mask(i, j, k) != -1) {
 
         amrex::Real* yvec_d = N_VGetArrayPointer(y);
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+        amrex::Real* yvec_d_aux = N_VGetArrayPointer(y_aux);
+#endif
+
         utils::box_flatten<Ordering>(
           icell, i, j, k, ncells,
           captured_reactor_type, captured_clean_init_massfrac,
@@ -1731,7 +1735,8 @@ ReactorCvode::react(
           rAux_in, rAux_src_in,
 #endif
           yvec_d, udata->rYsrc_ext, udata->rhoe_init, udata->rhoesrc_ext
-#if defined (PELE_USE_AUX) && (NUMUDA > 0)
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+          , yvec_d_aux
           , udata->rhoAuxsrc_ext
           , udata->rhoAux_init
 #endif
@@ -1768,7 +1773,11 @@ ReactorCvode::react(
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
           rAux_in,
 #endif
-          FC_in, yvec_d, udata->rhoe_init, nfe_tot, dt_react);
+          FC_in, yvec_d, udata->rhoe_init,
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+          yvec_d_aux,
+#endif
+          nfe_tot, dt_react);
 
         // cppcheck-suppress knownConditionTrueFalse
         if ((udata->verbose > 3) && (omp_thread == 0)) {
@@ -2092,7 +2101,7 @@ ReactorCvode::cF_RHS_aux(
   auto* rhoe_init = udata->rhoe_init;
   auto* rhoesrc_ext = udata->rhoesrc_ext;
   auto* rYsrc_ext = udata->rYsrc_ext;
-#if defined (PELE_USE_AUX) && (NUMUDA > 0)
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
   auto* rhoAuxsrc_ext = udata->rhoAuxsrc_ext;
   auto* rhoAux_init = udata->rhoAux_init;
 #endif
@@ -2117,7 +2126,7 @@ ReactorCvode::freeUserData(CVODEUserData* data_wk)
   amrex::The_Arena()->free(data_wk->rYsrc_ext);
   amrex::The_Arena()->free(data_wk->rhoe_init);
   amrex::The_Arena()->free(data_wk->rhoesrc_ext);
-#if defined (PELE_USE_AUX) && (NUMUDA > 0)
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
   amrex::The_Arena()->free(data_wk->rhoAuxsrc_ext);
   amrex::The_Arena()->free(data_wk->rhoAux_init);
 #endif
