@@ -108,7 +108,7 @@ protected:
   int verbose{0};
   amrex::GpuArray<amrex::Real, NUM_SPECIES + 1 + NUMODE> m_typ_vals = {0.0};
 #if defined(PELE_USE_AUX) && (NUMNEW > 0)
-  amrex::GpuArray<amrex::Real, NUMNEW> m_typ_vals_aux = {1E-6};
+  amrex::GpuArray<amrex::Real, NUMNEW> m_typ_vals_aux = {1E-3};
 #endif
 };
 } // namespace pele::physics::reactions
