@@ -1708,12 +1708,12 @@ ReactorCvode::react(
     absTol, m_typ_vals, "cvode", verbose);
 
 #if defined(PELE_USE_AUX) && (NUMNEW > 0)
-  initCvode_aux(y_aux, A_aux, udata, NLS_aux, LS_aux, cvode_mem_aux, time_start, ncells);
+  //initCvode_aux(y_aux, A_aux, udata, NLS_aux, LS_aux, cvode_mem_aux, time_start, ncells);
 
   // Update TypicalValues for auxiliary fields
-  utils::set_sundials_solver_tols_aux<Ordering>(
-    *amrex::sundials::The_Sundials_Context(), cvode_mem_aux, udata->ncells, relTol,
-    absTol, m_typ_vals_aux, "cvode", verbose);
+  //utils::set_sundials_solver_tols_aux<Ordering>(
+  //  *amrex::sundials::The_Sundials_Context(), cvode_mem_aux, udata->ncells, relTol,
+  //  absTol, m_typ_vals_aux, "cvode", verbose);
 #endif
 
   const auto captured_reactor_type = m_reactor_type;
