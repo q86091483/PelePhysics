@@ -221,7 +221,8 @@ set_sundials_solver_tols_aux(
     amrex::ParallelFor(ncells, [=] AMREX_GPU_DEVICE(int icell) {
       for (int k = 0; k < NUMNEW; k++) {
         ratol[aux_index<OrderType>(k, icell, ncells)] = typ_vals[k] * absTol;
-        amrex::Print() << "ratol[" << k << "] = " << ratol[aux_index<OrderType>(k, icell, ncells)] << ",  ";
+        amrex::Print() << "ratol[" << k << "] = " << ratol[aux_index<OrderType>(k, icell, ncells)] << ",  "
+                      << "typ_vals[" << k << "] = " << typ_vals[k];
       }
       amrex::Print() << std::endl;
     });
