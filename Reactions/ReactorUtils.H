@@ -67,7 +67,7 @@ template <typename OrderType>
 AMREX_GPU_DEVICE AMREX_FORCE_INLINE int
 aux_index(const int aux_idx, const int icell, const int /*ncells*/)
 {
-  return icell * NUMODE + aux_idx;
+  return icell * NUMAUX + aux_idx;
 }
 
 template <>
@@ -325,15 +325,14 @@ box_flatten(
   }
   y_vect[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] = temp;
 
-#if defined (PELE_USE_AUX) && (NUMODE > 0)
-  for (int n = 0; n < NUMODE; n++) {
-    const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+  for (int n = 0; n < NUMAUX; n++) {
+    //const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
-    y_vect[idx] = rhoAux(i, j, k, idx_src);
-    #if (NUMUDA > 0)
-    src_vec_aux[idx_src] = frcAuxExt(i, j, k, idx_src);
-    vec_aux_init[idx_src] = rhoAux(i, j, k, idx_src);
-    #endif
+    //y_vect[idx] = rhoAux(i, j, k, idx_src);
+    y_vect_aux[idx_src] = 0.0; //rhoAux(i, j, k, idx_src);
+    src_vec_aux[idx_src] = 0.0; //frcAuxExt(i, j, k, idx_src);
+    vec_aux_init[idx_src] = 0.0; //rhoAux(i, j, k, idx_src);
   }
 
   if (false) {
@@ -433,9 +432,9 @@ box_unflatten(
     amrex::Abort("Wrong reactor type. Choose between 1 (e) or 2 (h).");
   }
   temperature(i, j, k, 0) = temp;
-#if defined (PELE_USE_AUX) && (NUMODE > 0)
-  for (int n = 0; n < NUMODE; n++) {
-    rhoAux(i, j, k, n) = y_vect[vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells)];
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+  for (int n = 0; n < NUMAUX; n++) {
+    rhoAux(i, j, k, n) = 0.0; //y_vect_aux[aux_index<OrderType>(n, icell, ncells)];
   }
 #endif
   FC_in(i, j, k, 0) = static_cast<amrex::Real>(FCunt);
@@ -684,7 +683,7 @@ fKernelSpec(
 #endif
 }
 
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
 template <typename OrderType>
 AMREX_GPU_DEVICE AMREX_FORCE_INLINE void
 fKernelSpec_aux(
@@ -697,7 +696,7 @@ fKernelSpec_aux(
   const amrex::Real* rhoe_init,
   const amrex::Real* rhoesrc_ext,
   const amrex::Real* rYs
-#if defined (PELE_USE_AUX) && (NUMUDA > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   , const amrex::Real* rhoAuxsrc_ext
   , const amrex::Real* rhoAux_init
 #endif
@@ -750,7 +749,7 @@ fKernelSpec_aux(
   ydot_d[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] =
     rhoesrc * (rho_pt_inv / Cv_pt);
   */
-#if defined (PELE_USE_AUX) && (NUMODE > 0) // Advance ODE dU/dt = f(U) + g
+#if defined (PELE_USE_AUX) && (NUMAUX > 0) // Advance ODE dU/dt = f(U) + g
 
   /*STAR - debug output
   for (int ii = 0; ii < NUMAUX; ii++) {
@@ -762,10 +761,10 @@ fKernelSpec_aux(
 
   // Add g to r.h.s.
   // ydot_d may have non-zero values, so it is more safe to explicitly initialize the ydot_d vector.
-  for (int n = 0; n < NUMODE; n++) {
+  for (int n = 0; n < NUMAUX; n++) {
     const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
-    ydot_d[idx] = 0.0; //STARrhoAuxsrc_ext[idx_src];
+    ydot_d[idx_src] = 0.0; //rhoAuxsrc_ext[idx_src];
   }
 
   // Add f(U) to r.h.s.
@@ -811,7 +810,7 @@ fKernelSpec_aux(
     //amrex::Print() << "MIXF_IN_AUX, " << MIXF_IN_AUX << ", " << NUMMIXF << std::endl;
     //amrex::Print() << "AGE_IN_AUX, " << AGE_IN_AUX << ", " << NUMAGE << std::endl;
     //amrex::Print() << "AGEPV_IN_AUX, " << AGEPV_IN_AUX << ", " << NUMAGEPV << std::endl;
-    amrex::Print() << " rho = " << rho_pt << std::endl;
+    //amrex::Print() << " rho = " << rho_pt << std::endl;
     for (int n = 0; n < NUM_SPECIES; n++) {
       const int idx = vec_index<OrderType>(n, icell, ncells);
       const int idx_src = spec_index<OrderType>(n, icell, ncells);

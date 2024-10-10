@@ -1710,6 +1710,7 @@ ReactorCvode::react(
 #if defined(PELE_USE_AUX) && (NUMNEW > 0)
   initCvode_aux(y_aux, A_aux, udata, NLS_aux, LS_aux, cvode_mem_aux, time_start, ncells);
 
+  // Update TypicalValues for auxiliary fields
   utils::set_sundials_solver_tols_aux<Ordering>(
     *amrex::sundials::The_Sundials_Context(), cvode_mem_aux, udata->ncells, relTol,
     absTol, m_typ_vals_aux, "cvode", verbose);
@@ -1748,6 +1749,13 @@ ReactorCvode::react(
         BL_PROFILE_VAR("Pele::ReactorCvode::react():CVode", AroundCVODE);
         CVode(cvode_mem, time_final, y, &CvodeActual_time_final, CV_NORMAL);
         BL_PROFILE_VAR_STOP(AroundCVODE);
+
+#if defined(PELE_USE_AUX) && (NUMAUX > 0)
+        // ReInit CVODE for aux
+        CVodeReInit(cvode_mem_aux, time_start, y_aux);
+
+        CVode(cvode_mem_aux, time_final, y_aux, &CvodeActual_time_final, CV_NORMAL);
+#endif
 
         // cppcheck-suppress knownConditionTrueFalse
         if ((udata->verbose > 1) && (omp_thread == 0)) {
@@ -2088,8 +2096,8 @@ ReactorCvode::cF_RHS_aux(
   amrex::Real* yvec_d = N_VGetDeviceArrayPointer(y_in);
   amrex::Real* ydot_d = N_VGetDeviceArrayPointer(ydot_in);
 #else
-  amrex::Real* yvec_d = N_VGetArrayPointer(y_in);
-  amrex::Real* ydot_d = N_VGetArrayPointer(ydot_in);
+  amrex::Real* yvec_d_aux = N_VGetArrayPointer(y_in);
+  amrex::Real* ydot_d_aux = N_VGetArrayPointer(ydot_in);
 #endif
 
   auto* udata = static_cast<CVODEUserData*>(user_data);
@@ -2107,9 +2115,9 @@ ReactorCvode::cF_RHS_aux(
 #endif
   amrex::ParallelFor(ncells, [=] AMREX_GPU_DEVICE(int icell) noexcept {
     utils::fKernelSpec_aux<Ordering>(
-      icell, ncells, dt_save, reactor_type, yvec_d, ydot_d, rhoe_init,
+      icell, ncells, dt_save, reactor_type, yvec_d_aux, ydot_d_aux, rhoe_init,
       rhoesrc_ext, rYsrc_ext
-#if defined (PELE_USE_AUX) && (NUMUDA > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
       , rhoAuxsrc_ext
       , rhoAux_init
 #endif

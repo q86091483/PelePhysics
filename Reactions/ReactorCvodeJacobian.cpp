@@ -206,7 +206,7 @@ cJac(
   return (0);
 }
 
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
 int
 cJac_aux(
   amrex::Real /* tn */,
@@ -222,16 +222,16 @@ cJac_aux(
 
   // Make local copies of pointers to input data
   amrex::Real* ydata = N_VGetArrayPointer(u);
-  /*
   // Make local copies of pointers in user_data
   auto* udata = static_cast<CVODEUserData*>(user_data);
   auto ncells = udata->ncells;
   auto reactor_type = udata->reactor_type;
-#if defined (PELE_USE_AUX) && (NUMUDA > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   auto* rhoAuxsrc_ext = udata->rhoAuxsrc_ext;
   auto* rhoAux_init = udata->rhoAux_init;
 #endif
 
+  /*
   for (int tid = 0; tid < ncells; tid++) {
     // Offset in case several cells
     int offset = tid * (NUM_SPECIES + 1 + NUMODE);
