@@ -102,7 +102,7 @@ public:
 
   void set_typ_vals_ode(const std::vector<amrex::Real>& ExtTypVals);
 #if defined (PELE_USE_AUX) && (NUMNEW > 0)
-  void set_typ_vals_ode_aux(const std::vector<amrex::Real>& ExtTypVals);
+  void set_typ_vals_ode_aux(const std::vector<amrex::Real>& ExtTypVals_aux);
 #endif
 
   ~ReactorBase() override = default;
