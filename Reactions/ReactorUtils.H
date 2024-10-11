@@ -783,9 +783,9 @@ fKernelSpec_aux(
     //amrex::Print() << "idx_rhoAge[" << n << "] = " << idx_rhoAge << std::endl;
     //amrex::Print() << "alpha_1: " << alpha_1 << ", alpha_2: " << alpha_2 << "dt_save: " << dt_save << std::endl;
     //if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
-    //amrex::Print() << "yvec_d[" << n << "] = " << yvec_d[idx_rhoZ] << std::endl;
     //if (yvec_d[idx_rhoZ] > 1E-3) {
-      ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
+    ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
+    amrex::Print() << "yvec_d[" << idx_rhoZ << "] = " << yvec_d[idx_rhoZ] << std::endl;
     //} else {
     //  ydot_d[idx_rhoAge] = 0.0;
     //}
