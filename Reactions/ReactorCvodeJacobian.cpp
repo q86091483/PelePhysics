@@ -276,7 +276,6 @@ cJac_aux(
     // J_col = SM_COLUMN_D(J, offset); // Never read
 
 #if defined (PELE_USE_AUX) && (NUMFOO > 0)
-    /*STAR
     for (int ii = 0; ii < NUM_SPECIES + 1 + NUMAUX ; ii++) {
       amrex::Print() << "Line ii = " << ii << ", offset = "  << offset << std::endl;
       amrex::Print() << "  ";

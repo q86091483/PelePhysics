@@ -333,9 +333,9 @@ box_flatten(
     //const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
     //y_vect[idx] = rhoAux(i, j, k, idx_src);
-    y_vect_aux[idx_src] = 0.0; //rhoAux(i, j, k, idx_src);
-    src_vec_aux[idx_src] = 0.0; //frcAuxExt(i, j, k, idx_src);
-    vec_aux_init[idx_src] = 0.0; //rhoAux(i, j, k, idx_src);
+    y_vect_aux[idx_src] = rhoAux(i, j, k, idx_src);
+    src_vec_aux[idx_src] = frcAuxExt(i, j, k, idx_src);
+    vec_aux_init[idx_src] = rhoAux(i, j, k, idx_src);
   }
 
   if (false) {
@@ -437,7 +437,7 @@ box_unflatten(
   temperature(i, j, k, 0) = temp;
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
   for (int n = 0; n < NUMAUX; n++) {
-    rhoAux(i, j, k, n) = 0.0; //y_vect_aux[aux_index<OrderType>(n, icell, ncells)];
+    rhoAux(i, j, k, n) = y_vect_aux[aux_index<OrderType>(n, icell, ncells)];
   }
 #endif
   FC_in(i, j, k, 0) = static_cast<amrex::Real>(FCunt);
@@ -765,9 +765,9 @@ fKernelSpec_aux(
   // Add g to r.h.s.
   // ydot_d may have non-zero values, so it is more safe to explicitly initialize the ydot_d vector.
   for (int n = 0; n < NUMAUX; n++) {
-    const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
+    //const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
-    ydot_d[idx_src] = 0.0; //rhoAuxsrc_ext[idx_src];
+    ydot_d[idx_src] = rhoAuxsrc_ext[idx_src];
   }
 
   // Add f(U) to r.h.s.
