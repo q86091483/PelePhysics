@@ -519,7 +519,7 @@ ReactorCvode::initCvode_aux(
   const int ncells)
 {
   // Solution vector
-  int neq_tot = NUMNEW * ncells;
+  int neq_tot = NUMAUX * ncells;
   a_y = N_VNew_Serial(neq_tot, *amrex::sundials::The_Sundials_Context());
   if (utils::check_flag(static_cast<void*>(a_y), "N_VNew_Serial_aux", 0) != 0) {
     return (1);

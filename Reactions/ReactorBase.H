@@ -74,7 +74,7 @@ public:
     amrex::Real* src_vect,
     amrex::Real* vect_energy,
     amrex::Real* src_vect_energy
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
     , amrex::Real* y_vect_aux
     , amrex::Real* src_vect_aux
     , amrex::Real* vec_aux_init
@@ -94,14 +94,14 @@ public:
     amrex::Array4<amrex::Real> const& FC_in,
     amrex::Real* y_vect,
     amrex::Real* vect_energy,
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
     amrex::Real* y_vect_aux,
 #endif
     long int* FCunt,
     amrex::Real dt) = 0;
 
   void set_typ_vals_ode(const std::vector<amrex::Real>& ExtTypVals);
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   void set_typ_vals_ode_aux(const std::vector<amrex::Real>& ExtTypVals_aux);
 #endif
 
@@ -110,8 +110,8 @@ public:
 protected:
   int verbose{0};
   amrex::GpuArray<amrex::Real, NUM_SPECIES + 1 + NUMODE> m_typ_vals = {0.0};
-#if defined(PELE_USE_AUX) && (NUMNEW > 0)
-  amrex::GpuArray<amrex::Real, NUMNEW> m_typ_vals_aux = {1E-3};
+#if defined(PELE_USE_AUX) && (NUMAUX > 0)
+  amrex::GpuArray<amrex::Real, NUMAUX> m_typ_vals_aux = {1E-3};
 #endif
 };
 } // namespace pele::physics::reactions

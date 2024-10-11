@@ -178,7 +178,7 @@ set_sundials_solver_tols_aux(
   const int ncells,
   const amrex::Real relTol,
   const amrex::Real absTol,
-  const amrex::GpuArray<amrex::Real, NUMNEW>& typ_vals,
+  const amrex::GpuArray<amrex::Real, NUMAUX>& typ_vals,
   const std::string& solvername,
   const int verbose)
 {
@@ -187,7 +187,7 @@ set_sundials_solver_tols_aux(
   omp_thread = omp_get_thread_num();
 #endif
 
-  const int neq_tot = (NUMNEW) * ncells;
+  const int neq_tot = (NUMAUX) * ncells;
 
 #if defined(AMREX_USE_CUDA)
   N_Vector atol = N_VNewWithMemHelp_Cuda(
@@ -219,7 +219,7 @@ set_sundials_solver_tols_aux(
     }
 
     amrex::ParallelFor(ncells, [=] AMREX_GPU_DEVICE(int icell) {
-      for (int k = 0; k < NUMNEW; k++) {
+      for (int k = 0; k < NUMAUX; k++) {
         ratol[aux_index<OrderType>(k, icell, ncells)] = typ_vals[k] * absTol;
         amrex::Print() << "ratol[" << k << "] = " << ratol[aux_index<OrderType>(k, icell, ncells)] << ",  "
                       << "typ_vals[" << k << "] = " << typ_vals[k];

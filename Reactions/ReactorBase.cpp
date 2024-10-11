@@ -30,7 +30,7 @@ ReactorBase::set_typ_vals_ode(const std::vector<amrex::Real>& ExtTypVals)
   }
 }
 
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
 void
 ReactorBase::set_typ_vals_ode_aux(const std::vector<amrex::Real>& ExtTypVals_aux)
 {
