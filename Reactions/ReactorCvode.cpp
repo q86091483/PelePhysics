@@ -2093,8 +2093,8 @@ ReactorCvode::cF_RHS_aux(
 {
   BL_PROFILE("Pele::ReactorCvode::cF_RHS_aux()");
 #ifdef AMREX_USE_GPU
-  amrex::Real* yvec_d = N_VGetDeviceArrayPointer(y_in);
-  amrex::Real* ydot_d = N_VGetDeviceArrayPointer(ydot_in);
+  amrex::Real* yvec_d_aux = N_VGetDeviceArrayPointer(y_in);
+  amrex::Real* ydot_d_aux = N_VGetDeviceArrayPointer(ydot_in);
 #else
   amrex::Real* yvec_d_aux = N_VGetArrayPointer(y_in);
   amrex::Real* ydot_d_aux = N_VGetArrayPointer(ydot_in);

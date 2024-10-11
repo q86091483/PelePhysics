@@ -705,7 +705,7 @@ fKernelSpec_aux(
 #endif
   )
 {
-  /*
+  /* HERE
   amrex::Real rho_pt = 0.0;
   amrex::GpuArray<amrex::Real, NUM_SPECIES> massfrac = {0.0};
   for (int n = 0; n < NUM_SPECIES; n++) {
@@ -717,7 +717,9 @@ fKernelSpec_aux(
   for (int n = 0; n < NUM_SPECIES; n++) {
     massfrac[n] *= rho_pt_inv;
   }
+  */
 
+  /*
   const amrex::Real nrg_pt =
     (rhoe_init[icell] + rhoesrc_ext[icell] * dt_save) * rho_pt_inv;
 
@@ -773,13 +775,14 @@ fKernelSpec_aux(
   // Add f(U) to r.h.s.
 #if (NUMAGE > 0)
   for (int n = 0; n < NUMAGE; n++) {
-    const int idx_rhoAge = vec_index<OrderType>(NUM_SPECIES + 1 + AGE_IN_AUX + n, icell, ncells);
-    const int idx_rhoZ = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
+    const int idx_rhoAge = aux_index<OrderType>(AGE_IN_AUX + n, icell, ncells);
+    const int idx_rhoZ = aux_index<OrderType>(MIXF_IN_AUX + n, icell, ncells);
     amrex::Real alpha_1 = yvec_d[idx_rhoAge] / yvec_d[idx_rhoZ];
     amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAge] / rhoAux_init[idx_rhoZ];
     amrex::Real alpha_min = std::min(std::max(0.0, alpha_1), std::max(0.0, alpha_2));
     //amrex::Print() << "alpha_1: " << alpha_1 << ", alpha_2: " << alpha_2 << "dt_save: " << dt_save << std::endl;
-    if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
+    //if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
+    if (yvec_d[idx_rhoZ] > 1E-3) {
       ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
     } else {
       ydot_d[idx_rhoAge] = 0.0;

@@ -153,7 +153,7 @@ cJac(
     }
     // J_col = SM_COLUMN_D(J, offset); // Never read
 
-#if defined (PELE_USE_AUX) && (NUMFOO > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
     /*STAR
     for (int ii = 0; ii < NUM_SPECIES + 1 + NUMAUX ; ii++) {
       amrex::Print() << "Line ii = " << ii << ", offset = "  << offset << std::endl;
@@ -167,6 +167,7 @@ cJac(
     }
     */
 #if (NUMAGE > 0)
+    /*
     for (int i = 0; i < NUMAGE; i++) {
       const int MIXF_IN_J = offset + NUM_SPECIES + 1 + MIXF_IN_AUX + i;
       const int AGE_IN_J  = offset + NUM_SPECIES + 1 + AGE_IN_AUX  + i;
@@ -175,6 +176,7 @@ cJac(
       J_col_mixf[AGE_IN_J] = 1 - (ydata[AGE_IN_J]/ydata[MIXF_IN_J]/ydata[MIXF_IN_J]) * rhoAuxsrc_ext[MIXF_IN_AUX+i];
       J_col_age[AGE_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
     }
+    */
 #endif // #if (NUMAGE > 0)
 #if (NUMAGEPV > 0)
     const amrex::Real Tc      = 1750.;
@@ -231,11 +233,11 @@ cJac_aux(
   auto* rhoAux_init = udata->rhoAux_init;
 #endif
 
-  /*
   for (int tid = 0; tid < ncells; tid++) {
     // Offset in case several cells
-    int offset = tid * (NUM_SPECIES + 1 + NUMODE);
+    int offset = tid * (NUMAUX);
 
+    /*
     // rho MKS
     amrex::Real rho = 0.0;
     for (int i = 0; i < NUM_SPECIES; i++) {
@@ -274,23 +276,26 @@ cJac_aux(
       J_col[offset + i] = Jmat_tmp[NUM_SPECIES * (NUM_SPECIES + 1) + i] * mw(i);
     }
     // J_col = SM_COLUMN_D(J, offset); // Never read
+    */
 
-#if defined (PELE_USE_AUX) && (NUMFOO > 0)
-    for (int ii = 0; ii < NUM_SPECIES + 1 + NUMAUX ; ii++) {
-      amrex::Print() << "Line ii = " << ii << ", offset = "  << offset << std::endl;
-      amrex::Print() << "  ";
-      for (int kk = offset; kk < offset + NUM_SPECIES + 1 + NUMAUX; kk++) {
-        amrex::Real* J_col_temp = SM_COLUMN_D(J, kk);
-        const int ROW_J = offset + ii;
-        amrex::Print() << J_col_temp[ROW_J] << ", ";
-      }
-      amrex::Print() << std::endl;
-    }
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    //for (int ii = 0; ii < NUM_SPECIES + 1 + NUMAUX ; ii++) {
+    //  amrex::Print() << "Line ii = " << ii << ", offset = "  << offset << std::endl;
+    //  amrex::Print() << "  ";
+    //  for (int kk = offset; kk < offset + NUM_SPECIES + 1 + NUMAUX; kk++) {
+    //    amrex::Real* J_col_temp = SM_COLUMN_D(J, kk);
+    //    const int ROW_J = offset + ii;
+    //    amrex::Print() << J_col_temp[ROW_J] << ", ";
+    //  }
+    //  amrex::Print() << std::endl;
+    //}
 
 #if (NUMAGE > 0)
     for (int i = 0; i < NUMAGE; i++) {
-      const int MIXF_IN_J = offset + NUM_SPECIES + 1 + MIXF_IN_AUX + i;
-      const int AGE_IN_J  = offset + NUM_SPECIES + 1 + AGE_IN_AUX  + i;
+      //const int MIXF_IN_J = offset + NUM_SPECIES + 1 + MIXF_IN_AUX + i;
+      //const int AGE_IN_J  = offset + NUM_SPECIES + 1 + AGE_IN_AUX  + i;
+      const int MIXF_IN_J = offset + MIXF_IN_AUX + i;
+      const int AGE_IN_J  = offset + AGE_IN_AUX  + i;
       amrex::Real* J_col_mixf = SM_COLUMN_D(J, MIXF_IN_J);
       amrex::Real* J_col_age  = SM_COLUMN_D(J, AGE_IN_J);
       J_col_mixf[AGE_IN_J] = 1 - (ydata[AGE_IN_J]/ydata[MIXF_IN_J]/ydata[MIXF_IN_J]) * rhoAuxsrc_ext[MIXF_IN_AUX+i];
@@ -323,7 +328,6 @@ cJac_aux(
 #endif // #if (NUMAGEPV > 0)
 #endif // #if (NUMAUX > 0)
   }
-  */
   return (0);
 }
 #endif // #if (NUMNEW > 0) cJac_aux
