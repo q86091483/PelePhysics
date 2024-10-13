@@ -793,12 +793,12 @@ fKernelSpec_aux(
     amrex::Real alpha_1 = yvec_d[idx_rhoAge] / yvec_d[idx_rhoZ];
     amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAge] / rhoAux_init[idx_rhoZ];
     amrex::Real alpha_min = std::min(std::max(0.0, alpha_1), std::max(0.0, alpha_2));
-    amrex::Print() << "idx_rhoAge[" << n << "] = " << idx_rhoAge << std::endl;
-    amrex::Print() << "alpha_1: " << alpha_1 << ", alpha_2: " << alpha_2 << "dt_save: " << dt_save << std::endl;
-    amrex::Print() << "dt_save 1: " << dt_save << ", part 2: " << rhoAux_init[idx_rhoAge] / rhoAux_init[idx_rhoZ] << std::endl;
-    amrex::Print() << "rho_pt : " << rho_pt << std::endl;
+    //amrex::Print() << "idx_rhoAge[" << n << "] = " << idx_rhoAge << std::endl;
+    //amrex::Print() << "alpha_1: " << alpha_1 << ", alpha_2: " << alpha_2 << "dt_save: " << dt_save << std::endl;
+    //amrex::Print() << "dt_save 1: " << dt_save << ", part 2: " << rhoAux_init[idx_rhoAge] / rhoAux_init[idx_rhoZ] << std::endl;
+    //amrex::Print() << "rho_pt : " << rho_pt << std::endl;
 
-    if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
+    if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-2) {
     //if (yvec_d[idx_rhoZ] > 1E-3) {
       ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
     //ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + (yvec_d[idx_rhoAge] / yvec_d[idx_rhoZ]) * ydot_d[idx_rhoZ];

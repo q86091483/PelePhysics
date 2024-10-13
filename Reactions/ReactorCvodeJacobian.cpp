@@ -291,7 +291,7 @@ cJac_aux(
     //  amrex::Print() << std::endl;
     //}
 
-#if (NUMAGE > 10)
+#if (NUMAGE > 0)
     for (int i = 0; i < NUMAGE; i++) {
       //const int MIXF_IN_J = offset + NUM_SPECIES + 1 + MIXF_IN_AUX + i;
       //const int AGE_IN_J  = offset + NUM_SPECIES + 1 + AGE_IN_AUX  + i;
