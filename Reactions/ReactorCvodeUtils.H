@@ -47,6 +47,7 @@ struct CVODEUserData
   amrex::Real* rhoesrc_ext = nullptr; // External energy forcing
   amrex::Real* rYsrc_ext = nullptr;   // External species forcing
 #if defined (PELE_USE_AUX) && (NUMNEW > 0)
+  amrex::Real dt_save_aux;
   amrex::Real* rhoAuxsrc_ext = nullptr;   // External species forcing
   amrex::Real* rhoAux_init = nullptr;
   amrex::Real* rhoY_T_init = nullptr;

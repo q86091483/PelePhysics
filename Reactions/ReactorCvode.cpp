@@ -2104,10 +2104,10 @@ ReactorCvode::cF_RHS_aux(
 #endif
 
   auto* udata = static_cast<CVODEUserData*>(user_data);
-  udata->dt_save = t;
+  udata->dt_save_aux = t;
 
   const auto ncells = udata->ncells;
-  const auto dt_save = udata->dt_save;
+  const auto dt_save = udata->dt_save_aux;
   const auto reactor_type = udata->reactor_type;
   auto* rhoe_init = udata->rhoe_init;
   auto* rhoesrc_ext = udata->rhoesrc_ext;
