@@ -796,6 +796,7 @@ fKernelSpec_aux(
     amrex::Print() << "idx_rhoAge[" << n << "] = " << idx_rhoAge << std::endl;
     amrex::Print() << "alpha_1: " << alpha_1 << ", alpha_2: " << alpha_2 << "dt_save: " << dt_save << std::endl;
     amrex::Print() << "dt_save 1: " << dt_save << ", part 2: " << rhoAux_init[idx_rhoAge] / rhoAux_init[idx_rhoZ] << std::endl;
+    amrex::Print() << "rho_pt : " << rho_pt << std::endl;
 
     if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
     //if (yvec_d[idx_rhoZ] > 1E-3) {
