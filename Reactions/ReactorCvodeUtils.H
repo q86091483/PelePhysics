@@ -49,6 +49,7 @@ struct CVODEUserData
 #if defined (PELE_USE_AUX) && (NUMNEW > 0)
   amrex::Real* rhoAuxsrc_ext = nullptr;   // External species forcing
   amrex::Real* rhoAux_init = nullptr;
+  amrex::Real* rhoY_T_init = nullptr;
 #endif
 
   int* mask =

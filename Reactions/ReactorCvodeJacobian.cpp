@@ -231,6 +231,7 @@ cJac_aux(
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
   auto* rhoAuxsrc_ext = udata->rhoAuxsrc_ext;
   auto* rhoAux_init = udata->rhoAux_init;
+  auto* rhoY_T_init = udata->rhoY_T_init;
 #endif
 
   for (int tid = 0; tid < ncells; tid++) {

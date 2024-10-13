@@ -78,6 +78,7 @@ public:
     , amrex::Real* y_vect_aux
     , amrex::Real* src_vect_aux
     , amrex::Real* vec_aux_init
+    , amrex::Real* rhoY_T_init
 #endif
     ) = 0;
 

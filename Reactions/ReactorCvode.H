@@ -138,6 +138,7 @@ public:
     , amrex::Real* y_vect_aux
     , amrex::Real* src_vect_aux
     , amrex::Real* vec_aux_init
+    , amrex::Real* rhoY_T_init
 #endif
     ) override
   {
@@ -152,6 +153,7 @@ public:
       , y_vect_aux
       , src_vect_aux
       , vec_aux_init
+      , rhoY_T_init
 #endif
     );
   }

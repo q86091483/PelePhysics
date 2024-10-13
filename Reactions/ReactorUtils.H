@@ -284,6 +284,7 @@ box_flatten(
   , amrex::Real* y_vect_aux
   , amrex::Real* src_vec_aux
   , amrex::Real* vec_aux_init
+  , amrex::Real* rhoY_T_init
 #endif
   )
 {
@@ -329,6 +330,18 @@ box_flatten(
   y_vect[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] = temp;
 
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
+  // phi -> y, udata
+
+  for (int n = 0; n < NUM_SPECIES; n++) {
+    const amrex::Real rhoYn =
+      (clean_init_massfrac)
+        ? amrex::min<amrex::Real>(
+            amrex::max<amrex::Real>(0.0, rhoY(i, j, k, n)), rho_old)
+        : rhoY(i, j, k, n);
+    rhoY_T_init[n] = rhoYn;
+  }
+  rhoY_T_init[NUM_SPECIES] = temperature(i, j, k, 0);
+
   for (int n = 0; n < NUMAUX; n++) {
     //const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
@@ -473,6 +486,7 @@ public:
     , amrex::Real* y_vect_aux
     , amrex::Real* src_vect_aux
     , amrex::Real* vec_aux_init
+    , amrex::Real* rhoY_T_init
 #endif
     )
   {
@@ -493,6 +507,7 @@ public:
         , y_vect_aux
         , src_vect_aux
         , vec_aux_init
+        , rhoY_T_init
 #endif
         );
     });
@@ -702,22 +717,20 @@ fKernelSpec_aux(
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
   , const amrex::Real* rhoAuxsrc_ext
   , const amrex::Real* rhoAux_init
+  , const amrex::Real* rhoY_T_init
 #endif
   )
 {
-  /* HERE
   amrex::Real rho_pt = 0.0;
   amrex::GpuArray<amrex::Real, NUM_SPECIES> massfrac = {0.0};
   for (int n = 0; n < NUM_SPECIES; n++) {
-    massfrac[n] = yvec_d[vec_index<OrderType>(n, icell, ncells)];
-    rho_pt += massfrac[n];
+    rho_pt += rhoY_T_init[vec_index<OrderType>(n, icell, ncells)];
+    massfrac[n] = rhoY_T_init[vec_index<OrderType>(n, icell, ncells)];
   }
   const amrex::Real rho_pt_inv = 1.0 / rho_pt;
-
   for (int n = 0; n < NUM_SPECIES; n++) {
     massfrac[n] *= rho_pt_inv;
   }
-  */
 
   /*
   const amrex::Real nrg_pt =
@@ -782,14 +795,14 @@ fKernelSpec_aux(
     amrex::Real alpha_min = std::min(std::max(0.0, alpha_1), std::max(0.0, alpha_2));
     //amrex::Print() << "idx_rhoAge[" << n << "] = " << idx_rhoAge << std::endl;
     //amrex::Print() << "alpha_1: " << alpha_1 << ", alpha_2: " << alpha_2 << "dt_save: " << dt_save << std::endl;
-    //if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
+    if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
     //if (yvec_d[idx_rhoZ] > 1E-3) {
-    //ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
-    ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + (yvec_d[idx_rhoAge] / yvec_d[idx_rhoZ]) * ydot_d[idx_rhoZ];
+      ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
+    //ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + (yvec_d[idx_rhoAge] / yvec_d[idx_rhoZ]) * ydot_d[idx_rhoZ];
     //amrex::Print() << "yvec_d[" << idx_rhoZ << "] = " << yvec_d[idx_rhoZ] << std::endl;
-    //} else {
-    //  ydot_d[idx_rhoAge] = 0.0;
-    //}
+    } else {
+      ydot_d[idx_rhoAge] = 0.0;
+    }
   }
 #endif
 
