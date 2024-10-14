@@ -731,6 +731,7 @@ fKernelSpec_aux(
   for (int n = 0; n < NUM_SPECIES; n++) {
     massfrac[n] *= rho_pt_inv;
   }
+  const amrex::Real temp_pt = rhoY_T_init[vec_index<OrderType>(NUM_SPECIES, icell, ncells)];
 
   /*
   const amrex::Real nrg_pt =
@@ -815,14 +816,14 @@ fKernelSpec_aux(
   const amrex::Real tanh_T = std::tanh((temp_pt - Tc) / dT);
   const amrex::Real f_T = 0.5 * (1 + tanh_T);
   for (int n = 0; n < NUMAGEPV; n++) {
-    const int idx_rhoZ = vec_index<OrderType>(NUM_SPECIES + 1 + MIXF_IN_AUX + n, icell, ncells);
-    const int idx_rhoAge = vec_index<OrderType>(NUM_SPECIES + 1 + AGE_IN_AUX + n, icell, ncells);
-    const int idx_rhoAgePV = vec_index<OrderType>(NUM_SPECIES + 1 + AGEPV_IN_AUX + n, icell, ncells);
+    const int idx_rhoZ = aux_index<OrderType>(MIXF_IN_AUX + n, icell, ncells);
+    const int idx_rhoAge = aux_index<OrderType>(AGE_IN_AUX + n, icell, ncells);
+    const int idx_rhoAgePV = aux_index<OrderType>(AGEPV_IN_AUX + n, icell, ncells);
     amrex::Real alpha_1 = yvec_d[idx_rhoAgePV] / yvec_d[idx_rhoZ];
     amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAgePV] / rhoAux_init[idx_rhoZ];
     amrex::Real alpha_min = std::min(std::max(0.0, alpha_1), std::max(0.0, alpha_2));
     //amrex::Print() << "alpha_1: " << alpha_1 << ", alpha_2: " << alpha_2 << "dt_save: " << dt_save << std::endl;
-    if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
+    if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-2) {
       ydot_d[idx_rhoAgePV] = f_T * yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
     } else {
       ydot_d[idx_rhoAgePV] = 0.0;

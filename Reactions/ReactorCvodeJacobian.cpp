@@ -179,6 +179,7 @@ cJac(
     */
 #endif // #if (NUMAGE > 0)
 #if (NUMAGEPV > 0)
+    /*
     const amrex::Real Tc      = 1750.;
     const amrex::Real dT      = 10.;
     const amrex::Real tanh_T  = std::tanh((temp - Tc) / dT);
@@ -201,6 +202,7 @@ cJac(
       J_col_age[AGEPV_IN_J]   = 0.0;
       J_col_agepv[AGEPV_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
     }
+    */
 #endif // #if (NUMAGEPV > 0)
 #endif // #if (NUMAUX > 0)
   }
@@ -306,22 +308,23 @@ cJac_aux(
 #if (NUMAGEPV > 0)
     const amrex::Real Tc      = 1750.;
     const amrex::Real dT      = 10.;
+    amrex::Real temp          = rhoY_T_init[NUM_SPECIES];
     const amrex::Real tanh_T  = std::tanh((temp - Tc) / dT);
     const amrex::Real f_T     = 0.5 * (1 + tanh_T);
     const amrex::Real dfdT    = 0.5 * (1 - tanh_T * tanh_T) / dT;
     for (int i = 0; i < NUMAGEPV; i++) {
 
-      const int TEMP_IN_J   = offset + NUM_SPECIES;
-      const int MIXF_IN_J   = offset + NUM_SPECIES + 1 + MIXF_IN_AUX  + i;
-      const int AGE_IN_J    = offset + NUM_SPECIES + 1 + AGE_IN_AUX   + i;
-      const int AGEPV_IN_J  = offset + NUM_SPECIES + 1 + AGEPV_IN_AUX + i;
+      //const int TEMP_IN_J   = offset + NUM_SPECIES;
+      const int MIXF_IN_J   = offset + MIXF_IN_AUX  + i;
+      const int AGE_IN_J    = offset + AGE_IN_AUX   + i;
+      const int AGEPV_IN_J  = offset + AGEPV_IN_AUX + i;
 
-      amrex::Real* J_col_temp   = SM_COLUMN_D(J,  TEMP_IN_J);
+      //amrex::Real* J_col_temp   = SM_COLUMN_D(J,  TEMP_IN_J);
       amrex::Real* J_col_mixf   = SM_COLUMN_D(J,  MIXF_IN_J);
       amrex::Real* J_col_age    = SM_COLUMN_D(J,   AGE_IN_J);
       amrex::Real* J_col_agepv  = SM_COLUMN_D(J, AGEPV_IN_J);
 
-      J_col_temp[AGEPV_IN_J]  = ydata[MIXF_IN_J] * dfdT;
+      //J_col_temp[AGEPV_IN_J]  = ydata[MIXF_IN_J] * dfdT;
       J_col_mixf[AGEPV_IN_J]  = f_T - (ydata[AGEPV_IN_J]/ydata[MIXF_IN_J]/ydata[MIXF_IN_J]) * rhoAuxsrc_ext[MIXF_IN_AUX+i];
       J_col_age[AGEPV_IN_J]   = 0.0;
       J_col_agepv[AGEPV_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
