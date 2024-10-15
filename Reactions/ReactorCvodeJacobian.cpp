@@ -240,21 +240,21 @@ cJac_aux(
     // Offset in case several cells
     int offset = tid * (NUMAUX);
 
-    /*
     // rho MKS
     amrex::Real rho = 0.0;
     for (int i = 0; i < NUM_SPECIES; i++) {
-      rho = rho + ydata[offset + i];
+      rho = rho + rhoY_T_init[i];
     }
 
-    amrex::Real temp = ydata[offset + NUM_SPECIES];
+    amrex::Real temp = rhoY_T_init[NUM_SPECIES];
 
     amrex::Real massfrac[NUM_SPECIES] = {0.0};
     // Yks
     for (int i = 0; i < NUM_SPECIES; i++) {
-      massfrac[i] = ydata[offset + i] / rho;
+      massfrac[i] = rhoY_T_init[i] / rho;
     }
 
+    /*
     // Jac
     amrex::Real Jmat_tmp[(NUM_SPECIES + 1) * (NUM_SPECIES + 1)] = {0.0};
     const int consP =
@@ -301,14 +301,15 @@ cJac_aux(
       const int AGE_IN_J  = offset + AGE_IN_AUX  + i;
       amrex::Real* J_col_mixf = SM_COLUMN_D(J, MIXF_IN_J);
       amrex::Real* J_col_age  = SM_COLUMN_D(J, AGE_IN_J);
-      J_col_mixf[AGE_IN_J] = 1 - (ydata[AGE_IN_J]/ydata[MIXF_IN_J]/ydata[MIXF_IN_J]) * rhoAuxsrc_ext[MIXF_IN_AUX+i];
-      J_col_age[AGE_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
+      if ((ydata[MIXF_IN_J]/rho) > 1E-2) {
+        J_col_mixf[AGE_IN_J] = 1 - (ydata[AGE_IN_J]/ydata[MIXF_IN_J]/ydata[MIXF_IN_J]) * rhoAuxsrc_ext[MIXF_IN_AUX+i];
+        J_col_age[AGE_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
+      }
     }
 #endif // #if (NUMAGE > 0)
 #if (NUMAGEPV > 0)
     const amrex::Real Tc      = 1750.;
     const amrex::Real dT      = 10.;
-    amrex::Real temp          = rhoY_T_init[NUM_SPECIES];
     const amrex::Real tanh_T  = std::tanh((temp - Tc) / dT);
     const amrex::Real f_T     = 0.5 * (1 + tanh_T);
     const amrex::Real dfdT    = 0.5 * (1 - tanh_T * tanh_T) / dT;
@@ -325,9 +326,11 @@ cJac_aux(
       amrex::Real* J_col_agepv  = SM_COLUMN_D(J, AGEPV_IN_J);
 
       //J_col_temp[AGEPV_IN_J]  = ydata[MIXF_IN_J] * dfdT;
-      J_col_mixf[AGEPV_IN_J]  = f_T - (ydata[AGEPV_IN_J]/ydata[MIXF_IN_J]/ydata[MIXF_IN_J]) * rhoAuxsrc_ext[MIXF_IN_AUX+i];
-      J_col_age[AGEPV_IN_J]   = 0.0;
-      J_col_agepv[AGEPV_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
+      if ((ydata[MIXF_IN_J]/rho) > 1E-2) {
+        J_col_mixf[AGEPV_IN_J]  = f_T - (ydata[AGEPV_IN_J]/ydata[MIXF_IN_J]/ydata[MIXF_IN_J]) * rhoAuxsrc_ext[MIXF_IN_AUX+i];
+        J_col_age[AGEPV_IN_J]   = 0.0;
+        J_col_agepv[AGEPV_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
+      }
     }
 #endif // #if (NUMAGEPV > 0)
 #endif // #if (NUMAUX > 0)
