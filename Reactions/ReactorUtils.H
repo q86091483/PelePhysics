@@ -823,6 +823,8 @@ fKernelSpec_aux(
     const int idx_rhoZ = aux_index<OrderType>(MIXF_IN_AUX + n, icell, ncells);
     const int idx_rhoAge = aux_index<OrderType>(AGE_IN_AUX + n, icell, ncells);
     const int idx_rhoAgePV = aux_index<OrderType>(AGEPV_IN_AUX + n, icell, ncells);
+    amrex::Real rhoZ_pt = 0.0;
+    rhoZ_pt = rhoAux_init[idx_rhoZ] + dt_save * ydot_d[idx_rhoZ];
     amrex::Real alpha_1 = yvec_d[idx_rhoAgePV] / yvec_d[idx_rhoZ];
     amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAgePV] / rhoAux_init[idx_rhoZ];
     amrex::Real alpha_min = std::min(std::max(0.0, alpha_1), std::max(0.0, alpha_2));
@@ -830,6 +832,7 @@ fKernelSpec_aux(
     //if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
     if ((rhoAux_init[idx_rhoZ] / rho_pt) > 1E-3) {
       ydot_d[idx_rhoAgePV] = f_T * yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
+      ydot_d[idx_rhoAgePV] = std::min(std::max(rhoZ_pt, 0.0), ydot_d[idx_rhoAgePV]);
     } else {
       ydot_d[idx_rhoAgePV] = 0.0;
     }
