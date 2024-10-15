@@ -791,7 +791,9 @@ fKernelSpec_aux(
   for (int n = 0; n < NUMAGE; n++) {
     const int idx_rhoAge = aux_index<OrderType>(AGE_IN_AUX + n, icell, ncells);
     const int idx_rhoZ = aux_index<OrderType>(MIXF_IN_AUX + n, icell, ncells);
-    amrex::Real alpha_1 = yvec_d[idx_rhoAge] / yvec_d[idx_rhoZ];
+    amrex::Real rhoZ_pt = 0.0;
+    rhoZ_pt = rhoAux_init[idx_rhoZ] + dt_save * ydot_d[idx_rhoZ];
+    amrex::Real alpha_1 = yvec_d[idx_rhoAge] / rhoZ_pt; //yvec_d[idx_rhoZ];
     amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAge] / rhoAux_init[idx_rhoZ];
     amrex::Real alpha_min = std::min(std::max(0.0, alpha_1), std::max(0.0, alpha_2));
     //amrex::Print() << "idx_rhoAge[" << n << "] = " << idx_rhoAge << std::endl;
