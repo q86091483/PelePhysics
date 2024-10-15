@@ -301,7 +301,7 @@ cJac_aux(
       const int AGE_IN_J  = offset + AGE_IN_AUX  + i;
       amrex::Real* J_col_mixf = SM_COLUMN_D(J, MIXF_IN_J);
       amrex::Real* J_col_age  = SM_COLUMN_D(J, AGE_IN_J);
-      if ((ydata[MIXF_IN_J]/rho) > 1E-2) {
+      if ((ydata[MIXF_IN_J]/rho) > 1E-3) {
         J_col_mixf[AGE_IN_J] = 1 - (ydata[AGE_IN_J]/ydata[MIXF_IN_J]/ydata[MIXF_IN_J]) * rhoAuxsrc_ext[MIXF_IN_AUX+i];
         J_col_age[AGE_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
       }
@@ -326,7 +326,7 @@ cJac_aux(
       amrex::Real* J_col_agepv  = SM_COLUMN_D(J, AGEPV_IN_J);
 
       //J_col_temp[AGEPV_IN_J]  = ydata[MIXF_IN_J] * dfdT;
-      if ((ydata[MIXF_IN_J]/rho) > 1E-2) {
+      if ((ydata[MIXF_IN_J]/rho) > 1E-3) {
         J_col_mixf[AGEPV_IN_J]  = f_T - (ydata[AGEPV_IN_J]/ydata[MIXF_IN_J]/ydata[MIXF_IN_J]) * rhoAuxsrc_ext[MIXF_IN_AUX+i];
         J_col_age[AGEPV_IN_J]   = 0.0;
         J_col_agepv[AGEPV_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
