@@ -815,7 +815,7 @@ fKernelSpec_aux(
 #endif
 
 #if (NUMAGEPV > 0)
-  const amrex::Real Tc = 1750.;
+  const amrex::Real Tc = 1850.;
   const amrex::Real dT = 10.;
   const amrex::Real tanh_T = std::tanh((temp_pt - Tc) / dT);
   const amrex::Real f_T = 0.5 * (1 + tanh_T);
