@@ -1762,6 +1762,10 @@ reactions:
 - equation: CH3 + CH3 <=> H + C2H5  # Reaction 114
   type: pressure-dependent-Arrhenius
   rate-constants:
+  - {P: 0.01 atm, A: 4.74e+12, b: 0.105, Ea: 1.06643e+04}
+  - {P: 0.1 atm, A: 2.57e+13, b: -0.096, Ea: 1.14061e+04}
+  - {P: 1.0 atm, A: 3.1e+14, b: -0.362, Ea: 1.33725e+04}
+  - {P: 10.0 atm, A: 2.15e+10, b: 0.885, Ea: 1.35325e+04}
   - {P: 100.0 atm, A: 103.2, b: 3.23, Ea: 1.12361e+04}
   note: |-
     LOW-PRESSURE-LIMIT
@@ -1872,21 +1876,57 @@ reactions:
 - equation: C2H5 + O2 <=> C2H5O2  # Reaction 132
   type: pressure-dependent-Arrhenius
   rate-constants:
+  - {P: 0.0001 atm, A: 1.28e+42, b: -11.12, Ea: 5137.0}
+  - {P: 0.0003 atm, A: 1.95e+43, b: -11.3, Ea: 5485.0}
+  - {P: 0.001 atm, A: 1.22e+44, b: -11.36, Ea: 5850.0}
+  - {P: 0.003 atm, A: 3.23e+44, b: -11.32, Ea: 6198.0}
+  - {P: 0.01 atm, A: 1.31e+45, b: -11.33, Ea: 6761.0}
+  - {P: 0.03 atm, A: 1.2e+45, b: -11.15, Ea: 7163.0}
+  - {P: 0.1 atm, A: 4.34e+44, b: -10.83, Ea: 7564.0}
+  - {P: 0.3 atm, A: 4.87e+43, b: -10.37, Ea: 7810.0}
+  - {P: 1.0 atm, A: 3.98e+42, b: -9.86, Ea: 8124.0}
+  - {P: 3.0 atm, A: 1.24e+40, b: -8.95, Ea: 7857.0}
+  - {P: 10.0 atm, A: 2.16e+37, b: -7.95, Ea: 7525.0}
   - {P: 30.0 atm, A: 1.59e+34, b: -6.88, Ea: 6913.0}
+  - {P: 100.0 atm, A: 1.59e+30, b: -5.56, Ea: 5909.0}
   note: |-
     R319
     \Author: UB !\Ref: S.J. KLIPPENSTEIN, PROC. COMBUST. INST. 36(2017) 77-111 !\Comment: WARNING
 - equation: C2H5 + O2 <=> C2H4 + HO2  # Reaction 133
   type: pressure-dependent-Arrhenius
   rate-constants:
+  - {P: 0.0001 atm, A: 9.1, b: 2.87, Ea: -5099.0}
+  - {P: 0.0003 atm, A: 11.8, b: 2.84, Ea: -5029.0}
+  - {P: 0.001 atm, A: 28.2, b: 2.73, Ea: -4780.0}
+  - {P: 0.003 atm, A: 110.0, b: 2.56, Ea: -4380.0}
+  - {P: 0.01 atm, A: 957.0, b: 2.3, Ea: -3735.0}
+  - {P: 0.03 atm, A: 1.32e+04, b: 1.98, Ea: -2933.0}
+  - {P: 0.1 atm, A: 4.9e+05, b: 1.54, Ea: -1790.0}
+  - {P: 0.3 atm, A: 2.41e+07, b: 1.07, Ea: -497.7}
+  - {P: 1.0 atm, A: 2.47e+09, b: 0.51, Ea: 1157.0}
+  - {P: 3.0 atm, A: 1.36e+11, b: 0.04, Ea: 2789.0}
+  - {P: 10.0 atm, A: 3.13e+12, b: -0.31, Ea: 4501.0}
   - {P: 30.0 atm, A: 5.29e+12, b: -0.33, Ea: 5728.0}
+  - {P: 100.0 atm, A: 1.89e+11, b: 0.14, Ea: 6373.0}
   note: |-
     R321
     \Author: UB !\Ref: S.J. KLIPPENSTEIN, PROC. COMBUST. INST. 36(2017) 77-111 !\Comment: WARNING
 - equation: C2H5O2 <=> C2H4 + HO2  # Reaction 134
   type: pressure-dependent-Arrhenius
   rate-constants:
+  - {P: 0.0001 atm, A: 1.91e+46, b: -11.85, Ea: 3.644e+04}
+  - {P: 0.0003 atm, A: 4.21e+46, b: -11.88, Ea: 3.682e+04}
+  - {P: 0.001 atm, A: 3.63e+46, b: -11.77, Ea: 3.71e+04}
+  - {P: 0.003 atm, A: 1.7e+46, b: -11.58, Ea: 3.733e+04}
+  - {P: 0.01 atm, A: 4.36e+45, b: -11.28, Ea: 3.757e+04}
+  - {P: 0.03 atm, A: 8.12e+44, b: -10.94, Ea: 3.778e+04}
+  - {P: 0.1 atm, A: 4.61e+43, b: -10.43, Ea: 3.791e+04}
+  - {P: 0.3 atm, A: 8.69e+41, b: -9.77, Ea: 3.786e+04}
+  - {P: 1.0 atm, A: 8.65e+39, b: -9.01, Ea: 3.778e+04}
+  - {P: 3.0 atm, A: 7.24e+36, b: -7.95, Ea: 3.724e+04}
+  - {P: 10.0 atm, A: 4.3e+33, b: -6.84, Ea: 3.666e+04}
   - {P: 30.0 atm, A: 1.92e+30, b: -5.71, Ea: 3.591e+04}
+  - {P: 100.0 atm, A: 1.58e+26, b: -4.37, Ea: 3.484e+04}
   note: |-
     R324
     \Author: UB !\Ref: S.J. KLIPPENSTEIN, PROC. COMBUST. INST. 36(2017) 77-111 !\Comment: WARNING
@@ -2034,8 +2074,14 @@ reactions:
   duplicate: true
   type: pressure-dependent-Arrhenius
   rate-constants:
+  - {P: 0.01 atm, A: 1.55e+24, b: -5.45, Ea: 9662.0}
+  - {P: 0.1 atm, A: 3.48e+56, b: -15.01, Ea: 1.916e+04}
+  - {P: 0.316 atm, A: 1.25e+64, b: -16.97, Ea: 2.129e+04}
+  - {P: 1.0 atm, A: 3.34e+61, b: -15.79, Ea: 2.015e+04}
+  - {P: 3.16 atm, A: 7.34e+53, b: -13.11, Ea: 1.73e+04}
   - {P: 10.0 atm, A: 4.16e+48, b: -11.21, Ea: 1.6e+04}
   - {P: 31.6 atm, A: 2.33e+43, b: -9.38, Ea: 1.481e+04}
+  - {P: 100.0 atm, A: 3.41e+39, b: -8.04, Ea: 1.436e+04}
   note: |-
     R374
     \Author: WARNING !\Ref: GOLDSMITH ET AL, J. PHYS. CHEM. A 2015, 119, 7766-7779 !\Comment: WARNING
@@ -2118,7 +2164,14 @@ reactions:
   duplicate: true
   type: pressure-dependent-Arrhenius
   rate-constants:
+  - {P: 0.01 atm, A: 1.08e+07, b: 1.28, Ea: 3322.0}
+  - {P: 0.1 atm, A: 7.75e+06, b: 1.33, Ea: 3216.0}
+  - {P: 0.316 atm, A: 1.21e+07, b: 1.27, Ea: 3311.0}
+  - {P: 1.0 atm, A: 2.15e+07, b: 1.19, Ea: 3367.0}
+  - {P: 3.16 atm, A: 1.13e+08, b: 1.0, Ea: 3695.0}
+  - {P: 10.0 atm, A: 1.31e+11, b: 0.12, Ea: 5872.0}
   - {P: 31.6 atm, A: 1.19e+09, b: 0.82, Ea: 5617.0}
+  - {P: 100.0 atm, A: 1.06e+17, b: -1.45, Ea: 1.223e+04}
   note: |-
     R380
     \Author: WARNING !\Ref: GOLDSMITH ET AL, J. PHYS. CHEM. A 2015, 119, 7766-7779 !\Comment: WARNING
@@ -2171,7 +2224,14 @@ reactions:
   duplicate: true
   type: pressure-dependent-Arrhenius
   rate-constants:
+  - {P: 0.01 atm, A: 866.0, b: 2.41, Ea: 6061.0}
+  - {P: 0.1 atm, A: 891.0, b: 2.41, Ea: 6078.0}
+  - {P: 0.316 atm, A: 943.0, b: 2.4, Ea: 6112.0}
+  - {P: 1.0 atm, A: 1060.0, b: 2.39, Ea: 6180.0}
+  - {P: 3.16 atm, A: 1090.0, b: 2.38, Ea: 6179.0}
+  - {P: 10.0 atm, A: 1390.0, b: 2.36, Ea: 6074.0}
   - {P: 31.6 atm, A: 2.49e+06, b: 1.42, Ea: 8480.0}
+  - {P: 100.0 atm, A: 1.66e+10, b: 0.36, Ea: 1.201e+04}
   note: |-
     R384
     \Author: WARNING !\Ref: GOLDSMITH ET AL, J. PHYS. CHEM. A 2015, 119, 7766-7779 !\Comment: WARNING
@@ -2179,7 +2239,14 @@ reactions:
   duplicate: true
   type: pressure-dependent-Arrhenius
   rate-constants:
+  - {P: 0.01 atm, A: 0.182, b: 3.12, Ea: 1331.0}
+  - {P: 0.1 atm, A: 0.207, b: 3.11, Ea: 1383.0}
+  - {P: 0.316 atm, A: 0.271, b: 3.08, Ea: 1496.0}
+  - {P: 1.0 atm, A: 0.526, b: 3.01, Ea: 1777.0}
+  - {P: 3.16 atm, A: 1.37, b: 2.9, Ea: 2225.0}
+  - {P: 10.0 atm, A: 0.419, b: 2.93, Ea: 2052.0}
   - {P: 31.6 atm, A: 1.19e-04, b: 4.21, Ea: 2043.0}
+  - {P: 100.0 atm, A: 1.3e-03, b: 3.97, Ea: 3414.0}
   note: |-
     R385
     \Author: WARNING !\Ref: GOLDSMITH ET AL, J. PHYS. CHEM. A 2015, 119, 7766-7779 !\Comment: WARNING
@@ -2187,7 +2254,14 @@ reactions:
   duplicate: true
   type: pressure-dependent-Arrhenius
   rate-constants:
+  - {P: 0.01 atm, A: 2.77e+36, b: -7.6, Ea: 1.264e+04}
+  - {P: 0.1 atm, A: 2.7e+36, b: -7.6, Ea: 1.261e+04}
+  - {P: 0.316 atm, A: 2.17e+36, b: -7.57, Ea: 1.249e+04}
+  - {P: 1.0 atm, A: 3.03e+35, b: -7.32, Ea: 1.182e+04}
+  - {P: 3.16 atm, A: 1.59e+36, b: -7.47, Ea: 1.246e+04}
+  - {P: 10.0 atm, A: 5.76e+35, b: -7.2, Ea: 1.343e+04}
   - {P: 31.6 atm, A: 3.54e+20, b: -2.57, Ea: 5578.0}
+  - {P: 100.0 atm, A: 3.03e+33, b: -6.28, Ea: 1.6e+04}
   note: |-
     R386
     \Author: UB !\Ref: GOLDSMITH ET AL, J. PHYS. CHEM. A 2015, 119, 7766-7779 !\Comment: WARNING
@@ -2195,7 +2269,14 @@ reactions:
   duplicate: true
   type: pressure-dependent-Arrhenius
   rate-constants:
+  - {P: 0.01 atm, A: 5.04e+15, b: -1.28, Ea: 515.3}
+  - {P: 0.1 atm, A: 5.1e+15, b: -1.28, Ea: 513.0}
+  - {P: 0.316 atm, A: 5.34e+15, b: -1.29, Ea: 520.6}
+  - {P: 1.0 atm, A: 6.76e+15, b: -1.31, Ea: 645.7}
+  - {P: 3.16 atm, A: 1.05e+16, b: -1.36, Ea: 1066.0}
+  - {P: 10.0 atm, A: 2.84e+15, b: -1.18, Ea: 1429.0}
   - {P: 31.6 atm, A: 1.14e+69, b: -19.23, Ea: 1.476e+04}
+  - {P: 100.0 atm, A: 4.68e+10, b: 0.19, Ea: 830.6}
   note: |-
     R387
     \Author: UB !\Ref: GOLDSMITH ET AL, J. PHYS. CHEM. A 2015, 119, 7766-7779 !\Comment: WARNING

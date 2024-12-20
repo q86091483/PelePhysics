@@ -83,8 +83,6 @@ def pressure_interpolate_reaction(reaction, pressure):
 
             # Create a temperature vector for the curve fitting
             T = np.linspace(300, 2500, 100)
-            print(reaction)
-            print(pressures[idx1], pressures[idx2])
             
             # Compute the reaction rates at the two pressure points
             k1 = Arrhenius_evaluate(T, A1, b1, E1)
@@ -96,7 +94,10 @@ def pressure_interpolate_reaction(reaction, pressure):
             k = np.exp(log(k1) + (log(k2) - log(k1)) * ((log(P) - log(P1)) / (log(P2) - log(P1))))
             
             # Fit the A, b, E parameters to the interpolated curve 
-            (A, b, E), _ = curve_fit(Arrhenius_evaluate, T, k, p0=[A_guess, b_guess, E_guess])
+            #(A, b, E), _ = curve_fit(Arrhenius_evaluate, T, k, p0=[A_guess, b_guess, E_guess])
+            A = A1
+            b = b1
+            E = E2
         
     return A, b, E
 
