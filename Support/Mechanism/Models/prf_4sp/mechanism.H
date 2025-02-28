@@ -9,8 +9,6 @@
 1  H
 2  N
 3  O
-4  Ar
-5  He
 */
 
 // Species
@@ -19,10 +17,10 @@
 #define IC8H18_ID 2
 #define NC7H16_ID 3
 
-#define NUM_ELEMENTS 6
+#define NUM_ELEMENTS 4
 #define NUM_SPECIES 4
 #define NUM_IONS 0
-#define NUM_REACTIONS 1
+#define NUM_REACTIONS 0
 
 #define NUM_FIT 4
 
@@ -63,9 +61,9 @@ void SPARSITY_PREPROC_SYST_SIMPLIFIED_CSR(
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void
 CKINDX(int& mm, int& kk, int& ii, int& nfit)
 {
-  mm = 6;
+  mm = 4;
   kk = 4;
-  ii = 1;
+  ii = 0;
   nfit = -1; // Why do you need this anyway ?
 }
 
@@ -1587,77 +1585,23 @@ CKSMS(const amrex::Real T, amrex::Real sms[])
 // GPU version of productionRate: no more use of thermo namespace vectors
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void
 comp_qfqr(
-  amrex::Real* qf,
-  amrex::Real* qr,
-  const amrex::Real* sc,
+  amrex::Real* /*qf*/,
+  amrex::Real* /*qr*/,
+  const amrex::Real* /*sc*/,
   const amrex::Real* /*sc_qss*/,
-  const amrex::Real T,
-  const amrex::Real invT,
-  const amrex::Real logT)
+  const amrex::Real /*T*/,
+  const amrex::Real /*invT*/,
+  const amrex::Real /*logT*/)
 {
-
-  // reaction 0: N2 + O2 <=> N2 + O2
-  qf[0] = sc[0] * sc[1];
-  qr[0] = sc[0] * sc[1];
-
-  // compute the mixture concentration
-  amrex::Real mixture = 0.0;
-  for (int i = 0; i < 4; ++i) {
-    mixture += sc[i];
-  }
-
-  // compute the Gibbs free energy
-  amrex::Real g_RT[4];
-  gibbs(g_RT, T);
-
-  // reference concentration: P_atm / (RT) in inverse mol/m^3
-  amrex::Real refC = 101325 / 8.31446 * invT;
-  amrex::Real refCinv = 1 / refC;
-
-  // Evaluate the kfs
-  amrex::Real k_f, Corr;
-
-  // reaction 0:  N2 + O2 <=> N2 + O2
-  k_f = 6000000000 * exp(-(23147.9666270171) * invT);
-  qf[0] *= k_f;
-  qr[0] *= k_f * exp(-(g_RT[0] - g_RT[0] + g_RT[1] - g_RT[1]));
 }
 
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void
-productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
+productionRate(
+  amrex::Real* wdot, const amrex::Real* /*sc*/, const amrex::Real /*T*/)
 {
-  const amrex::Real invT = 1.0 / T;
-  const amrex::Real logT = log(T);
-
-  // reference concentration: P_atm / (RT) in inverse mol/m^3
-  const amrex::Real refC = 101325 / 8.31446 * invT;
-  const amrex::Real refCinv = 1 / refC;
 
   for (int i = 0; i < 4; ++i) {
     wdot[i] = 0.0;
-  }
-
-  // compute the mixture concentration
-  amrex::Real mixture = 0.0;
-  for (int i = 0; i < 4; ++i) {
-    mixture += sc[i];
-  }
-
-  // compute the Gibbs free energy
-  amrex::Real g_RT[4];
-  gibbs(g_RT, T);
-
-  {
-    // reaction 0:  N2 + O2 <=> N2 + O2
-    const amrex::Real k_f = 6000000000 * exp(-(23147.9666270171) * invT);
-    const amrex::Real qf = k_f * (sc[0] * sc[1]);
-    const amrex::Real qr =
-      k_f * exp(-(g_RT[0] - g_RT[0] + g_RT[1] - g_RT[1])) * (sc[0] * sc[1]);
-    const amrex::Real qdot = qf - qr;
-    wdot[0] -= qdot;
-    wdot[0] += qdot;
-    wdot[1] -= qdot;
-    wdot[1] += qdot;
   }
 }
 
@@ -1828,109 +1772,16 @@ CKCHRGMASS(amrex::Real zk[])
 // compute an approx to the reaction Jacobian
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void
 aJacobian_precond(
-  amrex::Real* J, const amrex::Real* sc, const amrex::Real T, const int HP)
+  amrex::Real* J,
+  const amrex::Real* /*sc*/,
+  const amrex::Real /*T*/,
+  const int /*HP*/)
 {
 
 #if defined(PELE_COMPILE_AJACOBIAN) || !defined(AMREX_USE_HIP)
   for (int i = 0; i < 25; i++) {
     J[i] = 0.0;
   }
-
-  amrex::Real wdot[4];
-  for (auto& val : wdot) {
-    val = 0.0;
-  }
-
-  const amrex::Real invT = 1.0 / T;
-  const amrex::Real invT2 = invT * invT;
-  const amrex::Real logT = log(T);
-
-  // reference concentration: P_atm / (RT) in inverse mol/m^3
-  amrex::Real refC = 101325 / 8.31446 / T;
-  amrex::Real refCinv = 1.0 / refC;
-
-  // compute the mixture concentration
-  amrex::Real mixture = 0.0;
-  for (int k = 0; k < 4; ++k) {
-    mixture += sc[k];
-  }
-
-  // compute the Gibbs free energy
-  amrex::Real g_RT[4];
-  gibbs(g_RT, T);
-
-  // compute the species enthalpy
-  amrex::Real h_RT[4];
-  speciesEnthalpy(h_RT, T);
-
-  amrex::Real phi_f, k_f, k_r, phi_r, Kc, q, q_nocor, Corr, alpha;
-  amrex::Real dlnkfdT, dlnk0dT, dlnKcdT, dkrdT, dqdT;
-  amrex::Real dqdci, dcdc_fac, dqdc[4];
-  amrex::Real Pr, fPr, F, k_0, logPr;
-  amrex::Real logFcent, troe_c, troe_n, troePr_den, troePr, troe;
-  amrex::Real Fcent1, Fcent2, Fcent3, Fcent;
-  amrex::Real dlogFdc, dlogFdn, dlogFdcn_fac;
-  amrex::Real dlogPrdT, dlogfPrdT, dlogFdT, dlogFcentdT, dlogFdlogPr, dlnCorrdT;
-  const amrex::Real ln10 = log(10.0);
-  const amrex::Real log10e = 1.0 / log(10.0);
-  // reaction 0: N2 + O2 <=> N2 + O2
-  // a non-third-body and non-pressure-fall-off reaction
-  // forward
-  phi_f = sc[0] * sc[1];
-  k_f = 6000000000 * exp(-(23147.9666270171) * invT);
-  dlnkfdT = (23147.9666270171) * invT2;
-  // reverse
-  phi_r = sc[0] * sc[1];
-  Kc = exp(g_RT[0] - g_RT[0] + g_RT[1] - g_RT[1]);
-  k_r = k_f / Kc;
-  dlnKcdT = invT * (-(h_RT[0] + h_RT[1]) + (h_RT[0] + h_RT[1]));
-  dkrdT = (dlnkfdT - dlnKcdT) * k_r;
-  // rate of progress
-  q = k_f * phi_f - k_r * phi_r;
-  dqdT = (dlnkfdT * k_f * phi_f - dkrdT * phi_r);
-  // update wdot
-  // d()/d[N2]
-  dqdci = +k_f * sc[1] - k_r * sc[1];
-  // d()/d[O2]
-  dqdci = +k_f * sc[0] - k_r * sc[0];
-  // d()/dT
-
-  amrex::Real c_R[4], dcRdT[4], e_RT[4];
-  amrex::Real* eh_RT;
-  if (HP == 1) {
-    cp_R(c_R, T);
-    dcvpRdT(dcRdT, T);
-    eh_RT = &h_RT[0];
-  } else {
-    cv_R(c_R, T);
-    dcvpRdT(dcRdT, T);
-    speciesInternalEnergy(e_RT, T);
-    eh_RT = &e_RT[0];
-  }
-
-  amrex::Real cmix = 0.0, ehmix = 0.0, dcmixdT = 0.0, dehmixdT = 0.0;
-  for (int k = 0; k < 4; ++k) {
-    cmix += c_R[k] * sc[k];
-    dcmixdT += dcRdT[k] * sc[k];
-    ehmix += eh_RT[k] * wdot[k];
-    dehmixdT += invT * (c_R[k] - eh_RT[k]) * wdot[k] + eh_RT[k] * J[20 + k];
-  }
-
-  amrex::Real cmixinv = 1.0 / cmix;
-  amrex::Real tmp1 = ehmix * cmixinv;
-  amrex::Real tmp3 = cmixinv * T;
-  amrex::Real tmp2 = tmp1 * tmp3;
-  amrex::Real dehmixdc;
-  // dTdot/d[X]
-  for (int k = 0; k < 4; ++k) {
-    dehmixdc = 0.0;
-    for (int m = 0; m < 4; ++m) {
-      dehmixdc += eh_RT[m] * J[k * 5 + m];
-    }
-    J[k * 5 + 4] = tmp2 * c_R[k] - tmp3 * dehmixdc;
-  }
-  // dTdot/dT
-  J[24] = -tmp1 + tmp2 * dcmixdT - tmp3 * dehmixdT;
 #else
   amrex::Abort();
 #endif
@@ -1960,109 +1811,16 @@ DWDOT_SIMPLIFIED(
 // compute the reaction Jacobian
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void
 aJacobian(
-  amrex::Real* J, const amrex::Real* sc, const amrex::Real T, const int consP)
+  amrex::Real* J,
+  const amrex::Real* /*sc*/,
+  const amrex::Real /*T*/,
+  const int /*consP*/)
 {
 
 #if defined(PELE_COMPILE_AJACOBIAN) || !defined(AMREX_USE_HIP)
   for (int i = 0; i < 25; i++) {
     J[i] = 0.0;
   }
-
-  amrex::Real wdot[4];
-  for (auto& val : wdot) {
-    val = 0.0;
-  }
-
-  const amrex::Real invT = 1.0 / T;
-  const amrex::Real invT2 = invT * invT;
-  const amrex::Real logT = log(T);
-
-  // reference concentration: P_atm / (RT) in inverse mol/m^3
-  amrex::Real refC = 101325 / 8.31446 / T;
-  amrex::Real refCinv = 1.0 / refC;
-
-  // compute the mixture concentration
-  amrex::Real mixture = 0.0;
-  for (int k = 0; k < 4; ++k) {
-    mixture += sc[k];
-  }
-
-  // compute the Gibbs free energy
-  amrex::Real g_RT[4];
-  gibbs(g_RT, T);
-
-  // compute the species enthalpy
-  amrex::Real h_RT[4];
-  speciesEnthalpy(h_RT, T);
-
-  amrex::Real phi_f, k_f, k_r, phi_r, Kc, q, q_nocor, Corr, alpha;
-  amrex::Real dlnkfdT, dlnk0dT, dlnKcdT, dkrdT, dqdT;
-  amrex::Real dqdci, dcdc_fac, dqdc[4];
-  amrex::Real Pr, fPr, F, k_0, logPr;
-  amrex::Real logFcent, troe_c, troe_n, troePr_den, troePr, troe;
-  amrex::Real Fcent1, Fcent2, Fcent3, Fcent;
-  amrex::Real dlogFdc, dlogFdn, dlogFdcn_fac;
-  amrex::Real dlogPrdT, dlogfPrdT, dlogFdT, dlogFcentdT, dlogFdlogPr, dlnCorrdT;
-  const amrex::Real ln10 = log(10.0);
-  const amrex::Real log10e = 1.0 / log(10.0);
-  // reaction 0: N2 + O2 <=> N2 + O2
-  // a non-third-body and non-pressure-fall-off reaction
-  // forward
-  phi_f = sc[0] * sc[1];
-  k_f = 6000000000 * exp(-(23147.9666270171) * invT);
-  dlnkfdT = (23147.9666270171) * invT2;
-  // reverse
-  phi_r = sc[0] * sc[1];
-  Kc = exp(g_RT[0] - g_RT[0] + g_RT[1] - g_RT[1]);
-  k_r = k_f / Kc;
-  dlnKcdT = invT * (-(h_RT[0] + h_RT[1]) + (h_RT[0] + h_RT[1]));
-  dkrdT = (dlnkfdT - dlnKcdT) * k_r;
-  // rate of progress
-  q = k_f * phi_f - k_r * phi_r;
-  dqdT = (dlnkfdT * k_f * phi_f - dkrdT * phi_r);
-  // update wdot
-  // d()/d[N2]
-  dqdci = +k_f * sc[1] - k_r * sc[1];
-  // d()/d[O2]
-  dqdci = +k_f * sc[0] - k_r * sc[0];
-  // d()/dT
-
-  amrex::Real c_R[4], dcRdT[4], e_RT[4];
-  amrex::Real* eh_RT;
-  if (consP == 1) {
-    cp_R(c_R, T);
-    dcvpRdT(dcRdT, T);
-    eh_RT = &h_RT[0];
-  } else {
-    cv_R(c_R, T);
-    dcvpRdT(dcRdT, T);
-    speciesInternalEnergy(e_RT, T);
-    eh_RT = &e_RT[0];
-  }
-
-  amrex::Real cmix = 0.0, ehmix = 0.0, dcmixdT = 0.0, dehmixdT = 0.0;
-  for (int k = 0; k < 4; ++k) {
-    cmix += c_R[k] * sc[k];
-    dcmixdT += dcRdT[k] * sc[k];
-    ehmix += eh_RT[k] * wdot[k];
-    dehmixdT += invT * (c_R[k] - eh_RT[k]) * wdot[k] + eh_RT[k] * J[20 + k];
-  }
-
-  amrex::Real cmixinv = 1.0 / cmix;
-  amrex::Real tmp1 = ehmix * cmixinv;
-  amrex::Real tmp3 = cmixinv * T;
-  amrex::Real tmp2 = tmp1 * tmp3;
-  amrex::Real dehmixdc;
-  // dTdot/d[X]
-  for (int k = 0; k < 4; ++k) {
-    dehmixdc = 0.0;
-    for (int m = 0; m < 4; ++m) {
-      dehmixdc += eh_RT[m] * J[k * 5 + m];
-    }
-    J[k * 5 + 4] = tmp2 * c_R[k] - tmp3 * dehmixdc;
-  }
-  // dTdot/dT
-  J[24] = -tmp1 + tmp2 * dcmixdT - tmp3 * dehmixdT;
 #else
   amrex::Abort();
 #endif

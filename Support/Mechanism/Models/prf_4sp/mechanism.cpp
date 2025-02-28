@@ -1,36 +1,21 @@
 #include "mechanism.H"
-const int rmap[1] = {0};
 
 // Returns 0-based map of reaction order
 void
-GET_RMAP(int* _rmap)
+GET_RMAP(int* /*_rmap*/)
 {
-  for (int j = 0; j < 1; ++j) {
-    _rmap[j] = rmap[j];
-  }
 }
 
 // Returns a count of species in a reaction, and their indices
 // and stoichiometric coefficients. (Eq 50)
 void
-CKINU(const int i, int& nspec, int ki[], int nu[])
+CKINU(const int i, int& nspec, int* /*ki*/, int* /*nu*/)
 {
-  const int ns[1] = {4};
-  const int kiv[4] = {0, 1, 0, 1};
-  const int nuv[4] = {-1, -1, 1, 1};
   if (i < 1) {
     // Return max num species per reaction
-    nspec = 4;
+    nspec = 0;
   } else {
-    if (i > 1) {
-      nspec = -1;
-    } else {
-      nspec = ns[i - 1];
-      for (int j = 0; j < nspec; ++j) {
-        ki[j] = kiv[(i - 1) * 4 + j] + 1;
-        nu[j] = nuv[(i - 1) * 4 + j];
-      }
-    }
+    nspec = -1;
   }
 }
 
@@ -55,28 +40,17 @@ CKKFKR(
 
   // convert to chemkin units
   progressRateFR(q_f, q_r, c, T);
-
-  // convert to chemkin units
-  for (int id = 0; id < 1; ++id) {
-    q_f[id] *= 1.0e-6;
-    q_r[id] *= 1.0e-6;
-  }
 }
 
 // compute the progress rate for each reaction
 // USES progressRate : todo switch to GPU
 void
 progressRateFR(
-  amrex::Real* q_f, amrex::Real* q_r, amrex::Real* sc, amrex::Real T)
+  amrex::Real* /*q_f*/,
+  amrex::Real* /*q_r*/,
+  amrex::Real* /*sc*/,
+  amrex::Real /*T*/)
 {
-  const amrex::Real invT = 1.0 / T;
-  const amrex::Real logT = log(T);
-  // compute the Gibbs free energy
-  amrex::Real g_RT[4];
-  gibbs(g_RT, T);
-
-  amrex::Real sc_qss[1];
-  comp_qfqr(q_f, q_r, sc, sc_qss, T, invT, logT);
 }
 
 // save atomic weights into array
@@ -87,8 +61,6 @@ atomicWeight(amrex::Real* awt)
   awt[1] = 1.008000;  // H
   awt[2] = 14.007000; // N
   awt[3] = 15.999000; // O
-  awt[4] = 39.950000; // Ar
-  awt[5] = 4.002602;  // He
 }
 
 // get atomic weight for all elements
@@ -103,7 +75,7 @@ CKAWT(amrex::Real* awt)
 void
 CKNCF(int* ncf)
 {
-  int kd = 6;
+  int kd = 4;
   // Zero ncf
   for (int id = 0; id < kd * 4; ++id) {
     ncf[id] = 0;
@@ -128,13 +100,11 @@ CKNCF(int* ncf)
 void
 CKSYME_STR(amrex::Vector<std::string>& ename)
 {
-  ename.resize(6);
+  ename.resize(4);
   ename[0] = "C";
   ename[1] = "H";
   ename[2] = "N";
   ename[3] = "O";
-  ename[4] = "Ar";
-  ename[5] = "He";
 }
 
 // Returns the vector of strings of species names

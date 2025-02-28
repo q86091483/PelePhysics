@@ -1,19 +1,15 @@
-description: |-
-  \START_ELEMENTS_LIST
-
 generator: ck2yaml
 input-files: [chem.inp, therm.dat, tran.dat]
-cantera-version: 3.1.0
-date: Sat, 01 Mar 2025 02:16:49 +1100
+cantera-version: 3.0.0
+date: Fri, 28 Feb 2025 14:19:14 -0500
 
 units: {length: cm, time: s, quantity: mol, activation-energy: cal/mol}
 
 phases:
 - name: gas
   thermo: ideal-gas
-  elements: [C, H, N, O, Ar, He]
+  elements: [C, H, N, O]
   species: [N2, O2, IC8H18, NC7H16]
-  kinetics: gas
   transport: mixture-averaged
   state: {T: 300.0, P: 1 atm}
 
@@ -90,10 +86,3 @@ species:
     diameter: 6.253
     rotational-relaxation: 1.0
     note: TCPC
-
-reactions:
-- equation: N2 + O2 <=> O2 + N2  # Reaction 1
-  rate-constant: {A: 6.0e+15, b: 0.0, Ea: 4.6e+04}
-  note: |
-    R1
-     modified
