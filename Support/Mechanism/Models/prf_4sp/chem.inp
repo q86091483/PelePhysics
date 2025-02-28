@@ -1,0 +1,20 @@
+!\START_ELEMENTS_LIST
+ELEMENTS
+C
+H
+N
+O
+AR
+HE
+END
+!\END_ELEMENTS_LIST
+!\START_SPECIES_LIST
+
+SPECIES
+N2               O2               IC8H18           NC7H16
+!\START_KINETICS_INPUT
+
+REACTIONS
+!R1
+N2 + O2 = O2 + N2               6.000E+15  0.00  46000.0              ! modified
+END
