@@ -9,7 +9,7 @@ description: |-
 generator: ck2yaml
 input-files: [mechanism.inp, therm.dat, tran.dat]
 cantera-version: 3.0.0
-date: Fri, 28 Feb 2025 14:58:44 -0500
+date: Fri, 28 Feb 2025 15:19:31 -0500
 
 units: {length: cm, time: s, quantity: mol, activation-energy: cal/mol}
 
@@ -18,6 +18,7 @@ phases:
   thermo: ideal-gas
   elements: [C, H, O, N]
   species: [NC7H16, IC8H18, O2, N2]
+  kinetics: gas
   transport: mixture-averaged
   state: {T: 300.0, P: 1 atm}
 
@@ -93,3 +94,11 @@ species:
     diameter: 3.621
     polarizability: 1.76
     rotational-relaxation: 4.0
+
+reactions:
+- equation: N2 + O2 <=> O2 + N2  # Reaction 1
+  rate-constant: {A: 6.0e+15, b: 0.0, Ea: 4.6e+04}
+  note: modified
+- equation: IC8H18 + NC7H16 <=> NC7H16 + IC8H18  # Reaction 2
+  rate-constant: {A: 6.0e+15, b: 0.0, Ea: 4.6e+04}
+  note: modified

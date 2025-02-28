@@ -1,21 +1,36 @@
 #include "mechanism.H"
+const int rmap[2] = {0, 1};
 
 // Returns 0-based map of reaction order
 void
-GET_RMAP(int* /*_rmap*/)
+GET_RMAP(int* _rmap)
 {
+  for (int j = 0; j < 2; ++j) {
+    _rmap[j] = rmap[j];
+  }
 }
 
 // Returns a count of species in a reaction, and their indices
 // and stoichiometric coefficients. (Eq 50)
 void
-CKINU(const int i, int& nspec, int* /*ki*/, int* /*nu*/)
+CKINU(const int i, int& nspec, int ki[], int nu[])
 {
+  const int ns[2] = {4, 4};
+  const int kiv[8] = {3, 2, 3, 2, 1, 0, 1, 0};
+  const int nuv[8] = {-1, -1, 1, 1, -1, -1, 1, 1};
   if (i < 1) {
     // Return max num species per reaction
-    nspec = 0;
+    nspec = 4;
   } else {
-    nspec = -1;
+    if (i > 2) {
+      nspec = -1;
+    } else {
+      nspec = ns[i - 1];
+      for (int j = 0; j < nspec; ++j) {
+        ki[j] = kiv[(i - 1) * 4 + j] + 1;
+        nu[j] = nuv[(i - 1) * 4 + j];
+      }
+    }
   }
 }
 
@@ -40,17 +55,28 @@ CKKFKR(
 
   // convert to chemkin units
   progressRateFR(q_f, q_r, c, T);
+
+  // convert to chemkin units
+  for (int id = 0; id < 2; ++id) {
+    q_f[id] *= 1.0e-6;
+    q_r[id] *= 1.0e-6;
+  }
 }
 
 // compute the progress rate for each reaction
 // USES progressRate : todo switch to GPU
 void
 progressRateFR(
-  amrex::Real* /*q_f*/,
-  amrex::Real* /*q_r*/,
-  amrex::Real* /*sc*/,
-  amrex::Real /*T*/)
+  amrex::Real* q_f, amrex::Real* q_r, amrex::Real* sc, amrex::Real T)
 {
+  const amrex::Real invT = 1.0 / T;
+  const amrex::Real logT = log(T);
+  // compute the Gibbs free energy
+  amrex::Real g_RT[4];
+  gibbs(g_RT, T);
+
+  amrex::Real sc_qss[1];
+  comp_qfqr(q_f, q_r, sc, sc_qss, T, invT, logT);
 }
 
 // save atomic weights into array
