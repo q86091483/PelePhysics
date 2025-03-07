@@ -1702,7 +1702,7 @@ ReactorCvode::react(
     rAux_in,
 #endif
     FC_in, yvec_d, udata->rhoe_init,
-#if defined (PELE_USE_AUX) && NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
     yvec_d_aux,
 #endif
     d_nfe, dt_react);
