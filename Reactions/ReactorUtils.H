@@ -329,7 +329,7 @@ box_flatten(
   }
   y_vect[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] = temp;
 
-#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 347251)
   // phi -> y, udata
 
   for (int n = 0; n < NUM_SPECIES; n++) {
@@ -448,7 +448,7 @@ box_unflatten(
     amrex::Abort("Wrong reactor type. Choose between 1 (e) or 2 (h).");
   }
   temperature(i, j, k, 0) = temp;
-#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 347251)
   for (int n = 0; n < NUMAUX; n++) {
     rhoAux(i, j, k, n) = y_vect_aux[aux_index<OrderType>(n, icell, ncells)];
   }
