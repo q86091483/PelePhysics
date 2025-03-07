@@ -1629,6 +1629,16 @@ ReactorCvode::react(
   // Solution data array
   amrex::Real* yvec_d = N_VGetDeviceArrayPointer(y);
 
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+  const int neq_tot_aux = NUMAUX * ncells;
+
+  // Solution vector and execution policy for GPU
+  auto y_aux = utils::setNVectorGPU(neq_tot_aux, atomic_reductions, stream);
+
+  // Solution data array for GPU
+  amrex::Real* yvec_d_aux = N_VGetDeviceArrayPointer(y_aux);
+#endif
+
   // Populate the userData
   amrex::Gpu::streamSynchronize();
   allocUserData(udata, ncells, A, stream);
@@ -1852,10 +1862,7 @@ ReactorCvode::react(
   freeUserData(udata);
 
 #if defined (PELE_USE_AUX) && (NUMNEW > 0)
-#ifdef AMREX_USE_GPU
-#else
   N_VDestroy(y_aux);
-#endif
   CVodeFree(&cvode_mem_aux);
   if (LS_aux != nullptr) {
     SUNLinSolFree(LS_aux);
