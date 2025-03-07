@@ -840,7 +840,7 @@ fKernelSpec_aux(
 #endif
 
   if (false) {
-    amrex::Print() << "In fKernelSpec: ----------------" << std::endl;
+    //amrex::Print() << "In fKernelSpec: ----------------" << std::endl;
     //amrex::Print() << "MIXF_IN_AUX, " << MIXF_IN_AUX << ", " << NUMMIXF << std::endl;
     //amrex::Print() << "AGE_IN_AUX, " << AGE_IN_AUX << ", " << NUMAGE << std::endl;
     //amrex::Print() << "AGEPV_IN_AUX, " << AGEPV_IN_AUX << ", " << NUMAGEPV << std::endl;
@@ -851,15 +851,15 @@ fKernelSpec_aux(
       amrex::Print() << " y[" << n << "] = " << yvec_d[idx] << ", idx=" << idx;
       amrex::Print() << ", ydot[" << n << "] = " << ydot_d[idx_src] << ", idx_src=" << idx_src << std::endl;
     }
-    amrex::Print() << " y[NUM_SPECIES] = " << yvec_d[NUM_SPECIES] << ", idx=" << NUM_SPECIES;
-    amrex::Print() << ", ydot[NUM_SPECIES] = " << ydot_d[NUM_SPECIES] << ", idx_src=" << NUM_SPECIES << std::endl;
+    //amrex::Print() << " y[NUM_SPECIES] = " << yvec_d[NUM_SPECIES] << ", idx=" << NUM_SPECIES;
+    //amrex::Print() << ", ydot[NUM_SPECIES] = " << ydot_d[NUM_SPECIES] << ", idx_src=" << NUM_SPECIES << std::endl;
     for (int n = 0; n < NUMODE; n++) {
       const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
       const int idx_src = aux_index<OrderType>(n, icell, ncells);
-      amrex::Print() << " y[FIRSTAUX + " << n << "] = " << yvec_d[idx] << ", idx=" << idx;
-      amrex::Print() << ", ydot[FIRSTAUX + " << n << "] = " << ydot_d[idx_src] << ", idx_src=" << idx_src << std::endl;
+      //amrex::Print() << " y[FIRSTAUX + " << n << "] = " << yvec_d[idx] << ", idx=" << idx;
+      //amrex::Print() << ", ydot[FIRSTAUX + " << n << "] = " << ydot_d[idx_src] << ", idx_src=" << idx_src << std::endl;
     }
-    amrex::Print() << " " << std::endl;
+    //amrex::Print() << " " << std::endl;
   } // if (true or not) for output
 #endif
 }
