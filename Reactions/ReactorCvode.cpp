@@ -1833,7 +1833,10 @@ ReactorCvode::react(
   freeUserData(udata);
 
 #if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#ifdef AMREX_USE_GPU
+#else
   N_VDestroy(y_aux);
+#endif
   CVodeFree(&cvode_mem_aux);
   if (LS_aux != nullptr) {
     SUNLinSolFree(LS_aux);
