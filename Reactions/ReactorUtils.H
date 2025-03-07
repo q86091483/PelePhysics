@@ -351,26 +351,26 @@ box_flatten(
     vec_aux_init[idx_src] = rhoAux(i, j, k, idx_src);
   }
 
-  if (false) {
-    amrex::Print() << "In box_flatten: ----------------" << std::endl;
-    amrex::Print() << " rho = " << rho << std::endl;
-    for (int n = 0; n < NUM_SPECIES; n++) {
-      const int idx = vec_index<OrderType>(n, icell, ncells);
-      const int idx_src = spec_index<OrderType>(n, icell, ncells);
-      amrex::Print() << " y[" << n << "] = " << y_vect[idx] << ", idx=" << idx;
-      amrex::Print() << ", ydot[" << n << "] = " << src_vect[idx_src] << ", idx_src=" << idx_src << std::endl;
-    }
-    amrex::Print() << " y[NUM_SPECIES] = " << y_vect[vec_index<OrderType>(NUM_SPECIES, icell, ncells)]
-                    << ", idx=" << vec_index<OrderType>(NUM_SPECIES, icell, ncells);
-    amrex::Print() << ", ydot[NUM_SPECIES] = " << src_vect_energy[icell] << ", idx_src=" << icell << std::endl;
-    for (int n = 0; n < NUMODE; n++) {
-      const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
-      const int idx_src = aux_index<OrderType>(n, icell, ncells);
-      amrex::Print() << " y[NUM_SPECIES + " << n << "] = " << y_vect[idx] << ", idx=" << idx;
+  //if (false) {
+    //amrex::Print() << "In box_flatten: ----------------" << std::endl;
+    //amrex::Print() << " rho = " << rho << std::endl;
+    //for (int n = 0; n < NUM_SPECIES; n++) {
+    //  const int idx = vec_index<OrderType>(n, icell, ncells);
+    //  const int idx_src = spec_index<OrderType>(n, icell, ncells);
+    //  amrex::Print() << " y[" << n << "] = " << y_vect[idx] << ", idx=" << idx;
+    //  amrex::Print() << ", ydot[" << n << "] = " << src_vect[idx_src] << ", idx_src=" << idx_src << std::endl;
+    //}
+    //amrex::Print() << " y[NUM_SPECIES] = " << y_vect[vec_index<OrderType>(NUM_SPECIES, icell, ncells)]
+    //                << ", idx=" << vec_index<OrderType>(NUM_SPECIES, icell, ncells);
+    //amrex::Print() << ", ydot[NUM_SPECIES] = " << src_vect_energy[icell] << ", idx_src=" << icell << std::endl;
+    //for (int n = 0; n < NUMODE; n++) {
+    //  const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
+    //  const int idx_src = aux_index<OrderType>(n, icell, ncells);
+    //  amrex::Print() << " y[NUM_SPECIES + " << n << "] = " << y_vect[idx] << ", idx=" << idx;
       //amrex::Print() << ", ydot[NUM_SPECIES + " << n << "] = " << src_vec_aux[idx_src] << ", idx_src=" << idx_src << std::endl;
-    }
-    amrex::Print() << " " << std::endl;
-  } // if(true or false) for output
+    //}
+    //amrex::Print() << " " << std::endl;
+  //} // if(true or false) for output
 #endif // #if (NUMAUX > 0)
 }
 
