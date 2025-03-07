@@ -1635,8 +1635,19 @@ ReactorCvode::react(
 
   // Fill data
   flatten(
-    box, ncells, rY_in, rYsrc_in, T_in, rEner_in, rEner_src_in, yvec_d,
-    udata->rYsrc_ext, udata->rhoe_init, udata->rhoesrc_ext);
+    box, ncells,
+    rY_in, rYsrc_in, T_in, rEner_in, rEner_src_in,
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    rAux_in, rAux_src_in,
+#endif
+    yvec_d, udata->rYsrc_ext, udata->rhoe_init, udata->rhoesrc_ext
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+    , yvec_d_aux
+    , udata->rhoAuxsrc_ext
+    , udata->rhoAux_init
+    , udata->rhoY_T_init
+#endif
+  );
 
 #ifdef AMREX_USE_OMP
   amrex::Gpu::Device::streamSynchronize();
@@ -1675,8 +1686,16 @@ ReactorCvode::react(
   amrex::Gpu::DeviceVector<long int> v_nfe(ncells, nfe);
   long int* d_nfe = v_nfe.data();
   unflatten(
-    box, ncells, rY_in, T_in, rEner_in, rEner_src_in, FC_in, yvec_d,
-    udata->rhoe_init, d_nfe, dt_react);
+    box, ncells,
+    rY_in, T_in, rEner_in, rEner_src_in,
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    rAux_in,
+#endif
+    FC_in, yvec_d, udata->rhoe_init,
+#if defined (PELE_USE_AUX) && NUMNEW > 0)
+    yvec_d_aux,
+#endif
+    d_nfe, dt_react);
 
   if (udata->verbose > 1) {
     print_final_stats(cvode_mem, LS != nullptr);
