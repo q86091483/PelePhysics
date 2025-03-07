@@ -221,17 +221,17 @@ set_sundials_solver_tols_aux(
     amrex::ParallelFor(ncells, [=] AMREX_GPU_DEVICE(int icell) {
       for (int k = 0; k < NUMAUX; k++) {
         ratol[aux_index<OrderType>(k, icell, ncells)] = typ_vals[k] * absTol;
-        amrex::Print() << "ratol[" << k << "] = " << ratol[aux_index<OrderType>(k, icell, ncells)] << ",  "
-                      << "typ_vals[" << k << "] = " << typ_vals[k];
+        //amrex::Print() << "ratol[" << k << "] = " << ratol[aux_index<OrderType>(k, icell, ncells)] << ",  "
+        //              << "typ_vals[" << k << "] = " << typ_vals[k];
       }
-      amrex::Print() << std::endl;
+      //amrex::Print() << std::endl;
     });
   } else {
     // cppcheck-suppress knownConditionTrueFalse
     if ((verbose > 0) && (omp_thread == 0)) {
-      amrex::Print() << " Setting " << solvername
-                     << " tolerances rtol = " << relTol << " atol = " << absTol
-                     << " in PelePhysics \n";
+      //amrex::Print() << " Setting " << solvername
+      //               << " tolerances rtol = " << relTol << " atol = " << absTol
+      //               << " in PelePhysics \n";
     }
     amrex::ParallelFor(
       neq_tot, [=] AMREX_GPU_DEVICE(int i) { ratol[i] = absTol; });
