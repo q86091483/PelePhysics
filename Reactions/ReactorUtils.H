@@ -848,8 +848,8 @@ fKernelSpec_aux(
     for (int n = 0; n < NUM_SPECIES; n++) {
       const int idx = vec_index<OrderType>(n, icell, ncells);
       const int idx_src = spec_index<OrderType>(n, icell, ncells);
-      amrex::Print() << " y[" << n << "] = " << yvec_d[idx] << ", idx=" << idx;
-      amrex::Print() << ", ydot[" << n << "] = " << ydot_d[idx_src] << ", idx_src=" << idx_src << std::endl;
+      //amrex::Print() << " y[" << n << "] = " << yvec_d[idx] << ", idx=" << idx;
+      //amrex::Print() << ", ydot[" << n << "] = " << ydot_d[idx_src] << ", idx_src=" << idx_src << std::endl;
     }
     //amrex::Print() << " y[NUM_SPECIES] = " << yvec_d[NUM_SPECIES] << ", idx=" << NUM_SPECIES;
     //amrex::Print() << ", ydot[NUM_SPECIES] = " << ydot_d[NUM_SPECIES] << ", idx_src=" << NUM_SPECIES << std::endl;
