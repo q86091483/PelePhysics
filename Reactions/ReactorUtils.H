@@ -329,7 +329,7 @@ box_flatten(
   }
   y_vect[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] = temp;
 
-#if defined (PELE_USE_AUX) && (NUMAUX > 347251)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   // phi -> y, udata
 
   for (int n = 0; n < NUM_SPECIES; n++) {
@@ -346,9 +346,9 @@ box_flatten(
     //const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
     const int idx_src = aux_index<OrderType>(n, icell, ncells);
     //y_vect[idx] = rhoAux(i, j, k, idx_src);
-    y_vect_aux[idx_src] = rhoAux(i, j, k, idx_src);
-    src_vec_aux[idx_src] = frcAuxExt(i, j, k, idx_src);
-    vec_aux_init[idx_src] = rhoAux(i, j, k, idx_src);
+    y_vect_aux[idx_src] = rhoAux(i, j, k, n);
+    src_vec_aux[idx_src] = frcAuxExt(i, j, k, n);
+    vec_aux_init[idx_src] = rhoAux(i, j, k, n);
   }
 
   //if (false) {
