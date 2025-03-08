@@ -1873,7 +1873,7 @@ ReactorCvode::react(
   }
   freeUserData(udata);
 
-#if Defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   N_VDestroy(y_aux);
   CVodeFree(&cvode_mem_aux);
   if (LS_aux != nullptr) {
@@ -1927,6 +1927,20 @@ ReactorCvode::react(
   void* cvode_mem =
     CVodeCreate(CV_BDF, *amrex::sundials::The_Sundials_Context());
   ; // Internal Cvode memory
+
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+  // Set of SUNDIALs objects needed for Cvode for GPU
+  SUNMatrix A_aux = nullptr;             // Jacobian matrix
+  SUNNonlinearSolver NLS_aux = nullptr;  // Non-linear solver
+  SUNLinearSolver LS_aux = nullptr;      // Linear solver
+
+  // Call CVodeCreate to create the solver memory and specify the Backward
+  // Differentiation Formula and the use of a Newton iteration
+  void* cvode_mem_aux =
+    CVodeCreate(CV_BDF, *amrex::sundials::The_Sundials_Context());
+  ; // Internal Cvode memory
+#endif
+
 
   //----------------------------------------------------------
   // GPU Region
