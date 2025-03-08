@@ -227,12 +227,11 @@ private:
     CVODEUserData* udata,
     int a_ncells
 #ifdef AMREX_USE_GPU
-    ,
-    SUNMatrix& a_A,
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
-    SUNMatrix& a_A_aux,
+    , SUNMatrix& a_A
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    , SUNMatrix& a_A_aux
 #endif
-    amrex::gpuStream_t stream
+    , amrex::gpuStream_t stream
 #endif
   ) const;
   static void freeUserData(CVODEUserData* data_wk);
