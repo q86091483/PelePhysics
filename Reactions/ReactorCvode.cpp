@@ -1222,10 +1222,12 @@ ReactorCvode::checkCvodeOptions(
 void
 ReactorCvode::allocUserData(
   CVODEUserData* udata,
-  int a_ncells
+  int a_ncells,
 #ifdef AMREX_USE_GPU
-  ,
   SUNMatrix& a_A,
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+  SUNMatrix& a_A_aux,
+#endif
   amrex::gpuStream_t stream
 #endif
 ) const
@@ -1349,6 +1351,12 @@ ReactorCvode::allocUserData(
       a_ncells, (NUM_SPECIES + 1), (NUM_SPECIES + 1), SUNMEMTYPE_DEVICE,
       *amrex::sundials::The_SUNMemory_Helper(), nullptr,
       *amrex::sundials::The_Sundials_Context());
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    a_A_aux = SUNMatrix_MagmaDenseBlock(
+      a_ncells, (NUM_AUX + 1), (NUM_AUX + 1), SUNMEMTYPE_DEVICE,
+      *amrex::sundials::The_SUNMemory_Helper(), nullptr,
+      *amrex::sundials::The_Sundials_Context());
+#endif
 #else
     amrex::Abort("solve_type=magma_direct requires PELE_USE_MAGMA=TRUE");
 #endif
@@ -1641,7 +1649,11 @@ ReactorCvode::react(
 
   // Populate the userData
   amrex::Gpu::streamSynchronize();
-  allocUserData(udata, ncells, A, stream);
+  allocUserData(udata, ncells, A,
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    A_aux,
+#endif
+    stream);
 
   // Fill data
   flatten(
@@ -1861,7 +1873,7 @@ ReactorCvode::react(
   }
   freeUserData(udata);
 
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if Defined (PELE_USE_AUX) && (NUMNEW > 0)
   N_VDestroy(y_aux);
   CVodeFree(&cvode_mem_aux);
   if (LS_aux != nullptr) {
@@ -1931,7 +1943,11 @@ ReactorCvode::react(
 
   // Populate the userData
   amrex::Gpu::streamSynchronize();
-  allocUserData(udata, ncells, A, stream);
+  allocUserData(udata, ncells, A,
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+    A_aux,
+#endif
+    stream);
 
   // Fill user_data
   initCvode(y, A, udata, NLS, LS, cvode_mem, stream, time_start, ncells);

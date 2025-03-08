@@ -229,6 +229,9 @@ private:
 #ifdef AMREX_USE_GPU
     ,
     SUNMatrix& a_A,
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+    SUNMatrix& a_A_aux,
+#endif
     amrex::gpuStream_t stream
 #endif
   ) const;
