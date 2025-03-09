@@ -81,7 +81,88 @@ cJac(
   }
 
   return (0);
-}
+} // cJac for GPU
+
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+int
+cJac_aux(
+  amrex::Real /*t*/,
+  N_Vector y_in,
+  N_Vector /*fy*/,
+  SUNMatrix J,
+  void* user_data,
+  N_Vector /*tmp1*/,
+  N_Vector /*tmp2*/,
+  N_Vector /*tmp3*/)
+{
+  BL_PROFILE("Pele::ReactorCvode::cJac()");
+  CVODEUserData* udata = static_cast<CVODEUserData*>(user_data);
+  auto solveType = udata->solve_type;
+  auto ncells = udata->ncells;
+  auto NNZ = udata->NNZ;
+  auto stream = udata->stream;
+  auto nbThreads = udata->nbThreads;
+  auto nbBlocks = udata->nbBlocks;
+  auto react_type = udata->reactor_type;
+
+  if (solveType == sparseDirect) {
+#ifdef AMREX_USE_CUDA
+    amrex::Real* yvec_d = N_VGetDeviceArrayPointer(y_in);
+    amrex::Real* Jdata = SUNMatrix_cuSparse_Data(J);
+    int* csr_row_count_d = SUNMatrix_cuSparse_IndexPointers(J);
+    int* csr_col_index_d = SUNMatrix_cuSparse_IndexValues(J);
+
+    // Checks
+    AMREX_ASSERT(
+      (SUNMatrix_cuSparse_Rows(J) == (NUM_SPECIES + 1) * ncells) &&
+      (SUNMatrix_cuSparse_Columns(J) == (NUM_SPECIES + 1) * ncells) &&
+      (SUNMatrix_cuSparse_NNZ(J) == ncells * NNZ));
+
+    const auto ec = amrex::Gpu::ExecutionConfig(ncells);
+
+    AMREX_ALWAYS_ASSERT(nbThreads == CVODE_NB_THREADS);
+    amrex::launch_global<CVODE_NB_THREADS>
+      <<<nbBlocks, CVODE_NB_THREADS, ec.sharedMem, stream>>>(
+        [=] AMREX_GPU_DEVICE() noexcept {
+          for (int icell = blockDim.x * blockIdx.x + threadIdx.x,
+                   stride = blockDim.x * gridDim.x;
+               icell < ncells; icell += stride) {
+            fKernelComputeAJchem(
+              icell, NNZ, react_type, csr_row_count_d, csr_col_index_d, yvec_d,
+              Jdata);
+          }
+        });
+    amrex::Gpu::Device::streamSynchronize();
+#else
+    amrex::Abort(
+      "Calling cJac with solve_type = sparse_direct only works with CUDA !");
+#endif
+  } else if (solveType == magmaDirect) {
+#ifdef PELE_USE_MAGMA
+    amrex::Real* yvec_d = N_VGetDeviceArrayPointer(y_in);
+    amrex::Real* Jdata = SUNMatrix_MagmaDense_Data(J);
+    const auto ec = amrex::Gpu::ExecutionConfig(ncells);
+    AMREX_ALWAYS_ASSERT(nbThreads == CVODE_NB_THREADS);
+    amrex::launch_global<CVODE_NB_THREADS>
+      <<<nbBlocks, CVODE_NB_THREADS, ec.sharedMem, stream>>>(
+        [=] AMREX_GPU_DEVICE() noexcept {
+          for (int icell = blockDim.x * blockIdx.x + threadIdx.x,
+                   stride = blockDim.x * gridDim.x;
+               icell < ncells; icell += stride) {
+            fKernelDenseAJchem(icell, react_type, yvec_d, Jdata);
+          }
+        });
+    amrex::Gpu::Device::streamSynchronize();
+#else
+    amrex::Abort(
+      "Calling cJac with solve_type = magma_direct requires PELE_USE_MAGMA = "
+      "TRUE !");
+#endif
+  }
+
+  return (0);
+} // cJac_aux for GPU
+#endif
 
 #else
 
