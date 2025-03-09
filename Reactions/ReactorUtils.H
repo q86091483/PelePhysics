@@ -330,7 +330,7 @@ box_flatten(
   y_vect[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] = temp;
 
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
-  // phi -> y, udata
+  // phi -> y, g, udata (dy/dt=f(y)+g)
 
   for (int n = 0; n < NUM_SPECIES; n++) {
     const amrex::Real rhoYn =
@@ -338,9 +338,11 @@ box_flatten(
         ? amrex::min<amrex::Real>(
             amrex::max<amrex::Real>(0.0, rhoY(i, j, k, n)), rho_old)
         : rhoY(i, j, k, n);
-    rhoY_T_init[n] = rhoYn;
+    const int idx_rhoY = vec_index<OrderType>(n, icell, ncells);
+    rhoY_T_init[idx_rhoY] = rhoYn;
   }
-  rhoY_T_init[NUM_SPECIES] = temperature(i, j, k, 0);
+  const int idx_T = vec_index<OrderType>(NUM_SPECIES, icell, ncells);
+  rhoY_T_init[idx_T] = temperature(i, j, k, 0);
 
   for (int n = 0; n < NUMAUX; n++) {
     //const int idx = vec_index<OrderType>(NUM_SPECIES + 1 + n, icell, ncells);
