@@ -269,7 +269,7 @@ ReactorCvode::initCvode_aux(
   // Sparse/custom/magma direct uses the same aux Jacobian functions
   if (a_udata->analytical_jacobian == 1) {
 #ifdef PELE_CVODE_FORCE_YCORDER
-    //flag = CVodeSetJacFn(a_cvode_mem, cvode::cJac);
+    flag = CVodeSetJacFn(a_cvode_mem, cvode::cJac_aux);
     if (utils::check_flag(&flag, "CVodeSetJacFn", 1)) {
       return (1);
     }
@@ -2267,7 +2267,7 @@ ReactorCvode::cF_RHS_aux(
   amrex::Gpu::Device::streamSynchronize();
   return 0;
 }
-#endif // #if (NUMNEW > 0) cF_RHS_aux
+#endif // #if (NUMAUX > 0) cF_RHS_aux
 
 void
 ReactorCvode::freeUserData(CVODEUserData* data_wk)
