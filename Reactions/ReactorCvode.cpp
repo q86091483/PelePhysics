@@ -224,6 +224,19 @@ ReactorCvode::initCvode(
   return (0);
 }
 
+int
+ReactorCvode::initCvode_aux(
+  N_Vector& a_y,
+  SUNMatrix& a_A,
+  CVODEUserData* a_udata,
+  SUNNonlinearSolver& a_NLS,
+  SUNLinearSolver& a_LS,
+  void* a_cvode_t mem,
+  amrex::gpuStream_t stream,
+  const amrex::Real& a_time,
+  const int ncells)
+{}
+
 #else
 
 int
