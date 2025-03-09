@@ -231,11 +231,40 @@ ReactorCvode::initCvode_aux(
   CVODEUserData* a_udata,
   SUNNonlinearSolver& a_NLS,
   SUNLinearSolver& a_LS,
-  void* a_cvode_t mem,
+  void* a_cvode_mem,
   amrex::gpuStream_t stream,
   const amrex::Real& a_time,
   const int ncells)
-{}
+{
+  int flag = CVodeSetUserData(a_cvode_mem, static_cast<void*>(a_udata));
+
+  // Call CVodeInit to initialize the integrator memory and specify the user's
+  // right hand side function, the initial time, and initial dependent variable
+  // vector a_y.
+  flag = CVodeInit(a_cvode_mem, cF_RHS_aux, a_time, a_y);
+  if (utils::check_flag(&flag, "CVodeInit", 1)) {
+    return (1);
+  }
+
+  // Solver data
+  if (a_udata->solve_type == cvode::magmaDirect) {
+#if defined(PELE_USE_MAGMA) && defined(PELE_CVODE_FORCE_YCORDER)
+    a_LS =
+      SUNLinSol_MagmaDense(a_y, a_A, *amrex::sundials::The_Sundials_Context());
+    if (utils::check_flag(
+          static_cast<void*>(a_LS), "SUNLinSol_MagmaDense", 0)) {
+      return (1);
+    }
+    flag = CVodeSetLinearSolver(a_cvode_mem, a_LS, a_A);
+    if (utils::check_flag(&flag, "CVodeSetLinearSolver", 1)) {
+      return (1);
+    }
+#else
+    amrex::Abort("solve_type=magma_direct only available with "
+                 "PELE_USE_MAGMA=TRUE with YCOrder");
+#endif
+  } // end if solve_type == cvode::magmaDirect
+} // end initCvode_aux
 
 #else
 
