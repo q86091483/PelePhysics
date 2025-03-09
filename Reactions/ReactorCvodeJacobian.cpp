@@ -84,8 +84,7 @@ cJac(
 } // cJac for GPU
 
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
-int
-cJac_aux(
+int cJac_aux(
   amrex::Real /*t*/,
   N_Vector y_in,
   N_Vector /*fy*/,
@@ -114,8 +113,8 @@ cJac_aux(
 
     // Checks
     AMREX_ASSERT(
-      (SUNMatrix_cuSparse_Rows(J) == (NUM_SPECIES + 1) * ncells) &&
-      (SUNMatrix_cuSparse_Columns(J) == (NUM_SPECIES + 1) * ncells) &&
+      (SUNMatrix_cuSparse_Rows(J) == NUMAUX * ncells) &&
+      (SUNMatrix_cuSparse_Columns(J) == NUMAUX * ncells) &&
       (SUNMatrix_cuSparse_NNZ(J) == ncells * NNZ));
 
     const auto ec = amrex::Gpu::ExecutionConfig(ncells);
@@ -127,15 +126,15 @@ cJac_aux(
           for (int icell = blockDim.x * blockIdx.x + threadIdx.x,
                    stride = blockDim.x * gridDim.x;
                icell < ncells; icell += stride) {
-            fKernelComputeAJchem(
-              icell, NNZ, react_type, csr_row_count_d, csr_col_index_d, yvec_d,
-              Jdata);
+            //fKernelComputeAJchem(   // TBD for aux
+            //  icell, NNZ, react_type, csr_row_count_d, csr_col_index_d, yvec_d,
+            //  Jdata);
           }
         });
     amrex::Gpu::Device::streamSynchronize();
 #else
     amrex::Abort(
-      "Calling cJac with solve_type = sparse_direct only works with CUDA !");
+      "Calling cJac_aux with solve_type = sparse_direct only works with CUDA !");
 #endif
   } else if (solveType == magmaDirect) {
 #ifdef PELE_USE_MAGMA
@@ -149,22 +148,21 @@ cJac_aux(
           for (int icell = blockDim.x * blockIdx.x + threadIdx.x,
                    stride = blockDim.x * gridDim.x;
                icell < ncells; icell += stride) {
-            fKernelDenseAJchem(icell, react_type, yvec_d, Jdata);
+            fKernelDenseAJchem_aux(icell, react_type, yvec_d, Jdata, udata);
           }
         });
     amrex::Gpu::Device::streamSynchronize();
 #else
     amrex::Abort(
-      "Calling cJac with solve_type = magma_direct requires PELE_USE_MAGMA = "
+      "Calling cJac_aux with solve_type = magma_direct requires PELE_USE_MAGMA = "
       "TRUE !");
 #endif
-  }
-
+  } // if solveType == {sparseDirect, magmaDirect}
   return (0);
 } // cJac_aux for GPU
-#endif
+#endif // if (NUMAUX > 0)
 
-#else
+#else // CPU region below
 
 int
 cJac(
