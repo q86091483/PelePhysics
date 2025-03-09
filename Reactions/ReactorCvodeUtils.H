@@ -343,7 +343,23 @@ fKernelDenseAJchem(
   }
 }
 
-#endif
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+AMREX_GPU_DEVICE
+AMREX_FORCE_INLINE
+void
+fKernelDenseAJchem_aux(
+  int icell, int reactor_type, amrex::Real* u_d, amrex::Real* Jdata,
+  CVODEUserData* udata)
+{
+  const int neqs = NUMAUX;
+
+  int u_offset = icell * neqs;
+  amrex::Real* u_curr = u_d + u_offset;
+
+}
+#endif // if(NUMAUX > 0)
+
+#endif // if GPU check
 } // namespace cvode
 } // namespace pele::physics::reactions
 #endif
