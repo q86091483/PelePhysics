@@ -1768,6 +1768,24 @@ ReactorCvode::react(
   }
   BL_PROFILE_VAR_STOP(AroundCVODE);
 
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+  initCvode_aux(y_aux, A_aux, udata, NLS_aux, LS_aux, cvode_mem_aux, stream, time_start, ncells);
+
+  // Update TypicalValues for auxiliary fields
+  utils::set_sundials_solver_tols_aux<Ordering>(
+    *amrex::sundials::The_Sundials_Context(), cvode_mem_aux, udata->ncells, relTol,
+    absTol, m_typ_vals_aux, "cvode", verbose);
+
+  // Actual CVODE solve
+  BL_PROFILE_VAR("Pele::ReactorCvode::react():CVode", AroundCVODE);
+  int flag =
+    CVode(cvode_mem_aux, time_final, y_aux, &CvodeActual_time_final, CV_NORMAL);
+  if (utils::check_flag(&flag, "CVode", 1)) {
+    return (1);
+  }
+  BL_PROFILE_VAR_STOP(AroundCVODE);
+#endif
+
 #ifdef MOD_REACTOR
   dt_react =
     time_start - CvodeActual_time_final; // Actual dt_react performed by Cvode
