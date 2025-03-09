@@ -364,8 +364,8 @@ fKernelDenseAJchem_aux(
   amrex::Real* Jcurr = Jdata + jac_offset;
 
   int rhoAux_offset = icell * neqs;
-  amrex::Real* rhoAuxsrc_ext_curr = rhoAux_ext + rhoAux_offset;
-  amrex::Real* rhoAux_init_curr  = rhoAux_init + rhoAux_offset;
+  amrex::Real* rhoAuxsrc_ext_curr = rhoAuxsrc_ext + rhoAux_offset;
+  amrex::Real* rhoAux_init_curr = rhoAux_init + rhoAux_offset;
 
   int rhoY_T_init_offset = icell * (NUM_SPECIES + 1);
   amrex::Real* rhoY_T_init_curr = rhoY_T_init + rhoY_T_init_offset;
