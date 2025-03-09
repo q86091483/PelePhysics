@@ -264,6 +264,43 @@ ReactorCvode::initCvode_aux(
                  "PELE_USE_MAGMA=TRUE with YCOrder");
 #endif
   } // end if solve_type == cvode::magmaDirect
+
+  // Analytical aux Jac. data for direct solver
+  // Sparse/custom/magma direct uses the same aux Jacobian functions
+  if (a_udata->analytical_jacobian == 1) {
+#ifdef PELE_CVODE_FORCE_YCORDER
+    //flag = CVodeSetJacFn(a_cvode_mem, cvode::cJac);
+    if (utils::check_flag(&flag, "CVodeSetJacFn", 1)) {
+      return (1);
+    }
+#else
+    amrex::Abort("analytical_jacobian only available with YCOrder");
+#endif
+  } // end if analytical_jacobian
+
+  // CVODE runtime options
+  flag = CVodeSetMaxNonlinIters(a_cvode_mem, max_nls_iters);
+  if (utils::check_flag(&flag, "CVodeSetMaxNonlinIters", 1)) {
+    return (1);
+  }
+  flag = CVodeSetMaxNumSteps(a_cvode_mem, 100000);
+  if (utils::check_flag(&flag, "CVodeSetMaxNumSteps", 1)) {
+    return (1);
+  }
+  flag = CVodeSetMaxOrd(a_cvode_mem, m_cvode_maxorder);
+  if (utils::check_flag(&flag, "CVodeSetMaxOrd", 1)) {
+    return (1);
+  }
+  if (a_LS != nullptr) {
+    flag = CVodeSetJacEvalFrequency(a_cvode_mem, 100); // Max Jac age
+    if (utils::check_flag(&flag, "CVodeSetJacEvalFrequency", 1) != 0) {
+      return (1);
+    }
+  }
+
+  return (0);
+
+
 } // end initCvode_aux
 
 #else
