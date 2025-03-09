@@ -126,7 +126,7 @@ int cJac_aux(
           for (int icell = blockDim.x * blockIdx.x + threadIdx.x,
                    stride = blockDim.x * gridDim.x;
                icell < ncells; icell += stride) {
-            //fKernelComputeAJchem(   // TBD for aux
+            //fKernelComputeAJchem(   // TBD for aux with CUDA
             //  icell, NNZ, react_type, csr_row_count_d, csr_col_index_d, yvec_d,
             //  Jdata);
           }

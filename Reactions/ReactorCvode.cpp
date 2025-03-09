@@ -299,8 +299,6 @@ ReactorCvode::initCvode_aux(
   }
 
   return (0);
-
-
 } // end initCvode_aux
 
 #else

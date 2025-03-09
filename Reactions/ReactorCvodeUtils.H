@@ -353,10 +353,51 @@ fKernelDenseAJchem_aux(
 {
   const int neqs = NUMAUX;
 
+  auto* rhoAuxsrc_ext = udata->rhoAuxsrc_ext;
+  auto* rhoAux_init = udata->rhoAux_init;
+  auto* rhoY_T_init = udata->rhoY_T_init;
+
   int u_offset = icell * neqs;
   amrex::Real* u_curr = u_d + u_offset;
 
-}
+  int jac_offset = icell * (neqs * neqs);
+  amrex::Real* Jcurr = Jdata + jac_offset;
+
+  int rhoAux_offset = icell * neqs;
+  amrex::Real* rhoAuxsrc_ext_curr = rhoAux_ext + rhoAux_offset;
+  amrex::Real* rhoAux_init_curr  = rhoAux_init + rhoAux_offset;
+
+  int rhoY_T_init_offset = icell * (NUM_SPECIES + 1);
+  amrex::Real* rhoY_T_init_curr = rhoY_T_init + rhoY_T_init_offset;
+
+  // rho MKS
+  amrex::Real rho = 0.0;
+  for (int i = 0; i < NUM_SPECIES; i++) {
+    rho = rho + rhoY_T_init_curr[i];
+  }
+
+  // Temperature
+  amrex::Real temp = rhoY_T_init_curr[NUM_SPECIES];
+
+  // Initialize Jacobian to zero
+  for (int i = 0; i < NUMAUX; i++) {
+    for (int j = 0; j < NUMAUX; j++) {
+      Jcurr[j * NUMAUX + i] = 0;
+    }
+  }
+
+#if (NUMAGE > 0)
+  for (int i = 0; i < NUMAGE; i++) {
+    const int MIXF_IN_J = (MIXF_IN_AUX + i) * NUMAUX + i;
+    const int AGE_IN_J  =  (AGE_IN_AUX + i) * NUMAUX + i;
+    if ((u_curr[MIXF_IN_AUX + i] / rho) > 1E-3) {
+      Jcurr[MIXF_IN_J] =  1 - (u_curr[AGE_IN_AUX + i] / u_curr[MIXF_IN_AUX + i] / u_curr[MIXF_IN_AUX + i])
+                            * rhoAuxsrc_ext_curr[MIXF_IN_AUX + i];
+      Jcurr[AGE_IN_J] = rhoAuxsrc_ext_curr[MIXF_IN_AUX + i] / u_curr[MIXF_IN_AUX + i];
+    }
+  }
+#endif // if (NUMAGE > 0)
+} // end fKernelDenseAJChem_aux
 #endif // if(NUMAUX > 0)
 
 #endif // if GPU check
