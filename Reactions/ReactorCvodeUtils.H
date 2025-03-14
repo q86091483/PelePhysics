@@ -387,15 +387,15 @@ fKernelDenseAJchem_aux(
   }
 
 #if (NUMAGE > 0)
-  for (int i = 0; i < NUMAGE; i++) {
-    const int MIXF_IN_J = (MIXF_IN_AUX + i) * NUMAUX + i;
-    const int AGE_IN_J  =  (AGE_IN_AUX + i) * NUMAUX + i;
-    if ((u_curr[MIXF_IN_AUX + i] / rho) > 1E-3) {
-      Jcurr[MIXF_IN_J] =  1 - (u_curr[AGE_IN_AUX + i] / u_curr[MIXF_IN_AUX + i] / u_curr[MIXF_IN_AUX + i])
-                            * rhoAuxsrc_ext_curr[MIXF_IN_AUX + i];
-      Jcurr[AGE_IN_J] = rhoAuxsrc_ext_curr[MIXF_IN_AUX + i] / u_curr[MIXF_IN_AUX + i];
-    }
-  }
+  //for (int i = 0; i < NUMAGE; i++) {
+  //  const int MIXF_IN_J = (MIXF_IN_AUX + i) * NUMAUX + i;
+  //  const int AGE_IN_J  =  (AGE_IN_AUX + i) * NUMAUX + i;
+  //  if ((u_curr[MIXF_IN_AUX + i] / rho) > 1E-3) {
+  //    Jcurr[MIXF_IN_J] =  1 - (u_curr[AGE_IN_AUX + i] / u_curr[MIXF_IN_AUX + i] / u_curr[MIXF_IN_AUX + i])
+  //                          * rhoAuxsrc_ext_curr[MIXF_IN_AUX + i];
+  //    Jcurr[AGE_IN_J] = rhoAuxsrc_ext_curr[MIXF_IN_AUX + i] / u_curr[MIXF_IN_AUX + i];
+  //  }
+  //}
 #endif // if (NUMAGE > 0)
 } // end fKernelDenseAJChem_aux
 #endif // if(NUMAUX > 0)
