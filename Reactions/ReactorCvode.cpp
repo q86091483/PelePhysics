@@ -1430,7 +1430,7 @@ ReactorCvode::allocUserData(
       *amrex::sundials::The_Sundials_Context());
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
     a_A_aux = SUNMatrix_MagmaDenseBlock(
-      a_ncells, (NUMAUX + 1), (NUMAUX + 1), SUNMEMTYPE_DEVICE,
+      a_ncells, NUMAUX, NUMAUX, SUNMEMTYPE_DEVICE,
       *amrex::sundials::The_SUNMemory_Helper(), nullptr,
       *amrex::sundials::The_Sundials_Context());
 #endif
