@@ -389,7 +389,7 @@ fKernelDenseAJchem_aux(
 #if (NUMAGE > 0)
   const int iz = 1;
   const int ia = 3;
-  Jcurr[iz * NUMAUX + ia] = 0.0;
+  Jcurr[(MIXF_IN_AUX + 1) * NUMAUX + AGE_IN_AUX + 1] = 0.0;
   //for (int i = 0; i < NUMAGE; i++) {
   //  const int MIXF_IN_J = (0 + i) * NUMAUX + 2 + i;
   //  const int AGE_IN_J  =  (2 + i) * NUMAUX + 2 + i;
