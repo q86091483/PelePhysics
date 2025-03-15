@@ -388,7 +388,7 @@ fKernelDenseAJchem_aux(
 
 #if (NUMAGE > 0)
   const int iz = 1;
-  const int ia = 1;
+  const int ia = 3;
   Jcurr[iz * NUMAUX + ia] = 0.0;
   //for (int i = 0; i < NUMAGE; i++) {
   //  const int MIXF_IN_J = (0 + i) * NUMAUX + 2 + i;
