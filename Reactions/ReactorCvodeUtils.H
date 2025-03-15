@@ -394,8 +394,8 @@ fKernelDenseAJchem_aux(
     //amrex::Real foo =  1 - (u_curr[AGE_IN_AUX + i] / u_curr[MIXF_IN_AUX + i] / u_curr[MIXF_IN_AUX + i])
     //                        * rhoAuxsrc_ext_curr[MIXF_IN_AUX + i];
 
-      Jcurr[MIXF_IN_J] =  1 - (u_curr[AGE_IN_AUX + i] / u_curr[MIXF_IN_AUX + i] / u_curr[MIXF_IN_AUX + i])
-                            * rhoAuxsrc_ext_curr[MIXF_IN_AUX + i];
+    //  Jcurr[MIXF_IN_J] =  1 - (u_curr[AGE_IN_AUX + i] / u_curr[MIXF_IN_AUX + i] / u_curr[MIXF_IN_AUX + i])
+    //                        * rhoAuxsrc_ext_curr[MIXF_IN_AUX + i];
   //    Jcurr[AGE_IN_J] = rhoAuxsrc_ext_curr[MIXF_IN_AUX + i] / u_curr[MIXF_IN_AUX + i];
     }
   }
