@@ -388,8 +388,8 @@ fKernelDenseAJchem_aux(
 
 #if (NUMAGE > 0)
   for (int i = 0; i < NUMAGE; i++) {
-    const int MIXF_IN_J = (MIXF_IN_AUX + i) * NUMAUX + AGE_IN_AUX + i;
-    const int AGE_IN_J  =  (AGE_IN_AUX + i) * NUMAUX + AGE_IN_AUX + i;
+    const int MIXF_IN_J = (0 + i) * NUMAUX + 2 + i;
+    const int AGE_IN_J  =  (2 + i) * NUMAUX + 2 + i;
     if ((u_curr[MIXF_IN_AUX + i] / rho) > 1E-3) {
     //amrex::Real foo =  1 - (u_curr[AGE_IN_AUX + i] / u_curr[MIXF_IN_AUX + i] / u_curr[MIXF_IN_AUX + i])
     //                        * rhoAuxsrc_ext_curr[MIXF_IN_AUX + i];
