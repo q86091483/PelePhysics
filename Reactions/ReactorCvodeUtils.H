@@ -381,7 +381,7 @@ fKernelDenseAJchem_aux(
 
   // Initialize Jacobian to zero
 
-  amrex::Real tmp0 = rhoAuxsrc_ext_curr[MIXF_IN_AUX + 0];
+  const amrex::Real tmp0 = rhoAuxsrc_ext_curr[MIXF_IN_AUX + 0];
   for (int i = 0; i < NUMAUX; i++) {
     for (int j = 0; j < NUMAUX; j++) {
       Jcurr[j * NUMAUX + i] = 0.0 * tmp0;
