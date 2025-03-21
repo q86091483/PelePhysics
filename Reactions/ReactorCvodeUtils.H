@@ -398,7 +398,7 @@ fKernelDenseAJchem_aux(
   amrex::Real tmp1 = rhoAuxsrc_ext_curr[MIXF_IN_AUX + 1];
   Jcurr[(MIXF_IN_AUX + 1) * NUMAUX + AGE_IN_AUX + 1] =
     1 - tmp1 * (u_curr[AGE_IN_AUX + 1] / u_curr[MIXF_IN_AUX + 1] / u_curr[MIXF_IN_AUX + 1]);
-  //Jcurr[(AGE_IN_AUX + 1) * NUMAUX  + AGE_IN_AUX + 1] = tmp1 / u_curr[MIXF_IN_AUX + 1];
+  Jcurr[(AGE_IN_AUX + 1) * NUMAUX  + AGE_IN_AUX + 1] = tmp1 / u_curr[MIXF_IN_AUX + 1];
 
   //for (int i = 0; i < NUMAGE; i++) {
   //  const int MIXF_IN_J = (0 + i) * NUMAUX + 2 + i;
