@@ -358,7 +358,8 @@ fKernelDenseAJchem_aux(
 {
   const int neqs = NUMAUX;
 
-  auto* rhoAuxsrc_ext = udata->rhoAuxsrc_ext;
+  //auto* rhoAuxsrc_ext = udata->rhoAuxsrc_ext;
+  amrex::Real* rhoAuxsrc_ext = N_VGetDeviceArrayPointer(udata->rhoAuxsrc_gpu);
   auto* rhoAux_init = udata->rhoAux_init;
   auto* rhoY_T_init = udata->rhoY_T_init;
 
