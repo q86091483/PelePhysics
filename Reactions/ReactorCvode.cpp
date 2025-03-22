@@ -1973,6 +1973,7 @@ ReactorCvode::react(
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
   N_VDestroy(y_aux);
   N_VDestroy(udata->rhoAuxsrc_gpu);
+  udata->rhoAuxsrc_gpu = nullptr;
   CVodeFree(&cvode_mem_aux);
   if (LS_aux != nullptr) {
     SUNLinSolFree(LS_aux);

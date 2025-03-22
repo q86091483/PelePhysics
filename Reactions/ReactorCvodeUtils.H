@@ -53,7 +53,7 @@ struct CVODEUserData
   amrex::Real* rhoY_T_init = nullptr;
 #ifdef AMREX_USE_GPU
 #if defined(AMREX_USE_HIP)
-  NVector rhoAuxsrc_gpu = nullptr;
+  N_Vector rhoAuxsrc_gpu = nullptr;
 #endif
 #endif
 #endif
