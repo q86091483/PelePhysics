@@ -51,6 +51,11 @@ struct CVODEUserData
   amrex::Real* rhoAuxsrc_ext = nullptr;   // External species forcing
   amrex::Real* rhoAux_init = nullptr;
   amrex::Real* rhoY_T_init = nullptr;
+#ifdef AMREX_USE_GPU
+#if defined(AMREX_USE_HIP)
+  NVector rhoAuxsrc_gpu = nullptr;
+#endif
+#endif
 #endif
 
   int* mask =

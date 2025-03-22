@@ -1747,6 +1747,8 @@ ReactorCvode::react(
     , udata->rhoY_T_init
 #endif
   );
+  // Test NVector - Zisen
+  udata->rhoAuxsrc_gpu = utils::setNVectorGPU(neq_tot_aux, atomic_reductions, stream);
 
 #ifdef AMREX_USE_OMP
   amrex::Gpu::Device::streamSynchronize();
@@ -1970,6 +1972,7 @@ ReactorCvode::react(
 
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
   N_VDestroy(y_aux);
+  N_VDestroy(udata->rhoAuxsrc_gpu);
   CVodeFree(&cvode_mem_aux);
   if (LS_aux != nullptr) {
     SUNLinSolFree(LS_aux);
