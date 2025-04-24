@@ -55,8 +55,8 @@ struct CVODEUserData
 #if defined(AMREX_USE_HIP)
   N_Vector rhoAuxsrc_gpu = nullptr;
 #endif
-#endif
-#endif
+#endif // AMREX_USE_GPU
+#endif // NUMAUX > 0
 
   int* mask =
     nullptr; // Masking tagging cells where integration should not be performed
