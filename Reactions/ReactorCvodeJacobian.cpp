@@ -140,7 +140,7 @@ int cJac_aux(
 #ifdef PELE_USE_MAGMA
     amrex::Real* yvec_d = N_VGetDeviceArrayPointer(y_in);
     amrex::Real* Jdata = SUNMatrix_MagmaDense_Data(J);
-    amrex::Real* rhoAuxsrc_ext = N_VGetDeviceArrayPointer(udata->rhoAuxsrc_gpu);
+    //amrex::Real* rhoAuxsrc_ext = N_VGetDeviceArrayPointer(udata->rhoAuxsrc_gpu);
     const auto ec = amrex::Gpu::ExecutionConfig(ncells);
     AMREX_ALWAYS_ASSERT(nbThreads == CVODE_NB_THREADS);
     amrex::launch_global<CVODE_NB_THREADS>
@@ -149,7 +149,7 @@ int cJac_aux(
           for (int icell = blockDim.x * blockIdx.x + threadIdx.x,
                    stride = blockDim.x * gridDim.x;
                icell < ncells; icell += stride) {
-            fKernelDenseAJchem_aux(icell, react_type, yvec_d, Jdata, udata, rhoAuxsrc_ext);
+            fKernelDenseAJchem_aux(icell, react_type, yvec_d, Jdata, udata); // rhoAuxsrc_ext);
           }
         });
     amrex::Gpu::Device::streamSynchronize();

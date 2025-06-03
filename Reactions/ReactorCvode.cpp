@@ -1748,11 +1748,11 @@ ReactorCvode::react(
 #endif
   );
   // Test NVector - Zisen
-  udata->rhoAuxsrc_gpu = utils::setNVectorGPU(neq_tot_aux, atomic_reductions, stream);
-  amrex::Real* yvec_rhoAuxsrc = N_VGetDeviceArrayPointer(udata->rhoAuxsrc_gpu);
-  for (int ia = 0; ia < neq_tot_aux; ia++) {
-    yvec_rhoAuxsrc[ia] = udata->rhoAuxsrc_ext[ia];
-  }
+  //udata->rhoAuxsrc_gpu = utils::setNVectorGPU(neq_tot_aux, atomic_reductions, stream);
+  //amrex::Real* yvec_rhoAuxsrc = N_VGetDeviceArrayPointer(udata->rhoAuxsrc_gpu);
+  //for (int ia = 0; ia < neq_tot_aux; ia++) {
+  //  yvec_rhoAuxsrc[ia] = udata->rhoAuxsrc_ext[ia];
+  //}
 
 #ifdef AMREX_USE_OMP
   amrex::Gpu::Device::streamSynchronize();
@@ -1978,8 +1978,8 @@ ReactorCvode::react(
   N_VDestroy(y_aux);
 #ifdef AMREX_GPU_GPU
 #ifdef AMREX_USE_HIP
-  N_VDestroy(udata->rhoAuxsrc_gpu);
-  udata->rhoAuxsrc_gpu = nullptr;
+  //N_VDestroy(udata->rhoAuxsrc_gpu);
+  //udata->rhoAuxsrc_gpu = nullptr;
 #endif
 #endif
   CVodeFree(&cvode_mem_aux);

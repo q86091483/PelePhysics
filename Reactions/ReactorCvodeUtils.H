@@ -53,7 +53,7 @@ struct CVODEUserData
   amrex::Real* rhoY_T_init = nullptr;
 #ifdef AMREX_USE_GPU
 #if defined(AMREX_USE_HIP)
-  N_Vector rhoAuxsrc_gpu = nullptr;
+  //N_Vector rhoAuxsrc_gpu = nullptr;
 #endif
 #endif // AMREX_USE_GPU
 #endif // NUMAUX > 0
@@ -354,7 +354,7 @@ AMREX_FORCE_INLINE
 void
 fKernelDenseAJchem_aux(
   int icell, int reactor_type, amrex::Real* u_d, amrex::Real* Jdata,
-  CVODEUserData* udata, amrex::Real* rhoAuxsrc_ext)
+  CVODEUserData* udata) //  amrex::Real* rhoAuxsrc_ext)
 {
   const int neqs = NUMAUX;
 
@@ -368,9 +368,10 @@ fKernelDenseAJchem_aux(
   int jac_offset = icell * (neqs * neqs);
   amrex::Real* Jcurr = Jdata + jac_offset;
 
+  if (false) {
   int rhoAux_offset = icell * neqs;
-  amrex::Real* rhoAuxsrc_ext_curr = rhoAuxsrc_ext + rhoAux_offset;
-  amrex::Real* rhoAux_init_curr = rhoAux_init + rhoAux_offset;
+  //amrex::Real* rhoAuxsrc_ext_curr = rhoAuxsrc_ext + rhoAux_offset;
+  //amrex::Real* rhoAux_init_curr = rhoAux_init + rhoAux_offset;
 
   int rhoY_T_init_offset = icell * (NUM_SPECIES + 1);
   amrex::Real* rhoY_T_init_curr = rhoY_T_init + rhoY_T_init_offset;
@@ -383,6 +384,7 @@ fKernelDenseAJchem_aux(
 
   // Temperature
   amrex::Real temp = rhoY_T_init_curr[NUM_SPECIES];
+  } // true
 
   // Initialize Jacobian to zero
 
