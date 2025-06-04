@@ -1767,11 +1767,11 @@ ReactorCvode::react(
 
   // Actual CVODE solve
   BL_PROFILE_VAR("Pele::ReactorCvode::react():CVode", AroundCVODE);
-  int flag =
-    CVode(cvode_mem, time_final, y, &CvodeActual_time_final, CV_NORMAL);
-  if (utils::check_flag(&flag, "CVode", 1)) {
-    return (1);
-  }
+  //int flag =
+  //  CVode(cvode_mem, time_final, y, &CvodeActual_time_final, CV_NORMAL);
+  //if (utils::check_flag(&flag, "CVode", 1)) {
+  //  return (1);
+  //}
   BL_PROFILE_VAR_STOP(AroundCVODE);
 
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
