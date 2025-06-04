@@ -1767,11 +1767,11 @@ ReactorCvode::react(
 
   // Actual CVODE solve
   BL_PROFILE_VAR("Pele::ReactorCvode::react():CVode", AroundCVODE);
-  //int flag =
-  //  CVode(cvode_mem, time_final, y, &CvodeActual_time_final, CV_NORMAL);
-  //if (utils::check_flag(&flag, "CVode", 1)) {
-  //  return (1);
-  //}
+  int flag =
+    CVode(cvode_mem, time_final, y, &CvodeActual_time_final, CV_NORMAL);
+  if (utils::check_flag(&flag, "CVode", 1)) {
+    return (1);
+  }
   BL_PROFILE_VAR_STOP(AroundCVODE);
 
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
@@ -1784,11 +1784,11 @@ ReactorCvode::react(
 
   // Actual CVODE solve
   BL_PROFILE_VAR("Pele::ReactorCvode::react():CVode", AroundCVODE);
-  //flag =
-  //  CVode(cvode_mem_aux, time_final, y_aux, &CvodeActual_time_final, CV_NORMAL);
-  //if (utils::check_flag(&flag, "CVode", 1)) {
-  //  return (1);
-  //}
+  flag =
+    CVode(cvode_mem_aux, time_final, y_aux, &CvodeActual_time_final, CV_NORMAL);
+  if (utils::check_flag(&flag, "CVode", 1)) {
+    return (1);
+  }
   BL_PROFILE_VAR_STOP(AroundCVODE);
 #endif
 
@@ -1804,7 +1804,6 @@ ReactorCvode::react(
 
   // Get workload estimate
   long int nfe;
-  int flag;
   flag = CVodeGetNumRhsEvals(cvode_mem, &nfe);
 
   amrex::Gpu::DeviceVector<long int> v_nfe(ncells, nfe);
