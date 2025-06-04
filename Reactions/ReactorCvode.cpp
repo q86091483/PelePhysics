@@ -1804,6 +1804,7 @@ ReactorCvode::react(
 
   // Get workload estimate
   long int nfe;
+  int flag;
   flag = CVodeGetNumRhsEvals(cvode_mem, &nfe);
 
   amrex::Gpu::DeviceVector<long int> v_nfe(ncells, nfe);
