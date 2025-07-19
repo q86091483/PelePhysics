@@ -82,6 +82,10 @@ public:
     amrex::Array4<amrex::Real> const& T_in,
     amrex::Array4<amrex::Real> const& rEner_in,
     amrex::Array4<amrex::Real> const& rEner_src_in,
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    amrex::Array4<amrex::Real> const& rAux_in,
+    amrex::Array4<amrex::Real> const& rAux_src_in,
+#endif
     amrex::Array4<amrex::Real> const& FC_in,
     amrex::Array4<int> const& mask,
     amrex::Real& dt_react,
@@ -109,6 +113,11 @@ public:
   static int
   cF_RHS(amrex::Real t, N_Vector y_in, N_Vector ydot, void* user_data);
 
+#if defined(PELE_USE_AUX) && (NUMNEW > 0)
+  static int
+  cF_RHS_aux(amrex::Real t, N_Vector y_in, N_Vector ydot, void* user_data);
+#endif
+
   void flatten(
     const amrex::Box& box,
     const int ncells,
@@ -117,15 +126,36 @@ public:
     amrex::Array4<const amrex::Real> const& temperature,
     amrex::Array4<const amrex::Real> const& rhoE,
     amrex::Array4<const amrex::Real> const& frcEExt,
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    amrex::Array4<const amrex::Real> const& rhoAux,
+    amrex::Array4<const amrex::Real> const& frcAuxExt,
+#endif
     amrex::Real* y_vect,
     amrex::Real* src_vect,
     amrex::Real* vect_energy,
-    amrex::Real* src_vect_energy) override
+    amrex::Real* src_vect_energy
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+    , amrex::Real* y_vect_aux
+    , amrex::Real* src_vect_aux
+    , amrex::Real* vec_aux_init
+    , amrex::Real* rhoY_T_init
+#endif
+    ) override
   {
     flatten_ops.flatten(
-      box, ncells, m_reactor_type, m_clean_init_massfrac, rhoY, frcExt,
-      temperature, rhoE, frcEExt, y_vect, src_vect, vect_energy,
-      src_vect_energy);
+      box, ncells, m_reactor_type, m_clean_init_massfrac,
+      rhoY, frcExt, temperature, rhoE, frcEExt,
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+      rhoAux, frcAuxExt,
+#endif
+      y_vect, src_vect, vect_energy, src_vect_energy
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+      , y_vect_aux
+      , src_vect_aux
+      , vec_aux_init
+      , rhoY_T_init
+#endif
+    );
   }
 
   void unflatten(
@@ -135,15 +165,29 @@ public:
     amrex::Array4<amrex::Real> const& temperature,
     amrex::Array4<amrex::Real> const& rhoE,
     amrex::Array4<amrex::Real> const& frcEExt,
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    amrex::Array4<amrex::Real> const& rhoAux,
+#endif
     amrex::Array4<amrex::Real> const& FC_in,
     amrex::Real* y_vect,
     amrex::Real* vect_energy,
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+    amrex::Real* y_vect_aux,
+#endif
     long int* FCunt,
     amrex::Real dt) override
   {
     flatten_ops.unflatten(
-      box, ncells, m_reactor_type, m_clean_init_massfrac, rhoY, temperature,
-      rhoE, frcEExt, FC_in, y_vect, vect_energy, FCunt, dt);
+      box, ncells, m_reactor_type, m_clean_init_massfrac,
+      rhoY, temperature, rhoE, frcEExt,
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+      rhoAux,
+#endif
+      FC_in, y_vect, vect_energy,
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+      y_vect_aux,
+#endif
+      FCunt, dt);
   }
 
 private:
@@ -165,13 +209,29 @@ private:
 #endif
     const amrex::Real& a_time,
     int ncells);
+#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+  int initCvode_aux(
+    N_Vector& a_y,
+    SUNMatrix& a_A,
+    CVODEUserData* a_udata,
+    SUNNonlinearSolver& a_NLS,
+    SUNLinearSolver& a_LS,
+    void* a_cvode_mem,
+#ifdef AMREX_USE_GPU
+    amrex::gpuStream_t stream,
+#endif
+    const amrex::Real& a_time,
+    int ncells);
+#endif // #if (NUMAUX > 0)
   void allocUserData(
     CVODEUserData* udata,
     int a_ncells
 #ifdef AMREX_USE_GPU
-    ,
-    SUNMatrix& a_A,
-    amrex::gpuStream_t stream
+    , SUNMatrix& a_A
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    , SUNMatrix& a_A_aux
+#endif
+    , amrex::gpuStream_t stream
 #endif
   ) const;
   static void freeUserData(CVODEUserData* data_wk);

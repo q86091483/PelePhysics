@@ -8,6 +8,7 @@
 #include "PelePhysics.H"
 #include "mechanism.H"
 #include "ReactorUtils.H"
+#include "PeleLMeX_Index.H"
 
 namespace pele::physics::reactions {
 
@@ -29,6 +30,10 @@ public:
     amrex::Array4<amrex::Real> const& T_in,
     amrex::Array4<amrex::Real> const& rEner_in,
     amrex::Array4<amrex::Real> const& rEner_src_in,
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    amrex::Array4<amrex::Real> const& rAux_in,
+    amrex::Array4<amrex::Real> const& rAux_src_in,
+#endif
     amrex::Array4<amrex::Real> const& FC_in,
     amrex::Array4<int> const& mask,
     amrex::Real& dt_react,
@@ -61,10 +66,21 @@ public:
     amrex::Array4<const amrex::Real> const& temperature,
     amrex::Array4<const amrex::Real> const& rhoE,
     amrex::Array4<const amrex::Real> const& frcEExt,
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    amrex::Array4<const amrex::Real> const& rhoAux,
+    amrex::Array4<const amrex::Real> const& frcAuxExt,
+#endif
     amrex::Real* y_vect,
     amrex::Real* src_vect,
     amrex::Real* vect_energy,
-    amrex::Real* src_vect_energy) = 0;
+    amrex::Real* src_vect_energy
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    , amrex::Real* y_vect_aux
+    , amrex::Real* src_vect_aux
+    , amrex::Real* vec_aux_init
+    , amrex::Real* rhoY_T_init
+#endif
+    ) = 0;
 
   virtual void unflatten(
     const amrex::Box& box,
@@ -73,13 +89,22 @@ public:
     amrex::Array4<amrex::Real> const& temperature,
     amrex::Array4<amrex::Real> const& rhoE,
     amrex::Array4<amrex::Real> const& frcEExt,
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    amrex::Array4<amrex::Real> const& rhoAux,
+#endif
     amrex::Array4<amrex::Real> const& FC_in,
     amrex::Real* y_vect,
     amrex::Real* vect_energy,
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+    amrex::Real* y_vect_aux,
+#endif
     long int* FCunt,
     amrex::Real dt) = 0;
 
   void set_typ_vals_ode(const std::vector<amrex::Real>& ExtTypVals);
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
+  void set_typ_vals_ode_aux(const std::vector<amrex::Real>& ExtTypVals_aux);
+#endif
 
   // Manifold EOS needs an eosparm - right now that is only propagated through
   // the RK64 reactor
@@ -103,7 +128,10 @@ public:
 
 protected:
   int verbose{0};
-  amrex::GpuArray<amrex::Real, NUM_SPECIES + 1> m_typ_vals = {0.0};
+  amrex::GpuArray<amrex::Real, NUM_SPECIES + 1 + NUMODE> m_typ_vals = {0.0};
+#if defined(PELE_USE_AUX) && (NUMAUX > 0)
+  amrex::GpuArray<amrex::Real, NUMAUX> m_typ_vals_aux = {1E-3};
+#endif
   const pele::physics::eos::EosParm<pele::physics::PhysicsType::eos_type>*
     m_h_eosparm;
   const pele::physics::eos::EosParm<pele::physics::PhysicsType::eos_type>*
