@@ -600,7 +600,7 @@ ReactorCvode::initCvode_aux(
     return (1);
   }
 
-  // We don't need to populate the userData for aux since this has been done in initCvode.
+  // Populate the userData -  this has been done in initCvode.
   //allocUserData(a_udata, ncells);
   //if (utils::check_flag(static_cast<void*>(a_udata), "allocUserData", 2) != 0) {
   //  return (1);
@@ -840,11 +840,11 @@ ReactorCvode::initCvode_aux(
   if (utils::check_flag(&flag, "CVodeSetMaxErrTestFails", 1) != 0) {
     return (1);
   }
-  flag = CVodeSetErrHandlerFn(
-    a_cvode_mem, cvode::cvodeErrHandler, nullptr); // Err. handler funct.
-  if (utils::check_flag(&flag, "CVodeSetErrHandlerFn", 1) != 0) {
-    return (1);
-  }
+  //flag = CVodeSetErrHandlerFn(
+  //  a_cvode_mem, cvode::cvodeErrHandler, nullptr); // Err. handler funct.
+  //if (utils::check_flag(&flag, "CVodeSetErrHandlerFn", 1) != 0) {
+  //  return (1);
+  //}
   flag = CVodeSetMaxNumSteps(a_cvode_mem, 10000); // Max substeps
   if (utils::check_flag(&flag, "CVodeSetMaxNumSteps", 1) != 0) {
     return (1);
@@ -2257,7 +2257,7 @@ ReactorCvode::cF_RHS(
 #if defined(PELE_USE_AUX) && (NUMNEW > 0)
 int
 ReactorCvode::cF_RHS_aux(
-  realtype t, N_Vector y_in, N_Vector ydot_in, void* user_data)
+  sunrealtype t, N_Vector y_in, N_Vector ydot_in, void* user_data)
 {
   BL_PROFILE("Pele::ReactorCvode::cF_RHS_aux()");
 #ifdef AMREX_USE_GPU

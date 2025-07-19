@@ -153,14 +153,14 @@ set_sundials_solver_tols(
   int flag;
   if (solvername == "cvode") {
     flag = CVodeSVtolerances(sundials_mem, relTol, atol);
-  } else if ((solvername == "arkstep") || (solvername == "erkstep")) {
-    flag = ARKodeSVtolerances(sundials_mem, relTol, atol);
-  } else {
-    amrex::Abort("setSundialsSolverTols not implemented for this solver type");
-  }
-  if (utils::check_flag(&flag, "SVtolerances", 1) != 0) {
-    amrex::Abort("Problem in setSundialsSolverTols");
-  }
+  } //else if ((solvername == "arkstep") || (solvername == "erkstep")) {
+  //  flag = ARKodeSVtolerances(sundials_mem, relTol, atol);
+  //} else {
+  //  amrex::Abort("setSundialsSolverTols not implemented for this solver type");
+  //}
+  //if (utils::check_flag(&flag, "SVtolerances", 1) != 0) {
+  //  amrex::Abort("Problem in setSundialsSolverTols");
+  //}
 
   N_VDestroy(atol);
 }
@@ -567,10 +567,10 @@ fKernelSpec(
   const amrex::Real* rhoe_init,
   const amrex::Real* rhoesrc_ext,
   const amrex::Real* rYs,
-+#if defined (PELE_USE_AUX) && (NUMUDA > 0)
-+  , const amrex::Real* rhoAuxsrc_ext
-+  , const amrex::Real* rhoAux_init
-+#endif
+#if defined (PELE_USE_AUX) && (NUMUDA > 0)
+  , const amrex::Real* rhoAuxsrc_ext
+  , const amrex::Real* rhoAux_init
+#endif
   const pele::physics::eos::EosParm<pele::physics::PhysicsType::eos_type>*
     eosparm = nullptr)
 {
