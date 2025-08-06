@@ -1893,7 +1893,7 @@ ReactorCvode::react(
         // ReInit CVODE for aux
         CVodeReInit(cvode_mem_aux, time_start, y_aux);
 
-        //CVode(cvode_mem_aux, time_final, y_aux, &CvodeActual_time_final, CV_NORMAL);
+        CVode(cvode_mem_aux, time_final, y_aux, &CvodeActual_time_final, CV_NORMAL);
 #endif
 
         // cppcheck-suppress knownConditionTrueFalse
