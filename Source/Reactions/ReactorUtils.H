@@ -761,7 +761,7 @@ fKernelSpec_aux(
 
     if ((rhoAux_init[idx_rhoZ] / rho_pt) > 0E-4) {
       ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + alpha_1 * ydot_d[idx_rhoZ];
-      ydot_d[idx_rhoAge] = std::min(std::max(rhoZ_pt, 0.0), ydot_d[idx_rhoAge]);
+      //ydot_d[idx_rhoAge] = std::min(std::max(rhoZ_pt, 0.0), ydot_d[idx_rhoAge]);
     } else {
       ydot_d[idx_rhoAge] = 0.0;
     }
@@ -786,7 +786,7 @@ fKernelSpec_aux(
     //if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
     if ((rhoAux_init[idx_rhoZ] / rho_pt) > 0E-4) {
       ydot_d[idx_rhoAgePV] = f_T * yvec_d[idx_rhoZ] + alpha_1 * ydot_d[idx_rhoZ];
-      ydot_d[idx_rhoAgePV] = std::min(std::max(rhoZ_pt, 0.0), ydot_d[idx_rhoAgePV]);
+      //ydot_d[idx_rhoAgePV] = std::min(std::max(rhoZ_pt, 0.0), ydot_d[idx_rhoAgePV]);
     } else {
       ydot_d[idx_rhoAgePV] = 0.0;
     }
