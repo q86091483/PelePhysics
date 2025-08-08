@@ -785,7 +785,7 @@ fKernelSpec_aux(
     //amrex::Print() << "alpha_1: " << alpha_1 << ", alpha_2: " << alpha_2 << "dt_save: " << dt_save << std::endl;
     //if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
     if ((rhoAux_init[idx_rhoZ] / rho_pt) > 0E-4) {
-      ydot_d[idx_rhoAgePV] = f_T * yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
+      ydot_d[idx_rhoAgePV] = f_T * yvec_d[idx_rhoZ] + alpha_1 * ydot_d[idx_rhoZ];
       ydot_d[idx_rhoAgePV] = std::min(std::max(rhoZ_pt, 0.0), ydot_d[idx_rhoAgePV]);
     } else {
       ydot_d[idx_rhoAgePV] = 0.0;
