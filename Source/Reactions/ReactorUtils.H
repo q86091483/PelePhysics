@@ -760,7 +760,7 @@ fKernelSpec_aux(
     amrex::Real alpha_min = std::min(2.0 * std::max(0.0, alpha_1), std::max(0.0, alpha_2));
 
     if ((rhoAux_init[idx_rhoZ] / rho_pt) > 0E-4) {
-      ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
+      ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + alpha_1 * ydot_d[idx_rhoZ];
       ydot_d[idx_rhoAge] = std::min(std::max(rhoZ_pt, 0.0), ydot_d[idx_rhoAge]);
     } else {
       ydot_d[idx_rhoAge] = 0.0;
