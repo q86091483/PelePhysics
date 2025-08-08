@@ -730,41 +730,6 @@ fKernelSpec_aux(
   }
   const amrex::Real temp_pt = rhoY_T_init[vec_index<OrderType>(NUM_SPECIES, icell, ncells)];
 
-  /*
-  const amrex::Real nrg_pt =
-    (rhoe_init[icell] + rhoesrc_ext[icell] * dt_save) * rho_pt_inv;
-
-  amrex::Real temp_pt =
-    yvec_d[vec_index<OrderType>(NUM_SPECIES, icell, ncells)];
-
-  amrex::Real Cv_pt = 0.0;
-  amrex::GpuArray<amrex::Real, NUM_SPECIES> ei_pt = {0.0};
-  auto eos = pele::physics::PhysicsType::eos();
-  if (reactor_type == ReactorTypes::e_reactor_type) {
-    eos.REY2T(rho_pt, nrg_pt, massfrac.arr, temp_pt);
-    eos.RTY2Ei(rho_pt, temp_pt, massfrac.arr, ei_pt.arr);
-    eos.RTY2Cv(rho_pt, temp_pt, massfrac.arr, Cv_pt);
-  } else if (reactor_type == ReactorTypes::h_reactor_type) {
-    eos.RHY2T(rho_pt, nrg_pt, massfrac.arr, temp_pt);
-    eos.RTY2Hi(rho_pt, temp_pt, massfrac.arr, ei_pt.arr);
-    eos.RTY2Cp(rho_pt, temp_pt, massfrac.arr, Cv_pt);
-  } else {
-    amrex::Abort("Wrong reactor type. Choose between 1 (e) or 2 (h).");
-  }
-
-  amrex::GpuArray<amrex::Real, NUM_SPECIES> cdots_pt = {0.0};
-  eos.RTY2WDOT(rho_pt, temp_pt, massfrac.arr, cdots_pt.arr);
-
-  amrex::Real rhoesrc = rhoesrc_ext[icell];
-  for (int n = 0; n < NUM_SPECIES; n++) {
-    const amrex::Real cdot_rYs =
-      cdots_pt[n] + rYs[spec_index<OrderType>(n, icell, ncells)];
-    ydot_d[vec_index<OrderType>(n, icell, ncells)] = cdot_rYs;
-    rhoesrc -= cdot_rYs * ei_pt[n];
-  }
-  ydot_d[vec_index<OrderType>(NUM_SPECIES, icell, ncells)] =
-    rhoesrc * (rho_pt_inv / Cv_pt);
-  */
 #if defined (PELE_USE_AUX) && (NUMAUX > 0) // Advance ODE dU/dt = f(U) + g
 
   /*STAR - debug output
@@ -794,7 +759,7 @@ fKernelSpec_aux(
     amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAge] / rhoAux_init[idx_rhoZ];
     amrex::Real alpha_min = std::min(2.0 * std::max(0.0, alpha_1), std::max(0.0, alpha_2));
 
-    if ((rhoAux_init[idx_rhoZ] / rho_pt) > 1E-4) {
+    if ((rhoAux_init[idx_rhoZ] / rho_pt) > 0E-4) {
       ydot_d[idx_rhoAge] = yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
       ydot_d[idx_rhoAge] = std::min(std::max(rhoZ_pt, 0.0), ydot_d[idx_rhoAge]);
     } else {
@@ -819,7 +784,7 @@ fKernelSpec_aux(
     amrex::Real alpha_min = std::min(std::max(0.0, alpha_1), std::max(0.0, alpha_2));
     //amrex::Print() << "alpha_1: " << alpha_1 << ", alpha_2: " << alpha_2 << "dt_save: " << dt_save << std::endl;
     //if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
-    if ((rhoAux_init[idx_rhoZ] / rho_pt) > 1E-4) {
+    if ((rhoAux_init[idx_rhoZ] / rho_pt) > 0E-4) {
       ydot_d[idx_rhoAgePV] = f_T * yvec_d[idx_rhoZ] + alpha_min * ydot_d[idx_rhoZ];
       ydot_d[idx_rhoAgePV] = std::min(std::max(rhoZ_pt, 0.0), ydot_d[idx_rhoAgePV]);
     } else {
