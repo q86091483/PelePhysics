@@ -755,7 +755,7 @@ fKernelSpec_aux(
     const int idx_rhoZ = aux_index<OrderType>(MIXF_IN_AUX + n, icell, ncells);
     amrex::Real rhoZ_pt = 0.0;
     rhoZ_pt = rhoAux_init[idx_rhoZ] + dt_save * ydot_d[idx_rhoZ];
-    amrex::Real alpha_1 = yvec_d[idx_rhoAge] / rhoZ_pt; //yvec_d[idx_rhoZ];
+    amrex::Real alpha_1 = yvec_d[idx_rhoAge] / yvec_d[idx_rhoZ];
     amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAge] / rhoAux_init[idx_rhoZ];
     amrex::Real alpha_min = std::min(2.0 * std::max(0.0, alpha_1), std::max(0.0, alpha_2));
 
