@@ -407,9 +407,9 @@ cJac_aux(
 
       //J_col_temp[AGEPV_IN_J]  = ydata[MIXF_IN_J] * dfdT;
       if ((ydata[MIXF_IN_J]/rho) > 1E-3) {
-        J_col_mixf[AGEPV_IN_J]  = 0.0; //f_T - (ydata[AGEPV_IN_J]/ydata[MIXF_IN_J]/ydata[MIXF_IN_J]) * rhoAuxsrc_ext[MIXF_IN_AUX+i];
+        J_col_mixf[AGEPV_IN_J]  = f_T - (ydata[AGEPV_IN_J]/ydata[MIXF_IN_J]/ydata[MIXF_IN_J]) * rhoAuxsrc_ext[MIXF_IN_AUX+i];
         J_col_age[AGEPV_IN_J]   = 0.0;
-        J_col_agepv[AGEPV_IN_J] = 0.0; //rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
+        J_col_agepv[AGEPV_IN_J] = rhoAuxsrc_ext[MIXF_IN_AUX+i] / ydata[MIXF_IN_J];
       }
     }
 #endif // #if (NUMAGEPV > 0)
