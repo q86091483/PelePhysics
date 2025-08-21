@@ -226,6 +226,7 @@ ReactorCvode::initCvode(
   return (0);
 }
 
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
 int
 ReactorCvode::initCvode_aux(
   N_Vector& a_y,
@@ -302,6 +303,7 @@ ReactorCvode::initCvode_aux(
 
   return (0);
 } // end initCvode_aux
+#endif
 
 #else
 
