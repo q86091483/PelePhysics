@@ -417,7 +417,7 @@ cJac_aux(
   }
   return (0);
 }
-#endif // #if (NUMNEW > 0) cJac_aux
+#endif // #if (NUMAUX > 0) cJac_aux
 
 // Analytical SPARSE CSR Jacobian evaluation
 int

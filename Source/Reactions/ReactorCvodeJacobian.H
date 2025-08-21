@@ -42,7 +42,7 @@ int cJac(
   N_Vector tmp2,
   N_Vector tmp3);
 
-#if defined(PELE_USE_AUX) && (NUMNEW > 0)
+#if defined(PELE_USE_AUX) && (NUMAUX > 0)
 int cJac_aux(
   amrex::Real tn,
   N_Vector u,

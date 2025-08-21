@@ -113,7 +113,7 @@ public:
   static int
   cF_RHS(amrex::Real t, N_Vector y_in, N_Vector ydot, void* user_data);
 
-#if defined(PELE_USE_AUX) && (NUMNEW > 0)
+#if defined(PELE_USE_AUX) && (NUMAUX > 0)
   static int
   cF_RHS_aux(amrex::Real t, N_Vector y_in, N_Vector ydot, void* user_data);
 #endif
@@ -134,7 +134,7 @@ public:
     amrex::Real* src_vect,
     amrex::Real* vect_energy,
     amrex::Real* src_vect_energy
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
     , amrex::Real* y_vect_aux
     , amrex::Real* src_vect_aux
     , amrex::Real* vec_aux_init
@@ -149,7 +149,7 @@ public:
       rhoAux, frcAuxExt,
 #endif
       y_vect, src_vect, vect_energy, src_vect_energy
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
       , y_vect_aux
       , src_vect_aux
       , vec_aux_init
@@ -171,7 +171,7 @@ public:
     amrex::Array4<amrex::Real> const& FC_in,
     amrex::Real* y_vect,
     amrex::Real* vect_energy,
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
     amrex::Real* y_vect_aux,
 #endif
     long int* FCunt,
@@ -184,7 +184,7 @@ public:
       rhoAux,
 #endif
       FC_in, y_vect, vect_energy,
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
       y_vect_aux,
 #endif
       FCunt, dt);
@@ -209,7 +209,7 @@ private:
 #endif
     const amrex::Real& a_time,
     int ncells);
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   int initCvode_aux(
     N_Vector& a_y,
     SUNMatrix& a_A,

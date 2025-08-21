@@ -581,7 +581,7 @@ ReactorCvode::initCvode(
   return (0);
 }
 
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
 int
 ReactorCvode::initCvode_aux(
   N_Vector& a_y,
@@ -856,7 +856,7 @@ ReactorCvode::initCvode_aux(
   }
   return (0);
 }
-#endif // #if (NUMNEW > 0) initCvode_aux
+#endif // #if (NUMAUX > 0) initCvode_aux
 
 #endif // End check GPU for initCvode method
 
@@ -1328,7 +1328,7 @@ ReactorCvode::allocUserData(
     amrex::The_Arena()->alloc(a_ncells * sizeof(amrex::Real)));
   udata->rhoesrc_ext = static_cast<amrex::Real*>(
     amrex::The_Arena()->alloc(a_ncells * sizeof(amrex::Real)));
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   udata->rhoAuxsrc_ext = static_cast<amrex::Real*>(
     amrex::The_Arena()->alloc(NUMAUX * a_ncells * sizeof(amrex::Real)));
   udata->rhoAux_init = static_cast<amrex::Real*>(
@@ -1684,7 +1684,7 @@ ReactorCvode::react(
     CVodeCreate(CV_BDF, *amrex::sundials::The_Sundials_Context());
   ; // Internal Cvode memory
 
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   SUNMatrix A_aux = nullptr;            // Jacobian matrix for aux
   SUNNonlinearSolver NLS_aux = nullptr; // Non-linear solver for aux
   SUNLinearSolver LS_aux = nullptr;     // Linear solver for aux
@@ -1733,7 +1733,7 @@ ReactorCvode::react(
     rAux_in, rAux_src_in,
 #endif
     yvec_d, udata->rYsrc_ext, udata->rhoe_init, udata->rhoesrc_ext
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
     , yvec_d_aux
     , udata->rhoAuxsrc_ext
     , udata->rhoAux_init
@@ -1808,7 +1808,7 @@ ReactorCvode::react(
     rAux_in,
 #endif
     FC_in, yvec_d, udata->rhoe_init,
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
     yvec_d_aux,
 #endif
     d_nfe, dt_react);
@@ -1824,7 +1824,7 @@ ReactorCvode::react(
 
   N_Vector y = nullptr; // Solution vector
 
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   N_Vector y_aux = nullptr; // Solution vector for aux
 #endif
 
@@ -1845,7 +1845,7 @@ ReactorCvode::react(
     *amrex::sundials::The_Sundials_Context(), cvode_mem, udata->ncells, relTol,
     absTol, m_typ_vals, "cvode", verbose);
 
-#if defined(PELE_USE_AUX) && (NUMNEW > 0)
+#if defined(PELE_USE_AUX) && (NUMAUX > 0)
   initCvode_aux(y_aux, A_aux, udata, NLS_aux, LS_aux, cvode_mem_aux, time_start, ncells);
 
   // Update TypicalValues for auxiliary fields
@@ -1862,7 +1862,7 @@ ReactorCvode::react(
       if (mask(i, j, k) != -1) {
 
         amrex::Real* yvec_d = N_VGetArrayPointer(y);
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
         amrex::Real* yvec_d_aux = N_VGetArrayPointer(y_aux);
 #endif
 
@@ -1874,7 +1874,7 @@ ReactorCvode::react(
           rAux_in, rAux_src_in,
 #endif
           yvec_d, udata->rYsrc_ext, udata->rhoe_init, udata->rhoesrc_ext
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
           , yvec_d_aux
           , udata->rhoAuxsrc_ext
           , udata->rhoAux_init
@@ -1921,7 +1921,7 @@ ReactorCvode::react(
           rAux_in,
 #endif
           FC_in, yvec_d, udata->rhoe_init,
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
           yvec_d_aux,
 #endif
           nfe_tot, dt_react);
@@ -2249,7 +2249,7 @@ ReactorCvode::cF_RHS(
   return 0;
 }
 
-#if defined(PELE_USE_AUX) && (NUMNEW > 0)
+#if defined(PELE_USE_AUX) && (NUMAUX > 0)
 int
 ReactorCvode::cF_RHS_aux(
   sunrealtype t, N_Vector y_in, N_Vector ydot_in, void* user_data)
@@ -2272,7 +2272,7 @@ ReactorCvode::cF_RHS_aux(
   auto* rhoe_init = udata->rhoe_init;
   auto* rhoesrc_ext = udata->rhoesrc_ext;
   auto* rYsrc_ext = udata->rYsrc_ext;
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   auto* rhoAuxsrc_ext = udata->rhoAuxsrc_ext;
   auto* rhoAux_init = udata->rhoAux_init;
   auto* rhoY_T_init = udata->rhoY_T_init;
@@ -2299,7 +2299,7 @@ ReactorCvode::freeUserData(CVODEUserData* data_wk)
   amrex::The_Arena()->free(data_wk->rYsrc_ext);
   amrex::The_Arena()->free(data_wk->rhoe_init);
   amrex::The_Arena()->free(data_wk->rhoesrc_ext);
-#if defined (PELE_USE_AUX) && (NUMNEW > 0)
+#if defined (PELE_USE_AUX) && (NUMAUX > 0)
   amrex::The_Arena()->free(data_wk->rhoAuxsrc_ext);
   amrex::The_Arena()->free(data_wk->rhoAux_init);
   amrex::The_Arena()->free(data_wk->rhoY_T_init);
