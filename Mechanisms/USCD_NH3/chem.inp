@@ -1,0 +1,104 @@
+ELEMENTS
+N AR HE H O C 
+END
+SPECIES
+H2    H     O2    O
+OH    HO2   H2O   H2O2  
+N     NO    NO2   N2O 
+NH    NH2   N2H   NH3
+HNO   H2NO  N2    
+AR    HE
+END
+
+REACTIONS
+H+O2<=>OH+O                              3.520e+16   -0.700  17069.79
+H2+O<=>OH+H                              5.060e+04    2.670   6290.63
+H2+OH<=>H2O+H                            1.170e+09    1.300   3635.28
+H2O+O<=>2 OH                             7.000e+05    2.330  14548.28
+2 H+M<=>H2+M                             1.300e+18   -1.000      0.00
+AR/0.50/ HE/0.50/ H2/2.50/ H2O/12.00/ 
+H+OH+M<=>H2O+M                           4.000e+22   -2.000      0.00
+AR/0.38/ HE/0.38/ H2/2.50/ H2O/12.00/ 
+2 O+M<=>O2+M                             6.170e+15   -0.500      0.00
+AR/0.20/ HE/0.20/ H2/2.50/ H2O/12.00/ 
+H+O+M<=>OH+M                             4.710e+18   -1.000      0.00
+AR/0.75/ HE/0.75/ H2/2.50/ H2O/12.00/  
+H+O2(+M)<=>HO2(+M)                       4.650e+12    0.440      0.00
+AR/0.70/ HE/0.70/ H2/2.50/ H2O/16.00/ 
+     LOW  /  5.750e+19   -1.400      0.00 /
+     TROE/     0.5    1e-30     1e+30        /
+HO2+H<=>2 OH                             7.080e+13    0.000    294.93
+HO2+H<=>H2+O2                            1.660e+13    0.000    822.90
+HO2+H<=>H2O+O                            3.100e+13    0.000   1720.84
+HO2+O<=>OH+O2                            2.000e+13    0.000      0.00
+HO2+OH<=>H2O+O2                          7.000e+12    0.000  -1094.65
+DUPLICATE
+HO2+OH<=>H2O+O2                          4.500e+14    0.000  10929.73
+DUPLICATE                           
+2 OH(+M)<=>H2O2(+M)                      9.550e+13   -0.270      0.00
+AR/0.70/ HE/0.40/ H2/2.50/ H2O/6.00/ H2O2/6.00/ 
+     LOW  /  2.760e+25   -3.200      0.00 /
+     TROE/    0.57    1e+30     1e-30        /
+2 HO2<=>H2O2+O2                          1.030e+14    0.000  11042.07              
+DUPLICATE
+2 HO2<=>H2O2+O2                          1.940e+11    0.000  -1408.94 
+DUPLICATE  
+H2O2+H<=>HO2+H2                          2.300e+13    0.000   7950.05
+H2O2+H<=>H2O+OH                          1.000e+13    0.000   3585.09
+H2O2+OH<=>H2O+HO2                        1.740e+12    0.000   1434.03
+DUPLICATE
+H2O2+OH<=>H2O+HO2                        7.590e+13    0.000   7272.94
+DUPLICATE
+H2O2+O<=>HO2+OH                          9.630e+06    2.000   3991.40
+
+N2+O = N+NO           		     1.470E13    0.30   75286.81   !(92MiC/liM)
+N+O2 = NO+O           		     6.400E09    1.00    6285.85   !(Mb89)
+N+OH = NO+H           		     3.800E13    0.00       0.00   !(glarbOrg94)
+NH+H = N+H2                          1.000E14    0.00       0.00  
+NH+O = NO+H                          9.200E13    0.00       0.00   ! GLA/MIL98 CEC94
+NH+OH = HNO+H                        4.000E13    0.00       0.00   ! GLA/MIL98 JAM est
+NH+OH = N+H2O                        5.000E11    0.50     2000.48  ! GLA/MIL98 JAM est 
+NH+O2 = HNO+O                        4.600E05    2.00     6500.96  ! GLA/MIL98 MIL/MEL92
+NH+NO = N2O+H                        1.800E14   -0.351    -244.00  ! pw 1.3.12 Klip
+NH+NO = N2+OH                        2.200E13   -0.23        0.00  ! GLA/MIL98 MIL/MEL92
+NH2+H = NH+H2                        4.000E13    0.00     3652.01  ! GLA/MIL98 DAV/HAN90
+NH2+O = HNO+H                        6.600E14   -0.50        0.00  ! GLA/MIL98 DRA/WAG84,JAM est
+NH2+O2 = H2NO+O                      2.600E11    0.4872  29050.00  ! DB  96 UPDATE
+NH2+OH = NH+H2O                      4.000E06    2.00     1001.43  ! GLA/MIL98 JAM est
+NH2+N = N2+H+H                       7.000E13    0.00        0.00  ! GLA/MIL98 WHY/PHI83
+NH2+NO = N2+H2O                      2.800E20   -2.654    1258.00  ! MIL/GLA99 MIL/GLA99
+NH2+NO = N2H+OH 		     3.100E13   -0.48     1180.00
+NH3+M = NH2+H+M                      2.200E16    0.00    93451.24  ! GLA/MIL98 DAV/HAN90
+NH3+H = NH2+H2                       6.400E05    2.39    10181.64  ! GLA/MIL98 MIC/SUT86
+NH3+O = NH2+OH                       9.400E06    1.94     6465.11  ! GLA/MIL98 SUT/KLE90
+NH3+OH = NH2+H2O                     2.040E06    2.04      566.44  ! GLA/MIL98 SAL/HAN84
+N2H+O2 = N2+HO2                      2.000E14    0.00        0.00  ! GLA/MIL98 MIL/GLA96
+N2H(+M) = N2+H(+M)                   6.500E07    0.00        0.00  ! MIL/GLA99 MIL/GLA99
+     LOW/5.000E13   0.00       0.00/
+N2H+H = N2+H2                        1.000E14    0.00        0.00  ! GLA/MIL98 JAM est
+N2H+O = N2O+H                        1.000E14    0.00        0.00  ! GLA/MIL98 JAM est
+N2H+OH = N2+H2O                      5.000E13    0.00        0.00  ! GLA/MIL98 JAM est
+H+NO(+M) = HNO(+M)                   1.500E15   -0.40        0.00
+     LOW  /   4.300e+14   0.206      -1554.97 /
+AR/0.50/H2O/5.00/
+HNO+H = NO+H2                        4.400E11    0.72      650.10  ! (glarbOrg94)
+HNO+OH = NO+H2O                      3.600E13    0.00        0.00  ! (Mb89)
+N2O(+M) = N2+O(+M)                   8.000E11    0.00    62619.50
+     LOW  /  2.000e+14    0.000  56644.36 / 
+
+N2O+H = N2+OH                        3.310E10    0.00     5090.00  ! 64 BaulcH
+DUP
+N2O+H = N2+OH                        7.830E14    0.00    19390.00  ! 65 BaulcH
+DUP
+N2O+O = NO+NO                        9.150E13    0.00    27693.00  ! 61 MeagHer J. PHys. cHem. a, 2000, 104(25), p 6003.
+
+N2O+OH = N2+HO2			     2.000E13    0.00    40000.00  ! Mueller00 IJCK
+NO2+M = NO+O+M        		     1.100E16    0.00    65965.58  ! (Mb89)
+H2O/16.25/ 
+NO+HO2 = NO2+OH       		     2.100E12    0.00     -480.40  ! (glarbOrg94  )
+NO2+H = NO+OH        		     3.500E14    0.00     1500.96  ! kO/fONtijN
+NO2+O = NO+O2           	     1.000E13    0.00      599.90  ! Konnov
+H2NO+O = HNO+OH                      3.000E07    2.00     2000.00  ! GLA/MIL98 JAM est
+H2NO+O2 = HNO+HO2                    3.000E12    0.00    25000.00  ! MIL/GLA99 JAM est
+H2NO+HO2 = HNO+H2O2                  2.900E04    2.69    -1600.00
+END
