@@ -244,15 +244,19 @@ class SpeciesInfo:
 
             level += 1
 
-        scqss_df["sc_dep"] = ""
-        scqss_df["scqss_dep"] = ""
+        # ZS - debug
+        #scqss_df["sc_dep"] = ""
+        #scqss_df["scqss_dep"] = ""
         # Add in a few more attributes for easy of use
-        for idx, item in scqss_df.iterrows():
-            scqss_df.at[idx, "sc_dep"] = self.dict_qssdepend_sc[item["symbol"]]
-            scqss_df.at[idx, "scqss_dep"] = self.dict_qssdepend_scqss[item["symbol"]]
+        #for idx, item in scqss_df.iterrows():
+        #    scqss_df.at[idx, "sc_dep"] = self.dict_qssdepend_sc[item["symbol"]]
+        #    scqss_df.at[idx, "scqss_dep"] = self.dict_qssdepend_scqss[item["symbol"]]
 
         # Return a deepcopy to self
-        self.scqss_df = scqss_df.copy(deep=True)
+        #self.scqss_df = scqss_df.copy(deep=True)
+        scqss_df["sc_dep"] = [self.dict_qssdepend_sc[s] for s in scqss_df["symbol"]]
+        scqss_df["scqss_dep"] = [self.dict_qssdepend_scqss[s] for s in scqss_df["symbol"]]
+    
 
     def make_sc_dataframe(self):
         """Make dataframe for sc species."""
@@ -274,15 +278,21 @@ class SpeciesInfo:
             }
         )
 
-        sc_df["scqss_rely"] = ""
+        # ZS - debug
+        #sc_df["scqss_rely"] = ""
         # Loop over the scqss_df and add in scqss dependence upon sc terms
-        for sc_idx, sc in sc_df.iterrows():
-            scqss_list = []
-            for _, scqss in self.scqss_df.iterrows():
-                if sc["name"] in str(scqss["sc_dep"]):
-                    scqss_list.append(scqss["name"])
-
-            sc_df.at[sc_idx, "scqss_rely"] = scqss_list
+        #for sc_idx, sc in sc_df.iterrows():
+        #    scqss_list = []
+        #    for _, scqss in self.scqss_df.iterrows():
+        #        if sc["name"] in str(scqss["sc_dep"]):
+        #            scqss_list.append(scqss["name"])
+        #
+        #    sc_df.at[sc_idx, "scqss_rely"] = scqss_list
+        sc_df["scqss_rely"] = [
+            [scqss["name"] for _, scqss in self.scqss_df.iterrows()
+             if sc["name"] in str(scqss["sc_dep"])]
+            for _, sc in sc_df.iterrows()
+        ]
 
         # Return a deepcopy to self
         self.sc_df = sc_df.copy(deep=True)
@@ -307,12 +317,16 @@ class SpeciesInfo:
             }
         )
 
-        wdot_df["sc_dep"] = ""
-        wdot_df["scqss_dep"] = ""
+        # ZS - debug
+        #wdot_df["sc_dep"] = ""
+        #wdot_df["scqss_dep"] = ""
         # Add in a few more attributes for easy of use
-        for idx, item in wdot_df.iterrows():
-            wdot_df.at[idx, "sc_dep"] = self.dict_wdot_sc[item["symbol"]]
-            wdot_df.at[idx, "scqss_dep"] = self.dict_wdot_scqss[item["symbol"]]
+        #for idx, item in wdot_df.iterrows():
+        #    wdot_df.at[idx, "sc_dep"] = self.dict_wdot_sc[item["symbol"]]
+        #    wdot_df.at[idx, "scqss_dep"] = self.dict_wdot_scqss[item["symbol"]]
+        wdot_df["sc_dep"] = [self.dict_wdot_sc[s] for s in wdot_df["symbol"]]
+        wdot_df["scqss_dep"] = [self.dict_wdot_scqss[s] for s in wdot_df["symbol"]]
+
 
         # Return a deepcopy to self
         self.wdot_df = wdot_df.copy(deep=True)
