@@ -1,0 +1,10 @@
+ELEMENTS
+C H N O
+END
+
+SPECIES
+N2               O2               IC8H18           NC7H16
+END
+
+REACTIONS
+END

@@ -256,6 +256,7 @@ class SpeciesInfo:
         #self.scqss_df = scqss_df.copy(deep=True)
         scqss_df["sc_dep"] = [self.dict_qssdepend_sc[s] for s in scqss_df["symbol"]]
         scqss_df["scqss_dep"] = [self.dict_qssdepend_scqss[s] for s in scqss_df["symbol"]]
+        self.scqss_df = scqss_df.copy(deep=True)
     
 
     def make_sc_dataframe(self):

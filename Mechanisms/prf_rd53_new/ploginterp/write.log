@@ -1,0 +1,1453 @@
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:190: UserWarning: NasaPoly2::validate: 
+For species C7H15O2, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  48.67716598
+	Value computed using high-temperature polynomial: 49.695730729
+
+  ref_gas = ct.Solution(input_file)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:190: UserWarning: NasaPoly2::validate: 
+For species C7H15O2, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  10.720312991333337
+	Value computed using high-temperature polynomial: 10.572805530133333
+
+  ref_gas = ct.Solution(input_file)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:190: UserWarning: NasaPoly2::validate: 
+For species C7H14OOH, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  48.94369881
+	Value computed using high-temperature polynomial: 49.8854976854
+
+  ref_gas = ct.Solution(input_file)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:190: UserWarning: NasaPoly2::validate: 
+For species C7H14OOH, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  17.27348820666667
+	Value computed using high-temperature polynomial: 17.150916222746655
+
+  ref_gas = ct.Solution(input_file)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:190: UserWarning: NasaPoly2::validate: 
+For species O2C7H14OOH, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  54.828888189999994
+	Value computed using high-temperature polynomial: 55.92339838899999
+
+  ref_gas = ct.Solution(input_file)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:190: UserWarning: NasaPoly2::validate: 
+For species O2C7H14OOH, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  2.180460266333334
+	Value computed using high-temperature polynomial: 2.033209119299997
+
+  ref_gas = ct.Solution(input_file)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:190: UserWarning: NasaPoly2::validate: 
+For species C5H11CO, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  36.476880509999994
+	Value computed using high-temperature polynomial: 37.2250997504
+
+  ref_gas = ct.Solution(input_file)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:190: UserWarning: NasaPoly2::validate: 
+For species C5H11CO, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  8.779954785666664
+	Value computed using high-temperature polynomial: 8.675775924079996
+
+  ref_gas = ct.Solution(input_file)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:190: UserWarning: NasaPoly2::validate: 
+For species C6H13CO, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  36.476880509999994
+	Value computed using high-temperature polynomial: 37.2250997504
+
+  ref_gas = ct.Solution(input_file)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:190: UserWarning: NasaPoly2::validate: 
+For species C6H13CO, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  8.779954785666664
+	Value computed using high-temperature polynomial: 8.675775924079996
+
+  ref_gas = ct.Solution(input_file)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:192: UserWarning: NasaPoly2::validate: 
+For species C7H15O2, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  48.67716598
+	Value computed using high-temperature polynomial: 49.695730729
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:192: UserWarning: NasaPoly2::validate: 
+For species C7H15O2, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  10.720312991333337
+	Value computed using high-temperature polynomial: 10.572805530133333
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:192: UserWarning: NasaPoly2::validate: 
+For species C7H14OOH, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  48.94369881
+	Value computed using high-temperature polynomial: 49.8854976854
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:192: UserWarning: NasaPoly2::validate: 
+For species C7H14OOH, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  17.27348820666667
+	Value computed using high-temperature polynomial: 17.150916222746655
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:192: UserWarning: NasaPoly2::validate: 
+For species O2C7H14OOH, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  54.828888189999994
+	Value computed using high-temperature polynomial: 55.92339838899999
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:192: UserWarning: NasaPoly2::validate: 
+For species O2C7H14OOH, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  2.180460266333334
+	Value computed using high-temperature polynomial: 2.033209119299997
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:192: UserWarning: NasaPoly2::validate: 
+For species C5H11CO, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  36.476880509999994
+	Value computed using high-temperature polynomial: 37.2250997504
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:192: UserWarning: NasaPoly2::validate: 
+For species C5H11CO, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  8.779954785666664
+	Value computed using high-temperature polynomial: 8.675775924079996
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:192: UserWarning: NasaPoly2::validate: 
+For species C6H13CO, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  36.476880509999994
+	Value computed using high-temperature polynomial: 37.2250997504
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:192: UserWarning: NasaPoly2::validate: 
+For species C6H13CO, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  8.779954785666664
+	Value computed using high-temperature polynomial: 8.675775924079996
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:80: RuntimeWarning: invalid value encountered in log
+  A_guess = np.exp(np.interp(log(P), log([P1, P2]), log([A1, A2])))
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:102: RuntimeWarning: invalid value encountered in log
+  k = np.exp(log(k1) + (log(k2) - log(k1)) * ((log(P) - log(P1)) / (log(P2) - log(P1))))
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:111: RuntimeWarning: invalid value encountered in log
+  print("Coefficient based on P: ", np.interp(np.log10(P), np.log10([P1, P2]), log([A1, A2])))
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:112: RuntimeWarning: invalid value encountered in log
+  print("[A1, A2], log[A1, A2], A_guess: ", A1, A2, log([A1, A2]), A_guess)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:113: RuntimeWarning: invalid value encountered in log
+  print("[b1, b2], log[b1, b2], b_guess: ", b1, b2, log([b1, b2]), b_guess)
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:218: UserWarning: NasaPoly2::validate: 
+For species C7H15O2, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  48.67716598
+	Value computed using high-temperature polynomial: 49.695730729
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:218: UserWarning: NasaPoly2::validate: 
+For species C7H15O2, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  10.720312991333337
+	Value computed using high-temperature polynomial: 10.572805530133333
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:218: UserWarning: NasaPoly2::validate: 
+For species C7H14OOH, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  48.94369881
+	Value computed using high-temperature polynomial: 49.8854976854
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:218: UserWarning: NasaPoly2::validate: 
+For species C7H14OOH, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  17.27348820666667
+	Value computed using high-temperature polynomial: 17.150916222746655
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:218: UserWarning: NasaPoly2::validate: 
+For species O2C7H14OOH, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  54.828888189999994
+	Value computed using high-temperature polynomial: 55.92339838899999
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:218: UserWarning: NasaPoly2::validate: 
+For species O2C7H14OOH, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  2.180460266333334
+	Value computed using high-temperature polynomial: 2.033209119299997
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:218: UserWarning: NasaPoly2::validate: 
+For species C5H11CO, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  36.476880509999994
+	Value computed using high-temperature polynomial: 37.2250997504
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:218: UserWarning: NasaPoly2::validate: 
+For species C5H11CO, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  8.779954785666664
+	Value computed using high-temperature polynomial: 8.675775924079996
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:218: UserWarning: NasaPoly2::validate: 
+For species C6H13CO, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  36.476880509999994
+	Value computed using high-temperature polynomial: 37.2250997504
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py:218: UserWarning: NasaPoly2::validate: 
+For species C6H13CO, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  8.779954785666664
+	Value computed using high-temperature polynomial: 8.675775924079996
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py", line 256, in <module>
+    convert_mech_to_fixed_pressure(file, pressure, validate=True)
+  File "/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py", line 250, in convert_mech_to_fixed_pressure
+    write_yaml_with_duplicates(input_file, new_gas, pressure)
+  File "/gpfs/fs1/home/b/bsavard/zisen347/codes/exascale/PelePhysics/Support/Mechanism/Models/prf_rd53/ploginterp/ploginterp.py", line 171, in write_yaml_with_duplicates
+    gas.write_yaml('temp.yaml', skip_user_defined=True)
+  File "cantera/solutionbase.pyx", line 354, in cantera.solutionbase._SolutionBase.write_yaml
+  File "cantera/yamlwriter.pyx", line 29, in cantera.yamlwriter.YamlWriter.to_file
+RuntimeError: number is too big
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  CO + OH <=> CO2 + H
+P =  6.08E+06 , P0 =  1.33E+06 P1 =  1.33E+07
+A =  1.52E+04 , A1 =  6.80E+03 A2 =  2.30E+04
+b =  1.39E+00 , b1 =  1.48E+00 b2 =  1.35E+00
+E =  2.75E+06 , b1 =  2.01E+05 b2 =  4.08E+06
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  CH3 + OH <=> CH2O + H2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  8.43E+13 , A1 =  5.37E+06 A2 =  9.49E+15
+b =  -1.88E+00 , b1 =  2.87E-01 b2 =  -2.20E+00
+E =  3.21E+07 , b1 =  1.17E+06 b2 =  4.09E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  CH3 + OH <=> CH3O + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.48E+07 , A1 =  1.80E+06 A2 =  5.24E+07
+b =  6.31E-01 , b1 =  9.65E-01 b2 =  5.51E-01
+E =  5.37E+07 , b1 =  5.05E+07 b2 =  5.47E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  CH3 + OH <=> H2 + HCOH
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  8.76E+17 , A1 =  1.70E+18 A2 =  7.25E+17
+b =  -2.46E+00 , b1 =  -2.64E+00 b2 =  -2.40E+00
+E =  3.73E+07 , b1 =  2.68E+07 b2 =  4.03E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  2 CH3 <=> C2H5 + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  7.23E+00 , A1 =  2.15E+07 A2 =  1.03E-01
+b =  2.44E+00 , b1 =  8.85E-01 b2 =  3.23E+00
+E =  4.91E+07 , b1 =  5.66E+07 b2 =  4.70E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H5 + OH <=> C2H4 + H2O
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  8.97E+16 , A1 =  2.79E+21 A2 =  4.70E+15
+b =  -2.13E+00 , b1 =  -3.33E+00 b2 =  -1.58E+00
+E =  3.32E+07 , b1 =  3.24E+07 b2 =  3.35E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H5 + O2 <=> C2H5O2
+P =  6.08E+06 , P0 =  3.04E+06 P1 =  1.01E+07
+A =  7.92E+28 , A1 =  1.59E+31 A2 =  1.59E+27
+b =  -6.26E+00 , b1 =  -6.88E+00 b2 =  -5.56E+00
+E =  2.65E+07 , b1 =  2.89E+07 b2 =  2.47E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H5 + O2 <=> C2H4 + HO2
+P =  6.08E+06 , P0 =  3.04E+06 P1 =  1.01E+07
+A =  7.77E+08 , A1 =  5.29E+09 A2 =  1.89E+08
+b =  -8.17E-02 , b1 =  -3.30E-01 b2 =  1.40E-01
+E =  2.55E+07 , b1 =  2.40E+07 b2 =  2.67E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H5O2 <=> C2H4 + HO2
+P =  6.08E+06 , P0 =  3.04E+06 P1 =  1.01E+07
+A =  8.54E+27 , A1 =  1.92E+30 A2 =  1.58E+26
+b =  -5.08E+00 , b1 =  -5.71E+00 b2 =  -4.37E+00
+E =  1.48E+08 , b1 =  1.50E+08 b2 =  1.46E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + H <=> C2H4
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  7.83E+10 , A1 =  2.35E+11 A2 =  5.73E+10
+b =  9.36E-02 , b1 =  -6.00E-02 b2 =  1.42E-01
+E =  3.04E+05 , b1 =  8.78E+05 b2 =  1.41E+05
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H4 + OH <=> CH2O + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  3.46E+09 , A1 =  2.37E+06 A2 =  2.76E+10
+b =  -3.26E-01 , b1 =  5.60E-01 b2 =  -5.00E-01
+E =  4.29E+07 , b1 =  2.51E+07 b2 =  4.79E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H4 + OH <=> PC2H4OH
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  5.22E+24 , A1 =  3.70E+30 A2 =  1.12E+23
+b =  -4.94E+00 , b1 =  -6.57E+00 b2 =  -4.10E+00
+E =  2.58E+07 , b1 =  3.18E+07 b2 =  2.41E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> C2H3OO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.71E+38 , A1 =  2.33E+40 A2 =  3.41E+36
+b =  -8.77E+00 , b1 =  -9.38E+00 b2 =  -8.04E+00
+E =  6.09E+07 , b1 =  6.20E+07 b2 =  6.01E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> C2H3OO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.73E+24 , A1 =  3.32E+24 A2 =  1.03E+24
+b =  -4.83E+00 , b1 =  -4.95E+00 b2 =  -4.72E+00
+E =  1.53E+07 , b1 =  1.51E+07 b2 =  1.54E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> CHCHO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.79E+25 , A1 =  6.11E+22 A2 =  1.65E+27
+b =  -4.95E+00 , b1 =  -4.21E+00 b2 =  -5.35E+00
+E =  6.71E+07 , b1 =  5.46E+07 b2 =  7.71E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> CHCHO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  2.22E+08 , A1 =  1.42E+08 A2 =  3.17E+08
+b =  1.05E-02 , b1 =  5.00E-02 b2 =  -2.00E-02
+E =  1.94E+07 , b1 =  1.58E+07 b2 =  2.23E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> CH2CHO + O
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  5.49E+22 , A1 =  2.85E+22 A2 =  9.27E+22
+b =  -3.79E+00 , b1 =  -3.77E+00 b2 =  -3.80E+00
+E =  5.38E+07 , b1 =  4.82E+07 b2 =  5.82E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> CH2CHO + O
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  2.70E+05 , A1 =  1.43E+06 A2 =  7.14E+04
+b =  1.11E+00 , b1 =  9.20E-01 b2 =  1.28E+00
+E =  5.52E+06 , b1 =  5.10E+06 b2 =  5.86E+06
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> C2H2 + HO2
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.16E+10 , A1 =  1.19E+06 A2 =  1.06E+14
+b =  -7.59E-01 , b1 =  8.20E-01 b2 =  -1.45E+00
+E =  3.89E+07 , b1 =  2.35E+07 b2 =  5.12E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> C2H2 + HO2
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.65E+01 , A1 =  4.47E+05 A2 =  2.02E-02
+b =  1.15E+00 , b1 =  0.00E+00 b2 =  2.94E+00
+E =  6.07E+06 , b1 =  4.00E+06 b2 =  7.73E+06
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> CHOCHO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  2.62E+29 , A1 =  3.57E+30 A2 =  3.28E+28
+b =  -6.14E+00 , b1 =  -6.50E+00 b2 =  -5.76E+00
+E =  6.55E+07 , b1 =  6.24E+07 b2 =  6.80E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> CHOCHO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  2.46E+06 , A1 =  3.84E+07 A2 =  2.75E+05
+b =  5.24E-01 , b1 =  2.20E-01 b2 =  8.30E-01
+E =  3.74E+06 , b1 =  3.94E+06 b2 =  3.59E+06
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> CH2CO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.35E+05 , A1 =  2.49E+03 A2 =  1.66E+07
+b =  7.38E-01 , b1 =  1.42E+00 b2 =  3.60E-01
+E =  4.37E+07 , b1 =  3.55E+07 b2 =  5.02E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> CH2CO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  4.50E-07 , A1 =  1.19E-07 A2 =  1.30E-06
+b =  4.07E+00 , b1 =  4.21E+00 b2 =  3.97E+00
+E =  1.17E+07 , b1 =  8.55E+06 b2 =  1.43E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> CH2O + HCO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  5.58E+24 , A1 =  3.54E+17 A2 =  3.03E+30
+b =  -5.29E+00 , b1 =  -2.57E+00 b2 =  -6.28E+00
+E =  4.76E+07 , b1 =  2.33E+07 b2 =  6.69E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> CH2O + HCO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.63E+33 , A1 =  1.14E+66 A2 =  4.68E+07
+b =  -1.49E+01 , b1 =  -1.92E+01 b2 =  1.90E-01
+E =  2.93E+07 , b1 =  6.18E+07 b2 =  3.48E+06
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 => CH2O + CO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.30E+25 , A1 =  8.26E+17 A2 =  7.07E+30
+b =  -5.29E+00 , b1 =  -2.57E+00 b2 =  -6.28E+00
+E =  4.76E+07 , b1 =  2.33E+07 b2 =  6.69E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 => CH2O + CO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  8.46E+33 , A1 =  2.66E+66 A2 =  1.09E+08
+b =  -1.49E+01 , b1 =  -1.92E+01 b2 =  1.90E-01
+E =  2.93E+07 , b1 =  6.18E+07 b2 =  3.48E+06
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> CH3O + CO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.72E+23 , A1 =  1.10E+15 A2 =  5.79E+29
+b =  -5.37E+00 , b1 =  -2.22E+00 b2 =  -6.45E+00
+E =  4.88E+07 , b1 =  2.17E+07 b2 =  7.03E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> CH3O + CO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  9.17E+33 , A1 =  1.02E+69 A2 =  1.10E+06
+b =  -1.61E+01 , b1 =  -2.07E+01 b2 =  3.10E-01
+E =  3.18E+07 , b1 =  6.64E+07 b2 =  4.28E+06
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> CH3 + CO2
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.25E+23 , A1 =  3.84E+15 A2 =  1.21E+29
+b =  -5.30E+00 , b1 =  -2.44E+00 b2 =  -6.32E+00
+E =  4.77E+07 , b1 =  2.26E+07 b2 =  6.77E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + O2 <=> CH3 + CO2
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.24E+33 , A1 =  1.40E+67 A2 =  9.21E+05
+b =  -1.56E+01 , b1 =  -2.01E+01 b2 =  2.50E-01
+E =  3.06E+07 , b1 =  6.46E+07 b2 =  3.58E+06
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3OO <=> CHCHO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.43E+133 , A1 =  2.00E+54 A2 =  9.54E+195
+b =  -4.81E+01 , b1 =  -1.22E+01 b2 =  -5.23E+01
+E =  4.95E+08 , b1 =  2.59E+08 b2 =  6.84E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3OO <=> CHCHO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  2.62E+44 , A1 =  1.51E+57 A2 =  1.79E+34
+b =  -1.16E+01 , b1 =  -1.39E+01 b2 =  -6.40E+00
+E =  2.19E+08 , b1 =  2.32E+08 b2 =  2.09E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3OO <=> CH2CHO + O
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.89E+50 , A1 =  1.11E+53 A2 =  4.30E+48
+b =  -1.11E+01 , b1 =  -1.18E+01 b2 =  -1.03E+01
+E =  2.36E+08 , b1 =  2.37E+08 b2 =  2.35E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3OO <=> CH2CHO + O
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  4.13E+26 , A1 =  4.66E+27 A2 =  5.99E+25
+b =  -4.18E+00 , b1 =  -4.50E+00 b2 =  -3.85E+00
+E =  1.69E+08 , b1 =  1.70E+08 b2 =  1.68E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3OO <=> CHOCHO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  4.43E+32 , A1 =  2.06E+33 A2 =  1.30E+32
+b =  -6.15E+00 , b1 =  -6.38E+00 b2 =  -5.92E+00
+E =  1.68E+08 , b1 =  1.65E+08 b2 =  1.70E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3OO <=> CHOCHO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.08E+38 , A1 =  7.14E+61 A2 =  1.14E+19
+b =  -1.27E+01 , b1 =  -1.62E+01 b2 =  -2.56E+00
+E =  1.49E+08 , b1 =  1.81E+08 b2 =  1.24E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3OO <=> CH2CO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  2.84E+36 , A1 =  1.19E+37 A2 =  9.08E+35
+b =  -7.51E+00 , b1 =  -7.80E+00 b2 =  -7.21E+00
+E =  2.39E+08 , b1 =  2.36E+08 b2 =  2.41E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3OO <=> CH2CO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.38E+05 , A1 =  5.62E+02 A2 =  1.11E+07
+b =  9.33E-01 , b1 =  1.70E+00 b2 =  5.20E-01
+E =  1.58E+08 , b1 =  1.53E+08 b2 =  1.62E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3OO <=> CH2O + HCO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  5.71E+31 , A1 =  1.85E+34 A2 =  5.70E+29
+b =  -5.95E+00 , b1 =  -6.57E+00 b2 =  -5.19E+00
+E =  1.57E+08 , b1 =  1.61E+08 b2 =  1.54E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3OO <=> CH2O + HCO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.40E+83 , A1 =  1.07E+185 A2 =  4.68E+02
+b =  -4.57E+01 , b1 =  -5.42E+01 b2 =  1.81E+00
+E =  2.07E+08 , b1 =  3.72E+08 b2 =  7.57E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3OO => CH2O + CO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  9.43E+98 , A1 =  2.49E+185 A2 =  1.33E+30
+b =  -4.64E+01 , b1 =  -5.42E+01 b2 =  -5.19E+00
+E =  2.51E+08 , b1 =  3.72E+08 b2 =  1.54E+08
+pressure-dependent-Arrhenius
+Here has nan: C2H3OO <=> CH3O + CO
+Coefficient based on P:  nan
+[A1, A2], log[A1, A2], A_guess:  1.97e+17 -10700.0 [39.82198012         nan] nan
+[b1, b2], log[b1, b2], b_guess:  -2.23 1.33 [       nan 0.28517894] -0.9031592678167621
+[E1, E2], log[E1, E2], E_guess:  119620560.0 65354080.0 [8.07780583 7.81527271] 89416922.10507137
+Interpolation cCoefficient:  C2H3OO <=> CH3O + CO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  NAN , A1 =  1.97E+17 A2 =  -1.07E+04
+b =  -9.03E-01 , b1 =  -2.23E+00 b2 =  1.33E+00
+E =  8.94E+07 , b1 =  1.20E+08 b2 =  6.54E+07
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + OH <=> CH2CO + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  5.34E+01 , A1 =  5.10E+03 A2 =  1.46E+01
+b =  2.23E+00 , b1 =  1.65E+00 b2 =  2.45E+00
+E =  1.77E+07 , b1 =  1.42E+07 b2 =  1.87E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + OH <=> CH3 + CO
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  3.31E+03 , A1 =  4.31E+05 A2 =  8.25E+02
+b =  1.53E+00 , b1 =  9.20E-01 b2 =  1.77E+00
+E =  1.88E+07 , b1 =  1.56E+07 b2 =  1.97E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> CHCHO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.03E+07 , A1 =  3.70E+05 A2 =  1.45E+08
+b =  7.62E-01 , b1 =  1.23E+00 b2 =  4.80E-01
+E =  7.09E+07 , b1 =  6.68E+07 b2 =  7.42E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> CHCHO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.05E+04 , A1 =  1.67E+04 A2 =  7.21E+03
+b =  1.67E+00 , b1 =  1.59E+00 b2 =  1.73E+00
+E =  6.68E+07 , b1 =  6.66E+07 b2 =  6.70E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> CH2CHO + O
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  6.90E+15 , A1 =  8.63E+15 A2 =  5.78E+15
+b =  -2.17E+00 , b1 =  -2.27E+00 b2 =  -2.09E+00
+E =  9.79E+07 , b1 =  9.30E+07 b2 =  1.02E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> CH2CHO + O
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.94E-04 , A1 =  1.95E-03 A2 =  1.10E-04
+b =  3.35E+00 , b1 =  3.17E+00 b2 =  3.52E+00
+E =  4.97E+07 , b1 =  4.91E+07 b2 =  5.01E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> CHOCHO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  4.40E+16 , A1 =  9.38E+13 A2 =  5.91E+18
+b =  -2.88E+00 , b1 =  -2.03E+00 b2 =  -3.32E+00
+E =  9.46E+07 , b1 =  8.20E+07 b2 =  1.05E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> CHOCHO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  2.32E-05 , A1 =  6.06E-06 A2 =  6.76E-05
+b =  3.38E+00 , b1 =  3.53E+00 b2 =  3.27E+00
+E =  4.22E+07 , b1 =  3.86E+07 b2 =  4.50E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> CH2CO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  9.07E-02 , A1 =  8.99E-04 A2 =  3.58E+00
+b =  2.33E+00 , b1 =  2.97E+00 b2 =  1.97E+00
+E =  9.02E+07 , b1 =  8.26E+07 b2 =  9.63E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> CH2CO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  8.74E-16 , A1 =  6.87E-17 A2 =  6.63E-15
+b =  6.35E+00 , b1 =  6.67E+00 b2 =  6.15E+00
+E =  5.87E+07 , b1 =  5.49E+07 b2 =  6.16E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> CH2O + HCO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  4.47E+18 , A1 =  1.78E+25 A2 =  2.47E+13
+b =  -3.96E+00 , b1 =  -5.30E+00 b2 =  -1.70E+00
+E =  9.33E+07 , b1 =  1.05E+08 b2 =  8.38E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> CH2O + HCO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  7.94E-05 , A1 =  1.79E+01 A2 =  4.32E-09
+b =  2.74E+00 , b1 =  1.70E+00 b2 =  4.31E+00
+E =  3.68E+07 , b1 =  4.71E+07 b2 =  2.86E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 => CH2O + CO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.04E+19 , A1 =  4.14E+25 A2 =  5.77E+13
+b =  -3.96E+00 , b1 =  -5.30E+00 b2 =  -1.70E+00
+E =  9.33E+07 , b1 =  1.05E+08 b2 =  8.38E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 => CH2O + CO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.86E-04 , A1 =  4.19E+01 A2 =  1.01E-08
+b =  2.74E+00 , b1 =  1.70E+00 b2 =  4.31E+00
+E =  3.68E+07 , b1 =  4.71E+07 b2 =  2.86E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> CH3O + CO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  9.61E+16 , A1 =  2.43E+19 A2 =  1.17E+15
+b =  -3.34E+00 , b1 =  -3.96E+00 b2 =  -2.57E+00
+E =  9.41E+07 , b1 =  9.48E+07 b2 =  9.36E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> CH3O + CO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  4.39E-05 , A1 =  8.11E-03 A2 =  6.86E-07
+b =  2.82E+00 , b1 =  2.30E+00 b2 =  3.42E+00
+E =  4.13E+07 , b1 =  4.42E+07 b2 =  3.90E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> CH3 + CO2
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.15E+17 , A1 =  1.28E+24 A2 =  1.71E+12
+b =  -4.08E+00 , b1 =  -5.42E+00 b2 =  -1.80E+00
+E =  9.45E+07 , b1 =  1.06E+08 b2 =  8.52E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> CH3 + CO2
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.34E-06 , A1 =  2.89E-01 A2 =  3.90E-10
+b =  2.77E+00 , b1 =  1.79E+00 b2 =  4.21E+00
+E =  3.79E+07 , b1 =  4.70E+07 b2 =  3.06E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> C2H3OO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  7.70E+33 , A1 =  5.61E+35 A2 =  2.53E+32
+b =  -7.93E+00 , b1 =  -8.49E+00 b2 =  -7.26E+00
+E =  1.10E+08 , b1 =  1.10E+08 b2 =  1.10E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + HO2 <=> C2H3OO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.90E+16 , A1 =  1.39E+17 A2 =  1.42E+16
+b =  -3.10E+00 , b1 =  -3.30E+00 b2 =  -2.91E+00
+E =  5.61E+07 , b1 =  5.61E+07 b2 =  5.61E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  CH2CHO <=> CH2CO + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.50E+36 , A1 =  3.46E+36 A2 =  1.18E+36
+b =  -6.59E+00 , b1 =  -6.92E+00 b2 =  -6.48E+00
+E =  2.29E+08 , b1 =  2.22E+08 b2 =  2.31E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  CH2CHO <=> CH3 + CO
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  6.14E+33 , A1 =  2.15E+35 A2 =  2.23E+33
+b =  -6.16E+00 , b1 =  -6.67E+00 b2 =  -5.97E+00
+E =  2.10E+08 , b1 =  2.07E+08 b2 =  2.11E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  CH2CHO + H <=> CH3 + HCO
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  7.72E+18 , A1 =  2.79E+22 A2 =  7.47E+17
+b =  -2.12E+00 , b1 =  -3.10E+00 b2 =  -1.69E+00
+E =  5.53E+07 , b1 =  5.21E+07 b2 =  5.62E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H5 + HCO <=> CH2CHO + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.29E+20 , A1 =  1.88E+22 A2 =  6.50E+19
+b =  -2.66E+00 , b1 =  -3.25E+00 b2 =  -2.44E+00
+E =  5.10E+07 , b1 =  4.43E+07 b2 =  5.29E+07
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  O2C2H4OH => 2 CH2O + OH
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.45E+18 , A1 =  5.00E+16 A2 =  3.80E+18
+b =  -2.53E+00 , b1 =  -2.26E+00 b2 =  -2.60E+00
+E =  8.13E+07 , b1 =  7.34E+07 b2 =  8.36E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  NC3H7 + O2 <=> C3H6 + HO2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.11E-01 , A1 =  2.63E-03 A2 =  7.37E-01
+b =  2.84E+00 , b1 =  3.46E+00 b2 =  2.71E+00
+E =  2.02E+07 , b1 =  1.04E+07 b2 =  2.30E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  IC3H7 + O2 <=> C3H6 + HO2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.39E+07 , A1 =  4.91E+14 A2 =  9.84E+04
+b =  2.81E-01 , b1 =  -1.66E+00 b2 =  1.34E+00
+E =  2.40E+07 , b1 =  2.91E+07 b2 =  2.25E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  NC3H7 + O2 <=> C3H6OOH1-2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.85E+13 , A1 =  1.30E+11 A2 =  7.63E+13
+b =  -2.19E+00 , b1 =  -1.73E+00 b2 =  -2.30E+00
+E =  3.42E+07 , b1 =  2.16E+07 b2 =  3.78E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  NC3H7 + O2 <=> C3H6OOH1-3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.27E-18 , A1 =  3.94E-21 A2 =  6.58E-18
+b =  7.98E+00 , b1 =  8.88E+00 b2 =  7.80E+00
+E =  -1.69E+07 , b1 =  -2.59E+07 b2 =  -1.44E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  NC3H7 + O2 <=> C3H6OOH1-3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.24E+13 , A1 =  1.02E+18 A2 =  1.05E+12
+b =  -1.05E+00 , b1 =  -2.26E+00 b2 =  -4.86E-01
+E =  6.89E+07 , b1 =  7.76E+07 b2 =  6.64E+07
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H6OOH1-2 <=> C3H6 + HO2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.67E-14 , A1 =  1.16E-09 A2 =  1.27E-15
+b =  8.38E+00 , b1 =  7.46E+00 b2 =  8.78E+00
+E =  4.39E+07 , b1 =  6.17E+07 b2 =  3.88E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H6OOH1-3 <=> C3H6 + HO2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  8.14E+15 , A1 =  1.60E+10 A2 =  3.45E+17
+b =  -2.51E+00 , b1 =  -4.44E-01 b2 =  -2.82E+00
+E =  8.65E+07 , b1 =  7.34E+07 b2 =  9.03E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H6OOH1-3 + O2 <=> AC3H5OOH + HO2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.21E-03 , A1 =  3.08E+08 A2 =  6.76E-07
+b =  2.89E+00 , b1 =  1.79E-01 b2 =  4.57E+00
+E =  2.25E+07 , b1 =  3.59E+07 b2 =  1.87E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H6OOH1-2 + O2 <=> AC3H5OOH + HO2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.63E+03 , A1 =  1.51E+13 A2 =  4.35E+00
+b =  1.13E+00 , b1 =  -1.27E+00 b2 =  2.55E+00
+E =  2.98E+07 , b1 =  3.93E+07 b2 =  2.71E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + CH3 <=> C3H5-A + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.06E+26 , A1 =  1.32E+27 A2 =  5.16E+25
+b =  -4.16E+00 , b1 =  -4.54E+00 b2 =  -4.03E+00
+E =  9.54E+07 , b1 =  8.08E+07 b2 =  9.96E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + CH3 <=> C3H5-A + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  6.24E-03 , A1 =  4.10E+03 A2 =  1.37E-04
+b =  3.18E+00 , b1 =  1.71E+00 b2 =  3.91E+00
+E =  -1.70E+05 , b1 =  4.42E+06 b2 =  -1.48E+06
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H6 <=> C2H3 + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.03E+66 , A1 =  8.12E+71 A2 =  2.15E+64
+b =  -1.42E+01 , b1 =  -1.58E+01 b2 =  -1.34E+01
+E =  5.66E+08 , b1 =  5.69E+08 b2 =  5.65E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H6 <=> C2H3 + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  4.72E+40 , A1 =  1.06E+47 A2 =  7.29E+38
+b =  -7.58E+00 , b1 =  -9.27E+00 b2 =  -6.70E+00
+E =  4.58E+08 , b1 =  4.67E+08 b2 =  4.55E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H6 <=> C3H5-A + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  7.59E+58 , A1 =  6.40E+65 A2 =  8.05E+56
+b =  -1.24E+01 , b1 =  -1.42E+01 b2 =  -1.15E+01
+E =  5.13E+08 , b1 =  5.23E+08 b2 =  5.10E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H6 <=> C3H5-A + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.58E+30 , A1 =  4.73E+35 A2 =  4.34E+28
+b =  -4.79E+00 , b1 =  -6.26E+00 b2 =  -4.06E+00
+E =  3.92E+08 , b1 =  4.00E+08 b2 =  3.90E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H6 + H <=> NC3H7
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  5.86E+27 , A1 =  6.20E+38 A2 =  4.22E+24
+b =  -6.12E+00 , b1 =  -8.89E+00 b2 =  -4.39E+00
+E =  4.40E+07 , b1 =  6.12E+07 b2 =  3.91E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H6 + H <=> NC3H7
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  6.33E-06 , A1 =  1.46E+22 A2 =  1.00E-13
+b =  -1.63E+00 , b1 =  -4.28E+00 b2 =  0.00E+00
+E =  4.87E+06 , b1 =  2.20E+07 b2 =  0.00E+00
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H6 + H <=> C2H4 + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.22E+20 , A1 =  9.25E+19 A2 =  1.32E+20
+b =  -2.46E+00 , b1 =  -2.60E+00 b2 =  -2.42E+00
+E =  6.57E+07 , b1 =  5.40E+07 b2 =  6.90E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H6 + H <=> C2H4 + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  5.96E+00 , A1 =  1.24E+02 A2 =  2.51E+00
+b =  2.81E+00 , b1 =  2.52E+00 b2 =  2.91E+00
+E =  1.64E+07 , b1 =  1.54E+07 b2 =  1.67E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H6 + H <=> IC3H7
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  3.37E+48 , A1 =  5.30E+53 A2 =  1.11E+47
+b =  -1.16E+01 , b1 =  -1.31E+01 b2 =  -1.08E+01
+E =  8.50E+07 , b1 =  8.65E+07 b2 =  8.45E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H6 + H <=> IC3H7
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.51E+21 , A1 =  6.11E+23 A2 =  2.73E+20
+b =  -3.61E+00 , b1 =  -4.44E+00 b2 =  -3.26E+00
+E =  1.98E+07 , b1 =  2.17E+07 b2 =  1.92E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H4 + CH3 <=> NC3H7
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.55E+38 , A1 =  1.81E+42 A2 =  2.04E+37
+b =  -8.81E+00 , b1 =  -1.00E+01 b2 =  -8.25E+00
+E =  1.01E+08 , b1 =  9.94E+07 b2 =  1.01E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H4 + CH3 <=> NC3H7
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  4.29E+19 , A1 =  3.85E+24 A2 =  1.66E+18
+b =  -3.90E+00 , b1 =  -5.38E+00 b2 =  -3.17E+00
+E =  4.40E+07 , b1 =  4.79E+07 b2 =  4.28E+07
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H5-A + HO2 <=> C3H5O + OH
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  5.14E+03 , A1 =  2.93E+12 A2 =  1.64E+01
+b =  1.50E+00 , b1 =  -6.84E-01 b2 =  2.74E+00
+E =  7.08E+06 , b1 =  1.51E+07 b2 =  4.79E+06
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H5-A + HO2 <=> AC3H5OOH
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.14E+30 , A1 =  2.79E+34 A2 =  1.44E+29
+b =  -6.62E+00 , b1 =  -7.92E+00 b2 =  -6.01E+00
+E =  2.57E+07 , b1 =  2.72E+07 b2 =  2.53E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H5-A + HO2 <=> C2H3CHO + H2O
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  7.52E-06 , A1 =  3.10E+02 A2 =  5.07E-08
+b =  3.53E+00 , b1 =  1.59E+00 b2 =  4.59E+00
+E =  5.51E+06 , b1 =  1.12E+07 b2 =  3.88E+06
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  AC3H5OOH <=> C2H3CHO + H2O
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  7.66E+18 , A1 =  2.54E+28 A2 =  1.48E+16
+b =  -2.57E+00 , b1 =  -5.00E+00 b2 =  -1.12E+00
+E =  1.96E+08 , b1 =  2.09E+08 b2 =  1.92E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  AC3H5OOH <=> C3H5O + OH
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.46E+29 , A1 =  2.39E+36 A2 =  1.28E+27
+b =  -4.64E+00 , b1 =  -6.54E+00 b2 =  -3.61E+00
+E =  1.97E+08 , b1 =  2.07E+08 b2 =  1.94E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H5O <=> C2H3 + CH2O
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.80E+31 , A1 =  6.50E+29 A2 =  4.63E+31
+b =  -5.54E+00 , b1 =  -5.37E+00 b2 =  -5.59E+00
+E =  1.19E+08 , b1 =  1.11E+08 b2 =  1.21E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H5O <=> C2H3CHO + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.47E+27 , A1 =  1.76E+28 A2 =  1.41E+27
+b =  -4.44E+00 , b1 =  -4.89E+00 b2 =  -4.28E+00
+E =  9.85E+07 , b1 =  9.52E+07 b2 =  9.95E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H5O <=> C2H4 + HCO
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.01E+22 , A1 =  8.42E+25 A2 =  1.86E+21
+b =  -3.25E+00 , b1 =  -4.40E+00 b2 =  -2.73E+00
+E =  9.78E+07 , b1 =  9.36E+07 b2 =  9.90E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + CH2O <=> C2H3CHO + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  7.21E+07 , A1 =  1.35E+06 A2 =  2.24E+08
+b =  4.63E-01 , b1 =  9.33E-01 b2 =  3.57E-01
+E =  3.09E+07 , b1 =  2.16E+07 b2 =  3.35E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H3 + CH2O <=> C2H4 + HCO
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.00E+11 , A1 =  3.45E+10 A2 =  3.31E+11
+b =  -8.37E-01 , b1 =  -7.26E-01 b2 =  -8.66E-01
+E =  4.21E+07 , b1 =  2.91E+07 b2 =  4.59E+07
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H4-A + H <=> C3H4-P + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.96E+17 , A1 =  1.79E+04 A2 =  1.02E+21
+b =  -2.20E+00 , b1 =  1.98E+00 b2 =  -2.67E+00
+E =  5.48E+07 , b1 =  1.89E+07 b2 =  6.51E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H4-A + H <=> C3H5-A
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  6.25E+36 , A1 =  2.29E+23 A2 =  4.23E+40
+b =  -8.16E+00 , b1 =  -4.32E+00 b2 =  -8.61E+00
+E =  7.90E+07 , b1 =  2.58E+07 b2 =  9.42E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H4-A + H <=> C2H2 + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.68E+12 , A1 =  3.31E+05 A2 =  1.37E+14
+b =  -5.21E-01 , b1 =  1.14E+00 b2 =  -7.90E-01
+E =  6.56E+07 , b1 =  3.72E+07 b2 =  7.37E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H4-P + H <=> C2H2 + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.12E+12 , A1 =  1.72E+11 A2 =  1.90E+12
+b =  -2.34E-01 , b1 =  -1.00E-02 b2 =  -2.90E-01
+E =  3.37E+07 , b1 =  2.98E+07 b2 =  3.48E+07
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H4-P + H <=> C3H5-A
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.32E+53 , A1 =  2.20E+56 A2 =  1.60E+52
+b =  -1.25E+01 , b1 =  -1.36E+01 b2 =  -1.21E+01
+E =  1.54E+08 , b1 =  1.46E+08 b2 =  1.57E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C2H2 + CH3 <=> C3H5-A
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  5.05E+42 , A1 =  4.40E+46 A2 =  3.80E+41
+b =  -1.02E+01 , b1 =  -1.14E+01 b2 =  -9.63E+00
+E =  1.56E+08 , b1 =  1.54E+08 b2 =  1.57E+08
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  CH3CHCHO <=> C2H3CHO + H
+P =  6.08E+06 , P0 =  1.00E+06 P1 =  1.00E+07
+A =  4.25E+38 , A1 =  5.82E+24 A2 =  2.82E+42
+b =  -7.73E+00 , b1 =  -3.71E+00 b2 =  -8.17E+00
+E =  2.40E+08 , b1 =  1.87E+08 b2 =  2.54E+08
+pressure-dependent-Arrhenius
+Interpolation cCoefficient:  C3H3 <=> C3H2 + H
+P =  6.08E+06 , P0 =  3.04E+06 P1 =  1.01E+07
+A =  1.89E+29 , A1 =  4.43E+31 A2 =  3.38E+27
+b =  -3.99E+00 , b1 =  -4.59E+00 b2 =  -3.33E+00
+E =  4.40E+08 , b1 =  4.44E+08 b2 =  4.37E+08
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+Reactions converted to fixed pressure : 
+
+CO + OH <=> CO2 + H
+CH3 + OH <=> CH2O + H2
+CH3 + OH <=> CH3O + H
+CH3 + OH <=> H2 + HCOH
+2 CH3 <=> C2H5 + H
+C2H5 + OH <=> C2H4 + H2O
+C2H5 + O2 <=> C2H5O2
+C2H5 + O2 <=> C2H4 + HO2
+C2H5O2 <=> C2H4 + HO2
+C2H3 + H <=> C2H4
+C2H4 + OH <=> CH2O + CH3
+C2H4 + OH <=> PC2H4OH
+C2H3 + O2 <=> C2H3OO
+C2H3 + O2 <=> C2H3OO
+C2H3 + O2 <=> CHCHO + OH
+C2H3 + O2 <=> CHCHO + OH
+C2H3 + O2 <=> CH2CHO + O
+C2H3 + O2 <=> CH2CHO + O
+C2H3 + O2 <=> C2H2 + HO2
+C2H3 + O2 <=> C2H2 + HO2
+C2H3 + O2 <=> CHOCHO + H
+C2H3 + O2 <=> CHOCHO + H
+C2H3 + O2 <=> CH2CO + OH
+C2H3 + O2 <=> CH2CO + OH
+C2H3 + O2 <=> CH2O + HCO
+C2H3 + O2 <=> CH2O + HCO
+C2H3 + O2 => CH2O + CO + H
+C2H3 + O2 => CH2O + CO + H
+C2H3 + O2 <=> CH3O + CO
+C2H3 + O2 <=> CH3O + CO
+C2H3 + O2 <=> CH3 + CO2
+C2H3 + O2 <=> CH3 + CO2
+C2H3OO <=> CHCHO + OH
+C2H3OO <=> CHCHO + OH
+C2H3OO <=> CH2CHO + O
+C2H3OO <=> CH2CHO + O
+C2H3OO <=> CHOCHO + H
+C2H3OO <=> CHOCHO + H
+C2H3OO <=> CH2CO + OH
+C2H3OO <=> CH2CO + OH
+C2H3OO <=> CH2O + HCO
+C2H3OO <=> CH2O + HCO
+C2H3OO => CH2O + CO + H
+C2H3OO <=> CH3O + CO
+CHOCHO <=> CH2O + CO
+CHOCHO <=> CO + HCOH
+CHOCHO => 2 CO + H2
+CHOCHO <=> 2 HCO
+C2H2 + OH <=> CH2CO + H
+C2H2 + OH <=> CH3 + CO
+C2H2 + HO2 <=> CHCHO + OH
+C2H2 + HO2 <=> CHCHO + OH
+C2H2 + HO2 <=> CH2CHO + O
+C2H2 + HO2 <=> CH2CHO + O
+C2H2 + HO2 <=> CHOCHO + H
+C2H2 + HO2 <=> CHOCHO + H
+C2H2 + HO2 <=> CH2CO + OH
+C2H2 + HO2 <=> CH2CO + OH
+C2H2 + HO2 <=> CH2O + HCO
+C2H2 + HO2 <=> CH2O + HCO
+C2H2 + HO2 => CH2O + CO + H
+C2H2 + HO2 => CH2O + CO + H
+C2H2 + HO2 <=> CH3O + CO
+C2H2 + HO2 <=> CH3O + CO
+C2H2 + HO2 <=> CH3 + CO2
+C2H2 + HO2 <=> CH3 + CO2
+C2H2 + HO2 <=> C2H3OO
+C2H2 + HO2 <=> C2H3OO
+CH2CHO <=> CH2CO + H
+CH2CHO <=> CH3 + CO
+CH2CHO + H <=> CH3 + HCO
+C2H5 + HCO <=> CH2CHO + CH3
+CH2CHO + O2 <=> CH2CO + HO2
+CH2CHO + O2 => CH2O + CO + OH
+O2C2H4OH => 2 CH2O + OH
+NC3H7 + O2 <=> C3H6 + HO2
+IC3H7 + O2 <=> C3H6 + HO2
+NC3H7 + O2 <=> C3H6OOH1-2
+NC3H7 + O2 <=> C3H6OOH1-3
+NC3H7 + O2 <=> C3H6OOH1-3
+C3H6OOH1-2 <=> C3H6OOH1-3
+C3H6OOH1-2 <=> C3H6 + HO2
+C3H6OOH1-3 <=> C3H6 + HO2
+C3H6OOH1-3 + O2 <=> AC3H5OOH + HO2
+C3H6OOH1-2 + O2 <=> AC3H5OOH + HO2
+C2H3 + CH3 <=> C3H5-A + H
+C2H3 + CH3 <=> C3H5-A + H
+C3H6 <=> C2H3 + CH3
+C3H6 <=> C2H3 + CH3
+C3H6 <=> C3H5-A + H
+C3H6 <=> C3H5-A + H
+C3H6 + H <=> NC3H7
+C3H6 + H <=> NC3H7
+C3H6 + H <=> C2H4 + CH3
+C3H6 + H <=> C2H4 + CH3
+C3H6 + H <=> IC3H7
+C3H6 + H <=> IC3H7
+C2H4 + CH3 <=> NC3H7
+C2H4 + CH3 <=> NC3H7
+2 C3H5-A <=> C3H4-A + C3H6
+C3H5-A + OH => C2H3CHO + 2 H
+C3H5-A + O2 <=> C3H4-A + HO2
+C3H5-A + O2 <=> C2H3CHO + OH
+C3H5-A + HO2 <=> C3H5O + OH
+C3H5-A + HO2 <=> AC3H5OOH
+C3H5-A + HO2 <=> C2H3CHO + H2O
+AC3H5OOH <=> C2H3CHO + H2O
+AC3H5OOH <=> C3H5O + OH
+C3H5O <=> C2H3 + CH2O
+C3H5O <=> C2H3CHO + H
+C3H5O <=> C2H4 + HCO
+C2H3 + CH2O <=> C2H3CHO + H
+C2H3 + CH2O <=> C2H4 + HCO
+C3H4-A <=> C3H4-P
+C3H3 + H <=> C3H4-P
+C3H3 + H <=> C3H4-A
+C3H4-A + H <=> C3H4-P + H
+C3H4-A + H <=> C3H5-A
+C3H4-A + H <=> C2H2 + CH3
+C3H4-P + H <=> C2H2 + CH3
+C3H4-P + H <=> C3H5-A
+C2H2 + CH3 <=> C3H5-A
+C3H4-P + O <=> C3H3 + OH
+C3H4-P + O <=> C2H3 + HCO
+C3H4-P + O <=> C2H4 + CO
+C3H4-P + O <=> C2H2 + CO + H2
+C3H4-P + O <=> CH3 + HCCO
+C3H4-P + O <=> C2H3CHO
+C3H4-P + O <=> C2H3 + CO + H
+C3H4-P + O <=> C2H3CO + H
+CH3CHCHO <=> C2H3CHO + H
+C3H3 <=> C3H2 + H
+C3H3 + OH <=> C2H3 + HCO
+C3H3 + OH <=> C2H2 + CO + H2
+C3H3 + OH <=> C2H4 + CO
+2 C3H3 => C6H6
+C3H2 + OH => C2H2 + CO + H
+
+ Variable pressure and interpolated fixed pressure reaction rates at 300K 
+
+Plog rate : 14311764.98133567    	 Fixed P rate : 14167742.663568502   	 Relative change :  0.010063211487541234
+Plog rate : 18278.63757007459    	 Fixed P rate : 4858.46532698827     	 Relative change :  0.7341998106608093  
+Plog rate : 0.4254921863898469   	 Fixed P rate : 0.3974305254794068   	 Relative change :  0.06595106046137657 
+Plog rate : 229586.88491462296   	 Fixed P rate : 223761.62416845575   	 Relative change :  0.025372794044108703
+Plog rate : 0.10354840323943962  	 Fixed P rate : 0.02273288773331354  	 Relative change :  0.7804612430309787  
+Plog rate : 1950370.0216871428   	 Fixed P rate : 764079.782343672     	 Relative change :  0.6082385527630729  
+Plog rate : 1328853408.0465515   	 Fixed P rate : 609764080.3758286    	 Relative change :  0.5411351796341498  
+Plog rate : 19950.260405218334   	 Fixed P rate : 17571.19277369345    	 Relative change :  0.11924995379521962 
+Plog rate : 9.709761154187015e-11 	 Fixed P rate : 4.3680992189778945e-11 	 Relative change :  0.5501331959031458  
+Plog rate : 120498957820.93855   	 Fixed P rate : 118285889158.5717    	 Relative change :  0.018365873882954836
+Plog rate : 26.20971779028089    	 Fixed P rate : 18.480527059381558   	 Relative change :  0.2948978998074324  
+Plog rate : 509856451.63886446   	 Fixed P rate : 97871157.33336747    	 Relative change :  0.80804173994705    
+Plog rate : 1732892.0745853924   	 Fixed P rate : 776536.6244366793    	 Relative change :  0.5518840233472292  
+Plog rate : 4318867084.534459    	 Fixed P rate : 4176107879.930054    	 Relative change :  0.03305478075850377 
+Plog rate : 36.641518071526356   	 Fixed P rate : 20.21660225744902    	 Relative change :  0.448259697701797   
+Plog rate : 97793.86033022564    	 Fixed P rate : 97468.85482229161    	 Relative change :  0.0033233733369002977
+Plog rate : 9894.869502858324    	 Fixed P rate : 9888.699170418507    	 Relative change :  0.0006235890668426051
+Plog rate : 17552662.345964294   	 Fixed P rate : 16232163.046891375   	 Relative change :  0.0752307127571749  
+Plog rate : 425.1773647628363    	 Fixed P rate : 70.31481187405818    	 Relative change :  0.8346224006697069  
+Plog rate : 36166.276732508406   	 Fixed P rate : 2194.589693981189    	 Relative change :  0.9393194463944209  
+Plog rate : 856.9682640772459    	 Fixed P rate : 641.4509056711305    	 Relative change :  0.2514881442408805  
+Plog rate : 13324951.901345206   	 Fixed P rate : 10851397.252842518   	 Relative change :  0.18563328909674892 
+Plog rate : 0.9370385340545906   	 Fixed P rate : 0.5536261678326104   	 Relative change :  0.40917459878938456 
+Plog rate : 50.945493770094735   	 Fixed P rate : 49.13644198242149    	 Relative change :  0.03550955450225061 
+Plog rate : 94734.40387138337    	 Fixed P rate : 2233.4980969995763   	 Relative change :  0.976423579969618   
+Plog rate : 39360742.270283945   	 Fixed P rate : 4.1707800541737945e-09 	 Relative change :  0.9999999999999998  
+Plog rate : 221046.9423665614    	 Fixed P rate : 5211.495559665664    	 Relative change :  0.9764235799696181  
+Plog rate : 91748072.5371539     	 Fixed P rate : 9.721895697981903e-09 	 Relative change :  0.9999999999999999  
+Plog rate : 2602.439197185908    	 Fixed P rate : 28.233536902931707   	 Relative change :  0.9891511252468602  
+Plog rate : 1334590.9364287178   	 Fixed P rate : 3.4233250862295343e-12 	 Relative change :  1.0                 
+Plog rate : 2468.2491719967015   	 Fixed P rate : 45.308334536327045   	 Relative change :  0.98164353297456    
+Plog rate : 1042830.7454658761   	 Fixed P rate : 1.2138053508846474e-11 	 Relative change :  1.0                 
+Plog rate : 2.5111623461518175e-39 	 Fixed P rate : 6.223669420146558e-73 	 Relative change :  1.0                 
+Plog rate : 1.3117661587735603e-18 	 Fixed P rate : 2.619094701678995e-23 	 Relative change :  0.9999800338293212  
+Plog rate : 2.3468267374390153e-18 	 Fixed P rate : 9.11051425347344e-19 	 Relative change :  0.6117943387923334  
+Plog rate : 1.0134022575280201e-13 	 Fixed P rate : 8.051197043788132e-14 	 Relative change :  0.20552801377931415 
+Plog rate : 1.6758767475988012e-12 	 Fixed P rate : 1.4818623609247757e-12 	 Relative change :  0.115768887510379   
+Plog rate : 5.541219455492176e-10 	 Fixed P rate : 3.3994449358128887e-20 	 Relative change :  0.9999999999386517  
+Plog rate : 2.3619943294525676e-24 	 Fixed P rate : 1.9466424606045633e-24 	 Relative change :  0.17584795343021387 
+Plog rate : 1.868096738018329e-20 	 Fixed P rate : 9.949892634944245e-21 	 Relative change :  0.4673780842046189  
+Plog rate : 1.0558433777820498e-10 	 Fixed P rate : 4.5449322365151564e-11 	 Relative change :  0.5695448461245799  
+Plog rate : 2.4382813571786755e-10 	 Fixed P rate : 1.5006194336292545e-66 	 Relative change :  1.0                 
+Plog rate : 3.541026030097553e-08 	 Fixed P rate : 2.420656030033494e-60 	 Relative change :  1.0                 
+Plog rate : 5.119377373363815e-07 	 Fixed P rate : nan                  	 Relative change :  nan                 
+Plog rate : 1.8882924071306275e-33 	 Fixed P rate : 1.8882924071306312e-33 	 Relative change :  1.99293959854888e-15
+Plog rate : 8.979725436458373e-35 	 Fixed P rate : 8.979725436458314e-35 	 Relative change :  6.548176114972565e-15
+Plog rate : 1.5095970148890723e-35 	 Fixed P rate : 1.509597014889065e-35 	 Relative change :  4.780391485988203e-15
+Plog rate : 5.027509205227958e-38 	 Fixed P rate : 5.027509205227993e-38 	 Relative change :  7.060684497404602e-15
+Plog rate : 18613.460673579113   	 Fixed P rate : 14599.871948516377   	 Relative change :  0.2156282915599799  
+Plog rate : 14807.987632762037   	 Fixed P rate : 11297.370594523747   	 Relative change :  0.2370759029046729  
+Plog rate : 0.00047867969472283593 	 Fixed P rate : 0.0003580233374250091 	 Relative change :  0.2520607383768158  
+Plog rate : 0.000328499271803881 	 Fixed P rate : 0.000324276329520649 	 Relative change :  0.012855256147274322
+Plog rate : 2.572935055953518e-07 	 Fixed P rate : 2.519409072762366e-07 	 Relative change :  0.02080347230968699 
+Plog rate : 0.00019070737646739453 	 Fixed P rate : 0.00017706735382128774 	 Relative change :  0.07152330915966872 
+Plog rate : 2.2888763296711468e-07 	 Fixed P rate : 1.1026759887531652e-07 	 Relative change :  0.5182457110246792  
+Plog rate : 0.0002577373656270872 	 Fixed P rate : 0.00024712105164511087 	 Relative change :  0.04119043413106342 
+Plog rate : 1.709756493022315e-11 	 Fixed P rate : 1.061345981690575e-11 	 Relative change :  0.3792414381685154  
+Plog rate : 3.413854015274028e-10 	 Fixed P rate : 2.933947441570606e-10 	 Relative change :  0.1405761850261485  
+Plog rate : 1.7632153351804228e-06 	 Fixed P rate : 3.960580474691151e-08 	 Relative change :  0.9775377380421554  
+Plog rate : 0.002026082405182865 	 Fixed P rate : 0.00019596714956164306 	 Relative change :  0.9032777990370259  
+Plog rate : 4.1109516793958285e-06 	 Fixed P rate : 9.234127351863047e-08 	 Relative change :  0.9775377380421553  
+Plog rate : 0.004739437522488863 	 Fixed P rate : 0.0004584088285016274 	 Relative change :  0.9032777990370261  
+Plog rate : 5.093688700356593e-08 	 Fixed P rate : 2.1704545469452743e-08 	 Relative change :  0.5738933659622097  
+Plog rate : 4.89893023498001e-05 	 Fixed P rate : 2.7052560133827035e-05 	 Relative change :  0.4477863771020323  
+Plog rate : 4.0329608470367506e-08 	 Fixed P rate : 8.780226314753269e-10 	 Relative change :  0.9782288332374846  
+Plog rate : 4.992665437844739e-05 	 Fixed P rate : 6.248578797893646e-06 	 Relative change :  0.8748448323709216  
+Plog rate : 2.427859694476602e-05 	 Fixed P rate : 1.2109756996568064e-05 	 Relative change :  0.5012167703052262  
+Plog rate : 0.151970211814927    	 Fixed P rate : 0.1387859003804475   	 Relative change :  0.08675589299392229 
+Plog rate : 1.1091729472930839e-20 	 Fixed P rate : 1.0223595308360128e-20 	 Relative change :  0.07826860244737992 
+Plog rate : 1.0238412132220527e-18 	 Fixed P rate : 8.457718148150729e-19 	 Relative change :  0.1739228662680917  
+Plog rate : 19724.586230743735   	 Fixed P rate : 10292.768232858809   	 Relative change :  0.47817570860797165 
+Plog rate : 96977.37943195869    	 Fixed P rate : 75785.31950137836    	 Relative change :  0.21852580524151116 
+Plog rate : 2.900774233659849e-10 	 Fixed P rate : 2.90077423365985e-10 	 Relative change :  3.564482039633736e-16
+Plog rate : 124.00201970803202   	 Fixed P rate : 124.00201970803202   	 Relative change :  0.0                 
+Plog rate : 0.005631995491129277 	 Fixed P rate : 0.005370173543347986 	 Relative change :  0.046488309195857065
+Plog rate : 856.7736356270535    	 Fixed P rate : 704.9309085041725    	 Relative change :  0.1772261899862858  
+Plog rate : 43697.35190351115    	 Fixed P rate : 4632.34438774397     	 Relative change :  0.8939902720427378  
+Plog rate : 84.59295551604959    	 Fixed P rate : 74.95612584703925    	 Relative change :  0.11392000208790401 
+Plog rate : 92303.80379714924    	 Fixed P rate : 64375.465713442536   	 Relative change :  0.3025697418178259  
+Plog rate : 0.14862408024915313  	 Fixed P rate : 0.05689554841007662  	 Relative change :  0.6171848578326135  
+Plog rate : 1.3476781416885084e-08 	 Fixed P rate : 1.3476781416885078e-08 	 Relative change :  4.9102561625977045e-16
+Plog rate : 0.651404276552572    	 Fixed P rate : 0.36350088994593427  	 Relative change :  0.4419734364200207  
+Plog rate : 1.4626384270353188e-05 	 Fixed P rate : 4.236233686805868e-06 	 Relative change :  0.7103704094939949  
+Plog rate : 118.5581342161759    	 Fixed P rate : 2.101017184630294    	 Relative change :  0.9822785910176407  
+Plog rate : 280.7733095262802    	 Fixed P rate : 10.734675144173336   	 Relative change :  0.9617674658524885  
+Plog rate : 0.14166054698132785  	 Fixed P rate : 0.12726523141881677  	 Relative change :  0.10161838189435    
+Plog rate : 2001826.0418872286   	 Fixed P rate : 510002.1214260843    	 Relative change :  0.7452315482192059  
+Plog rate : 9.862869191897284e-68 	 Fixed P rate : 2.0438733924795394e-68 	 Relative change :  0.7927709115154181  
+Plog rate : 1.0032818886994837e-57 	 Fixed P rate : 1.7322276817763653e-58 	 Relative change :  0.8273438700242276  
+Plog rate : 3.54542950262028e-61 	 Fixed P rate : 5.302290827471427e-62 	 Relative change :  0.8504471510841571  
+Plog rate : 4.9156816629769e-50  	 Fixed P rate : 1.2523606067238772e-50 	 Relative change :  0.7452315482192032  
+Plog rate : 5704774.815197119    	 Fixed P rate : 86632.04241947044    	 Relative change :  0.9848141170815912  
+Plog rate : 3.990199640734238e-09 	 Fixed P rate : 8.239075069970919e-11 	 Relative change :  0.979351722189883   
+Plog rate : 358.83318990117345   	 Fixed P rate : 353.53085262989555   	 Relative change :  0.014776607684306537
+Plog rate : 82847.39391185173    	 Fixed P rate : 77629.27542890115    	 Relative change :  0.06298470279587276 
+Plog rate : 509543.7617190858    	 Fixed P rate : 114811.75948641487   	 Relative change :  0.774677332720028   
+Plog rate : 1028044127.6116841   	 Fixed P rate : 635461376.4872538    	 Relative change :  0.3818734435422191  
+Plog rate : 0.26625068598046353  	 Fixed P rate : 0.10137594637880962  	 Relative change :  0.6192462528106004  
+Plog rate : 810.3442019248188    	 Fixed P rate : 204.37415548791785   	 Relative change :  0.7477934006284418  
+Plog rate : 1387116.4757822808   	 Fixed P rate : 1387116.47578228     	 Relative change :  5.035567979737866e-16
+Plog rate : 1.7370455730003084e-06 	 Fixed P rate : 2.9558187988161555e-07 	 Relative change :  0.8298364277391569  
+Plog rate : 7.483558678478252e-12 	 Fixed P rate : 7.483558678478254e-12 	 Relative change :  2.1588487553907368e-16
+Plog rate : 3.239333835920819e-08 	 Fixed P rate : 3.239333835920822e-08 	 Relative change :  1.0214206431957844e-15
+Plog rate : 24196263.829498097   	 Fixed P rate : 1534394.1832409513   	 Relative change :  0.9365854912951337  
+Plog rate : 8174051842.069017    	 Fixed P rate : 2761914875.379502    	 Relative change :  0.6621118964324546  
+Plog rate : 4354.483460726823    	 Fixed P rate : 461.6176070660498    	 Relative change :  0.8939902720427374  
+Plog rate : 7.292537187936402e-21 	 Fixed P rate : 2.5771146079832917e-22 	 Relative change :  0.9646609329295371  
+Plog rate : 2.281029280794445e-16 	 Fixed P rate : 2.624252948145582e-17 	 Relative change :  0.8849531231255569  
+Plog rate : 0.000677506235881389 	 Fixed P rate : 0.0006633413773235406 	 Relative change :  0.02090734787026852 
+Plog rate : 0.2000283550849746   	 Fixed P rate : 0.17236628572988225  	 Relative change :  0.13829074054696472 
+Plog rate : 0.003919996800973876 	 Fixed P rate : 0.0016451542908335862 	 Relative change :  0.580317440456873   
+Plog rate : 4862.940566113609    	 Fixed P rate : 4299.24694844009     	 Relative change :  0.1159162054337042  
+Plog rate : 78.57522764838107    	 Fixed P rate : 77.87750525399571    	 Relative change :  0.008879673852268392
+Plog rate : 2.0094527572645482e-41 	 Fixed P rate : 2.0094527572645398e-41 	 Relative change :  4.18597812781122e-15
+Plog rate : 71067921050.94962    	 Fixed P rate : 71067921050.94954    	 Relative change :  1.0735356287938095e-15
+Plog rate : 43854264076.91594    	 Fixed P rate : 43854264076.915924   	 Relative change :  3.479431107483101e-16
+Plog rate : 134311.63892745515   	 Fixed P rate : 195.4615617287813    	 Relative change :  0.9985447161296694  
+Plog rate : 142589704.4030006    	 Fixed P rate : 648.9123696554793    	 Relative change :  0.9999954490938011  
+Plog rate : 4.399550595181964    	 Fixed P rate : 0.3315676058065457   	 Relative change :  0.9246360284685321  
+Plog rate : 416694.38880106603   	 Fixed P rate : 403078.15676488564   	 Relative change :  0.032676782798438185
+Plog rate : 3.0133818277634573e-05 	 Fixed P rate : 1.4122840397503618e-05 	 Relative change :  0.5313292106767086  
+Plog rate : 4.2677404899674077e-10 	 Fixed P rate : 1.639637847018385e-10 	 Relative change :  0.6158065723834799  
+Plog rate : 34645.271379451515   	 Fixed P rate : 34645.27137945154    	 Relative change :  6.3003902043315e-16 
+Plog rate : 5424704.195137088    	 Fixed P rate : 5424704.195137084    	 Relative change :  6.867269005748565e-16
+Plog rate : 49223908.53990687    	 Fixed P rate : 49223908.539906934   	 Relative change :  1.3622491053905514e-15
+Plog rate : 1340813.765508574    	 Fixed P rate : 1340813.7655085742   	 Relative change :  1.736487569290105e-16
+Plog rate : 51681951.45172298    	 Fixed P rate : 51681951.45172302    	 Relative change :  7.208106880294126e-16
+Plog rate : 104795120.91120107   	 Fixed P rate : 104795120.91120094   	 Relative change :  1.2797394533116518e-15
+Plog rate : 4427088.548380422    	 Fixed P rate : 4427088.548380421    	 Relative change :  4.207381733786136e-16
+Plog rate : 66654.05017412346    	 Fixed P rate : 66654.0501741235     	 Relative change :  6.5496013477135495e-16
+Plog rate : 9.617950153444121e-18 	 Fixed P rate : 5.890207407937438e-23 	 Relative change :  0.9999938758183252  
+Plog rate : 1.1238511395421942e-57 	 Fixed P rate : 5.46706651044517e-58 	 Relative change :  0.5135417567248093  
+Plog rate : 2.095761339781242    	 Fixed P rate : 2.095761339781242    	 Relative change :  0.0                 
+Plog rate : 1872066397.6394658   	 Fixed P rate : 1872066397.639463    	 Relative change :  1.5282700190689196e-15
+Plog rate : 52707322264.48733    	 Fixed P rate : 52707322264.48728    	 Relative change :  8.68501096636867e-16
+Plog rate : 357579.45698300144   	 Fixed P rate : 357579.4569830013    	 Relative change :  3.255649046764701e-16
+Plog rate : 217.5448970044855    	 Fixed P rate : 217.54489700448548   	 Relative change :  1.3064755745485488e-16
+
+ Variable pressure and interpolated fixed pressure reaction rates at 1000K 
+
+Plog rate : 166112596.32502002   	 Fixed P rate : 164090273.77860317   	 Relative change :  0.012174408149397187
+Plog rate : 20352725.159124333   	 Fixed P rate : 4089885.28992184     	 Relative change :  0.7990497460194758  
+Plog rate : 3278455.587226708    	 Fixed P rate : 3018453.311438112    	 Relative change :  0.07930632850467727 
+Plog rate : 424136619.6371728    	 Fixed P rate : 411138646.57175994   	 Relative change :  0.03064572230648695 
+Plog rate : 2639626.687033687    	 Fixed P rate : 420782.5987493506    	 Relative change :  0.8405901104060247  
+Plog rate : 2049725860.5746007   	 Fixed P rate : 658887369.5071417    	 Relative change :  0.6785485404753417  
+Plog rate : 1425237338.206281    	 Fixed P rate : 554829166.1650085    	 Relative change :  0.6107110364767151  
+Plog rate : 23942813.623306133   	 Fixed P rate : 20529916.55637633    	 Relative change :  0.14254369267643882 
+Plog rate : 252781.03983749158   	 Fixed P rate : 96072.76369684494    	 Relative change :  0.61993682849549    
+Plog rate : 147476168709.00195   	 Fixed P rate : 144202304304.4818    	 Relative change :  0.022199277572636757
+Plog rate : 3199010.693923697    	 Fixed P rate : 2095251.9066101525   	 Relative change :  0.3450312902704762  
+Plog rate : 2637888521.8625464   	 Fixed P rate : 357404670.0792803    	 Relative change :  0.8645110787976263  
+Plog rate : 1408068403.2956955   	 Fixed P rate : 532633586.18044376   	 Relative change :  0.6217274779167172  
+Plog rate : 943635772.1406198    	 Fixed P rate : 905993008.7309185    	 Relative change :  0.0398912001018246  
+Plog rate : 16313946.518829007   	 Fixed P rate : 7939227.9565555155   	 Relative change :  0.5133471874881822  
+Plog rate : 23146907.77402866    	 Fixed P rate : 23053776.914592475   	 Relative change :  0.004023468721842796
+Plog rate : 371984282.97989166   	 Fixed P rate : 371703372.14972794   	 Relative change :  0.0007551685461369411
+Plog rate : 318736506.28204626   	 Fixed P rate : 289931515.63967836   	 Relative change :  0.09037242385056042 
+Plog rate : 13738893.374327036   	 Fixed P rate : 1554039.2145441812   	 Relative change :  0.8868875991535016  
+Plog rate : 1425855.0869272258   	 Fixed P rate : 47890.248842937304   	 Relative change :  0.9664129621011187  
+Plog rate : 54091488.00910362    	 Fixed P rate : 38086675.39617953    	 Relative change :  0.2958841252477742  
+Plog rate : 74726320.0496846     	 Fixed P rate : 58273245.7969228     	 Relative change :  0.22017776657304083 
+Plog rate : 539433.9179461829    	 Fixed P rate : 285204.43234866485   	 Relative change :  0.47128939642034423 
+Plog rate : 185996.97862551457   	 Fixed P rate : 178028.43562984007   	 Relative change :  0.042842324937537465
+Plog rate : 226697504.28121355   	 Fixed P rate : 2423159.3550832677   	 Relative change :  0.9893110452946259  
+Plog rate : 5821337.510263841    	 Fixed P rate : 2.619116178424147e-13 	 Relative change :  1.0                 
+Plog rate : 528960843.322832     	 Fixed P rate : 5654038.495194275    	 Relative change :  0.9893110452946259  
+Plog rate : 13569268.904721979   	 Fixed P rate : 6.105038860070154e-13 	 Relative change :  1.0                 
+Plog rate : 9235144.96200235     	 Fixed P rate : 38559.47180606392    	 Relative change :  0.9958247031351738  
+Plog rate : 197397.95783395818   	 Fixed P rate : 9.80163900098621e-17 	 Relative change :  1.0                 
+Plog rate : 6387257.773556722    	 Fixed P rate : 50421.823074024906   	 Relative change :  0.9921058731522044  
+Plog rate : 144581.08359794936   	 Fixed P rate : 4.48280322546816e-16 	 Relative change :  1.0                 
+Plog rate : 5530.9327393001695   	 Fixed P rate : 1.1049521292904131e-37 	 Relative change :  1.0                 
+Plog rate : 5482.644971773213    	 Fixed P rate : 0.011149514710406608 	 Relative change :  0.9999979663985599  
+Plog rate : 236934.61321273094   	 Fixed P rate : 75326.57611932901    	 Relative change :  0.6820786330121497  
+Plog rate : 247440.47417432716   	 Fixed P rate : 187265.4219641478    	 Relative change :  0.24319001331926296 
+Plog rate : 315144.5442624946    	 Fixed P rate : 271516.683334198     	 Relative change :  0.13843762083965333 
+Plog rate : 28785.17305766434    	 Fixed P rate : 1.2340931672769996e-08 	 Relative change :  0.9999999999995713  
+Plog rate : 36.90409472177503    	 Fixed P rate : 29.19795644630246    	 Relative change :  0.20881526382289534 
+Plog rate : 1.0820866682797825   	 Fixed P rate : 0.5045831290534479   	 Relative change :  0.5336943482950446  
+Plog rate : 1387811.3597681606   	 Fixed P rate : 500019.1906930076    	 Relative change :  0.6397066595732883  
+Plog rate : 3999.6895912034665   	 Fixed P rate : 3.357787801648656e-65 	 Relative change :  1.0                 
+Plog rate : 3258207.539428501    	 Fixed P rate : 4.9234002370032064e-54 	 Relative change :  1.0                 
+Plog rate : 40222.38038871885    	 Fixed P rate : nan                  	 Relative change :  nan                 
+Plog rate : 29.146942186587633   	 Fixed P rate : 29.14694218658763    	 Relative change :  1.2188975625838827e-16
+Plog rate : 39.70133610137854    	 Fixed P rate : 39.701336101378544   	 Relative change :  1.7897199579019414e-16
+Plog rate : 16.195984660670597   	 Fixed P rate : 16.1959846606706     	 Relative change :  2.1935768360090559e-16
+Plog rate : 13.430882415680237   	 Fixed P rate : 13.430882415680236   	 Relative change :  1.3225913118905693e-16
+Plog rate : 41613903.81253532    	 Fixed P rate : 31009568.742073536   	 Relative change :  0.2548267309462914  
+Plog rate : 19224697.518573113   	 Fixed P rate : 13852706.354023436   	 Relative change :  0.27943176527795865 
+Plog rate : 557078.298907429     	 Fixed P rate : 391884.3050483536    	 Relative change :  0.2965364010464282  
+Plog rate : 341202.0173344151    	 Fixed P rate : 335897.14823183237   	 Relative change :  0.015547590087614851
+Plog rate : 16350.632014875142   	 Fixed P rate : 15939.591637159881   	 Relative change :  0.025139112502887515
+Plog rate : 12432.474572700217   	 Fixed P rate : 11363.852417097984   	 Relative change :  0.08595409943156143 
+Plog rate : 2860.6395283041875   	 Fixed P rate : 1181.2410406859353   	 Relative change :  0.5870709926929571  
+Plog rate : 2086.0383472286167   	 Fixed P rate : 1982.4336152157143   	 Relative change :  0.04966578497971778 
+Plog rate : 30.683261641615932   	 Fixed P rate : 17.223194301215443   	 Relative change :  0.43867785301366075 
+Plog rate : 10.450419473070312   	 Fixed P rate : 8.698680696898357    	 Relative change :  0.16762377631692305 
+Plog rate : 7762.809263098361    	 Fixed P rate : 78.25135875686158    	 Relative change :  0.9899197112662755  
+Plog rate : 2736.3036203316697   	 Fixed P rate : 161.64119301174117   	 Relative change :  0.9409271720394288  
+Plog rate : 18099.056388763856   	 Fixed P rate : 182.4437142066987    	 Relative change :  0.9899197112662755  
+Plog rate : 6400.7959488457      	 Fixed P rate : 378.1131178968833    	 Relative change :  0.9409271720394288  
+Plog rate : 322.6823657397899    	 Fixed P rate : 114.83943703165178   	 Relative change :  0.6441099693552577  
+Plog rate : 179.5743878688134    	 Fixed P rate : 87.48118337462097    	 Relative change :  0.512841533735147   
+Plog rate : 221.53453498875322   	 Fixed P rate : 2.1501950155910827   	 Relative change :  0.9902940865824813  
+Plog rate : 90.36426868183135    	 Fixed P rate : 7.293434763419904    	 Relative change :  0.9192885100514698  
+Plog rate : 52546.356572244375   	 Fixed P rate : 22630.216505069428   	 Relative change :  0.5693285323416127  
+Plog rate : 25756.318309358212   	 Fixed P rate : 23075.504953320447   	 Relative change :  0.10408371739464514 
+Plog rate : 31016.52636838406    	 Fixed P rate : 28101.2810402963     	 Relative change :  0.09399006495644671 
+Plog rate : 26980.747821803463   	 Fixed P rate : 21407.158486510616   	 Relative change :  0.20657653272266838 
+Plog rate : 9647211444.664186    	 Fixed P rate : 4388339365.867221    	 Relative change :  0.5451183597417278  
+Plog rate : 6770526985.85013     	 Fixed P rate : 5022653197.854274    	 Relative change :  0.2581591937597731  
+Plog rate : 16262.011620661415   	 Fixed P rate : 16262.01162066142    	 Relative change :  3.3556538624682285e-16
+Plog rate : 8715422.84688872     	 Fixed P rate : 8715422.846888712    	 Relative change :  8.54873105736181e-16
+Plog rate : 2194595.5389363794   	 Fixed P rate : 2071650.9540953608   	 Relative change :  0.0560215231735157  
+Plog rate : 7917992.316895149    	 Fixed P rate : 6251909.188402631    	 Relative change :  0.21041737119869194 
+Plog rate : 82307437.23452711    	 Fixed P rate : 5433149.18272324     	 Relative change :  0.933989571717049   
+Plog rate : 91332.56666175033    	 Fixed P rate : 78888.01217669195    	 Relative change :  0.13625538994372866 
+Plog rate : 12768099.199160542   	 Fixed P rate : 8252635.7053350685   	 Relative change :  0.3536519746120354  
+Plog rate : 12918816.917936606   	 Fixed P rate : 4038200.210679562    	 Relative change :  0.6874171809747619  
+Plog rate : 409320540.7912369    	 Fixed P rate : 409320540.79123664   	 Relative change :  5.824740156960791e-16
+Plog rate : 3952157617.250948    	 Fixed P rate : 1949899477.33058     	 Relative change :  0.5066240605335736  
+Plog rate : 32538.68332135205    	 Fixed P rate : 7255.159676906119    	 Relative change :  0.7770297093691789  
+Plog rate : 4953448.308698535    	 Fixed P rate : 37470.82404482858    	 Relative change :  0.9924354062645556  
+Plog rate : 9360711.519572912    	 Fixed P rate : 179687.2859803268    	 Relative change :  0.9808040996024066  
+Plog rate : 409603268.13595814   	 Fixed P rate : 359749863.58250535   	 Relative change :  0.12171144234353407 
+Plog rate : 117478001.58571517   	 Fixed P rate : 22425880.60826083    	 Relative change :  0.8091057022969675  
+Plog rate : 4.612957928467975e-06 	 Fixed P rate : 6.857162204315421e-07 	 Relative change :  0.8513499947181877  
+Plog rate : 9.208664348896036e-06 	 Fixed P rate : 1.0973888970165937e-06 	 Relative change :  0.8808308289412078  
+Plog rate : 5.961575548572919e-05 	 Fixed P rate : 5.969923194856954e-06 	 Relative change :  0.8998599758366556  
+Plog rate : 0.00012084059006614273 	 Fixed P rate : 2.306777957469644e-05 	 Relative change :  0.8091057022969669  
+Plog rate : 2008866550.1113648   	 Fixed P rate : 12604442.264029177   	 Relative change :  0.9937255950310235  
+Plog rate : 4.991088030634194e-09 	 Fixed P rate : 4.543382579211563e-11 	 Relative change :  0.9908970097274876  
+Plog rate : 1884318553.4082205   	 Fixed P rate : 1850650146.1838484   	 Relative change :  0.017867683340205477
+Plog rate : 245748789.47264728   	 Fixed P rate : 227129877.41883928   	 Relative change :  0.07576400312596598 
+Plog rate : 13975663495.025543   	 Fixed P rate : 2299139304.2838006   	 Relative change :  0.8354897923020149  
+Plog rate : 3810247847.33032     	 Fixed P rate : 2127798865.8337085   	 Relative change :  0.4415589349851434  
+Plog rate : 15936452.98950757    	 Fixed P rate : 4948993.3942662105   	 Relative change :  0.6894545230657921  
+Plog rate : 2261583.6533918194   	 Fixed P rate : 426471.41159057023   	 Relative change :  0.811427973954902   
+Plog rate : 11089984.735925594   	 Fixed P rate : 11089984.73592559    	 Relative change :  3.3591482650052476e-16
+Plog rate : 5893476.559101018    	 Fixed P rate : 7509.225519742549    	 Relative change :  0.9987258411152672  
+Plog rate : 1167.0532404005112   	 Fixed P rate : 1167.0532404005116   	 Relative change :  3.896543320769181e-16
+Plog rate : 10290.487486602937   	 Fixed P rate : 10290.487486602944   	 Relative change :  7.070566504896788e-16
+Plog rate : 1915835665.3050728   	 Fixed P rate : 67874868.08203484    	 Relative change :  0.9645716648294954  
+Plog rate : 4848515904.070959    	 Fixed P rate : 1302907517.0749128   	 Relative change :  0.7312770458314981  
+Plog rate : 2300947.5341158723   	 Fixed P rate : 151886.53218359      	 Relative change :  0.9339895717170486  
+Plog rate : 510.1161596148613    	 Fixed P rate : 8.901950210304792    	 Relative change :  0.9825491703359764  
+Plog rate : 1282242.648958977    	 Fixed P rate : 93456.92382010235    	 Relative change :  0.9271144787642356  
+Plog rate : 264091698.83570015   	 Fixed P rate : 257419592.13183028   	 Relative change :  0.025264356029686526
+Plog rate : 1000544109.7408644   	 Fixed P rate : 835512092.4951934    	 Relative change :  0.1649422705495847  
+Plog rate : 78034342.063867      	 Fixed P rate : 27265384.51215031    	 Relative change :  0.6505976241866046  
+Plog rate : 50187668.57631972    	 Fixed P rate : 43231082.65619153    	 Relative change :  0.1386114581024899  
+Plog rate : 3941093.2590963137   	 Fixed P rate : 3898750.4604396243   	 Relative change :  0.010743922021880447
+Plog rate : 0.19873208557953168  	 Fixed P rate : 0.1987320855795317   	 Relative change :  1.3966328353415916e-16
+Plog rate : 73708575630.132      	 Fixed P rate : 73708575630.13193    	 Relative change :  1.0350755615647944e-15
+Plog rate : 42525816540.38608    	 Fixed P rate : 42525816540.38606    	 Relative change :  3.588123710219409e-16
+Plog rate : 4960630488.20184     	 Fixed P rate : 66455784.48199059    	 Relative change :  0.9866033592624875  
+Plog rate : 9453628784.249815    	 Fixed P rate : 150712462.55156627   	 Relative change :  0.9840577130759924  
+Plog rate : 98401777.73886125    	 Fixed P rate : 17323611.90732493    	 Relative change :  0.8239502140571245  
+Plog rate : 4025007488.8640575   	 Fixed P rate : 3866274753.8735743   	 Relative change :  0.03943663097016523 
+Plog rate : 65744517.393447794   	 Fixed P rate : 26257487.031930853   	 Relative change :  0.6006132819442109  
+Plog rate : 28937.531496743184   	 Fixed P rate : 9084.8313910074      	 Relative change :  0.686053684571199   
+Plog rate : 105224958.56184183   	 Fixed P rate : 105224958.5618417    	 Relative change :  1.2745117943269208e-15
+Plog rate : 619737183.4626541    	 Fixed P rate : 619737183.4626534    	 Relative change :  1.1541275179074186e-15
+Plog rate : 1090468891.8406804   	 Fixed P rate : 1090468891.8406806   	 Relative change :  2.186385883040815e-16
+Plog rate : 70645153.0640899     	 Fixed P rate : 70645153.06408979    	 Relative change :  1.4765079249287542e-15
+Plog rate : 1597229713.071224    	 Fixed P rate : 1597229713.071225    	 Relative change :  5.970802500114294e-16
+Plog rate : 652681849.095088     	 Fixed P rate : 652681849.0950872    	 Relative change :  1.2785172868104336e-15
+Plog rate : 971380040.5429733    	 Fixed P rate : 971380040.5429746    	 Relative change :  1.349937336910499e-15
+Plog rate : 92912892.82848941    	 Fixed P rate : 92912892.82848956    	 Relative change :  1.6037775533858514e-15
+Plog rate : 58432.99231654952    	 Fixed P rate : 855.7097396687806    	 Relative change :  0.9853557090652976  
+Plog rate : 4.858170173352717e-06 	 Fixed P rate : 2.0298262249859102e-06 	 Relative change :  0.5821829716629526  
+Plog rate : 2202367236.500807    	 Fixed P rate : 2202367236.5008073   	 Relative change :  2.1651119318353986e-16
+Plog rate : 5458112627.950597    	 Fixed P rate : 5458112627.950597    	 Relative change :  0.0                 
+Plog rate : 20384293435.90219    	 Fixed P rate : 20384293435.902172   	 Relative change :  9.356952394794067e-16
+Plog rate : 14238906219.076385   	 Fixed P rate : 14238906219.076405   	 Relative change :  1.3395331098235306e-15
+Plog rate : 1045807833.4283394   	 Fixed P rate : 1045807833.4283409   	 Relative change :  1.481840845540335e-15
+
+ Variable pressure and interpolated fixed pressure reaction rates at 3000K 
+
+Plog rate : 958444421.4412637    	 Fixed P rate : 944933303.6898253    	 Relative change :  0.014096923566127075
+Plog rate : 43568908.35663532    	 Fixed P rate : 6783098.927323841    	 Relative change :  0.8443133146279345  
+Plog rate : 494308501.3378583    	 Fixed P rate : 449165196.2596117    	 Relative change :  0.09132617577093072 
+Plog rate : 570466971.3256018    	 Fixed P rate : 550254004.8681434    	 Relative change :  0.03543231680966425 
+Plog rate : 2665142762.8548937   	 Fixed P rate : 317251315.985625     	 Relative change :  0.880962730999901   
+Plog rate : 3387868213.066422    	 Fixed P rate : 909187251.4352081    	 Relative change :  0.7316344101200188  
+Plog rate : 14350493.761909962   	 Fixed P rate : 4808123.760161582    	 Relative change :  0.6649506393345416  
+Plog rate : 173573290.24593976   	 Fixed P rate : 145235539.97748205   	 Relative change :  0.16326100766025312 
+Plog rate : 154414799.2939265    	 Fixed P rate : 50318165.37972396    	 Relative change :  0.6741363806461063  
+Plog rate : 168088907667.95828   	 Fixed P rate : 163771686329.15158   	 Relative change :  0.025684153694037398
+Plog rate : 74391143.7821156     	 Fixed P rate : 45552627.10562192    	 Relative change :  0.3876606167121032  
+Plog rate : 126317342.36391468   	 Fixed P rate : 12453871.476578021   	 Relative change :  0.9014080628715337  
+Plog rate : 14136843.697363034   	 Fixed P rate : 4581536.484594639    	 Relative change :  0.6759151772011711  
+Plog rate : 16061075.79273192    	 Fixed P rate : 15320866.164545286   	 Relative change :  0.04608717608577621 
+Plog rate : 17328668.46834304    	 Fixed P rate : 7520377.60155574     	 Relative change :  0.566015264514156   
+Plog rate : 111288024.83289932   	 Fixed P rate : 110769214.62261982   	 Relative change :  0.004661869154911286
+Plog rate : 433207481.7378919    	 Fixed P rate : 432828330.62417483   	 Relative change :  0.0008752182953905698
+Plog rate : 1699600857.0736718   	 Fixed P rate : 1522888867.356806    	 Relative change :  0.10397264097708438 
+Plog rate : 190994210.41147828   	 Fixed P rate : 15275670.883152599   	 Relative change :  0.9200202411882399  
+Plog rate : 14005066.53011357    	 Fixed P rate : 274194.4197411664    	 Relative change :  0.9804217695680634  
+Plog rate : 12863453.38100626    	 Fixed P rate : 8565860.008023895    	 Relative change :  0.33409328317137954 
+Plog rate : 186546320.3783118    	 Fixed P rate : 139831571.11396682   	 Relative change :  0.2504190335655429  
+Plog rate : 44640199.8615773     	 Fixed P rate : 21326747.59619069    	 Relative change :  0.5222524168278413  
+Plog rate : 42003839.20462674    	 Fixed P rate : 39925289.97600892    	 Relative change :  0.04948474396571026 
+Plog rate : 63368090.096998595   	 Fixed P rate : 329099.24819728395   	 Relative change :  0.9948065462018261  
+Plog rate : 5861.458027580542    	 Fixed P rate : 2.2090404183586096e-19 	 Relative change :  1.0                 
+Plog rate : 147858876.8929963    	 Fixed P rate : 767898.2457936605    	 Relative change :  0.9948065462018261  
+Plog rate : 13662.787977805589   	 Fixed P rate : 5.149171200820606e-19 	 Relative change :  1.0                 
+Plog rate : 3024220.09638121     	 Fixed P rate : 5283.161380232473    	 Relative change :  0.9982530499726014  
+Plog rate : 128.2495556357696    	 Fixed P rate : 2.6050007727874747e-23 	 Relative change :  1.0                 
+Plog rate : 1875185.2679909708   	 Fixed P rate : 6853.850825845143    	 Relative change :  0.9963449740445177  
+Plog rate : 109.17890271677719   	 Fixed P rate : 1.8530480442487824e-22 	 Relative change :  1.0                 
+Plog rate : 33928.84931319177    	 Fixed P rate : 2.2816860401349236e-43 	 Relative change :  1.0                 
+Plog rate : 5287894.720655316    	 Fixed P rate : 1.3376203260629391   	 Relative change :  0.9999997470410443  
+Plog rate : 225578899.8300556    	 Fixed P rate : 59767750.58013836    	 Relative change :  0.7350472467719029  
+Plog rate : 1953832676.5195684   	 Fixed P rate : 1414582371.3842356   	 Relative change :  0.275996154438321   
+Plog rate : 267313865.50251508   	 Fixed P rate : 224913843.37013766   	 Relative change :  0.15861512478101697 
+Plog rate : 365221.0238939935    	 Fixed P rate : 1.6894738127653566e-09 	 Relative change :  0.9999999999999953  
+Plog rate : 2073235.17577269     	 Fixed P rate : 1580332.7617690898   	 Relative change :  0.23774553883878444 
+Plog rate : 1053637.098717897    	 Fixed P rate : 435178.04743859364   	 Relative change :  0.586975394119917   
+Plog rate : 701834209.8957922    	 Fixed P rate : 214971650.2721101    	 Relative change :  0.6937002396847698  
+Plog rate : 0.6738813554273911   	 Fixed P rate : 8.429060586300991e-80 	 Relative change :  1.0                 
+Plog rate : 1675469838.7157984   	 Fixed P rate : 1.9499471267109444e-67 	 Relative change :  1.0                 
+Plog rate : 190031099.5485361    	 Fixed P rate : nan                  	 Relative change :  nan                 
+Plog rate : 12687566.06627476    	 Fixed P rate : 12687566.066274744   	 Relative change :  1.3212783488583395e-15
+Plog rate : 26574937.811849028   	 Fixed P rate : 26574937.811849043   	 Relative change :  5.60722335433035e-16
+Plog rate : 13966118.067472225   	 Fixed P rate : 13966118.067472208   	 Relative change :  1.200319678101701e-15
+Plog rate : 56027726.206939034   	 Fixed P rate : 56027726.20693903    	 Relative change :  1.3298024212878148e-16
+Plog rate : 2094017754.8115      	 Fixed P rate : 1489091448.1773162   	 Relative change :  0.288883083844071   
+Plog rate : 491664998.9921117    	 Fixed P rate : 336286161.3663927    	 Relative change :  0.31602582641481036 
+Plog rate : 400373126.0491892    	 Fixed P rate : 266324912.75365302   	 Relative change :  0.33480821906879743 
+Plog rate : 452659130.48623973   	 Fixed P rate : 444512213.0189145    	 Relative change :  0.01799790817998946 
+Plog rate : 3881756.7026874074   	 Fixed P rate : 3768880.711006216    	 Relative change :  0.02907858485902674 
+Plog rate : 26910465.77948166    	 Fixed P rate : 24248314.447621163   	 Relative change :  0.09892624504070456 
+Plog rate : 275856.9704727658    	 Fixed P rate : 98961.89802990077    	 Relative change :  0.6412564893310504  
+Plog rate : 2526560.8118496137   	 Fixed P rate : 2381702.8106477223   	 Relative change :  0.057334064758111036
+Plog rate : 601144.2684119302    	 Fixed P rate : 307826.13411655015   	 Relative change :  0.4879330132685981  
+Plog rate : 1277002.803475764    	 Fixed P rate : 1032378.9088382157   	 Relative change :  0.19156096914723103 
+Plog rate : 367345.00148571614   	 Fixed P rate : 1782.4551587376288   	 Relative change :  0.9951477353672201  
+Plog rate : 1667074.9710075152   	 Fixed P rate : 62797.721884024904   	 Relative change :  0.9623305952184789  
+Plog rate : 856468.0221663574    	 Fixed P rate : 4155.809493064787    	 Relative change :  0.9951477353672201  
+Plog rate : 3899642.803364619    	 Fixed P rate : 146897.22326328815   	 Relative change :  0.9623305952184786  
+Plog rate : 18408.481822072714   	 Fixed P rate : 5558.720994026712    	 Relative change :  0.6980347946259468  
+Plog rate : 122400.15636566107   	 Fixed P rate : 53183.776631923305   	 Relative change :  0.5654925760630497  
+Plog rate : 10286.69247007416    	 Fixed P rate : 47.771579233451426   	 Relative change :  0.995355982559756   
+Plog rate : 59150.22636877586    	 Fixed P rate : 3199.265765530502    	 Relative change :  0.9459128736788854  
+Plog rate : 67566.5234676825     	 Fixed P rate : 25450.25374258447    	 Relative change :  0.6233304240559677  
+Plog rate : 78443.67539659305    	 Fixed P rate : 69061.1737997716     	 Relative change :  0.11960813347138188 
+Plog rate : 2092524696.8018425   	 Fixed P rate : 1866319357.0817754   	 Relative change :  0.10810163438729926 
+Plog rate : 675424287.8326567    	 Fixed P rate : 516534049.1927869    	 Relative change :  0.23524507706071202 
+Plog rate : 89702252098.93236    	 Fixed P rate : 35999276693.64151    	 Relative change :  0.5986803469110451  
+Plog rate : 22667838315.260876   	 Fixed P rate : 16035960857.285152   	 Relative change :  0.2925677060926839  
+Plog rate : 471583366.98404425   	 Fixed P rate : 471583366.98404354   	 Relative change :  1.516711121257353e-15
+Plog rate : 134421619.79232007   	 Fixed P rate : 134421619.79232007   	 Relative change :  0.0                 
+Plog rate : 92996569.78087912    	 Fixed P rate : 86985523.73519087    	 Relative change :  0.06463728780375057 
+Plog rate : 942663506.7160428    	 Fixed P rate : 716863302.551677     	 Relative change :  0.23953425857227256 
+Plog rate : 1180825458.2097888   	 Fixed P rate : 50590496.85514646    	 Relative change :  0.9571566682413462  
+Plog rate : 130301.63794471743   	 Fixed P rate : 109955.74484320695   	 Relative change :  0.15614456903559837 
+Plog rate : 22522126140.202606   	 Fixed P rate : 13581017663.16429    	 Relative change :  0.3969922031951591  
+Plog rate : 1233930999.552775    	 Fixed P rate : 320578961.2467585    	 Relative change :  0.7401970115322908  
+Plog rate : 3.026146408374337e+23 	 Fixed P rate : 3.0261464083743355e+23 	 Relative change :  4.4352688167557143e-16
+Plog rate : 1490893402167970.5   	 Fixed P rate : 657396601532016.1    	 Relative change :  0.5590586150719641  
+Plog rate : 2701498.2789009837   	 Fixed P rate : 474456.7453775927    	 Relative change :  0.8243727382382009  
+Plog rate : 1561884307.7184913   	 Fixed P rate : 5433449.642359296    	 Relative change :  0.9965212214403408  
+Plog rate : 663054632.8740289    	 Fixed P rate : 6787636.268793674    	 Relative change :  0.9897630814532243  
+Plog rate : 9072309266.58619     	 Fixed P rate : 7805327173.273174    	 Relative change :  0.13965375915693035 
+Plog rate : 4974068624.724027    	 Fixed P rate : 729662016.5909151    	 Relative change :  0.8533068054260312  
+Plog rate : 52231482.939337194   	 Fixed P rate : 5733740.708950726    	 Relative change :  0.8902244319654867  
+Plog rate : 26796381.670417357   	 Fixed P rate : 2276736.6388393883   	 Relative change :  0.9150356691122645  
+Plog rate : 74933211.60737646    	 Fixed P rate : 5204011.742748974    	 Relative change :  0.9305513318978484  
+Plog rate : 36344448.24481256    	 Fixed P rate : 5331483.218059819    	 Relative change :  0.8533068054260314  
+Plog rate : 183881625.2696846    	 Fixed P rate : 515033.99551856366   	 Relative change :  0.9971991002648405  
+Plog rate : 2.598876179257882e-09 	 Fixed P rate : 1.1204628184694624e-11 	 Relative change :  0.9956886640948419  
+Plog rate : 24492995733.980053   	 Fixed P rate : 23986485631.88341    	 Relative change :  0.02067979383158676 
+Plog rate : 20318111279.404457   	 Fixed P rate : 18544892008.240803   	 Relative change :  0.08727283982153823 
+Plog rate : 50733423.708214164   	 Fixed P rate : 6263686.387416024    	 Relative change :  0.8765372819417689  
+Plog rate : 388439945.90058696   	 Fixed P rate : 197724462.2329027    	 Relative change :  0.4909780409569254  
+Plog rate : 3901697.1221751375   	 Fixed P rate : 1006018.9053540557   	 Relative change :  0.7421586366516284  
+Plog rate : 1378272.3080261282   	 Fixed P rate : 199335.15549259316   	 Relative change :  0.8553731694877713  
+Plog rate : 316503.5986845544    	 Fixed P rate : 316503.5986845543    	 Relative change :  3.6781673987524226e-16
+Plog rate : 7275375892.611878    	 Fixed P rate : 2434070.4360828223   	 Relative change :  0.9996654371578856  
+Plog rate : 1542430.6361739025   	 Fixed P rate : 1542430.6361739032   	 Relative change :  4.528514375818303e-16
+Plog rate : 14165722.193227151   	 Fixed P rate : 14165722.193227164   	 Relative change :  9.20427202140856e-16
+Plog rate : 29774612674.879528   	 Fixed P rate : 620133226.115957     	 Relative change :  0.979172416686409   
+Plog rate : 32530531.607144613   	 Fixed P rate : 7093038.495663687    	 Relative change :  0.7819574982258864  
+Plog rate : 266715898.8293155    	 Fixed P rate : 11426997.73885195    	 Relative change :  0.957156668241346   
+Plog rate : 385122215.07832277   	 Fixed P rate : 3530143.3733565216   	 Relative change :  0.9908337061972948  
+Plog rate : 84350197069.1142     	 Fixed P rate : 4053604341.904068    	 Relative change :  0.9519431550517581  
+Plog rate : 8268434183.800442    	 Fixed P rate : 8026804416.289217    	 Relative change :  0.02922315908187635 
+Plog rate : 21105559683.0029     	 Fixed P rate : 17126283669.55381    	 Relative change :  0.1885416010385998  
+Plog rate : 6587835792.095707    	 Fixed P rate : 1947327387.7075086   	 Relative change :  0.7044055970484309  
+Plog rate : 1014483875.5189505   	 Fixed P rate : 853371776.5720592    	 Relative change :  0.15881188733973303 
+Plog rate : 46231225.343910605   	 Fixed P rate : 45656017.88760389    	 Relative change :  0.012441968648414427
+Plog rate : 28066736.179675315   	 Fixed P rate : 28066736.179675296   	 Relative change :  6.63648647034279e-16
+Plog rate : 6913594616.867071    	 Fixed P rate : 6913594616.867064    	 Relative change :  9.655932383650353e-16
+Plog rate : 3767977568.250339    	 Fixed P rate : 3767977568.250338    	 Relative change :  2.5309978606085196e-16
+Plog rate : 69798688892.0298     	 Fixed P rate : 480203122.58734673   	 Relative change :  0.9931201698741052  
+Plog rate : 1160923356.090017    	 Fixed P rate : 10866137.614913682   	 Relative change :  0.990640090443601   
+Plog rate : 12856832304.887789   	 Fixed P rate : 1875693829.0929167   	 Relative change :  0.854109178325377   
+Plog rate : 46627302139.905975   	 Fixed P rate : 44502790085.27256    	 Relative change :  0.045563692453378116
+Plog rate : 18862383.95787566    	 Fixed P rate : 6510220.124187425    	 Relative change :  0.6548569820905806  
+Plog rate : 134445.86300650577   	 Fixed P rate : 35106.0934440669     	 Relative change :  0.7388830518171605  
+Plog rate : 560241342.0116386    	 Fixed P rate : 560241342.0116384    	 Relative change :  4.255640582422593e-16
+Plog rate : 2034169434.8590212   	 Fixed P rate : 2034169434.8590229   	 Relative change :  8.204479062121997e-16
+Plog rate : 2925951307.7059526   	 Fixed P rate : 2925951307.705951    	 Relative change :  4.889047438492562e-16
+Plog rate : 32991726.13568637    	 Fixed P rate : 32991726.135686323   	 Relative change :  1.4679066406174068e-15
+Plog rate : 11016058546.044437   	 Fixed P rate : 11016058546.044445   	 Relative change :  6.925702599855468e-16
+Plog rate : 11893172.14920282    	 Fixed P rate : 11893172.149202805   	 Relative change :  1.2529173047281971e-15
+Plog rate : 9610371048.037804    	 Fixed P rate : 9610371048.037792    	 Relative change :  1.1908064464598999e-15
+Plog rate : 2881505328.421817    	 Fixed P rate : 2881505328.4218216   	 Relative change :  1.654819630211428e-15
+Plog rate : 5154146462.12396     	 Fixed P rate : 38836355.519207686   	 Relative change :  0.9924650267887025  
+Plog rate : 148940935.0879919    	 Fixed P rate : 54165366.80923538    	 Relative change :  0.6363298862247954  
+Plog rate : 7450390887.747703    	 Fixed P rate : 7450390887.7477045   	 Relative change :  2.560065185236345e-16
+Plog rate : 1905069403.9408627   	 Fixed P rate : 1905069403.940863    	 Relative change :  1.251495502517469e-16
+Plog rate : 87742002.39794919    	 Fixed P rate : 87742002.39794911    	 Relative change :  8.491464057467159e-16
+Plog rate : 72910734.86895473    	 Fixed P rate : 72910734.86895484    	 Relative change :  1.4306278567128779e-15
+Plog rate : 11925483038.305508   	 Fixed P rate : 11925483038.305527   	 Relative change :  1.599388994714897e-15
