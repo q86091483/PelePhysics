@@ -1864,6 +1864,10 @@ ReactorCvode::react(
       if (mask(i, j, k) != -1) {
 
         amrex::Real* yvec_d = N_VGetArrayPointer(y);
+        amrex::Real yvec_input[NUM_SPECIES + 1];
+        for (int n = 0; n < NUM_SPECIES + 1; ++n) {
+          yvec_input[n] = yvec_d[n];
+        }
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
         amrex::Real* yvec_d_aux = N_VGetArrayPointer(y_aux);
 #endif
@@ -1888,8 +1892,13 @@ ReactorCvode::react(
         CVodeReInit(cvode_mem, time_start, y);
 
         BL_PROFILE_VAR("Pele::ReactorCvode::react():CVode", AroundCVODE);
-        CVode(cvode_mem, time_final, y, &CvodeActual_time_final, CV_NORMAL);
+        int cvode_flag = CVode(cvode_mem, time_final, y, &CvodeActual_time_final, CV_NORMAL);
         BL_PROFILE_VAR_STOP(AroundCVODE);
+
+        if (cvode_flag < 0) {
+#ifndef AMREX_USE_GPU
+#endif
+        }
 
 #if defined(PELE_USE_AUX) && (NUMAUX > 0)
         // ReInit CVODE for aux
