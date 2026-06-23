@@ -1897,6 +1897,16 @@ ReactorCvode::react(
 
         if (cvode_flag < 0) {
 #ifndef AMREX_USE_GPU
+          amrex::Print() << "\n[CVODE FAIL] cell (" << i << "," << j << "," << k
+            << ")  flag=" << cvode_flag
+            << "  time_start=" << time_start
+            << "  time_final=" << time_final << "\n";
+          amrex::Print() << "  Input state BEFORE CVode (packed per Ordering, "
+            << "first " << NUM_SPECIES << " = rho*Y_i, last = T):\n  ";
+          for (int n = 0; n < NUM_SPECIES; ++n) {
+            amrex::Print() << n << "-th species : " << yvec_input[n] << " ";
+          }
+          amrex::Print() << "T: " << yvec_input[NUM_SPECIES] << "\n";
 #endif
         }
 
