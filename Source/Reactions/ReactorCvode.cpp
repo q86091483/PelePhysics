@@ -1895,7 +1895,7 @@ ReactorCvode::react(
         int cvode_flag = CVode(cvode_mem, time_final, y, &CvodeActual_time_final, CV_NORMAL);
         BL_PROFILE_VAR_STOP(AroundCVODE);
 
-        if (cvode_flag < 0) {
+        if (true) {
 #ifndef AMREX_USE_GPU
           amrex::Print() << "\n[CVODE FAIL] cell (" << i << "," << j << "," << k
             << ")  flag=" << cvode_flag
