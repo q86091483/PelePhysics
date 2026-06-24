@@ -1924,14 +1924,14 @@ ReactorCvode::react(
         // ------ End debug ------
 
         BL_PROFILE_VAR("Pele::ReactorCvode::react():CVode", AroundCVODE);
-        //int cvode_flag = CVode(cvode_mem, time_final, y, &CvodeActual_time_final, CV_NORMAL);
+        int cvode_flag = CVode(cvode_mem, time_final, y, &CvodeActual_time_final, CV_NORMAL);
         BL_PROFILE_VAR_STOP(AroundCVODE);
 
 #if defined(PELE_USE_AUX) && (NUMAUX > 0)
         // ReInit CVODE for aux
         CVodeReInit(cvode_mem_aux, time_start, y_aux);
 
-        //CVode(cvode_mem_aux, time_final, y_aux, &CvodeActual_time_final, CV_NORMAL);
+        CVode(cvode_mem_aux, time_final, y_aux, &CvodeActual_time_final, CV_NORMAL);
 #endif
         // ------- Debug -----
         //SUNContext_PopErrHandler(sunctx);
