@@ -8924,10 +8924,11 @@ comp_qss_coeff(
     const amrex::Real redP = Corr / k_f[0] * 60220000000 *
                              exp(-0.547 * logT - 9069.92686279769 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
-    const amrex::Real logFcent = log10(
-      0.659 * exp(-T * 0.0357142857142857) + 0.341 * exp(-T * 0.001) +
-      exp(-2339 * invT));
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
+    const amrex::Real Fcent_arg =
+      (0.659 * exp(-T * 0.0357142857142857) + 0.341 * exp(-T * 0.001) +
+       exp(-2339 * invT));
+    const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));
     const amrex::Real troe_c = -0.4 - 0.67 * logFcent;
     const amrex::Real troe_n = 0.75 - 1.27 * logFcent;
     const amrex::Real troe =
@@ -8945,10 +8946,11 @@ comp_qss_coeff(
     const amrex::Real redP =
       Corr / k_f[1] * 4.7e+19 * exp(-3 * logT - 8319.17791908363 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
-    const amrex::Real logFcent = log10(
-      0.574 * exp(-T * 3.33333333333333) +
-      0.426 * exp(-T * 0.000438981562774363) + exp(-100000 * invT));
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
+    const amrex::Real Fcent_arg =
+      (0.574 * exp(-T * 3.33333333333333) +
+       0.426 * exp(-T * 0.000438981562774363) + exp(-100000 * invT));
+    const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));
     const amrex::Real troe_c = -0.4 - 0.67 * logFcent;
     const amrex::Real troe_n = 0.75 - 1.27 * logFcent;
     const amrex::Real troe =
@@ -8967,10 +8969,11 @@ comp_qss_coeff(
     const amrex::Real redP =
       Corr / k_f[2] * 3.01e+36 * exp(-9.32 * logT - 2935.56474163841 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
-    const amrex::Real logFcent = log10(
-      0.502 * exp(-T * 0.00076103500761035) +
-      0.498 * exp(-T * 0.00076103500761035) + exp(-50000 * invT));
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
+    const amrex::Real Fcent_arg =
+      (0.502 * exp(-T * 0.00076103500761035) +
+       0.498 * exp(-T * 0.00076103500761035) + exp(-50000 * invT));
+    const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));
     const amrex::Real troe_c = -0.4 - 0.67 * logFcent;
     const amrex::Real troe_n = 0.75 - 1.27 * logFcent;
     const amrex::Real troe =
@@ -11701,7 +11704,7 @@ comp_qfqr(
   Corr = mixture + (1.5) * sc[1] + (9.4) * sc[5];
   redP = Corr / k_f * 22000000000 * exp(-2 * logT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent =
     ((0.27) * exp(-T * 1e+30) + 0.73 * exp(-T * 1e-30) + exp(-1e+30 * invT));
   logFcent = log10(amrex::max(Fcent, 1.e-200));
@@ -11720,7 +11723,7 @@ comp_qfqr(
   redP = Corr / k_f * 2.3530181e+18 *
          exp(-2.2929358 * logT - (24528.4937440691) * invT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent = ((0.57) * exp(-T * 1e+30) + 0.43 * exp(-T * 1e-30) + 0.0);
   logFcent = log10(amrex::max(Fcent, 1.e-200));
   troe_c = -0.4 - 0.67 * logFcent;
@@ -11736,7 +11739,7 @@ comp_qfqr(
          (2.8) * sc[10] + sc[11] + (2) * sc[17];
   redP = Corr / k_f * 17370000 * exp(-1.23 * logT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent =
     ((0.33) * exp(-T * 1e+30) + 0.67 * exp(-T * 1e-30) + exp(-1e+30 * invT));
   logFcent = log10(amrex::max(Fcent, 1.e-200));
@@ -11753,7 +11756,7 @@ comp_qfqr(
          sc[10] + sc[11] + (2) * sc[17];
   redP = Corr / k_f * 8.54e+20 * exp(-4.69 * logT - (1107.07666477038) * invT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent =
     ((0.483806) * exp(-T * 0.000274887775691135) + 0.516194 * exp(-T * 1) +
      exp(-1e+30 * invT));
@@ -11772,7 +11775,7 @@ comp_qfqr(
   redP = Corr / k_f * 104000000000000 *
          exp(-2.76 * logT - (805.146665287552) * invT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent =
     ((0.438) * exp(-T * 0.010989010989011) +
      0.562 * exp(-T * 0.000171350239890336) + exp(-8552 * invT));
@@ -11790,7 +11793,7 @@ comp_qfqr(
   redP =
     Corr / k_f * 1350000000000 * exp(-2.57 * logT - (717.083748771726) * invT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent =
     ((0.2176) * exp(-T * 0.003690036900369) +
      0.7824 * exp(-T * 0.000362976406533575) + exp(-6570 * invT));
@@ -11807,7 +11810,7 @@ comp_qfqr(
   Corr = mixture;
   redP = Corr / k_f * 5.07e+15 * exp(-3.42 * logT - (42445.3193272965) * invT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent =
     ((0.0679999999999999) * exp(-T * 0.0050761421319797) +
      0.932 * exp(-T * 0.000649350649350649) + exp(-10300 * invT));
@@ -11826,7 +11829,7 @@ comp_qfqr(
   redP =
     Corr / k_f * 60220000000 * exp(-0.547 * logT - (9069.92686279769) * invT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent =
     ((0.659) * exp(-T * 0.0357142857142857) + 0.341 * exp(-T * 0.001) +
      exp(-2339 * invT));
@@ -11843,7 +11846,7 @@ comp_qfqr(
   Corr = mixture + (4) * sc[5] + sc[9] + (2) * sc[10];
   redP = Corr / k_f * 8.054e+19 * exp(-3.75 * logT - (493.957479153913) * invT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent =
     ((1) * exp(-T * 0.00175438596491228) + 0 * exp(-T * 1e-30) +
      exp(-1e+30 * invT));
@@ -11861,7 +11864,7 @@ comp_qfqr(
          (2) * sc[17];
   redP = Corr / k_f * 1.99e+29 * exp(-7.08 * logT - (3364.00341090455) * invT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent =
     ((0.158) * exp(-T * 0.008) + 0.842 * exp(-T * 0.000450653447498873) +
      exp(-6882 * invT));
@@ -11880,7 +11883,7 @@ comp_qfqr(
   redP =
     Corr / k_f * 1.419e+27 * exp(-6.642 * logT - (2903.05694502743) * invT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent =
     ((1.569) * exp(-T * 0.00334448160535117) +
      -0.569 * exp(-T * -0.000109325461900077) + exp(-152.4 * invT));
@@ -11899,7 +11902,7 @@ comp_qfqr(
   redP =
     Corr / k_f * 6.346e+19 * exp(-4.664 * logT - (1902.15899674184) * invT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent =
     ((0.212) * exp(-T * -9.80392156862745e-05) + 0.788 * exp(-T * 1e+30) + 0.0);
   logFcent = log10(amrex::max(Fcent, 1.e-200));
@@ -11916,7 +11919,7 @@ comp_qfqr(
          (2) * sc[17];
   redP = Corr / k_f * 2.69e+21 * exp(-5.11 * logT - (3570.32224388449) * invT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent =
     ((0.4093) * exp(-T * 0.00363636363636364) +
      0.5907 * exp(-T * 0.000815660685154976) + exp(-5185 * invT));
@@ -11933,7 +11936,7 @@ comp_qfqr(
   Corr = mixture;
   redP = Corr / k_f * 4.7e+19 * exp(-3 * logT - (8319.17791908363) * invT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent =
     ((0.574) * exp(-T * 3.33333333333333) +
      0.426 * exp(-T * 0.000438981562774363) + exp(-100000 * invT));
@@ -11950,7 +11953,7 @@ comp_qfqr(
   Corr = mixture + sc[1] + (4) * sc[5] + sc[9] + (2) * sc[10];
   redP = Corr / k_f * 4.77e+71 * exp(-16.67 * logT - (50371.9882470524) * invT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent =
     ((0.19) * exp(-T * 0.000323519896473633) + 0.81 * exp(-T * 0.0078125) +
      exp(-8829 * invT));
@@ -11968,7 +11971,7 @@ comp_qfqr(
          (2) * sc[17];
   redP = Corr / k_f * 3.01e+36 * exp(-9.32 * logT - (2935.56474163841) * invT);
   F = redP / (1.0 + redP);
-  logPred = log10(redP);
+  logPred = log10(amrex::max(redP, 1.e-200));
   Fcent =
     ((0.502) * exp(-T * 0.00076103500761035) +
      0.498 * exp(-T * 0.00076103500761035) + exp(-50000 * invT));
@@ -13831,7 +13834,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
     amrex::Real Corr = mixture + (1.5) * sc[1] + (9.4) * sc[5];
     const amrex::Real redP = Corr / k_f * 22000000000 * exp(-2 * logT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.27 * exp(-T * 1e+30) + 0.73 * exp(-T * 1e-30) + exp(-1e+30 * invT));
     const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));
@@ -13860,7 +13863,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
     const amrex::Real redP = Corr / k_f * 2.3530181e+18 *
                              exp(-2.2929358 * logT - 24528.4937440691 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.57 * exp(-T * 1e+30) + 0.43 * exp(-T * 1e-30) + 0.0);
     const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));
@@ -13885,7 +13888,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
                        (2.8) * sc[10] + sc[11] + (2) * sc[17];
     const amrex::Real redP = Corr / k_f * 17370000 * exp(-1.23 * logT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.33 * exp(-T * 1e+30) + 0.67 * exp(-T * 1e-30) + exp(-1e+30 * invT));
     const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));
@@ -13913,7 +13916,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
     const amrex::Real redP =
       Corr / k_f * 8.54e+20 * exp(-4.69 * logT - 1107.07666477038 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.483806 * exp(-T * 0.000274887775691135) + 0.516194 * exp(-T * 1) +
        exp(-1e+30 * invT));
@@ -13941,7 +13944,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
     const amrex::Real redP = Corr / k_f * 104000000000000 *
                              exp(-2.76 * logT - 805.146665287552 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.438 * exp(-T * 0.010989010989011) +
        0.562 * exp(-T * 0.000171350239890336) + exp(-8552 * invT));
@@ -13969,7 +13972,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
     const amrex::Real redP =
       Corr / k_f * 1350000000000 * exp(-2.57 * logT - 717.083748771726 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.2176 * exp(-T * 0.003690036900369) +
        0.7824 * exp(-T * 0.000362976406533575) + exp(-6570 * invT));
@@ -13996,7 +13999,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
     const amrex::Real redP =
       Corr / k_f * 5.07e+15 * exp(-3.42 * logT - 42445.3193272965 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.0679999999999999 * exp(-T * 0.0050761421319797) +
        0.932 * exp(-T * 0.000649350649350649) + exp(-10300 * invT));
@@ -14025,7 +14028,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
     const amrex::Real redP =
       Corr / k_f * 60220000000 * exp(-0.547 * logT - 9069.92686279769 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.659 * exp(-T * 0.0357142857142857) + 0.341 * exp(-T * 0.001) +
        exp(-2339 * invT));
@@ -14053,7 +14056,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
     const amrex::Real redP =
       Corr / k_f * 8.054e+19 * exp(-3.75 * logT - 493.957479153913 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (1 * exp(-T * 0.00175438596491228) + exp(-1e+30 * invT));
     const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));
@@ -14080,7 +14083,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
     const amrex::Real redP =
       Corr / k_f * 1.99e+29 * exp(-7.08 * logT - 3364.00341090455 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.158 * exp(-T * 0.008) + 0.842 * exp(-T * 0.000450653447498873) +
        exp(-6882 * invT));
@@ -14109,7 +14112,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
     const amrex::Real redP =
       Corr / k_f * 1.419e+27 * exp(-6.642 * logT - 2903.05694502743 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (1.569 * exp(-T * 0.00334448160535117) +
        -0.569 * exp(-T * -0.000109325461900077) + exp(-152.4 * invT));
@@ -14138,7 +14141,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
     const amrex::Real redP =
       Corr / k_f * 6.346e+19 * exp(-4.664 * logT - 1902.15899674184 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.212 * exp(-T * -9.80392156862745e-05) + 0.788 * exp(-T * 1e+30) + 0.0);
     const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));
@@ -14166,7 +14169,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
     const amrex::Real redP =
       Corr / k_f * 2.69e+21 * exp(-5.11 * logT - 3570.32224388449 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.4093 * exp(-T * 0.00363636363636364) +
        0.5907 * exp(-T * 0.000815660685154976) + exp(-5185 * invT));
@@ -14194,7 +14197,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
     const amrex::Real redP =
       Corr / k_f * 4.7e+19 * exp(-3 * logT - 8319.17791908363 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.574 * exp(-T * 3.33333333333333) +
        0.426 * exp(-T * 0.000438981562774363) + exp(-100000 * invT));
@@ -14222,7 +14225,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
     const amrex::Real redP =
       Corr / k_f * 4.77e+71 * exp(-16.67 * logT - 50371.9882470524 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.19 * exp(-T * 0.000323519896473633) + 0.81 * exp(-T * 0.0078125) +
        exp(-8829 * invT));
@@ -14251,7 +14254,7 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
     const amrex::Real redP =
       Corr / k_f * 3.01e+36 * exp(-9.32 * logT - 2935.56474163841 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.502 * exp(-T * 0.00076103500761035) +
        0.498 * exp(-T * 0.00076103500761035) + exp(-50000 * invT));
@@ -19904,7 +19907,7 @@ productionRate_light(
     const amrex::Real redP =
       Corr / k_f * 22000000000 * exp(-2 * logT - 0 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.27 * exp(-T * 1e+30) + 0.73 * exp(-T * 1e-30) + exp(-1e+30 * invT));
     const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));
@@ -19933,7 +19936,7 @@ productionRate_light(
     const amrex::Real redP = Corr / k_f * 2.3530181e+18 *
                              exp(-2.2929358 * logT - 24528.4937440691 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.57 * exp(-T * 1e+30) + 0.43 * exp(-T * 1e-30) + 0.0);
     const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));
@@ -19959,7 +19962,7 @@ productionRate_light(
     const amrex::Real redP =
       Corr / k_f * 17370000 * exp(-1.23 * logT - 0 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.33 * exp(-T * 1e+30) + 0.67 * exp(-T * 1e-30) + exp(-1e+30 * invT));
     const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));
@@ -19987,7 +19990,7 @@ productionRate_light(
     const amrex::Real redP =
       Corr / k_f * 8.54e+20 * exp(-4.69 * logT - 1107.07666477038 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.483806 * exp(-T * 0.000274887775691135) + 0.516194 * exp(-T * 1) +
        exp(-1e+30 * invT));
@@ -20015,7 +20018,7 @@ productionRate_light(
     const amrex::Real redP = Corr / k_f * 104000000000000 *
                              exp(-2.76 * logT - 805.146665287552 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.438 * exp(-T * 0.010989010989011) +
        0.562 * exp(-T * 0.000171350239890336) + exp(-8552 * invT));
@@ -20043,7 +20046,7 @@ productionRate_light(
     const amrex::Real redP =
       Corr / k_f * 1350000000000 * exp(-2.57 * logT - 717.083748771726 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.2176 * exp(-T * 0.003690036900369) +
        0.7824 * exp(-T * 0.000362976406533575) + exp(-6570 * invT));
@@ -20070,7 +20073,7 @@ productionRate_light(
     const amrex::Real redP =
       Corr / k_f * 5.07e+15 * exp(-3.42 * logT - 42445.3193272965 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.0679999999999999 * exp(-T * 0.0050761421319797) +
        0.932 * exp(-T * 0.000649350649350649) + exp(-10300 * invT));
@@ -20099,7 +20102,7 @@ productionRate_light(
     const amrex::Real redP =
       Corr / k_f * 60220000000 * exp(-0.547 * logT - 9069.92686279769 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.659 * exp(-T * 0.0357142857142857) + 0.341 * exp(-T * 0.001) +
        exp(-2339 * invT));
@@ -20127,7 +20130,7 @@ productionRate_light(
     const amrex::Real redP =
       Corr / k_f * 8.054e+19 * exp(-3.75 * logT - 493.957479153913 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (1 * exp(-T * 0.00175438596491228) + exp(-1e+30 * invT));
     const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));
@@ -20154,7 +20157,7 @@ productionRate_light(
     const amrex::Real redP =
       Corr / k_f * 1.99e+29 * exp(-7.08 * logT - 3364.00341090455 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.158 * exp(-T * 0.008) + 0.842 * exp(-T * 0.000450653447498873) +
        exp(-6882 * invT));
@@ -20183,7 +20186,7 @@ productionRate_light(
     const amrex::Real redP =
       Corr / k_f * 1.419e+27 * exp(-6.642 * logT - 2903.05694502743 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (1.569 * exp(-T * 0.00334448160535117) +
        -0.569 * exp(-T * -0.000109325461900077) + exp(-152.4 * invT));
@@ -20212,7 +20215,7 @@ productionRate_light(
     const amrex::Real redP =
       Corr / k_f * 6.346e+19 * exp(-4.664 * logT - 1902.15899674184 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.212 * exp(-T * -9.80392156862745e-05) + 0.788 * exp(-T * 1e+30) + 0.0);
     const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));
@@ -20240,7 +20243,7 @@ productionRate_light(
     const amrex::Real redP =
       Corr / k_f * 2.69e+21 * exp(-5.11 * logT - 3570.32224388449 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.4093 * exp(-T * 0.00363636363636364) +
        0.5907 * exp(-T * 0.000815660685154976) + exp(-5185 * invT));
@@ -20268,7 +20271,7 @@ productionRate_light(
     const amrex::Real redP =
       Corr / k_f * 4.7e+19 * exp(-3 * logT - 8319.17791908363 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.574 * exp(-T * 3.33333333333333) +
        0.426 * exp(-T * 0.000438981562774363) + exp(-100000 * invT));
@@ -20296,7 +20299,7 @@ productionRate_light(
     const amrex::Real redP =
       Corr / k_f * 4.77e+71 * exp(-16.67 * logT - 50371.9882470524 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.19 * exp(-T * 0.000323519896473633) + 0.81 * exp(-T * 0.0078125) +
        exp(-8829 * invT));
@@ -20325,7 +20328,7 @@ productionRate_light(
     const amrex::Real redP =
       Corr / k_f * 3.01e+36 * exp(-9.32 * logT - 2935.56474163841 * invT);
     const amrex::Real F = redP / (1.0 + redP);
-    const amrex::Real logPred = log10(redP);
+    const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));
     const amrex::Real Fcent_arg =
       (0.502 * exp(-T * 0.00076103500761035) +
        0.498 * exp(-T * 0.00076103500761035) + exp(-50000 * invT));
