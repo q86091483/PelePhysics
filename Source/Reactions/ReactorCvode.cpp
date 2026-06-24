@@ -13,13 +13,21 @@ static void MyCvodeErrHandler(int line, const char* func, const char* file,
   const char* msg, SUNErrCode err_code,
   void* err_user_data, SUNContext sunctx) {
   auto* ctx = static_cast<MyCellDiagCtx*>(err_user_data);
-  fprintf(stderr, "[CVODE INTERNAL FAIL] cell (%d,%d,%d) at %s:%d (%s): %s\n",
-  ctx->i, ctx->j, ctx->k, file, line, func, msg);
-  fprintf(stderr, "  Input state: T=%g ", ctx->yvec_input[NUM_SPECIES]);
+
+  char buf[4096];
+  int offset = 0;
+  offset += snprintf(buf + offset, sizeof(buf) - offset,
+    "[CVODE INTERNAL FAIL] cell (%d,%d,%d) at %s:%d (%s): %s\n",
+    ctx->i, ctx->j, ctx->k, file, line, func, msg);
+  offset += snprintf(buf + offset, sizeof(buf) - offset,
+    "  Input state: T=%g ", ctx->yvec_input[NUM_SPECIES]);
   for (int n = 0; n < NUM_SPECIES; ++n) {
-    fprintf(stderr, "Y[%d]=%g ", n, ctx->yvec_input[n]);
+    offset += snprintf(buf + offset, sizeof(buf) - offset,
+      "Y[%d]=%g ", n, ctx->yvec_input[n]);
   }
-  fprintf(stderr, "\n");
+  offset += snprintf(buf + offset, sizeof(buf) - offset, "\n");
+
+  fprintf(stderr, "%s", buf);
 }
 
 int
