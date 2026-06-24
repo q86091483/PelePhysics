@@ -897,7 +897,7 @@ def ajac_reaction_d(
             cw.writer(fstream, cw.comment("Troe form"))
             troe = reaction.rate.falloff_coeffs
             ntroe = len(troe)
-            cw.writer(fstream, "logPr = log10(Pr);")
+            cw.writer(fstream, "logPr = log10(amrex::max(Pr, 1.e-200));") # log10(Pr);") - Zisen
             if abs(troe[1]) > 1.0e-100:
                 if troe[0] < 0:
                     cw.writer(
@@ -926,6 +926,7 @@ def ajac_reaction_d(
             else:
                 cw.writer(fstream, "Fcent3 = 0.;")
             cw.writer(fstream, "Fcent = Fcent1 + Fcent2 + Fcent3;")
+            cw.writer(fstream, "Fcent = amrex::max(Fcent, 1.e-200);")  # ZS
             cw.writer(fstream, "logFcent = log10(Fcent);")
             cw.writer(fstream, "troe_c = -.4 - .67 * logFcent;")
             cw.writer(fstream, "troe_n = .75 - 1.27 * logFcent;")

@@ -170,7 +170,7 @@ def production_rate(
         if ntroe > 0:
             cw.writer(
                 fstream,
-                "amrex::Real redP, F, logPred, logFcent, troe_c, troe_n, troe, F_troe;",
+                "amrex::Real redP, F, logPred, logFcent, Fcent, troe_c, troe_n, troe, F_troe;", # // ZS
             )
         if nsri > 0:
             cw.writer(fstream, "amrex::Real redP, F, X, F_sri;")
@@ -328,7 +328,7 @@ def production_rate(
                 if is_troe:
                     cw.writer(fstream, "F = redP / (1.0 + redP);")
                     cw.writer(fstream, "logPred = log10(redP);")
-                    cw.writer(fstream, "logFcent = log10(")
+                    cw.writer(fstream, "Fcent = (") #"logFcent = log10(") // ZS
                     if abs(troe[1]) > 1.0e-100:
                         if 1.0 - troe[0] != 0:
                             cw.writer(
@@ -358,6 +358,7 @@ def production_rate(
                             cw.writer(fstream, f"    + exp(-{troe[3]:.15g} * invT));")
                     else:
                         cw.writer(fstream, "    + 0.0);")
+                    cw.writer(fstream, "logFcent = log10(amrex::max(Fcent, 1.e-200));") # ZS
                     cw.writer(fstream, "troe_c = -0.4 - 0.67 * logFcent;")
                     cw.writer(fstream, "troe_n = 0.75 - 1.27 * logFcent;")
                     cw.writer(
@@ -740,7 +741,7 @@ def production_rate(
                     f_smp = redp_smp / (1.0 + redp_smp)
                     cw.writer(fstream, "const amrex::Real logPred = log10(redP);")
                     logpred_smp = sme.log(redp_smp, 10)
-                    cw.writer(fstream, "const amrex::Real logFcent = log10(")
+                    cw.writer(fstream, "const amrex::Real Fcent_arg = (") # logFcent = log10(") - ZS
                     int_smp = 0.0
                     if abs(troe[1]) > 1.0e-100:
                         if 1.0 - troe[0] != 0:
@@ -780,6 +781,7 @@ def production_rate(
                             int_smp += sme.exp(first_factor * syms.invT_smp)
                     else:
                         cw.writer(fstream, "    + 0.0);")
+                    cw.writer(fstream, "const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));") # ZS
                     logfcent_smp = sme.log(int_smp, 10)
                     cw.writer(
                         fstream,
@@ -1260,7 +1262,7 @@ def production_rate_light(fstream, mechanism, species_info, reaction_info):
                 if is_troe:
                     cw.writer(fstream, "const amrex::Real F = redP / (1.0 + redP);")
                     cw.writer(fstream, "const amrex::Real logPred = log10(redP);")
-                    cw.writer(fstream, "const amrex::Real logFcent = log10(")
+                    cw.writer(fstream, "const amrex::Real Fcent_arg = (") # logFcent = log10(") - ZS
                     if abs(troe[1]) > 1.0e-100:
                         if 1.0 - troe[0] != 0:
                             cw.writer(
@@ -1285,6 +1287,7 @@ def production_rate_light(fstream, mechanism, species_info, reaction_info):
                             cw.writer(fstream, f"    + exp(-{troe[3]:.15g} * invT));")
                     else:
                         cw.writer(fstream, "    + 0.0);")
+                    cw.writer(fstream, "const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));")
                     cw.writer(
                         fstream,
                         "const amrex::Real troe_c = -0.4 - 0.67 * logFcent;",
