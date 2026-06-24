@@ -14084,9 +14084,14 @@ productionRate(amrex::Real* wdot, const amrex::Real* sc, const amrex::Real T)
       Corr / k_f * 1.419e+27 * exp(-6.642 * logT - 2903.05694502743 * invT);
     const amrex::Real F = redP / (1.0 + redP);
     const amrex::Real logPred = log10(redP);
-    const amrex::Real logFcent = log10(
-      1.569 * exp(-T * 0.00334448160535117) +
-      -0.569 * exp(-T * -0.000109325461900077) + exp(-152.4 * invT));
+    // ---- begin debug ----
+    //const amrex::Real logFcent = log10(
+    //  1.569 * exp(-T * 0.00334448160535117) +
+    //  -0.569 * exp(-T * -0.000109325461900077) + exp(-152.4 * invT));
+    const amrex::Real Fcent_arg = 1.569 * exp(-T * 0.00334448160535117) +
+            -0.569 * exp(-T * -0.000109325461900077) + exp(-152.4 * invT);
+    const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-300));
+    // ---- end debug ------
     const amrex::Real troe_c = -0.4 - 0.67 * logFcent;
     const amrex::Real troe_n = 0.75 - 1.27 * logFcent;
     const amrex::Real troe =
