@@ -604,6 +604,17 @@ fKernelSpec(
   }
 #endif
 
+//------------- begin debug -------------
+if (temp_pt < 200.0 || temp_pt > 6000.0 || !std::isfinite(temp_pt) ||
+    !std::isfinite(rho_pt) || !std::isfinite(nrg_pt)) {
+  printf("[fKernelSpec ABNORMAL] icell=%d rho=%g T=%g nrg=%g\n",
+         icell, rho_pt, temp_pt, nrg_pt);
+  for (int n = 0; n < NUM_SPECIES; n++) {
+    if (massfrac[n] < -1e-6 || massfrac[n] > 1.0 + 1e-6)
+      printf("  Y[%d]=%g (abnormal)\n", n, massfrac[n]);
+  }
+}
+//------------- end debug -------------
   amrex::GpuArray<amrex::Real, NUM_SPECIES> cdots_pt = {0.0};
   eos.RTY2WDOT(rho_pt, temp_pt, massfrac.arr, cdots_pt.arr);
 
