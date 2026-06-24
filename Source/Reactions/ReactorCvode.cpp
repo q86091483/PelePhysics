@@ -9,26 +9,26 @@ struct MyCellDiagCtx {
   amrex::Real yvec_input[NUM_SPECIES + 1];
 };
 
-static void MyCvodeErrHandler(int line, const char* func, const char* file,
-  const char* msg, SUNErrCode err_code,
-  void* err_user_data, SUNContext sunctx) {
-  auto* ctx = static_cast<MyCellDiagCtx*>(err_user_data);
+//static void MyCvodeErrHandler(int line, const char* func, const char* file,
+//  const char* msg, SUNErrCode err_code,
+//  void* err_user_data, SUNContext sunctx) {
+//  auto* ctx = static_cast<MyCellDiagCtx*>(err_user_data);
 
-  char buf[4096];
-  int offset = 0;
-  offset += snprintf(buf + offset, sizeof(buf) - offset,
-    "[CVODE INTERNAL FAIL] cell (%d,%d,%d) at %s:%d (%s): %s\n",
-    ctx->i, ctx->j, ctx->k, file, line, func, msg);
-  offset += snprintf(buf + offset, sizeof(buf) - offset,
-    "  Input state: T=%g ", ctx->yvec_input[NUM_SPECIES]);
-  for (int n = 0; n < NUM_SPECIES; ++n) {
-    offset += snprintf(buf + offset, sizeof(buf) - offset,
-      "Y[%d]=%g ", n, ctx->yvec_input[n]);
-  }
-  offset += snprintf(buf + offset, sizeof(buf) - offset, "\n");
-
-  fprintf(stderr, "%s", buf);
-}
+// char buf[4096];
+//  int offset = 0;
+//  offset += snprintf(buf + offset, sizeof(buf) - offset,
+//    "[CVODE INTERNAL FAIL] cell (%d,%d,%d) at %s:%d (%s): %s\n",
+//    ctx->i, ctx->j, ctx->k, file, line, func, msg);
+//  offset += snprintf(buf + offset, sizeof(buf) - offset,
+//    "  Input state: T=%g ", ctx->yvec_input[NUM_SPECIES]);
+//  for (int n = 0; n < NUM_SPECIES; ++n) {
+//    offset += snprintf(buf + offset, sizeof(buf) - offset,
+//      "Y[%d]=%g ", n, ctx->yvec_input[n]);
+//  }
+//  offset += snprintf(buf + offset, sizeof(buf) - offset, "\n");
+//
+//  fprintf(stderr, "%s", buf);
+//}
 
 int
 ReactorCvode::init(int reactor_type, int /*ncells*/)
@@ -1914,13 +1914,13 @@ ReactorCvode::react(
         CVodeReInit(cvode_mem, time_start, y);
 
         // ------ Debug -----
-        MyCellDiagCtx diag_ctx;
-        diag_ctx.i = i; diag_ctx.j = j; diag_ctx.k = k;
-        for (int n = 0; n < NUM_SPECIES + 1; ++n) {
-          diag_ctx.yvec_input[n] = yvec_d[n];   // CVodeReInit之前，这时yvec_d还是这个cell的初始输入状态
-        }
-        SUNContext sunctx = *amrex::sundials::The_Sundials_Context();
-        SUNContext_PushErrHandler(sunctx, MyCvodeErrHandler, &diag_ctx);
+        //MyCellDiagCtx diag_ctx;
+        //diag_ctx.i = i; diag_ctx.j = j; diag_ctx.k = k;
+        //for (int n = 0; n < NUM_SPECIES + 1; ++n) {
+        //  diag_ctx.yvec_input[n] = yvec_d[n];   // CVodeReInit之前，这时yvec_d还是这个cell的初始输入状态
+        //}
+        //SUNContext sunctx = *amrex::sundials::The_Sundials_Context();
+        //SUNContext_PushErrHandler(sunctx, MyCvodeErrHandler, &diag_ctx);
         // ------ End debug ------
 
         BL_PROFILE_VAR("Pele::ReactorCvode::react():CVode", AroundCVODE);
@@ -1934,7 +1934,7 @@ ReactorCvode::react(
         CVode(cvode_mem_aux, time_final, y_aux, &CvodeActual_time_final, CV_NORMAL);
 #endif
         // ------- Debug -----
-        SUNContext_PopErrHandler(sunctx);
+        //SUNContext_PopErrHandler(sunctx);
         // ------- End debug ----
 
         // cppcheck-suppress knownConditionTrueFalse
