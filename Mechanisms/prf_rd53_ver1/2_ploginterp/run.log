@@ -1,0 +1,1483 @@
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:208: UserWarning: NasaPoly2::validate: 
+For species C7H15O2, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  48.67716598
+	Value computed using high-temperature polynomial: 49.695730729
+
+  ref_gas = ct.Solution(input_file)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:208: UserWarning: NasaPoly2::validate: 
+For species C7H15O2, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  10.720312991333337
+	Value computed using high-temperature polynomial: 10.572805530133333
+
+  ref_gas = ct.Solution(input_file)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:208: UserWarning: NasaPoly2::validate: 
+For species C7H14OOH, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  48.94369881
+	Value computed using high-temperature polynomial: 49.8854976854
+
+  ref_gas = ct.Solution(input_file)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:208: UserWarning: NasaPoly2::validate: 
+For species C7H14OOH, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  17.27348820666667
+	Value computed using high-temperature polynomial: 17.150916222746655
+
+  ref_gas = ct.Solution(input_file)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:208: UserWarning: NasaPoly2::validate: 
+For species O2C7H14OOH, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  54.828888189999994
+	Value computed using high-temperature polynomial: 55.92339838899999
+
+  ref_gas = ct.Solution(input_file)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:208: UserWarning: NasaPoly2::validate: 
+For species O2C7H14OOH, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  2.180460266333334
+	Value computed using high-temperature polynomial: 2.033209119299997
+
+  ref_gas = ct.Solution(input_file)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:208: UserWarning: NasaPoly2::validate: 
+For species C5H11CO, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  36.476880509999994
+	Value computed using high-temperature polynomial: 37.2250997504
+
+  ref_gas = ct.Solution(input_file)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:208: UserWarning: NasaPoly2::validate: 
+For species C5H11CO, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  8.779954785666664
+	Value computed using high-temperature polynomial: 8.675775924079996
+
+  ref_gas = ct.Solution(input_file)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:208: UserWarning: NasaPoly2::validate: 
+For species C6H13CO, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  36.476880509999994
+	Value computed using high-temperature polynomial: 37.2250997504
+
+  ref_gas = ct.Solution(input_file)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:208: UserWarning: NasaPoly2::validate: 
+For species C6H13CO, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  8.779954785666664
+	Value computed using high-temperature polynomial: 8.675775924079996
+
+  ref_gas = ct.Solution(input_file)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:210: UserWarning: NasaPoly2::validate: 
+For species C7H15O2, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  48.67716598
+	Value computed using high-temperature polynomial: 49.695730729
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:210: UserWarning: NasaPoly2::validate: 
+For species C7H15O2, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  10.720312991333337
+	Value computed using high-temperature polynomial: 10.572805530133333
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:210: UserWarning: NasaPoly2::validate: 
+For species C7H14OOH, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  48.94369881
+	Value computed using high-temperature polynomial: 49.8854976854
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:210: UserWarning: NasaPoly2::validate: 
+For species C7H14OOH, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  17.27348820666667
+	Value computed using high-temperature polynomial: 17.150916222746655
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:210: UserWarning: NasaPoly2::validate: 
+For species O2C7H14OOH, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  54.828888189999994
+	Value computed using high-temperature polynomial: 55.92339838899999
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:210: UserWarning: NasaPoly2::validate: 
+For species O2C7H14OOH, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  2.180460266333334
+	Value computed using high-temperature polynomial: 2.033209119299997
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:210: UserWarning: NasaPoly2::validate: 
+For species C5H11CO, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  36.476880509999994
+	Value computed using high-temperature polynomial: 37.2250997504
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:210: UserWarning: NasaPoly2::validate: 
+For species C5H11CO, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  8.779954785666664
+	Value computed using high-temperature polynomial: 8.675775924079996
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:210: UserWarning: NasaPoly2::validate: 
+For species C6H13CO, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  36.476880509999994
+	Value computed using high-temperature polynomial: 37.2250997504
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:210: UserWarning: NasaPoly2::validate: 
+For species C6H13CO, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  8.779954785666664
+	Value computed using high-temperature polynomial: 8.675775924079996
+
+  reference_phase = ct.Solution(thermo='ideal-gas', kinetics='gas', species=species)
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:236: UserWarning: NasaPoly2::validate: 
+For species C7H15O2, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  48.67716598
+	Value computed using high-temperature polynomial: 49.695730729
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:236: UserWarning: NasaPoly2::validate: 
+For species C7H15O2, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  10.720312991333337
+	Value computed using high-temperature polynomial: 10.572805530133333
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:236: UserWarning: NasaPoly2::validate: 
+For species C7H14OOH, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  48.94369881
+	Value computed using high-temperature polynomial: 49.8854976854
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:236: UserWarning: NasaPoly2::validate: 
+For species C7H14OOH, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  17.27348820666667
+	Value computed using high-temperature polynomial: 17.150916222746655
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:236: UserWarning: NasaPoly2::validate: 
+For species O2C7H14OOH, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  54.828888189999994
+	Value computed using high-temperature polynomial: 55.92339838899999
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:236: UserWarning: NasaPoly2::validate: 
+For species O2C7H14OOH, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  2.180460266333334
+	Value computed using high-temperature polynomial: 2.033209119299997
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:236: UserWarning: NasaPoly2::validate: 
+For species C5H11CO, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  36.476880509999994
+	Value computed using high-temperature polynomial: 37.2250997504
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:236: UserWarning: NasaPoly2::validate: 
+For species C5H11CO, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  8.779954785666664
+	Value computed using high-temperature polynomial: 8.675775924079996
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:236: UserWarning: NasaPoly2::validate: 
+For species C6H13CO, discontinuity in cp/R detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  36.476880509999994
+	Value computed using high-temperature polynomial: 37.2250997504
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+/software/projects/w47/q86091483/code/exascale_eb/PelePhysics_gpu/Mechanisms/prf_rd53_ver1/2_ploginterp/ploginterp.py:236: UserWarning: NasaPoly2::validate: 
+For species C6H13CO, discontinuity in h/RT detected at Tmid = 1000
+	Value computed using low-temperature polynomial:  8.779954785666664
+	Value computed using high-temperature polynomial: 8.675775924079996
+
+  new_gas = ct.Solution(name="fixed_pressure_mech", thermo=ref_gas.thermo_model, kinetics="gas",
+pressure-dependent-Arrhenius
+Interpolation coefficient:  CO + OH <=> CO2 + H
+P =  6.08E+06 , P0 =  1.33E+06 P1 =  1.33E+07
+A =  1.52E+04 , A1 =  6.80E+03 A2 =  2.30E+04
+b =  1.39E+00 , b1 =  1.48E+00 b2 =  1.35E+00
+E =  2.75E+06 , E1 =  2.01E+05 E2 =  4.08E+06
+pressure-dependent-Arrhenius
+Interpolation coefficient:  CH3 + OH <=> CH2O + H2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  8.43E+13 , A1 =  5.37E+06 A2 =  9.49E+15
+b =  -1.65E+00 , b1 =  2.87E-01 b2 =  -2.20E+00
+E =  3.21E+07 , E1 =  1.17E+06 E2 =  4.09E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  CH3 + OH <=> CH3O + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.48E+07 , A1 =  1.80E+06 A2 =  5.24E+07
+b =  6.43E-01 , b1 =  9.65E-01 b2 =  5.51E-01
+E =  5.37E+07 , E1 =  5.05E+07 E2 =  5.47E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  CH3 + OH <=> H2 + HCOH
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  8.76E+17 , A1 =  1.70E+18 A2 =  7.25E+17
+b =  -2.46E+00 , b1 =  -2.64E+00 b2 =  -2.40E+00
+E =  3.73E+07 , E1 =  2.68E+07 E2 =  4.03E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  2 CH3 <=> C2H5 + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  7.23E+00 , A1 =  2.15E+07 A2 =  1.03E-01
+b =  2.71E+00 , b1 =  8.85E-01 b2 =  3.23E+00
+E =  4.91E+07 , E1 =  5.66E+07 E2 =  4.70E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H5 + OH <=> C2H4 + H2O
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  8.97E+16 , A1 =  2.79E+21 A2 =  4.70E+15
+b =  -1.97E+00 , b1 =  -3.33E+00 b2 =  -1.58E+00
+E =  3.32E+07 , E1 =  3.24E+07 E2 =  3.35E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H5 + O2 <=> C2H5O2
+P =  6.08E+06 , P0 =  3.04E+06 P1 =  1.01E+07
+A =  7.92E+28 , A1 =  1.59E+31 A2 =  1.59E+27
+b =  -6.12E+00 , b1 =  -6.88E+00 b2 =  -5.56E+00
+E =  2.65E+07 , E1 =  2.89E+07 E2 =  2.47E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H5 + O2 <=> C2H4 + HO2
+P =  6.08E+06 , P0 =  3.04E+06 P1 =  1.01E+07
+A =  7.77E+08 , A1 =  5.29E+09 A2 =  1.89E+08
+b =  -5.94E-02 , b1 =  -3.30E-01 b2 =  1.40E-01
+E =  2.55E+07 , E1 =  2.40E+07 E2 =  2.67E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H5O2 <=> C2H4 + HO2
+P =  6.08E+06 , P0 =  3.04E+06 P1 =  1.01E+07
+A =  8.54E+27 , A1 =  1.92E+30 A2 =  1.58E+26
+b =  -4.94E+00 , b1 =  -5.71E+00 b2 =  -4.37E+00
+E =  1.48E+08 , E1 =  1.50E+08 E2 =  1.46E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + H <=> C2H4
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  7.83E+10 , A1 =  2.35E+11 A2 =  5.73E+10
+b =  9.69E-02 , b1 =  -6.00E-02 b2 =  1.42E-01
+E =  3.04E+05 , E1 =  8.78E+05 E2 =  1.41E+05
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H4 + OH <=> CH2O + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  3.46E+09 , A1 =  2.37E+06 A2 =  2.76E+10
+b =  -2.65E-01 , b1 =  5.60E-01 b2 =  -5.00E-01
+E =  4.29E+07 , E1 =  2.51E+07 E2 =  4.79E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H4 + OH <=> PC2H4OH
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  5.22E+24 , A1 =  3.70E+30 A2 =  1.12E+23
+b =  -4.65E+00 , b1 =  -6.57E+00 b2 =  -4.10E+00
+E =  2.58E+07 , E1 =  3.18E+07 E2 =  2.41E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> C2H3OO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.71E+38 , A1 =  2.33E+40 A2 =  3.41E+36
+b =  -8.63E+00 , b1 =  -9.38E+00 b2 =  -8.04E+00
+E =  6.09E+07 , E1 =  6.20E+07 E2 =  6.01E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> C2H3OO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.73E+24 , A1 =  3.32E+24 A2 =  1.03E+24
+b =  -4.82E+00 , b1 =  -4.95E+00 b2 =  -4.72E+00
+E =  1.53E+07 , E1 =  1.51E+07 E2 =  1.54E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> CHCHO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.79E+25 , A1 =  6.11E+22 A2 =  1.65E+27
+b =  -4.84E+00 , b1 =  -4.21E+00 b2 =  -5.35E+00
+E =  6.71E+07 , E1 =  5.46E+07 E2 =  7.71E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> CHCHO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  2.22E+08 , A1 =  1.42E+08 A2 =  3.17E+08
+b =  1.10E-02 , b1 =  5.00E-02 b2 =  -2.00E-02
+E =  1.94E+07 , E1 =  1.58E+07 E2 =  2.23E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> CH2CHO + O
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  5.49E+22 , A1 =  2.85E+22 A2 =  9.27E+22
+b =  -3.79E+00 , b1 =  -3.77E+00 b2 =  -3.80E+00
+E =  5.38E+07 , E1 =  4.82E+07 E2 =  5.82E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> CH2CHO + O
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  2.70E+05 , A1 =  1.43E+06 A2 =  7.14E+04
+b =  1.12E+00 , b1 =  9.20E-01 b2 =  1.28E+00
+E =  5.52E+06 , E1 =  5.10E+06 E2 =  5.86E+06
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> C2H2 + HO2
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.16E+10 , A1 =  1.19E+06 A2 =  1.06E+14
+b =  -4.43E-01 , b1 =  8.20E-01 b2 =  -1.45E+00
+E =  3.89E+07 , E1 =  2.35E+07 E2 =  5.12E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> C2H2 + HO2
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.65E+01 , A1 =  4.47E+05 A2 =  2.02E-02
+b =  1.64E+00 , b1 =  0.00E+00 b2 =  2.94E+00
+E =  6.07E+06 , E1 =  4.00E+06 E2 =  7.73E+06
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> CHOCHO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  2.62E+29 , A1 =  3.57E+30 A2 =  3.28E+28
+b =  -6.09E+00 , b1 =  -6.50E+00 b2 =  -5.76E+00
+E =  6.55E+07 , E1 =  6.24E+07 E2 =  6.80E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> CHOCHO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  2.46E+06 , A1 =  3.84E+07 A2 =  2.75E+05
+b =  5.60E-01 , b1 =  2.20E-01 b2 =  8.30E-01
+E =  3.74E+06 , E1 =  3.94E+06 E2 =  3.59E+06
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> CH2CO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.35E+05 , A1 =  2.49E+03 A2 =  1.66E+07
+b =  8.30E-01 , b1 =  1.42E+00 b2 =  3.60E-01
+E =  4.37E+07 , E1 =  3.55E+07 E2 =  5.02E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> CH2CO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  4.50E-07 , A1 =  1.19E-07 A2 =  1.30E-06
+b =  4.08E+00 , b1 =  4.21E+00 b2 =  3.97E+00
+E =  1.17E+07 , E1 =  8.55E+06 E2 =  1.43E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> CH2O + HCO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  5.58E+24 , A1 =  3.54E+17 A2 =  3.03E+30
+b =  -4.63E+00 , b1 =  -2.57E+00 b2 =  -6.28E+00
+E =  4.76E+07 , E1 =  2.33E+07 E2 =  6.69E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> CH2O + HCO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.63E+33 , A1 =  1.14E+66 A2 =  4.68E+07
+b =  -8.42E+00 , b1 =  -1.92E+01 b2 =  1.90E-01
+E =  2.93E+07 , E1 =  6.18E+07 E2 =  3.48E+06
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 => CH2O + CO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.30E+25 , A1 =  8.26E+17 A2 =  7.07E+30
+b =  -4.63E+00 , b1 =  -2.57E+00 b2 =  -6.28E+00
+E =  4.76E+07 , E1 =  2.33E+07 E2 =  6.69E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 => CH2O + CO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  8.46E+33 , A1 =  2.66E+66 A2 =  1.09E+08
+b =  -8.42E+00 , b1 =  -1.92E+01 b2 =  1.90E-01
+E =  2.93E+07 , E1 =  6.18E+07 E2 =  3.48E+06
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> CH3O + CO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.72E+23 , A1 =  1.10E+15 A2 =  5.79E+29
+b =  -4.57E+00 , b1 =  -2.22E+00 b2 =  -6.45E+00
+E =  4.88E+07 , E1 =  2.17E+07 E2 =  7.03E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> CH3O + CO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  9.17E+33 , A1 =  1.02E+69 A2 =  1.10E+06
+b =  -9.00E+00 , b1 =  -2.07E+01 b2 =  3.10E-01
+E =  3.18E+07 , E1 =  6.64E+07 E2 =  4.28E+06
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> CH3 + CO2
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.25E+23 , A1 =  3.84E+15 A2 =  1.21E+29
+b =  -4.60E+00 , b1 =  -2.44E+00 b2 =  -6.32E+00
+E =  4.77E+07 , E1 =  2.26E+07 E2 =  6.77E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + O2 <=> CH3 + CO2
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.24E+33 , A1 =  1.40E+67 A2 =  9.21E+05
+b =  -8.78E+00 , b1 =  -2.01E+01 b2 =  2.50E-01
+E =  3.06E+07 , E1 =  6.46E+07 E2 =  3.58E+06
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3OO <=> CHCHO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.43E+133 , A1 =  2.00E+54 A2 =  9.54E+195
+b =  -3.45E+01 , b1 =  -1.22E+01 b2 =  -5.23E+01
+E =  4.95E+08 , E1 =  2.59E+08 E2 =  6.84E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3OO <=> CHCHO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  2.62E+44 , A1 =  1.51E+57 A2 =  1.79E+34
+b =  -9.74E+00 , b1 =  -1.39E+01 b2 =  -6.40E+00
+E =  2.19E+08 , E1 =  2.32E+08 E2 =  2.09E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3OO <=> CH2CHO + O
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.89E+50 , A1 =  1.11E+53 A2 =  4.30E+48
+b =  -1.10E+01 , b1 =  -1.18E+01 b2 =  -1.03E+01
+E =  2.36E+08 , E1 =  2.37E+08 E2 =  2.35E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3OO <=> CH2CHO + O
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  4.13E+26 , A1 =  4.66E+27 A2 =  5.99E+25
+b =  -4.14E+00 , b1 =  -4.50E+00 b2 =  -3.85E+00
+E =  1.69E+08 , E1 =  1.70E+08 E2 =  1.68E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3OO <=> CHOCHO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  4.43E+32 , A1 =  2.06E+33 A2 =  1.30E+32
+b =  -6.12E+00 , b1 =  -6.38E+00 b2 =  -5.92E+00
+E =  1.68E+08 , E1 =  1.65E+08 E2 =  1.70E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3OO <=> CHOCHO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.08E+38 , A1 =  7.14E+61 A2 =  1.14E+19
+b =  -8.59E+00 , b1 =  -1.62E+01 b2 =  -2.56E+00
+E =  1.49E+08 , E1 =  1.81E+08 E2 =  1.24E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3OO <=> CH2CO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  2.84E+36 , A1 =  1.19E+37 A2 =  9.08E+35
+b =  -7.47E+00 , b1 =  -7.80E+00 b2 =  -7.21E+00
+E =  2.39E+08 , E1 =  2.36E+08 E2 =  2.41E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3OO <=> CH2CO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.38E+05 , A1 =  5.62E+02 A2 =  1.11E+07
+b =  1.04E+00 , b1 =  1.70E+00 b2 =  5.20E-01
+E =  1.58E+08 , E1 =  1.53E+08 E2 =  1.62E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3OO <=> CH2O + HCO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  5.71E+31 , A1 =  1.85E+34 A2 =  5.70E+29
+b =  -5.80E+00 , b1 =  -6.57E+00 b2 =  -5.19E+00
+E =  1.57E+08 , E1 =  1.61E+08 E2 =  1.54E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3OO <=> CH2O + HCO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.40E+83 , A1 =  1.07E+185 A2 =  4.68E+02
+b =  -2.30E+01 , b1 =  -5.42E+01 b2 =  1.81E+00
+E =  2.07E+08 , E1 =  3.72E+08 E2 =  7.57E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3OO => CH2O + CO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.33E+32 , A1 =  4.32E+34 A2 =  1.33E+30
+b =  -5.80E+00 , b1 =  -6.57E+00 b2 =  -5.19E+00
+E =  1.57E+08 , E1 =  1.61E+08 E2 =  1.54E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3OO => CH2O + CO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  7.92E+83 , A1 =  2.49E+185 A2 =  1.09E+03
+b =  -2.30E+01 , b1 =  -5.42E+01 b2 =  1.81E+00
+E =  2.07E+08 , E1 =  3.72E+08 E2 =  7.57E+07
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3OO <=> CH3O + CO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  6.43E+03 , A1 =  1.97E+17 A2 =  1.16E-07
+b =  1.69E+00 , b1 =  -2.23E+00 b2 =  4.81E+00
+E =  8.10E+07 , E1 =  1.20E+08 E2 =  5.02E+07
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + OH <=> CH2CO + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  5.34E+01 , A1 =  5.10E+03 A2 =  1.46E+01
+b =  2.27E+00 , b1 =  1.65E+00 b2 =  2.45E+00
+E =  1.77E+07 , E1 =  1.42E+07 E2 =  1.87E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + OH <=> CH3 + CO
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  3.31E+03 , A1 =  4.31E+05 A2 =  8.25E+02
+b =  1.58E+00 , b1 =  9.20E-01 b2 =  1.77E+00
+E =  1.88E+07 , E1 =  1.56E+07 E2 =  1.97E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> CHCHO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.03E+07 , A1 =  3.70E+05 A2 =  1.45E+08
+b =  8.13E-01 , b1 =  1.23E+00 b2 =  4.80E-01
+E =  7.09E+07 , E1 =  6.68E+07 E2 =  7.42E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> CHCHO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.05E+04 , A1 =  1.67E+04 A2 =  7.21E+03
+b =  1.67E+00 , b1 =  1.59E+00 b2 =  1.73E+00
+E =  6.68E+07 , E1 =  6.66E+07 E2 =  6.70E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> CH2CHO + O
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  6.90E+15 , A1 =  8.63E+15 A2 =  5.78E+15
+b =  -2.17E+00 , b1 =  -2.27E+00 b2 =  -2.09E+00
+E =  9.79E+07 , E1 =  9.30E+07 E2 =  1.02E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> CH2CHO + O
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.94E-04 , A1 =  1.95E-03 A2 =  1.10E-04
+b =  3.36E+00 , b1 =  3.17E+00 b2 =  3.52E+00
+E =  4.97E+07 , E1 =  4.91E+07 E2 =  5.01E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> CHOCHO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  4.40E+16 , A1 =  9.38E+13 A2 =  5.91E+18
+b =  -2.75E+00 , b1 =  -2.03E+00 b2 =  -3.32E+00
+E =  9.46E+07 , E1 =  8.20E+07 E2 =  1.05E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> CHOCHO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  2.32E-05 , A1 =  6.06E-06 A2 =  6.76E-05
+b =  3.39E+00 , b1 =  3.53E+00 b2 =  3.27E+00
+E =  4.22E+07 , E1 =  3.86E+07 E2 =  4.50E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> CH2CO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  9.07E-02 , A1 =  8.99E-04 A2 =  3.58E+00
+b =  2.41E+00 , b1 =  2.97E+00 b2 =  1.97E+00
+E =  9.02E+07 , E1 =  8.26E+07 E2 =  9.63E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> CH2CO + OH
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  8.74E-16 , A1 =  6.87E-17 A2 =  6.63E-15
+b =  6.38E+00 , b1 =  6.67E+00 b2 =  6.15E+00
+E =  5.87E+07 , E1 =  5.49E+07 E2 =  6.16E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> CH2O + HCO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  4.47E+18 , A1 =  1.78E+25 A2 =  2.47E+13
+b =  -3.30E+00 , b1 =  -5.30E+00 b2 =  -1.70E+00
+E =  9.33E+07 , E1 =  1.05E+08 E2 =  8.38E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> CH2O + HCO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  7.94E-05 , A1 =  1.79E+01 A2 =  4.32E-09
+b =  3.15E+00 , b1 =  1.70E+00 b2 =  4.31E+00
+E =  3.68E+07 , E1 =  4.71E+07 E2 =  2.86E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 => CH2O + CO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.04E+19 , A1 =  4.14E+25 A2 =  5.77E+13
+b =  -3.30E+00 , b1 =  -5.30E+00 b2 =  -1.70E+00
+E =  9.33E+07 , E1 =  1.05E+08 E2 =  8.38E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 => CH2O + CO + H
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  1.86E-04 , A1 =  4.19E+01 A2 =  1.01E-08
+b =  3.15E+00 , b1 =  1.70E+00 b2 =  4.31E+00
+E =  3.68E+07 , E1 =  4.71E+07 E2 =  2.86E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> CH3O + CO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  9.61E+16 , A1 =  2.43E+19 A2 =  1.17E+15
+b =  -3.19E+00 , b1 =  -3.96E+00 b2 =  -2.57E+00
+E =  9.41E+07 , E1 =  9.48E+07 E2 =  9.36E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> CH3O + CO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  4.39E-05 , A1 =  8.11E-03 A2 =  6.86E-07
+b =  2.92E+00 , b1 =  2.30E+00 b2 =  3.42E+00
+E =  4.13E+07 , E1 =  4.42E+07 E2 =  3.90E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> CH3 + CO2
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.15E+17 , A1 =  1.28E+24 A2 =  1.71E+12
+b =  -3.41E+00 , b1 =  -5.42E+00 b2 =  -1.80E+00
+E =  9.45E+07 , E1 =  1.06E+08 E2 =  8.52E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> CH3 + CO2
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.34E-06 , A1 =  2.89E-01 A2 =  3.90E-10
+b =  3.14E+00 , b1 =  1.79E+00 b2 =  4.21E+00
+E =  3.79E+07 , E1 =  4.70E+07 E2 =  3.06E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> C2H3OO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  7.70E+33 , A1 =  5.61E+35 A2 =  2.53E+32
+b =  -7.81E+00 , b1 =  -8.49E+00 b2 =  -7.26E+00
+E =  1.10E+08 , E1 =  1.10E+08 E2 =  1.10E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + HO2 <=> C2H3OO
+P =  6.08E+06 , P0 =  3.20E+06 P1 =  1.01E+07
+A =  3.90E+16 , A1 =  1.39E+17 A2 =  1.42E+16
+b =  -3.08E+00 , b1 =  -3.30E+00 b2 =  -2.91E+00
+E =  5.61E+07 , E1 =  5.61E+07 E2 =  5.61E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  CH2CHO <=> CH2CO + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.50E+36 , A1 =  3.46E+36 A2 =  1.18E+36
+b =  -6.58E+00 , b1 =  -6.92E+00 b2 =  -6.48E+00
+E =  2.29E+08 , E1 =  2.22E+08 E2 =  2.31E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  CH2CHO <=> CH3 + CO
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  6.14E+33 , A1 =  2.15E+35 A2 =  2.23E+33
+b =  -6.13E+00 , b1 =  -6.67E+00 b2 =  -5.97E+00
+E =  2.10E+08 , E1 =  2.07E+08 E2 =  2.11E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  CH2CHO + H <=> CH3 + HCO
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  7.72E+18 , A1 =  2.79E+22 A2 =  7.47E+17
+b =  -2.01E+00 , b1 =  -3.10E+00 b2 =  -1.69E+00
+E =  5.53E+07 , E1 =  5.21E+07 E2 =  5.62E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H5 + HCO <=> CH2CHO + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.29E+20 , A1 =  1.88E+22 A2 =  6.50E+19
+b =  -2.62E+00 , b1 =  -3.25E+00 b2 =  -2.44E+00
+E =  5.10E+07 , E1 =  4.43E+07 E2 =  5.29E+07
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+Interpolation coefficient:  O2C2H4OH => 2 CH2O + OH
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.45E+18 , A1 =  5.00E+16 A2 =  3.80E+18
+b =  -2.52E+00 , b1 =  -2.26E+00 b2 =  -2.60E+00
+E =  8.13E+07 , E1 =  7.34E+07 E2 =  8.36E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  NC3H7 + O2 <=> C3H6 + HO2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.11E-01 , A1 =  2.63E-03 A2 =  7.37E-01
+b =  2.88E+00 , b1 =  3.46E+00 b2 =  2.71E+00
+E =  2.02E+07 , E1 =  1.04E+07 E2 =  2.30E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  IC3H7 + O2 <=> C3H6 + HO2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.39E+07 , A1 =  4.91E+14 A2 =  9.84E+04
+b =  6.74E-01 , b1 =  -1.66E+00 b2 =  1.34E+00
+E =  2.40E+07 , E1 =  2.91E+07 E2 =  2.25E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  NC3H7 + O2 <=> C3H6OOH1-2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.85E+13 , A1 =  1.30E+11 A2 =  7.63E+13
+b =  -2.17E+00 , b1 =  -1.73E+00 b2 =  -2.30E+00
+E =  3.42E+07 , E1 =  2.16E+07 E2 =  3.78E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  NC3H7 + O2 <=> C3H6OOH1-3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.27E-18 , A1 =  3.94E-21 A2 =  6.58E-18
+b =  8.04E+00 , b1 =  8.88E+00 b2 =  7.80E+00
+E =  -1.69E+07 , E1 =  -2.59E+07 E2 =  -1.44E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  NC3H7 + O2 <=> C3H6OOH1-3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.24E+13 , A1 =  1.02E+18 A2 =  1.05E+12
+b =  -8.80E-01 , b1 =  -2.26E+00 b2 =  -4.86E-01
+E =  6.89E+07 , E1 =  7.76E+07 E2 =  6.64E+07
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H6OOH1-2 <=> C3H6 + HO2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.67E-14 , A1 =  1.16E-09 A2 =  1.27E-15
+b =  8.49E+00 , b1 =  7.46E+00 b2 =  8.78E+00
+E =  4.39E+07 , E1 =  6.17E+07 E2 =  3.88E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H6OOH1-3 <=> C3H6 + HO2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  8.14E+15 , A1 =  1.60E+10 A2 =  3.45E+17
+b =  -2.29E+00 , b1 =  -4.44E-01 b2 =  -2.82E+00
+E =  8.65E+07 , E1 =  7.34E+07 E2 =  9.03E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H6OOH1-3 + O2 <=> AC3H5OOH + HO2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.21E-03 , A1 =  3.08E+08 A2 =  6.76E-07
+b =  3.60E+00 , b1 =  1.79E-01 b2 =  4.57E+00
+E =  2.25E+07 , E1 =  3.59E+07 E2 =  1.87E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H6OOH1-2 + O2 <=> AC3H5OOH + HO2
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.63E+03 , A1 =  1.51E+13 A2 =  4.35E+00
+b =  1.70E+00 , b1 =  -1.27E+00 b2 =  2.55E+00
+E =  2.98E+07 , E1 =  3.93E+07 E2 =  2.71E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + CH3 <=> C3H5-A + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.06E+26 , A1 =  1.32E+27 A2 =  5.16E+25
+b =  -4.14E+00 , b1 =  -4.54E+00 b2 =  -4.03E+00
+E =  9.54E+07 , E1 =  8.08E+07 E2 =  9.96E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + CH3 <=> C3H5-A + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  6.24E-03 , A1 =  4.10E+03 A2 =  1.37E-04
+b =  3.42E+00 , b1 =  1.71E+00 b2 =  3.91E+00
+E =  -1.70E+05 , E1 =  4.42E+06 E2 =  -1.48E+06
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H6 <=> C2H3 + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.03E+66 , A1 =  8.12E+71 A2 =  2.15E+64
+b =  -1.39E+01 , b1 =  -1.58E+01 b2 =  -1.34E+01
+E =  5.66E+08 , E1 =  5.69E+08 E2 =  5.65E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H6 <=> C2H3 + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  4.72E+40 , A1 =  1.06E+47 A2 =  7.29E+38
+b =  -7.27E+00 , b1 =  -9.27E+00 b2 =  -6.70E+00
+E =  4.58E+08 , E1 =  4.67E+08 E2 =  4.55E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H6 <=> C3H5-A + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  7.59E+58 , A1 =  6.40E+65 A2 =  8.05E+56
+b =  -1.21E+01 , b1 =  -1.42E+01 b2 =  -1.15E+01
+E =  5.13E+08 , E1 =  5.23E+08 E2 =  5.10E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H6 <=> C3H5-A + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.58E+30 , A1 =  4.73E+35 A2 =  4.34E+28
+b =  -4.55E+00 , b1 =  -6.26E+00 b2 =  -4.06E+00
+E =  3.92E+08 , E1 =  4.00E+08 E2 =  3.90E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H6 + H <=> NC3H7
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  5.86E+27 , A1 =  6.20E+38 A2 =  4.22E+24
+b =  -5.39E+00 , b1 =  -8.89E+00 b2 =  -4.39E+00
+E =  4.40E+07 , E1 =  6.12E+07 E2 =  3.91E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H6 + H <=> NC3H7
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  6.33E-06 , A1 =  1.46E+22 A2 =  1.00E-13
+b =  -9.50E-01 , b1 =  -4.28E+00 b2 =  0.00E+00
+E =  4.87E+06 , E1 =  2.20E+07 E2 =  0.00E+00
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H6 + H <=> C2H4 + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.22E+20 , A1 =  9.25E+19 A2 =  1.32E+20
+b =  -2.46E+00 , b1 =  -2.60E+00 b2 =  -2.42E+00
+E =  6.57E+07 , E1 =  5.40E+07 E2 =  6.90E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H6 + H <=> C2H4 + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  5.96E+00 , A1 =  1.24E+02 A2 =  2.51E+00
+b =  2.82E+00 , b1 =  2.52E+00 b2 =  2.91E+00
+E =  1.64E+07 , E1 =  1.54E+07 E2 =  1.67E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H6 + H <=> IC3H7
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  3.37E+48 , A1 =  5.30E+53 A2 =  1.11E+47
+b =  -1.13E+01 , b1 =  -1.31E+01 b2 =  -1.08E+01
+E =  8.50E+07 , E1 =  8.65E+07 E2 =  8.45E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H6 + H <=> IC3H7
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.51E+21 , A1 =  6.11E+23 A2 =  2.73E+20
+b =  -3.52E+00 , b1 =  -4.44E+00 b2 =  -3.26E+00
+E =  1.98E+07 , E1 =  2.17E+07 E2 =  1.92E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H4 + CH3 <=> NC3H7
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.55E+38 , A1 =  1.81E+42 A2 =  2.04E+37
+b =  -8.64E+00 , b1 =  -1.00E+01 b2 =  -8.25E+00
+E =  1.01E+08 , E1 =  9.94E+07 E2 =  1.01E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H4 + CH3 <=> NC3H7
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  4.29E+19 , A1 =  3.85E+24 A2 =  1.66E+18
+b =  -3.66E+00 , b1 =  -5.38E+00 b2 =  -3.17E+00
+E =  4.40E+07 , E1 =  4.79E+07 E2 =  4.28E+07
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H5-A + HO2 <=> C3H5O + OH
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  5.14E+03 , A1 =  2.93E+12 A2 =  1.64E+01
+b =  1.98E+00 , b1 =  -6.84E-01 b2 =  2.74E+00
+E =  7.08E+06 , E1 =  1.51E+07 E2 =  4.79E+06
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H5-A + HO2 <=> AC3H5OOH
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.14E+30 , A1 =  2.79E+34 A2 =  1.44E+29
+b =  -6.43E+00 , b1 =  -7.92E+00 b2 =  -6.01E+00
+E =  2.57E+07 , E1 =  2.72E+07 E2 =  2.53E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H5-A + HO2 <=> C2H3CHO + H2O
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  7.52E-06 , A1 =  3.10E+02 A2 =  5.07E-08
+b =  3.92E+00 , b1 =  1.59E+00 b2 =  4.59E+00
+E =  5.51E+06 , E1 =  1.12E+07 E2 =  3.88E+06
+pressure-dependent-Arrhenius
+Interpolation coefficient:  AC3H5OOH <=> C2H3CHO + H2O
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  7.66E+18 , A1 =  2.54E+28 A2 =  1.48E+16
+b =  -1.98E+00 , b1 =  -5.00E+00 b2 =  -1.12E+00
+E =  1.96E+08 , E1 =  2.09E+08 E2 =  1.92E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  AC3H5OOH <=> C3H5O + OH
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.46E+29 , A1 =  2.39E+36 A2 =  1.28E+27
+b =  -4.26E+00 , b1 =  -6.54E+00 b2 =  -3.61E+00
+E =  1.97E+08 , E1 =  2.07E+08 E2 =  1.94E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H5O <=> C2H3 + CH2O
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.80E+31 , A1 =  6.50E+29 A2 =  4.63E+31
+b =  -5.54E+00 , b1 =  -5.37E+00 b2 =  -5.59E+00
+E =  1.19E+08 , E1 =  1.11E+08 E2 =  1.21E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H5O <=> C2H3CHO + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.47E+27 , A1 =  1.76E+28 A2 =  1.41E+27
+b =  -4.42E+00 , b1 =  -4.89E+00 b2 =  -4.28E+00
+E =  9.85E+07 , E1 =  9.52E+07 E2 =  9.95E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H5O <=> C2H4 + HCO
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.01E+22 , A1 =  8.42E+25 A2 =  1.86E+21
+b =  -3.10E+00 , b1 =  -4.40E+00 b2 =  -2.73E+00
+E =  9.78E+07 , E1 =  9.36E+07 E2 =  9.90E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + CH2O <=> C2H3CHO + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  7.21E+07 , A1 =  1.35E+06 A2 =  2.24E+08
+b =  4.85E-01 , b1 =  9.33E-01 b2 =  3.57E-01
+E =  3.09E+07 , E1 =  2.16E+07 E2 =  3.35E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H3 + CH2O <=> C2H4 + HCO
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.00E+11 , A1 =  3.45E+10 A2 =  3.31E+11
+b =  -8.35E-01 , b1 =  -7.26E-01 b2 =  -8.66E-01
+E =  4.21E+07 , E1 =  2.91E+07 E2 =  4.59E+07
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H4-A + H <=> C3H4-P + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  2.05E+21 , A1 =  2.35E+22 A2 =  1.02E+21
+b =  -2.79E+00 , b1 =  -3.23E+00 b2 =  -2.67E+00
+E =  6.29E+07 , E1 =  5.51E+07 E2 =  6.51E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H4-A + H <=> C3H4-P + H
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.74E+02 , A1 =  1.79E+04 A2 =  4.63E+01
+b =  2.48E+00 , b1 =  1.98E+00 b2 =  2.62E+00
+E =  1.87E+07 , E1 =  1.89E+07 E2 =  1.87E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H4-A + H <=> C3H5-A
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  5.30E+41 , A1 =  3.75E+45 A2 =  4.23E+40
+b =  -8.98E+00 , b1 =  -1.03E+01 b2 =  -8.61E+00
+E =  9.42E+07 , E1 =  9.42E+07 E2 =  9.42E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H4-A + H <=> C3H5-A
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  4.88E+19 , A1 =  2.29E+23 A2 =  4.38E+18
+b =  -3.07E+00 , b1 =  -4.32E+00 b2 =  -2.71E+00
+E =  2.26E+07 , E1 =  2.58E+07 E2 =  2.17E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H4-A + H <=> C2H2 + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  8.60E+13 , A1 =  1.68E+13 A2 =  1.37E+14
+b =  -7.48E-01 , b1 =  -6.00E-01 b2 =  -7.90E-01
+E =  7.10E+07 , E1 =  6.17E+07 E2 =  7.37E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H4-A + H <=> C2H2 + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  4.39E+03 , A1 =  3.31E+05 A2 =  1.28E+03
+b =  1.58E+00 , b1 =  1.14E+00 b2 =  1.71E+00
+E =  4.01E+07 , E1 =  3.72E+07 E2 =  4.09E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H4-P + H <=> C2H2 + CH3
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.12E+12 , A1 =  1.72E+11 A2 =  1.90E+12
+b =  -2.28E-01 , b1 =  -1.00E-02 b2 =  -2.90E-01
+E =  3.37E+07 , E1 =  2.98E+07 E2 =  3.48E+07
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H4-P + H <=> C3H5-A
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  1.32E+53 , A1 =  2.20E+56 A2 =  1.60E+52
+b =  -1.24E+01 , b1 =  -1.36E+01 b2 =  -1.21E+01
+E =  1.54E+08 , E1 =  1.46E+08 E2 =  1.57E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C2H2 + CH3 <=> C3H5-A
+P =  6.08E+06 , P0 =  1.01E+06 P1 =  1.01E+07
+A =  5.05E+42 , A1 =  4.40E+46 A2 =  3.80E+41
+b =  -1.00E+01 , b1 =  -1.14E+01 b2 =  -9.63E+00
+E =  1.56E+08 , E1 =  1.54E+08 E2 =  1.57E+08
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+Interpolation coefficient:  CH3CHCHO <=> C2H3CHO + H
+P =  6.08E+06 , P0 =  1.00E+06 P1 =  1.00E+07
+A =  3.69E+43 , A1 =  4.14E+47 A2 =  2.82E+42
+b =  -8.55E+00 , b1 =  -9.93E+00 b2 =  -8.17E+00
+E =  2.54E+08 , E1 =  2.54E+08 E2 =  2.54E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  CH3CHCHO <=> C2H3CHO + H
+P =  6.08E+06 , P0 =  1.00E+06 P1 =  1.00E+07
+A =  5.42E+20 , A1 =  5.82E+24 A2 =  4.19E+19
+b =  -2.34E+00 , b1 =  -3.71E+00 b2 =  -1.96E+00
+E =  1.84E+08 , E1 =  1.87E+08 E2 =  1.83E+08
+pressure-dependent-Arrhenius
+Interpolation coefficient:  C3H3 <=> C3H2 + H
+P =  6.08E+06 , P0 =  3.04E+06 P1 =  1.01E+07
+A =  1.89E+29 , A1 =  4.43E+31 A2 =  3.38E+27
+b =  -3.86E+00 , b1 =  -4.59E+00 b2 =  -3.33E+00
+E =  4.40E+08 , E1 =  4.44E+08 E2 =  4.37E+08
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+pressure-dependent-Arrhenius
+Reactions converted to fixed pressure : 
+
+CO + OH <=> CO2 + H
+CH3 + OH <=> CH2O + H2
+CH3 + OH <=> CH3O + H
+CH3 + OH <=> H2 + HCOH
+2 CH3 <=> C2H5 + H
+C2H5 + OH <=> C2H4 + H2O
+C2H5 + O2 <=> C2H5O2
+C2H5 + O2 <=> C2H4 + HO2
+C2H5O2 <=> C2H4 + HO2
+C2H3 + H <=> C2H4
+C2H4 + OH <=> CH2O + CH3
+C2H4 + OH <=> PC2H4OH
+C2H3 + O2 <=> C2H3OO
+C2H3 + O2 <=> C2H3OO
+C2H3 + O2 <=> CHCHO + OH
+C2H3 + O2 <=> CHCHO + OH
+C2H3 + O2 <=> CH2CHO + O
+C2H3 + O2 <=> CH2CHO + O
+C2H3 + O2 <=> C2H2 + HO2
+C2H3 + O2 <=> C2H2 + HO2
+C2H3 + O2 <=> CHOCHO + H
+C2H3 + O2 <=> CHOCHO + H
+C2H3 + O2 <=> CH2CO + OH
+C2H3 + O2 <=> CH2CO + OH
+C2H3 + O2 <=> CH2O + HCO
+C2H3 + O2 <=> CH2O + HCO
+C2H3 + O2 => CH2O + CO + H
+C2H3 + O2 => CH2O + CO + H
+C2H3 + O2 <=> CH3O + CO
+C2H3 + O2 <=> CH3O + CO
+C2H3 + O2 <=> CH3 + CO2
+C2H3 + O2 <=> CH3 + CO2
+C2H3OO <=> CHCHO + OH
+C2H3OO <=> CHCHO + OH
+C2H3OO <=> CH2CHO + O
+C2H3OO <=> CH2CHO + O
+C2H3OO <=> CHOCHO + H
+C2H3OO <=> CHOCHO + H
+C2H3OO <=> CH2CO + OH
+C2H3OO <=> CH2CO + OH
+C2H3OO <=> CH2O + HCO
+C2H3OO <=> CH2O + HCO
+C2H3OO => CH2O + CO + H
+C2H3OO => CH2O + CO + H
+C2H3OO <=> CH3O + CO
+C2H3OO <=> CH3O + CO
+CHOCHO <=> CH2O + CO
+CHOCHO <=> CO + HCOH
+CHOCHO => 2 CO + H2
+CHOCHO <=> 2 HCO
+C2H2 + OH <=> CH2CO + H
+C2H2 + OH <=> CH3 + CO
+C2H2 + HO2 <=> CHCHO + OH
+C2H2 + HO2 <=> CHCHO + OH
+C2H2 + HO2 <=> CH2CHO + O
+C2H2 + HO2 <=> CH2CHO + O
+C2H2 + HO2 <=> CHOCHO + H
+C2H2 + HO2 <=> CHOCHO + H
+C2H2 + HO2 <=> CH2CO + OH
+C2H2 + HO2 <=> CH2CO + OH
+C2H2 + HO2 <=> CH2O + HCO
+C2H2 + HO2 <=> CH2O + HCO
+C2H2 + HO2 => CH2O + CO + H
+C2H2 + HO2 => CH2O + CO + H
+C2H2 + HO2 <=> CH3O + CO
+C2H2 + HO2 <=> CH3O + CO
+C2H2 + HO2 <=> CH3 + CO2
+C2H2 + HO2 <=> CH3 + CO2
+C2H2 + HO2 <=> C2H3OO
+C2H2 + HO2 <=> C2H3OO
+CH2CHO <=> CH2CO + H
+CH2CHO <=> CH3 + CO
+CH2CHO + H <=> CH3 + HCO
+C2H5 + HCO <=> CH2CHO + CH3
+CH2CHO + O2 <=> CH2CO + HO2
+CH2CHO + O2 => CH2O + CO + OH
+O2C2H4OH => 2 CH2O + OH
+NC3H7 + O2 <=> C3H6 + HO2
+IC3H7 + O2 <=> C3H6 + HO2
+NC3H7 + O2 <=> C3H6OOH1-2
+NC3H7 + O2 <=> C3H6OOH1-3
+NC3H7 + O2 <=> C3H6OOH1-3
+C3H6OOH1-2 <=> C3H6OOH1-3
+C3H6OOH1-2 <=> C3H6 + HO2
+C3H6OOH1-3 <=> C3H6 + HO2
+C3H6OOH1-3 + O2 <=> AC3H5OOH + HO2
+C3H6OOH1-2 + O2 <=> AC3H5OOH + HO2
+C2H3 + CH3 <=> C3H5-A + H
+C2H3 + CH3 <=> C3H5-A + H
+C3H6 <=> C2H3 + CH3
+C3H6 <=> C2H3 + CH3
+C3H6 <=> C3H5-A + H
+C3H6 <=> C3H5-A + H
+C3H6 + H <=> NC3H7
+C3H6 + H <=> NC3H7
+C3H6 + H <=> C2H4 + CH3
+C3H6 + H <=> C2H4 + CH3
+C3H6 + H <=> IC3H7
+C3H6 + H <=> IC3H7
+C2H4 + CH3 <=> NC3H7
+C2H4 + CH3 <=> NC3H7
+2 C3H5-A <=> C3H4-A + C3H6
+C3H5-A + OH => C2H3CHO + 2 H
+C3H5-A + O2 <=> C3H4-A + HO2
+C3H5-A + O2 <=> C2H3CHO + OH
+C3H5-A + HO2 <=> C3H5O + OH
+C3H5-A + HO2 <=> AC3H5OOH
+C3H5-A + HO2 <=> C2H3CHO + H2O
+AC3H5OOH <=> C2H3CHO + H2O
+AC3H5OOH <=> C3H5O + OH
+C3H5O <=> C2H3 + CH2O
+C3H5O <=> C2H3CHO + H
+C3H5O <=> C2H4 + HCO
+C2H3 + CH2O <=> C2H3CHO + H
+C2H3 + CH2O <=> C2H4 + HCO
+C3H4-A <=> C3H4-P
+C3H3 + H <=> C3H4-P
+C3H3 + H <=> C3H4-A
+C3H4-A + H <=> C3H4-P + H
+C3H4-A + H <=> C3H4-P + H
+C3H4-A + H <=> C3H5-A
+C3H4-A + H <=> C3H5-A
+C3H4-A + H <=> C2H2 + CH3
+C3H4-A + H <=> C2H2 + CH3
+C3H4-P + H <=> C2H2 + CH3
+C3H4-P + H <=> C3H5-A
+C2H2 + CH3 <=> C3H5-A
+C3H4-P + O <=> C3H3 + OH
+C3H4-P + O <=> C2H3 + HCO
+C3H4-P + O <=> C2H4 + CO
+C3H4-P + O <=> C2H2 + CO + H2
+C3H4-P + O <=> CH3 + HCCO
+C3H4-P + O <=> C2H3CHO
+C3H4-P + O <=> C2H3 + CO + H
+C3H4-P + O <=> C2H3CO + H
+CH3CHCHO <=> C2H3CHO + H
+CH3CHCHO <=> C2H3CHO + H
+C3H3 <=> C3H2 + H
+C3H3 + OH <=> C2H3 + HCO
+C3H3 + OH <=> C2H2 + CO + H2
+C3H3 + OH <=> C2H4 + CO
+2 C3H3 => C6H6
+C3H2 + OH => C2H2 + CO + H
+
+ Variable pressure and interpolated fixed pressure reaction rates at 300K 
+
+CO + OH <=> CO2 + H                      	 Plog rate : 14311764.98133567    	 Fixed P rate : 14311764.98133619    	 Relative change :  3.631124444211892e-14
+CH3 + OH <=> CH2O + H2                   	 Plog rate : 18278.63757007459    	 Fixed P rate : 18278.637570074035   	 Relative change :  3.025240675395064e-14
+CH3 + OH <=> CH3O + H                    	 Plog rate : 0.4254921863898469   	 Fixed P rate : 0.4254921863898503   	 Relative change :  7.958266528552e-15  
+CH3 + OH <=> H2 + HCOH                   	 Plog rate : 229586.88491462296   	 Fixed P rate : 229586.88491459523   	 Relative change :  1.208080785432559e-13
+2 CH3 <=> C2H5 + H                       	 Plog rate : 0.10354840323943962  	 Fixed P rate : 0.10354840323945114  	 Relative change :  1.1123845004013347e-13
+C2H5 + OH <=> C2H4 + H2O                 	 Plog rate : 1950370.021687143    	 Fixed P rate : 1950370.0216870217   	 Relative change :  6.21957700307211e-14
+C2H5 + O2 <=> C2H5O2                     	 Plog rate : 1328853408.0465515   	 Fixed P rate : 1328853408.046155    	 Relative change :  2.9837007953251144e-13
+C2H5 + O2 <=> C2H4 + HO2                 	 Plog rate : 19950.260405218334   	 Fixed P rate : 19950.2604052172     	 Relative change :  5.689396352519403e-14
+C2H5O2 <=> C2H4 + HO2                    	 Plog rate : 9.709761154187015e-11 	 Fixed P rate : 9.709761154185636e-11 	 Relative change :  1.4202874361086363e-13
+C2H3 + H <=> C2H4                        	 Plog rate : 120498957820.93855   	 Fixed P rate : 120498957820.93816   	 Relative change :  3.2923813018743164e-15
+C2H4 + OH <=> CH2O + CH3                 	 Plog rate : 26.20971779028089    	 Fixed P rate : 26.20971779028087    	 Relative change :  8.132968940515463e-16
+C2H4 + OH <=> PC2H4OH                    	 Plog rate : 509856451.63886446   	 Fixed P rate : 509856451.63876307   	 Relative change :  1.9885499229644554e-13
+C2H3 + O2 <=> C2H3OO                     	 Plog rate : 1732892.0745853924   	 Fixed P rate : 1732892.07458486     	 Relative change :  3.072803493338156e-13
+C2H3 + O2 <=> C2H3OO                     	 Plog rate : 4318867084.534459    	 Fixed P rate : 4318867084.533415    	 Relative change :  2.417933583101709e-13
+C2H3 + O2 <=> CHCHO + OH                 	 Plog rate : 36.641518071526356   	 Fixed P rate : 36.6415180715171     	 Relative change :  2.526743523257205e-13
+C2H3 + O2 <=> CHCHO + OH                 	 Plog rate : 97793.86033022564    	 Fixed P rate : 97793.86033022599    	 Relative change :  3.571246336952927e-15
+C2H3 + O2 <=> CH2CHO + O                 	 Plog rate : 9894.869502858324    	 Fixed P rate : 9894.86950285676     	 Relative change :  1.5809515088577463e-13
+C2H3 + O2 <=> CH2CHO + O                 	 Plog rate : 17552662.345964294   	 Fixed P rate : 17552662.34596378    	 Relative change :  2.928843790503061e-14
+C2H3 + O2 <=> C2H2 + HO2                 	 Plog rate : 425.1773647628363    	 Fixed P rate : 425.17736476280834   	 Relative change :  6.577716594842131e-14
+C2H3 + O2 <=> C2H2 + HO2                 	 Plog rate : 36166.276732508406   	 Fixed P rate : 36166.27673251097    	 Relative change :  7.081561364845896e-14
+C2H3 + O2 <=> CHOCHO + H                 	 Plog rate : 856.9682640772459    	 Fixed P rate : 856.9682640770014    	 Relative change :  2.8522258215088607e-13
+C2H3 + O2 <=> CHOCHO + H                 	 Plog rate : 13324951.901345206   	 Fixed P rate : 13324951.90134547    	 Relative change :  1.9849648475210932e-14
+C2H3 + O2 <=> CH2CO + OH                 	 Plog rate : 0.9370385340545906   	 Fixed P rate : 0.9370385340546384   	 Relative change :  5.1065789316361816e-14
+C2H3 + O2 <=> CH2CO + OH                 	 Plog rate : 50.945493770094735   	 Fixed P rate : 50.945493770100434   	 Relative change :  1.118558741723509e-13
+C2H3 + O2 <=> CH2O + HCO                 	 Plog rate : 94734.40387138337    	 Fixed P rate : 94734.4038713573     	 Relative change :  2.7526464540418713e-13
+C2H3 + O2 <=> CH2O + HCO                 	 Plog rate : 39360742.270283945   	 Fixed P rate : 39360742.27027038    	 Relative change :  3.4469642807628933e-13
+C2H3 + O2 => CH2O + CO + H               	 Plog rate : 221046.9423665614    	 Fixed P rate : 221046.94236652486   	 Relative change :  1.6523778538692024e-13
+C2H3 + O2 => CH2O + CO + H               	 Plog rate : 91748072.5371539     	 Fixed P rate : 91748072.53712326    	 Relative change :  3.3392295409959965e-13
+C2H3 + O2 <=> CH3O + CO                  	 Plog rate : 2602.439197185908    	 Fixed P rate : 2602.439197185474    	 Relative change :  1.668756451893964e-13
+C2H3 + O2 <=> CH3O + CO                  	 Plog rate : 1334590.9364287178   	 Fixed P rate : 1334590.9364282389   	 Relative change :  3.588609969715542e-13
+C2H3 + O2 <=> CH3 + CO2                  	 Plog rate : 2468.2491719967015   	 Fixed P rate : 2468.2491719964887   	 Relative change :  8.622377458054694e-14
+C2H3 + O2 <=> CH3 + CO2                  	 Plog rate : 1042830.7454658761   	 Fixed P rate : 1042830.7454655203   	 Relative change :  3.4115337033353155e-13
+C2H3OO <=> CHCHO + OH                    	 Plog rate : 2.5111623461518175e-39 	 Fixed P rate : 2.5111623461477496e-39 	 Relative change :  1.619917092012795e-12
+C2H3OO <=> CHCHO + OH                    	 Plog rate : 1.3117661587735603e-18 	 Fixed P rate : 1.3117661587729263e-18 	 Relative change :  4.833301525975127e-13
+C2H3OO <=> CH2CHO + O                    	 Plog rate : 2.3468267374390153e-18 	 Fixed P rate : 2.346826737437681e-18 	 Relative change :  5.685482631442662e-13
+C2H3OO <=> CH2CHO + O                    	 Plog rate : 1.0134022575280201e-13 	 Fixed P rate : 1.0134022575278077e-13 	 Relative change :  2.0961514835784804e-13
+C2H3OO <=> CHOCHO + H                    	 Plog rate : 1.6758767475988012e-12 	 Fixed P rate : 1.6758767475984617e-12 	 Relative change :  2.0256575968106843e-13
+C2H3OO <=> CHOCHO + H                    	 Plog rate : 5.541219455492176e-10 	 Fixed P rate : 5.541219455490856e-10 	 Relative change :  2.3809796518966657e-13
+C2H3OO <=> CH2CO + OH                    	 Plog rate : 2.3619943294525676e-24 	 Fixed P rate : 2.3619943294520137e-24 	 Relative change :  2.345271137688932e-13
+C2H3OO <=> CH2CO + OH                    	 Plog rate : 1.868096738018329e-20 	 Fixed P rate : 1.8680967380182826e-20 	 Relative change :  2.480743547359225e-14
+C2H3OO <=> CH2O + HCO                    	 Plog rate : 1.0558433777820498e-10 	 Fixed P rate : 1.0558433777815883e-10 	 Relative change :  4.371301105093636e-13
+C2H3OO <=> CH2O + HCO                    	 Plog rate : 2.4382813571786755e-10 	 Fixed P rate : 2.4382813571764405e-10 	 Relative change :  9.1660407071633e-13 
+C2H3OO => CH2O + CO + H                  	 Plog rate : 2.4644779382331507e-10 	 Fixed P rate : 2.4644779382324765e-10 	 Relative change :  2.735476705926753e-13
+C2H3OO => CH2O + CO + H                  	 Plog rate : 5.676786764039261e-10 	 Fixed P rate : 5.676786764033978e-10 	 Relative change :  9.30740642955375e-13
+C2H3OO <=> CH3O + CO                     	 Plog rate : 5.0743732242082604e-15 	 Fixed P rate : 5.074373224208275e-15 	 Relative change :  2.7982758986344997e-15
+C2H3OO <=> CH3O + CO                     	 Plog rate : 7.688743666150241e-07 	 Fixed P rate : 7.688743666150652e-07 	 Relative change :  5.3430182778356166e-14
+CHOCHO <=> CH2O + CO                     	 Plog rate : 1.8882924071306275e-33 	 Fixed P rate : 1.8882924071306312e-33 	 Relative change :  1.99293959854888e-15
+CHOCHO <=> CO + HCOH                     	 Plog rate : 8.979725436458373e-35 	 Fixed P rate : 8.979725436458314e-35 	 Relative change :  6.548176114972565e-15
+CHOCHO => 2 CO + H2                      	 Plog rate : 1.5095970148890723e-35 	 Fixed P rate : 1.509597014889065e-35 	 Relative change :  4.780391485988203e-15
+CHOCHO <=> 2 HCO                         	 Plog rate : 5.027509205227958e-38 	 Fixed P rate : 5.027509205227993e-38 	 Relative change :  7.060684497404602e-15
+C2H2 + OH <=> CH2CO + H                  	 Plog rate : 18613.460673579113   	 Fixed P rate : 18613.460673579182   	 Relative change :  3.713527459880539e-15
+C2H2 + OH <=> CH3 + CO                   	 Plog rate : 14807.987632762037   	 Fixed P rate : 14807.987632763063   	 Relative change :  6.92808536205204e-14
+C2H2 + HO2 <=> CHCHO + OH                	 Plog rate : 0.00047867969472283593 	 Fixed P rate : 0.0004786796947228138 	 Relative change :  4.6205687357410983e-14
+C2H2 + HO2 <=> CHCHO + OH                	 Plog rate : 0.000328499271803881 	 Fixed P rate : 0.0003284992718038967 	 Relative change :  4.785682298384347e-14
+C2H2 + HO2 <=> CH2CHO + O                	 Plog rate : 2.572935055953518e-07 	 Fixed P rate : 2.572935055953203e-07 	 Relative change :  1.2242453478619148e-13
+C2H2 + HO2 <=> CH2CHO + O                	 Plog rate : 0.00019070737646739453 	 Fixed P rate : 0.0001907073764674074 	 Relative change :  6.751128895355866e-14
+C2H2 + HO2 <=> CHOCHO + H                	 Plog rate : 2.2888763296711468e-07 	 Fixed P rate : 2.288876329670846e-07 	 Relative change :  1.314887091844469e-13
+C2H2 + HO2 <=> CHOCHO + H                	 Plog rate : 0.0002577373656270872 	 Fixed P rate : 0.0002577373656271238 	 Relative change :  1.4197329608128856e-13
+C2H2 + HO2 <=> CH2CO + OH                	 Plog rate : 1.709756493022315e-11 	 Fixed P rate : 1.709756493022502e-11 	 Relative change :  1.0923302437521478e-13
+C2H2 + HO2 <=> CH2CO + OH                	 Plog rate : 3.413854015274028e-10 	 Fixed P rate : 3.413854015274707e-10 	 Relative change :  1.9898978545063686e-13
+C2H2 + HO2 <=> CH2O + HCO                	 Plog rate : 1.7632153351804228e-06 	 Fixed P rate : 1.763215335180307e-06 	 Relative change :  6.56934823704746e-14
+C2H2 + HO2 <=> CH2O + HCO                	 Plog rate : 0.002026082405182865 	 Fixed P rate : 0.002026082405183086 	 Relative change :  1.0916497898666687e-13
+C2H2 + HO2 => CH2O + CO + H              	 Plog rate : 4.1109516793958285e-06 	 Fixed P rate : 4.110951679395265e-06 	 Relative change :  1.3701861609010506e-13
+C2H2 + HO2 => CH2O + CO + H              	 Plog rate : 0.004739437522488863 	 Fixed P rate : 0.004739437522489272 	 Relative change :  8.638044881653749e-14
+C2H2 + HO2 <=> CH3O + CO                 	 Plog rate : 5.093688700356593e-08 	 Fixed P rate : 5.093688700355833e-08 	 Relative change :  1.4927186637956767e-13
+C2H2 + HO2 <=> CH3O + CO                 	 Plog rate : 4.89893023498001e-05 	 Fixed P rate : 4.898930234980244e-05 	 Relative change :  4.785916691074231e-14
+C2H2 + HO2 <=> CH3 + CO2                 	 Plog rate : 4.0329608470367506e-08 	 Fixed P rate : 4.032960847035891e-08 	 Relative change :  2.1314516187200494e-13
+C2H2 + HO2 <=> CH3 + CO2                 	 Plog rate : 4.992665437844739e-05 	 Fixed P rate : 4.99266543784512e-05 	 Relative change :  7.641281880246045e-14
+C2H2 + HO2 <=> C2H3OO                    	 Plog rate : 2.427859694476602e-05 	 Fixed P rate : 2.4278596944758778e-05 	 Relative change :  2.982230665800749e-13
+C2H2 + HO2 <=> C2H3OO                    	 Plog rate : 0.151970211814927    	 Fixed P rate : 0.1519702118149033   	 Relative change :  1.5597307717523942e-13
+CH2CHO <=> CH2CO + H                     	 Plog rate : 1.1091729472930839e-20 	 Fixed P rate : 1.1091729472926502e-20 	 Relative change :  3.9095360655812713e-13
+CH2CHO <=> CH3 + CO                      	 Plog rate : 1.0238412132220527e-18 	 Fixed P rate : 1.023841213221791e-18 	 Relative change :  2.556391323792706e-13
+CH2CHO + H <=> CH3 + HCO                 	 Plog rate : 19724.586230743735   	 Fixed P rate : 19724.586230741355   	 Relative change :  1.206229683099552e-13
+C2H5 + HCO <=> CH2CHO + CH3              	 Plog rate : 96977.37943195869    	 Fixed P rate : 96977.37943195231    	 Relative change :  6.57239750894344e-14
+CH2CHO + O2 <=> CH2CO + HO2              	 Plog rate : 2.900774233659849e-10 	 Fixed P rate : 2.90077423365985e-10 	 Relative change :  3.564482039633736e-16
+CH2CHO + O2 => CH2O + CO + OH            	 Plog rate : 124.00201970803202   	 Fixed P rate : 124.00201970803202   	 Relative change :  0.0                 
+O2C2H4OH => 2 CH2O + OH                  	 Plog rate : 0.005631995491129277 	 Fixed P rate : 0.005631995491128686 	 Relative change :  1.0487816343256097e-13
+NC3H7 + O2 <=> C3H6 + HO2                	 Plog rate : 856.7736356270535    	 Fixed P rate : 856.7736356270999    	 Relative change :  5.413825526560672e-14
+IC3H7 + O2 <=> C3H6 + HO2                	 Plog rate : 43697.35190351115    	 Fixed P rate : 43697.35190351073    	 Relative change :  9.6574625976072e-15 
+NC3H7 + O2 <=> C3H6OOH1-2                	 Plog rate : 84.59295551604959    	 Fixed P rate : 84.59295551604049    	 Relative change :  1.0751423640711695e-13
+NC3H7 + O2 <=> C3H6OOH1-3                	 Plog rate : 92303.80379714924    	 Fixed P rate : 92303.80379717334    	 Relative change :  2.6107235700853923e-13
+NC3H7 + O2 <=> C3H6OOH1-3                	 Plog rate : 0.14862408024915313  	 Fixed P rate : 0.14862408024915064  	 Relative change :  1.680751733648381e-14
+C3H6OOH1-2 <=> C3H6OOH1-3                	 Plog rate : 1.3476781416885084e-08 	 Fixed P rate : 1.3476781416885078e-08 	 Relative change :  4.9102561625977045e-16
+C3H6OOH1-2 <=> C3H6 + HO2                	 Plog rate : 0.651404276552572    	 Fixed P rate : 0.6514042765527954   	 Relative change :  3.429158828013216e-13
+C3H6OOH1-3 <=> C3H6 + HO2                	 Plog rate : 1.4626384270353188e-05 	 Fixed P rate : 1.4626384270351916e-05 	 Relative change :  8.698277463930173e-14
+C3H6OOH1-3 + O2 <=> AC3H5OOH + HO2       	 Plog rate : 118.5581342161759    	 Fixed P rate : 118.55813421618855   	 Relative change :  1.0667897888362817e-13
+C3H6OOH1-2 + O2 <=> AC3H5OOH + HO2       	 Plog rate : 280.7733095262802    	 Fixed P rate : 280.7733095262849    	 Relative change :  1.6803604920308365e-14
+C2H3 + CH3 <=> C3H5-A + H                	 Plog rate : 0.14166054698132785  	 Fixed P rate : 0.1416605469813041   	 Relative change :  1.6771622892370994e-13
+C2H3 + CH3 <=> C3H5-A + H                	 Plog rate : 2001826.0418872286   	 Fixed P rate : 2001826.0418874065   	 Relative change :  8.886017467524648e-14
+C3H6 <=> C2H3 + CH3                      	 Plog rate : 9.862869191897284e-68 	 Fixed P rate : 9.862869191891678e-68 	 Relative change :  5.683421531365558e-13
+C3H6 <=> C2H3 + CH3                      	 Plog rate : 1.0032818886994837e-57 	 Fixed P rate : 1.0032818886993125e-57 	 Relative change :  1.706488819468267e-13
+C3H6 <=> C3H5-A + H                      	 Plog rate : 3.54542950262028e-61 	 Fixed P rate : 3.5454295026188685e-61 	 Relative change :  3.981168960210486e-13
+C3H6 <=> C3H5-A + H                      	 Plog rate : 4.9156816629769e-50  	 Fixed P rate : 4.915681662975922e-50 	 Relative change :  1.9896395756859557e-13
+C3H6 + H <=> NC3H7                       	 Plog rate : 5704774.815197119    	 Fixed P rate : 5704774.815195751    	 Relative change :  2.396556540485081e-13
+C3H6 + H <=> NC3H7                       	 Plog rate : 3.990199640734238e-09 	 Fixed P rate : 3.990199640734239e-09 	 Relative change :  2.073030642649293e-16
+C3H6 + H <=> C2H4 + CH3                  	 Plog rate : 358.83318990117345   	 Fixed P rate : 358.8331899011301    	 Relative change :  1.2086821902606474e-13
+C3H6 + H <=> C2H4 + CH3                  	 Plog rate : 82847.39391185173    	 Fixed P rate : 82847.3939118575     	 Relative change :  6.973195019035108e-14
+C3H6 + H <=> IC3H7                       	 Plog rate : 509543.7617190858    	 Fixed P rate : 509543.76171891025   	 Relative change :  3.445323414866999e-13
+C3H6 + H <=> IC3H7                       	 Plog rate : 1028044127.6116841   	 Fixed P rate : 1028044127.6115123   	 Relative change :  1.6709456494027197e-13
+C2H4 + CH3 <=> NC3H7                     	 Plog rate : 0.26625068598046353  	 Fixed P rate : 0.26625068598036056  	 Relative change :  3.8675275203437056e-13
+C2H4 + CH3 <=> NC3H7                     	 Plog rate : 810.3442019248188    	 Fixed P rate : 810.3442019247116    	 Relative change :  1.322977170896451e-13
+2 C3H5-A <=> C3H4-A + C3H6               	 Plog rate : 1387116.4757822808   	 Fixed P rate : 1387116.47578228     	 Relative change :  5.035567979737866e-16
+C3H5-A + OH => C2H3CHO + 2 H             	 Plog rate : 1.7370455730003084e-06 	 Fixed P rate : 2.9558187988161555e-07 	 Relative change :  0.8298364277391569  
+C3H5-A + O2 <=> C3H4-A + HO2             	 Plog rate : 7.483558678478252e-12 	 Fixed P rate : 7.483558678478254e-12 	 Relative change :  2.1588487553907368e-16
+C3H5-A + O2 <=> C2H3CHO + OH             	 Plog rate : 3.239333835920819e-08 	 Fixed P rate : 3.239333835920822e-08 	 Relative change :  1.0214206431957844e-15
+C3H5-A + HO2 <=> C3H5O + OH              	 Plog rate : 24196263.829498097   	 Fixed P rate : 24196263.82949994    	 Relative change :  7.621088572734818e-14
+C3H5-A + HO2 <=> AC3H5OOH                	 Plog rate : 8174051842.069017    	 Fixed P rate : 8174051842.066666    	 Relative change :  2.8771053936238973e-13
+C3H5-A + HO2 <=> C2H3CHO + H2O           	 Plog rate : 4354.483460726823    	 Fixed P rate : 4354.483460727488    	 Relative change :  1.526795618796631e-13
+AC3H5OOH <=> C2H3CHO + H2O               	 Plog rate : 7.292537187936402e-21 	 Fixed P rate : 7.292537187935158e-21 	 Relative change :  1.706307788275474e-13
+AC3H5OOH <=> C3H5O + OH                  	 Plog rate : 2.281029280794445e-16 	 Fixed P rate : 2.2810292807938453e-16 	 Relative change :  2.6283498112709936e-13
+C3H5O <=> C2H3 + CH2O                    	 Plog rate : 0.000677506235881389 	 Fixed P rate : 0.0006775062358812608 	 Relative change :  1.891535309945432e-13
+C3H5O <=> C2H3CHO + H                    	 Plog rate : 0.2000283550849746   	 Fixed P rate : 0.20002835508493572  	 Relative change :  1.9440024601000705e-13
+C3H5O <=> C2H4 + HCO                     	 Plog rate : 0.003919996800973876 	 Fixed P rate : 0.00391999680097279  	 Relative change :  2.7702494443150907e-13
+C2H3 + CH2O <=> C2H3CHO + H              	 Plog rate : 4862.940566113609    	 Fixed P rate : 4862.940566113773    	 Relative change :  3.366462001610704e-14
+C2H3 + CH2O <=> C2H4 + HCO               	 Plog rate : 78.57522764838107    	 Fixed P rate : 78.57522764837682    	 Relative change :  5.407614698693074e-14
+C3H4-A <=> C3H4-P                        	 Plog rate : 2.0094527572645482e-41 	 Fixed P rate : 2.0094527572645398e-41 	 Relative change :  4.18597812781122e-15
+C3H3 + H <=> C3H4-P                      	 Plog rate : 71067921050.94962    	 Fixed P rate : 71067921050.94954    	 Relative change :  1.0735356287938095e-15
+C3H3 + H <=> C3H4-A                      	 Plog rate : 43854264076.91594    	 Fixed P rate : 43854264076.915924   	 Relative change :  3.479431107483101e-16
+C3H4-A + H <=> C3H4-P + H                	 Plog rate : 2789.822796712236    	 Fixed P rate : 2789.8227967118296   	 Relative change :  1.4572399801578975e-13
+C3H4-A + H <=> C3H4-P + H                	 Plog rate : 130499.81334415004   	 Fixed P rate : 130499.81334416915   	 Relative change :  1.4641143312947256e-13
+C3H4-A + H <=> C3H5-A                    	 Plog rate : 1198.283862601591    	 Fixed P rate : 1198.2838626011555   	 Relative change :  3.633701513166078e-13
+C3H4-A + H <=> C3H5-A                    	 Plog rate : 142587927.8267283    	 Fixed P rate : 142587927.82670906   	 Relative change :  1.35020548765155e-13
+C3H4-A + H <=> C2H2 + CH3                	 Plog rate : 0.5235164924552236   	 Fixed P rate : 0.5235164924551625   	 Relative change :  1.1663866799689462e-13
+C3H4-A + H <=> C2H2 + CH3                	 Plog rate : 3.8759993503384016   	 Fixed P rate : 3.8759993503385237   	 Relative change :  3.150788265692173e-14
+C3H4-P + H <=> C2H2 + CH3                	 Plog rate : 416694.38880106603   	 Fixed P rate : 416694.3888010357    	 Relative change :  7.27780170574712e-14
+C3H4-P + H <=> C3H5-A                    	 Plog rate : 3.0133818277634573e-05 	 Fixed P rate : 3.013381827761776e-05 	 Relative change :  5.579083865910618e-13
+C2H2 + CH3 <=> C3H5-A                    	 Plog rate : 4.2677404899674077e-10 	 Fixed P rate : 4.267740489965755e-10 	 Relative change :  3.8727993544662334e-13
+C3H4-P + O <=> C3H3 + OH                 	 Plog rate : 34645.271379451515   	 Fixed P rate : 34645.27137945154    	 Relative change :  6.3003902043315e-16 
+C3H4-P + O <=> C2H3 + HCO                	 Plog rate : 5424704.195137088    	 Fixed P rate : 5424704.195137084    	 Relative change :  6.867269005748565e-16
+C3H4-P + O <=> C2H4 + CO                 	 Plog rate : 49223908.53990687    	 Fixed P rate : 49223908.539906934   	 Relative change :  1.3622491053905514e-15
+C3H4-P + O <=> C2H2 + CO + H2            	 Plog rate : 1340813.765508574    	 Fixed P rate : 1340813.7655085742   	 Relative change :  1.736487569290105e-16
+C3H4-P + O <=> CH3 + HCCO                	 Plog rate : 51681951.45172298    	 Fixed P rate : 51681951.45172302    	 Relative change :  7.208106880294126e-16
+C3H4-P + O <=> C2H3CHO                   	 Plog rate : 104795120.91120107   	 Fixed P rate : 104795120.91120094   	 Relative change :  1.2797394533116518e-15
+C3H4-P + O <=> C2H3 + CO + H             	 Plog rate : 4427088.548380422    	 Fixed P rate : 4427088.548380421    	 Relative change :  4.207381733786136e-16
+C3H4-P + O <=> C2H3CO + H                	 Plog rate : 66654.05017412346    	 Fixed P rate : 66654.0501741235     	 Relative change :  6.5496013477135495e-16
+CH3CHCHO <=> C2H3CHO + H                 	 Plog rate : 1.464116274086551e-22 	 Fixed P rate : 1.4641162740861868e-22 	 Relative change :  2.487289816595652e-13
+CH3CHCHO <=> C2H3CHO + H                 	 Plog rate : 9.617724482934354e-18 	 Fixed P rate : 9.617724482932167e-18 	 Relative change :  2.2732151214643118e-13
+C3H3 <=> C3H2 + H                        	 Plog rate : 1.1238511395421942e-57 	 Fixed P rate : 1.1238511395417471e-57 	 Relative change :  3.9784998100300627e-13
+C3H3 + OH <=> C2H3 + HCO                 	 Plog rate : 2.095761339781242    	 Fixed P rate : 2.095761339781242    	 Relative change :  0.0                 
+C3H3 + OH <=> C2H2 + CO + H2             	 Plog rate : 1872066397.6394658   	 Fixed P rate : 1872066397.639463    	 Relative change :  1.5282700190689196e-15
+C3H3 + OH <=> C2H4 + CO                  	 Plog rate : 52707322264.48733    	 Fixed P rate : 52707322264.48728    	 Relative change :  8.68501096636867e-16
+2 C3H3 => C6H6                           	 Plog rate : 357579.45698300144   	 Fixed P rate : 357579.4569830013    	 Relative change :  3.255649046764701e-16
+C3H2 + OH => C2H2 + CO + H               	 Plog rate : 217.5448970044855    	 Fixed P rate : 217.54489700448548   	 Relative change :  1.3064755745485488e-16
+
+ Variable pressure and interpolated fixed pressure reaction rates at 1000K 
+
+CO + OH <=> CO2 + H                      	 Plog rate : 166112596.32502002   	 Fixed P rate : 166112596.32502323   	 Relative change :  1.9376319972588966e-14
+CH3 + OH <=> CH2O + H2                   	 Plog rate : 20352725.159124333   	 Fixed P rate : 20352725.159123972   	 Relative change :  1.7754534398987223e-14
+CH3 + OH <=> CH3O + H                    	 Plog rate : 3278455.587226708    	 Fixed P rate : 3278455.5872266963   	 Relative change :  3.5509195939851724e-15
+CH3 + OH <=> H2 + HCOH                   	 Plog rate : 424136619.6371728    	 Fixed P rate : 424136619.6371487    	 Relative change :  5.691534287863103e-14
+2 CH3 <=> C2H5 + H                       	 Plog rate : 2639626.687033687    	 Fixed P rate : 2639626.6870337906   	 Relative change :  3.9339830734292246e-14
+C2H5 + OH <=> C2H4 + H2O                 	 Plog rate : 2049725860.5746007   	 Fixed P rate : 2049725860.5745425   	 Relative change :  2.8381421349913234e-14
+C2H5 + O2 <=> C2H5O2                     	 Plog rate : 1425237338.206281    	 Fixed P rate : 1425237338.206129    	 Relative change :  1.0655953981589704e-13
+C2H5 + O2 <=> C2H4 + HO2                 	 Plog rate : 23942813.623306133   	 Fixed P rate : 23942813.62330572    	 Relative change :  1.7270619470000848e-14
+C2H5O2 <=> C2H4 + HO2                    	 Plog rate : 252781.03983749158   	 Fixed P rate : 252781.0398374727    	 Relative change :  7.472232086141896e-14
+C2H3 + H <=> C2H4                        	 Plog rate : 147476168709.00195   	 Fixed P rate : 147476168709.0022    	 Relative change :  1.6554581471514566e-15
+C2H4 + OH <=> CH2O + CH3                 	 Plog rate : 3199010.693923697    	 Fixed P rate : 3199010.6939236857   	 Relative change :  3.493539711078037e-15
+C2H4 + OH <=> PC2H4OH                    	 Plog rate : 2637888521.8625464   	 Fixed P rate : 2637888521.862341    	 Relative change :  7.790959075118028e-14
+C2H3 + O2 <=> C2H3OO                     	 Plog rate : 1408068403.2956955   	 Fixed P rate : 1408068403.2955153   	 Relative change :  1.2800830228056028e-13
+C2H3 + O2 <=> C2H3OO                     	 Plog rate : 943635772.1406198    	 Fixed P rate : 943635772.1405425    	 Relative change :  8.186169061148614e-14
+C2H3 + O2 <=> CHCHO + OH                 	 Plog rate : 16313946.518829007   	 Fixed P rate : 16313946.518827325   	 Relative change :  1.0310004190673806e-13
+C2H3 + O2 <=> CHCHO + OH                 	 Plog rate : 23146907.77402866    	 Fixed P rate : 23146907.77402878    	 Relative change :  5.311058438102841e-15
+C2H3 + O2 <=> CH2CHO + O                 	 Plog rate : 371984282.97989166   	 Fixed P rate : 371984282.97986394   	 Relative change :  7.450895397657135e-14
+C2H3 + O2 <=> CH2CHO + O                 	 Plog rate : 318736506.28204626   	 Fixed P rate : 318736506.2820437    	 Relative change :  8.041123858820954e-15
+C2H3 + O2 <=> C2H2 + HO2                 	 Plog rate : 13738893.374327036   	 Fixed P rate : 13738893.374326585   	 Relative change :  3.2809056292422894e-14
+C2H3 + O2 <=> C2H2 + HO2                 	 Plog rate : 1425855.0869272258   	 Fixed P rate : 1425855.0869272682   	 Relative change :  2.971913312475846e-14
+C2H3 + O2 <=> CHOCHO + H                 	 Plog rate : 54091488.00910362    	 Fixed P rate : 54091488.009097084   	 Relative change :  1.2079828867718514e-13
+C2H3 + O2 <=> CHOCHO + H                 	 Plog rate : 74726320.0496846     	 Fixed P rate : 74726320.04968533    	 Relative change :  9.77108063147045e-15
+C2H3 + O2 <=> CH2CO + OH                 	 Plog rate : 539433.9179461829    	 Fixed P rate : 539433.9179461905    	 Relative change :  1.4027660603102253e-14
+C2H3 + O2 <=> CH2CO + OH                 	 Plog rate : 185996.97862551457   	 Fixed P rate : 185996.97862552316   	 Relative change :  4.616005081471086e-14
+C2H3 + O2 <=> CH2O + HCO                 	 Plog rate : 226697504.28121355   	 Fixed P rate : 226697504.28118935   	 Relative change :  1.0674791438722516e-13
+C2H3 + O2 <=> CH2O + HCO                 	 Plog rate : 5821337.510263841    	 Fixed P rate : 5821337.510262993    	 Relative change :  1.4558570799336355e-13
+C2H3 + O2 => CH2O + CO + H               	 Plog rate : 528960843.322832     	 Fixed P rate : 528960843.3228       	 Relative change :  6.05105172687613e-14
+C2H3 + O2 => CH2O + CO + H               	 Plog rate : 13569268.904721979   	 Fixed P rate : 13569268.904720195   	 Relative change :  1.3150406742564423e-13
+C2H3 + O2 <=> CH3O + CO                  	 Plog rate : 9235144.96200235     	 Fixed P rate : 9235144.962001728    	 Relative change :  6.736477688253328e-14
+C2H3 + O2 <=> CH3O + CO                  	 Plog rate : 197397.95783395818   	 Fixed P rate : 197397.95783392942   	 Relative change :  1.4566809508454943e-13
+C2H3 + O2 <=> CH3 + CO2                  	 Plog rate : 6387257.773556722    	 Fixed P rate : 6387257.773556337    	 Relative change :  6.03651143511163e-14
+C2H3 + O2 <=> CH3 + CO2                  	 Plog rate : 144581.08359794936   	 Fixed P rate : 144581.0835979283    	 Relative change :  1.457394890556351e-13
+C2H3OO <=> CHCHO + OH                    	 Plog rate : 5530.9327393001695   	 Fixed P rate : 5530.932739296073    	 Relative change :  7.406280874975137e-13
+C2H3OO <=> CHCHO + OH                    	 Plog rate : 5482.644971773213    	 Fixed P rate : 5482.644971771849    	 Relative change :  2.488291800185933e-13
+C2H3OO <=> CH2CHO + O                    	 Plog rate : 236934.61321273094   	 Fixed P rate : 236934.61321267075   	 Relative change :  2.540224940899068e-13
+C2H3OO <=> CH2CHO + O                    	 Plog rate : 247440.47417432716   	 Fixed P rate : 247440.47417429995   	 Relative change :  1.0997425367797556e-13
+C2H3OO <=> CHOCHO + H                    	 Plog rate : 315144.5442624946    	 Fixed P rate : 315144.544262461     	 Relative change :  1.0657274878633445e-13
+C2H3OO <=> CHOCHO + H                    	 Plog rate : 28785.17305766434    	 Fixed P rate : 28785.173057660144   	 Relative change :  1.4572049145488441e-13
+C2H3OO <=> CH2CO + OH                    	 Plog rate : 36.90409472177503    	 Fixed P rate : 36.90409472177011    	 Relative change :  1.3342858552528273e-13
+C2H3OO <=> CH2CO + OH                    	 Plog rate : 1.0820866682797825   	 Fixed P rate : 1.082086668279736    	 Relative change :  4.288688123577597e-14
+C2H3OO <=> CH2O + HCO                    	 Plog rate : 1387811.3597681606   	 Fixed P rate : 1387811.3597679166   	 Relative change :  1.7582109616829885e-13
+C2H3OO <=> CH2O + HCO                    	 Plog rate : 3999.6895912034665   	 Fixed P rate : 3999.6895912018463   	 Relative change :  4.05097639269789e-13
+C2H3OO => CH2O + CO + H                  	 Plog rate : 3239335.0666863793   	 Fixed P rate : 3239335.0666859876   	 Relative change :  1.2089553397957398e-13
+C2H3OO => CH2O + CO + H                  	 Plog rate : 9312.044676370615    	 Fixed P rate : 9312.044676366464    	 Relative change :  4.4575965463575054e-13
+C2H3OO <=> CH3O + CO                     	 Plog rate : 27424.001389044814   	 Fixed P rate : 27424.001389044795   	 Relative change :  6.632837337415306e-16
+C2H3OO <=> CH3O + CO                     	 Plog rate : 43857.269520574155   	 Fixed P rate : 43857.26952057455    	 Relative change :  8.95864506525169e-15
+CHOCHO <=> CH2O + CO                     	 Plog rate : 29.146942186587633   	 Fixed P rate : 29.14694218658763    	 Relative change :  1.2188975625838827e-16
+CHOCHO <=> CO + HCOH                     	 Plog rate : 39.70133610137854    	 Fixed P rate : 39.701336101378544   	 Relative change :  1.7897199579019414e-16
+CHOCHO => 2 CO + H2                      	 Plog rate : 16.195984660670597   	 Fixed P rate : 16.1959846606706     	 Relative change :  2.1935768360090559e-16
+CHOCHO <=> 2 HCO                         	 Plog rate : 13.430882415680237   	 Fixed P rate : 13.430882415680236   	 Relative change :  1.3225913118905693e-16
+C2H2 + OH <=> CH2CO + H                  	 Plog rate : 41613903.81253532    	 Fixed P rate : 41613903.81253562    	 Relative change :  7.161626201173172e-15
+C2H2 + OH <=> CH3 + CO                   	 Plog rate : 19224697.518573113   	 Fixed P rate : 19224697.518573627   	 Relative change :  2.6741126131689626e-14
+C2H2 + HO2 <=> CHCHO + OH                	 Plog rate : 557078.298907429     	 Fixed P rate : 557078.2989074171    	 Relative change :  2.1315428817880666e-14
+C2H2 + HO2 <=> CHCHO + OH                	 Plog rate : 341202.0173344151    	 Fixed P rate : 341202.01733442      	 Relative change :  1.4330054537570555e-14
+C2H2 + HO2 <=> CH2CHO + O                	 Plog rate : 16350.632014875142   	 Fixed P rate : 16350.632014874298   	 Relative change :  5.161947761269597e-14
+C2H2 + HO2 <=> CH2CHO + O                	 Plog rate : 12432.474572700217   	 Fixed P rate : 12432.474572700505   	 Relative change :  2.3116904368445828e-14
+C2H2 + HO2 <=> CHOCHO + H                	 Plog rate : 2860.6395283041875   	 Fixed P rate : 2860.639528303989    	 Relative change :  6.930962221025957e-14
+C2H2 + HO2 <=> CHOCHO + H                	 Plog rate : 2086.0383472286167   	 Fixed P rate : 2086.038347228711    	 Relative change :  4.512510604541716e-14
+C2H2 + HO2 <=> CH2CO + OH                	 Plog rate : 30.683261641615932   	 Fixed P rate : 30.683261641616625   	 Relative change :  2.2578406932673555e-14
+C2H2 + HO2 <=> CH2CO + OH                	 Plog rate : 10.450419473070312   	 Fixed P rate : 10.450419473071051   	 Relative change :  7.07114625489189e-14
+C2H2 + HO2 <=> CH2O + HCO                	 Plog rate : 7762.809263098361    	 Fixed P rate : 7762.809263098072    	 Relative change :  3.7257042568163707e-14
+C2H2 + HO2 <=> CH2O + HCO                	 Plog rate : 2736.3036203316697   	 Fixed P rate : 2736.303620331781    	 Relative change :  4.0716644212779004e-14
+C2H2 + HO2 => CH2O + CO + H              	 Plog rate : 18099.056388763856   	 Fixed P rate : 18099.05638876244    	 Relative change :  7.819047167769672e-14
+C2H2 + HO2 => CH2O + CO + H              	 Plog rate : 6400.7959488457      	 Fixed P rate : 6400.795948845929    	 Relative change :  3.5806900685235844e-14
+C2H2 + HO2 <=> CH3O + CO                 	 Plog rate : 322.6823657397899    	 Fixed P rate : 322.6823657397612    	 Relative change :  8.878416098185476e-14
+C2H2 + HO2 <=> CH3O + CO                 	 Plog rate : 179.5743878688134    	 Fixed P rate : 179.5743878688161    	 Relative change :  1.5035899205519715e-14
+C2H2 + HO2 <=> CH3 + CO2                 	 Plog rate : 221.53453498875322   	 Fixed P rate : 221.534534988729     	 Relative change :  1.0930709487770639e-13
+C2H2 + HO2 <=> CH3 + CO2                 	 Plog rate : 90.36426868183135    	 Fixed P rate : 90.36426868183297    	 Relative change :  1.7927854241117245e-14
+C2H2 + HO2 <=> C2H3OO                    	 Plog rate : 52546.356572244375   	 Fixed P rate : 52546.35657223775    	 Relative change :  1.2600533815895952e-13
+C2H2 + HO2 <=> C2H3OO                    	 Plog rate : 25756.318309358212   	 Fixed P rate : 25756.31830935652    	 Relative change :  6.567942378173687e-14
+CH2CHO <=> CH2CO + H                     	 Plog rate : 31016.52636838406    	 Fixed P rate : 31016.526368378545   	 Relative change :  1.7781410484356483e-13
+CH2CHO <=> CH3 + CO                      	 Plog rate : 26980.747821803463   	 Fixed P rate : 26980.747821800538   	 Relative change :  1.084082242723481e-13
+CH2CHO + H <=> CH3 + HCO                 	 Plog rate : 9647211444.664186    	 Fixed P rate : 9647211444.663673    	 Relative change :  5.318394700577877e-14
+C2H5 + HCO <=> CH2CHO + CH3              	 Plog rate : 6770526985.85013     	 Fixed P rate : 6770526985.849937    	 Relative change :  2.845306019999176e-14
+CH2CHO + O2 <=> CH2CO + HO2              	 Plog rate : 16262.011620661415   	 Fixed P rate : 16262.01162066142    	 Relative change :  3.3556538624682285e-16
+CH2CHO + O2 => CH2O + CO + OH            	 Plog rate : 8715422.84688872     	 Fixed P rate : 8715422.846888712    	 Relative change :  8.54873105736181e-16
+O2C2H4OH => 2 CH2O + OH                  	 Plog rate : 2194595.5389363794   	 Fixed P rate : 2194595.5389362546   	 Relative change :  5.686570613323932e-14
+NC3H7 + O2 <=> C3H6 + HO2                	 Plog rate : 7917992.316895149    	 Fixed P rate : 7917992.316895297    	 Relative change :  1.8701747038563336e-14
+IC3H7 + O2 <=> C3H6 + HO2                	 Plog rate : 82307437.23452711    	 Fixed P rate : 82307437.2345267     	 Relative change :  5.069195779220662e-15
+NC3H7 + O2 <=> C3H6OOH1-2                	 Plog rate : 91332.56666175033    	 Fixed P rate : 91332.56666174611    	 Relative change :  4.6205374166865797e-14
+NC3H7 + O2 <=> C3H6OOH1-3                	 Plog rate : 12768099.199160542   	 Fixed P rate : 12768099.199161857   	 Relative change :  1.0299320633751923e-13
+NC3H7 + O2 <=> C3H6OOH1-3                	 Plog rate : 12918816.917936606   	 Fixed P rate : 12918816.917936284   	 Relative change :  2.494327560053567e-14
+C3H6OOH1-2 <=> C3H6OOH1-3                	 Plog rate : 409320540.7912369    	 Fixed P rate : 409320540.79123664   	 Relative change :  5.824740156960791e-16
+C3H6OOH1-2 <=> C3H6 + HO2                	 Plog rate : 3952157617.250948    	 Fixed P rate : 3952157617.2514815   	 Relative change :  1.350099949709107e-13
+C3H6OOH1-3 <=> C3H6 + HO2                	 Plog rate : 32538.68332135205    	 Fixed P rate : 32538.683321350494   	 Relative change :  4.785242580524166e-14
+C3H6OOH1-3 + O2 <=> AC3H5OOH + HO2       	 Plog rate : 4953448.308698535    	 Fixed P rate : 4953448.308698782    	 Relative change :  4.982397451078802e-14
+C3H6OOH1-2 + O2 <=> AC3H5OOH + HO2       	 Plog rate : 9360711.519572912    	 Fixed P rate : 9360711.519572986    	 Relative change :  7.959416953876777e-15
+C2H3 + CH3 <=> C3H5-A + H                	 Plog rate : 409603268.13595814   	 Fixed P rate : 409603268.13592464   	 Relative change :  8.178111106440373e-14
+C2H3 + CH3 <=> C3H5-A + H                	 Plog rate : 117478001.58571517   	 Fixed P rate : 117478001.58572039   	 Relative change :  4.439474920793044e-14
+C3H6 <=> C2H3 + CH3                      	 Plog rate : 4.612957928467975e-06 	 Fixed P rate : 4.612957928466525e-06 	 Relative change :  3.143580384183054e-13
+C3H6 <=> C2H3 + CH3                      	 Plog rate : 9.208664348896036e-06 	 Fixed P rate : 9.20866434889448e-06 	 Relative change :  1.6887926763725862e-13
+C3H6 <=> C3H5-A + H                      	 Plog rate : 5.961575548572919e-05 	 Fixed P rate : 5.9615755485713625e-05 	 Relative change :  2.610899972989689e-13
+C3H6 <=> C3H5-A + H                      	 Plog rate : 0.00012084059006614273 	 Fixed P rate : 0.00012084059006612105 	 Relative change :  1.7944337608614138e-13
+C3H6 + H <=> NC3H7                       	 Plog rate : 2008866550.1113648   	 Fixed P rate : 2008866550.1111722   	 Relative change :  9.589597273317287e-14
+C3H6 + H <=> NC3H7                       	 Plog rate : 4.991088030634194e-09 	 Fixed P rate : 4.991088030634146e-09 	 Relative change :  9.612428238814185e-15
+C3H6 + H <=> C2H4 + CH3                  	 Plog rate : 1884318553.4082205   	 Fixed P rate : 1884318553.4081132   	 Relative change :  5.69374856505274e-14
+C3H6 + H <=> C2H4 + CH3                  	 Plog rate : 245748789.47264728   	 Fixed P rate : 245748789.47265568   	 Relative change :  3.4198560779749034e-14
+C3H6 + H <=> IC3H7                       	 Plog rate : 13975663495.025543   	 Fixed P rate : 13975663495.023558   	 Relative change :  1.4207196155406456e-13
+C3H6 + H <=> IC3H7                       	 Plog rate : 3810247847.33032     	 Fixed P rate : 3810247847.3301167   	 Relative change :  5.3312182706659813e-14
+C2H4 + CH3 <=> NC3H7                     	 Plog rate : 15936452.98950757    	 Fixed P rate : 15936452.989504851   	 Relative change :  1.7064411507803328e-13
+C2H4 + CH3 <=> NC3H7                     	 Plog rate : 2261583.6533918194   	 Fixed P rate : 2261583.653391687    	 Relative change :  5.847575233268897e-14
+2 C3H5-A <=> C3H4-A + C3H6               	 Plog rate : 11089984.735925594   	 Fixed P rate : 11089984.73592559    	 Relative change :  3.3591482650052476e-16
+C3H5-A + OH => C2H3CHO + 2 H             	 Plog rate : 5893476.559101018    	 Fixed P rate : 7509.225519742549    	 Relative change :  0.9987258411152672  
+C3H5-A + O2 <=> C3H4-A + HO2             	 Plog rate : 1167.0532404005112   	 Fixed P rate : 1167.0532404005116   	 Relative change :  3.896543320769181e-16
+C3H5-A + O2 <=> C2H3CHO + OH             	 Plog rate : 10290.487486602937   	 Fixed P rate : 10290.487486602944   	 Relative change :  7.070566504896788e-16
+C3H5-A + HO2 <=> C3H5O + OH              	 Plog rate : 1915835665.3050728   	 Fixed P rate : 1915835665.3051238   	 Relative change :  2.6631499168593788e-14
+C3H5-A + HO2 <=> AC3H5OOH                	 Plog rate : 4848515904.070959    	 Fixed P rate : 4848515904.070392    	 Relative change :  1.170329703951847e-13
+C3H5-A + HO2 <=> C2H3CHO + H2O           	 Plog rate : 2300947.5341158723   	 Fixed P rate : 2300947.5341160353   	 Relative change :  7.083231935591855e-14
+AC3H5OOH <=> C2H3CHO + H2O               	 Plog rate : 510.1161596148613    	 Fixed P rate : 510.11615961480425   	 Relative change :  1.1187803299417098e-13
+AC3H5OOH <=> C3H5O + OH                  	 Plog rate : 1282242.648958977    	 Fixed P rate : 1282242.6489587948   	 Relative change :  1.4217776497216828e-13
+C3H5O <=> C2H3 + CH2O                    	 Plog rate : 264091698.83570015   	 Fixed P rate : 264091698.83567858   	 Relative change :  8.170223261017784e-14
+C3H5O <=> C2H3CHO + H                    	 Plog rate : 1000544109.7408644   	 Fixed P rate : 1000544109.7407684   	 Relative change :  9.591129182024062e-14
+C3H5O <=> C2H4 + HCO                     	 Plog rate : 78034342.063867      	 Fixed P rate : 78034342.06385759    	 Relative change :  1.2068447846723642e-13
+C2H3 + CH2O <=> C2H3CHO + H              	 Plog rate : 50187668.57631972    	 Fixed P rate : 50187668.57632023    	 Relative change :  1.0243354110103247e-14
+C2H3 + CH2O <=> C2H4 + HCO               	 Plog rate : 3941093.2590963137   	 Fixed P rate : 3941093.2590962234   	 Relative change :  2.2922139568556122e-14
+C3H4-A <=> C3H4-P                        	 Plog rate : 0.19873208557953168  	 Fixed P rate : 0.1987320855795317   	 Relative change :  1.3966328353415916e-16
+C3H3 + H <=> C3H4-P                      	 Plog rate : 73708575630.132      	 Fixed P rate : 73708575630.13193    	 Relative change :  1.0350755615647944e-15
+C3H3 + H <=> C3H4-A                      	 Plog rate : 42525816540.38608    	 Fixed P rate : 42525816540.38606    	 Relative change :  3.588123710219409e-16
+C3H4-A + H <=> C3H4-P + H                	 Plog rate : 4416399270.870015    	 Fixed P rate : 4416399270.869749    	 Relative change :  6.024707413397609e-14
+C3H4-A + H <=> C3H4-P + H                	 Plog rate : 495363248.67741966   	 Fixed P rate : 495363248.6774452    	 Relative change :  5.149915346360263e-14
+C3H4-A + H <=> C3H5-A                    	 Plog rate : 7372672795.417127    	 Fixed P rate : 7372672795.4158945   	 Relative change :  1.6712354542070294e-13
+C3H4-A + H <=> C3H5-A                    	 Plog rate : 2022048013.490108    	 Fixed P rate : 2022048013.4900005   	 Relative change :  5.31771641708995e-14
+C3H4-A + H <=> C2H2 + CH3                	 Plog rate : 95952010.22376148    	 Fixed P rate : 95952010.22375706    	 Relative change :  4.612352429357223e-14
+C3H4-A + H <=> C2H2 + CH3                	 Plog rate : 1995608.4561740155   	 Fixed P rate : 1995608.4561740244   	 Relative change :  4.433517222015391e-15
+C3H4-P + H <=> C2H2 + CH3                	 Plog rate : 4025007488.8640575   	 Fixed P rate : 4025007488.8639283   	 Relative change :  3.210500110386535e-14
+C3H4-P + H <=> C3H5-A                    	 Plog rate : 65744517.393447794   	 Fixed P rate : 65744517.39343214    	 Relative change :  2.3809848265304983e-13
+C2H2 + CH3 <=> C3H5-A                    	 Plog rate : 28937.531496743184   	 Fixed P rate : 28937.531496738557   	 Relative change :  1.59913745342842e-13
+C3H4-P + O <=> C3H3 + OH                 	 Plog rate : 105224958.56184183   	 Fixed P rate : 105224958.5618417    	 Relative change :  1.2745117943269208e-15
+C3H4-P + O <=> C2H3 + HCO                	 Plog rate : 619737183.4626541    	 Fixed P rate : 619737183.4626534    	 Relative change :  1.1541275179074186e-15
+C3H4-P + O <=> C2H4 + CO                 	 Plog rate : 1090468891.8406804   	 Fixed P rate : 1090468891.8406806   	 Relative change :  2.186385883040815e-16
+C3H4-P + O <=> C2H2 + CO + H2            	 Plog rate : 70645153.0640899     	 Fixed P rate : 70645153.06408979    	 Relative change :  1.4765079249287542e-15
+C3H4-P + O <=> CH3 + HCCO                	 Plog rate : 1597229713.071224    	 Fixed P rate : 1597229713.071225    	 Relative change :  5.970802500114294e-16
+C3H4-P + O <=> C2H3CHO                   	 Plog rate : 652681849.095088     	 Fixed P rate : 652681849.0950872    	 Relative change :  1.2785172868104336e-15
+C3H4-P + O <=> C2H3 + CO + H             	 Plog rate : 971380040.5429733    	 Fixed P rate : 971380040.5429746    	 Relative change :  1.349937336910499e-15
+C3H4-P + O <=> C2H3CO + H                	 Plog rate : 92912892.82848941    	 Fixed P rate : 92912892.82848956    	 Relative change :  1.6037775533858514e-15
+CH3CHCHO <=> C2H3CHO + H                 	 Plog rate : 44614.028012072995   	 Fixed P rate : 44614.02801206705    	 Relative change :  1.3324188905738864e-13
+CH3CHCHO <=> C2H3CHO + H                 	 Plog rate : 13535.033689415179   	 Fixed P rate : 13535.03368941347    	 Relative change :  1.2619333568894573e-13
+C3H3 <=> C3H2 + H                        	 Plog rate : 4.858170173352717e-06 	 Fixed P rate : 4.858170173351794e-06 	 Relative change :  1.8986961070640183e-13
+C3H3 + OH <=> C2H3 + HCO                 	 Plog rate : 2202367236.500807    	 Fixed P rate : 2202367236.5008073   	 Relative change :  2.1651119318353986e-16
+C3H3 + OH <=> C2H2 + CO + H2             	 Plog rate : 5458112627.950597    	 Fixed P rate : 5458112627.950597    	 Relative change :  0.0                 
+C3H3 + OH <=> C2H4 + CO                  	 Plog rate : 20384293435.90219    	 Fixed P rate : 20384293435.902172   	 Relative change :  9.356952394794067e-16
+2 C3H3 => C6H6                           	 Plog rate : 14238906219.076385   	 Fixed P rate : 14238906219.076405   	 Relative change :  1.3395331098235306e-15
+C3H2 + OH => C2H2 + CO + H               	 Plog rate : 1045807833.4283394   	 Fixed P rate : 1045807833.4283409   	 Relative change :  1.481840845540335e-15
+
+ Variable pressure and interpolated fixed pressure reaction rates at 3000K 
+
+CO + OH <=> CO2 + H                      	 Plog rate : 958444421.4412637    	 Fixed P rate : 958444421.4412721    	 Relative change :  8.830829799580778e-15
+CH3 + OH <=> CH2O + H2                   	 Plog rate : 43568908.35663532    	 Fixed P rate : 43568908.356634624   	 Relative change :  1.5903634533188627e-14
+CH3 + OH <=> CH3O + H                    	 Plog rate : 494308501.3378583    	 Fixed P rate : 494308501.3378528    	 Relative change :  1.1214114159696692e-14
+CH3 + OH <=> H2 + HCOH                   	 Plog rate : 570466971.3256018    	 Fixed P rate : 570466971.3255875    	 Relative change :  2.5076148953641893e-14
+2 CH3 <=> C2H5 + H                       	 Plog rate : 2665142762.8548937   	 Fixed P rate : 2665142762.854913    	 Relative change :  7.335563317210771e-15
+C2H5 + OH <=> C2H4 + H2O                 	 Plog rate : 3387868213.066422    	 Fixed P rate : 3387868213.066374    	 Relative change :  1.421559221010094e-14
+C2H5 + O2 <=> C2H5O2                     	 Plog rate : 14350493.761909962   	 Fixed P rate : 14350493.761909757   	 Relative change :  1.4277624854918968e-14
+C2H5 + O2 <=> C2H4 + HO2                 	 Plog rate : 173573290.24593976   	 Fixed P rate : 173573290.2459394    	 Relative change :  2.060385374648444e-15
+C2H5O2 <=> C2H4 + HO2                    	 Plog rate : 154414799.2939265    	 Fixed P rate : 154414799.2939166    	 Relative change :  6.407657218063044e-14
+C2H3 + H <=> C2H4                        	 Plog rate : 168088907667.95828   	 Fixed P rate : 168088907667.95865   	 Relative change :  2.1786740278151527e-15
+C2H4 + OH <=> CH2O + CH3                 	 Plog rate : 74391143.7821156     	 Fixed P rate : 74391143.78211473    	 Relative change :  1.1617879566074677e-14
+C2H4 + OH <=> PC2H4OH                    	 Plog rate : 126317342.36391468   	 Fixed P rate : 126317342.3639129    	 Relative change :  1.4155929105206855e-14
+C2H3 + O2 <=> C2H3OO                     	 Plog rate : 14136843.697363034   	 Fixed P rate : 14136843.69736248    	 Relative change :  3.9132186870311403e-14
+C2H3 + O2 <=> C2H3OO                     	 Plog rate : 16061075.79273192    	 Fixed P rate : 16061075.792731578   	 Relative change :  2.1338963334796627e-14
+C2H3 + O2 <=> CHCHO + OH                 	 Plog rate : 17328668.46834304    	 Fixed P rate : 17328668.468342178   	 Relative change :  4.987500054156237e-14
+C2H3 + O2 <=> CHCHO + OH                 	 Plog rate : 111288024.83289932   	 Fixed P rate : 111288024.83290012   	 Relative change :  7.230451844895144e-15
+C2H3 + O2 <=> CH2CHO + O                 	 Plog rate : 433207481.7378919    	 Fixed P rate : 433207481.73787344   	 Relative change :  4.2652633343831986e-14
+C2H3 + O2 <=> CH2CHO + O                 	 Plog rate : 1699600857.0736718   	 Fixed P rate : 1699600857.073684    	 Relative change :  7.154237116069318e-15
+C2H3 + O2 <=> C2H2 + HO2                 	 Plog rate : 190994210.41147828   	 Fixed P rate : 190994210.41147557   	 Relative change :  1.4199442650316527e-14
+C2H3 + O2 <=> C2H2 + HO2                 	 Plog rate : 14005066.53011357    	 Fixed P rate : 14005066.530113766   	 Relative change :  1.3964784833311642e-14
+C2H3 + O2 <=> CHOCHO + H                 	 Plog rate : 12863453.38100626    	 Fixed P rate : 12863453.381005665   	 Relative change :  4.6191624053461957e-14
+C2H3 + O2 <=> CHOCHO + H                 	 Plog rate : 186546320.3783118    	 Fixed P rate : 186546320.37831283   	 Relative change :  5.431782085686457e-15
+C2H3 + O2 <=> CH2CO + OH                 	 Plog rate : 44640199.8615773     	 Fixed P rate : 44640199.86157709    	 Relative change :  4.67328231864453e-15
+C2H3 + O2 <=> CH2CO + OH                 	 Plog rate : 42003839.20462674    	 Fixed P rate : 42003839.20462763    	 Relative change :  2.128542744093681e-14
+C2H3 + O2 <=> CH2O + HCO                 	 Plog rate : 63368090.096998595   	 Fixed P rate : 63368090.09699634    	 Relative change :  3.562559511281289e-14
+C2H3 + O2 <=> CH2O + HCO                 	 Plog rate : 5861.458027580542    	 Fixed P rate : 5861.458027580271    	 Relative change :  4.6239249663313986e-14
+C2H3 + O2 => CH2O + CO + H               	 Plog rate : 147858876.8929963    	 Fixed P rate : 147858876.89299315   	 Relative change :  2.136527910584541e-14
+C2H3 + O2 => CH2O + CO + H               	 Plog rate : 13662.787977805589   	 Fixed P rate : 13662.78797780508    	 Relative change :  3.727767962294343e-14
+C2H3 + O2 <=> CH3O + CO                  	 Plog rate : 3024220.09638121     	 Fixed P rate : 3024220.096381108    	 Relative change :  3.37210317603617e-14
+C2H3 + O2 <=> CH3O + CO                  	 Plog rate : 128.2495556357696    	 Fixed P rate : 128.24955563576233   	 Relative change :  5.673280954553355e-14
+C2H3 + O2 <=> CH3 + CO2                  	 Plog rate : 1875185.2679909708   	 Fixed P rate : 1875185.2679908907   	 Relative change :  4.271244168995723e-14
+C2H3 + O2 <=> CH3 + CO2                  	 Plog rate : 109.17890271677719   	 Fixed P rate : 109.1789027167731    	 Relative change :  3.7486419593309034e-14
+C2H3OO <=> CHCHO + OH                    	 Plog rate : 33928.84931319177    	 Fixed P rate : 33928.84931318056    	 Relative change :  3.3046362934263315e-13
+C2H3OO <=> CHCHO + OH                    	 Plog rate : 5287894.720655316    	 Fixed P rate : 5287894.720654536    	 Relative change :  1.4741537722153288e-13
+C2H3OO <=> CH2CHO + O                    	 Plog rate : 225578899.8300556    	 Fixed P rate : 225578899.83002836   	 Relative change :  1.2075297238737668e-13
+C2H3OO <=> CH2CHO + O                    	 Plog rate : 1953832676.5195684   	 Fixed P rate : 1953832676.5194228   	 Relative change :  7.455794632862243e-14
+C2H3OO <=> CHOCHO + H                    	 Plog rate : 267313865.50251508   	 Fixed P rate : 267313865.5025008    	 Relative change :  5.340281319440851e-14
+C2H3OO <=> CHOCHO + H                    	 Plog rate : 365221.0238939935    	 Fixed P rate : 365221.02389395976   	 Relative change :  9.243838969032124e-14
+C2H3OO <=> CH2CO + OH                    	 Plog rate : 2073235.17577269     	 Fixed P rate : 2073235.175772513    	 Relative change :  8.535032168311131e-14
+C2H3OO <=> CH2CO + OH                    	 Plog rate : 1053637.098717897    	 Fixed P rate : 1053637.0987178267   	 Relative change :  6.673536312363169e-14
+C2H3OO <=> CH2O + HCO                    	 Plog rate : 701834209.8957922    	 Fixed P rate : 701834209.8957623    	 Relative change :  4.263333313673726e-14
+C2H3OO <=> CH2O + HCO                    	 Plog rate : 0.6738813554273911   	 Fixed P rate : 0.6738813554272618   	 Relative change :  1.9193435361748464e-13
+C2H3OO => CH2O + CO + H                  	 Plog rate : 1638173769.8813457   	 Fixed P rate : 1638173769.8812525   	 Relative change :  5.690584609681735e-14
+C2H3OO => CH2O + CO + H                  	 Plog rate : 1.5689250741142924   	 Fixed P rate : 1.56892507411388     	 Relative change :  2.6281486487081626e-13
+C2H3OO <=> CH3O + CO                     	 Plog rate : 3162003.0693553216   	 Fixed P rate : 3162003.0693553193   	 Relative change :  7.363390817370073e-16
+C2H3OO <=> CH3O + CO                     	 Plog rate : 185586900.5322753    	 Fixed P rate : 185586900.53227103   	 Relative change :  2.2963539394308032e-14
+CHOCHO <=> CH2O + CO                     	 Plog rate : 12687566.06627476    	 Fixed P rate : 12687566.066274744   	 Relative change :  1.3212783488583395e-15
+CHOCHO <=> CO + HCOH                     	 Plog rate : 26574937.811849028   	 Fixed P rate : 26574937.811849043   	 Relative change :  5.60722335433035e-16
+CHOCHO => 2 CO + H2                      	 Plog rate : 13966118.067472225   	 Fixed P rate : 13966118.067472208   	 Relative change :  1.200319678101701e-15
+CHOCHO <=> 2 HCO                         	 Plog rate : 56027726.206939034   	 Fixed P rate : 56027726.20693903    	 Relative change :  1.3298024212878148e-16
+C2H2 + OH <=> CH2CO + H                  	 Plog rate : 2094017754.8115      	 Fixed P rate : 2094017754.8115296   	 Relative change :  1.4118267975839126e-14
+C2H2 + OH <=> CH3 + CO                   	 Plog rate : 491664998.9921117    	 Fixed P rate : 491664998.9921143    	 Relative change :  5.334128676015973e-15
+C2H2 + HO2 <=> CHCHO + OH                	 Plog rate : 400373126.0491892    	 Fixed P rate : 400373126.0491842    	 Relative change :  1.250531026030375e-14
+C2H2 + HO2 <=> CHCHO + OH                	 Plog rate : 452659130.48623973   	 Fixed P rate : 452659130.48623973   	 Relative change :  0.0                 
+C2H2 + HO2 <=> CH2CHO + O                	 Plog rate : 3881756.7026874074   	 Fixed P rate : 3881756.7026873105   	 Relative change :  2.495198828225211e-14
+C2H2 + HO2 <=> CH2CHO + O                	 Plog rate : 26910465.77948166    	 Fixed P rate : 26910465.779481612   	 Relative change :  1.7996259996707385e-15
+C2H2 + HO2 <=> CHOCHO + H                	 Plog rate : 275856.9704727658    	 Fixed P rate : 275856.9704727555    	 Relative change :  3.73481807040322e-14
+C2H2 + HO2 <=> CHOCHO + H                	 Plog rate : 2526560.8118496137   	 Fixed P rate : 2526560.811849609    	 Relative change :  1.8430638404734997e-15
+C2H2 + HO2 <=> CH2CO + OH                	 Plog rate : 601144.2684119302    	 Fixed P rate : 601144.2684119147    	 Relative change :  2.575627618289549e-14
+C2H2 + HO2 <=> CH2CO + OH                	 Plog rate : 1277002.803475764    	 Fixed P rate : 1277002.8034757732   	 Relative change :  7.11070882365001e-15
+C2H2 + HO2 <=> CH2O + HCO                	 Plog rate : 367345.00148571614   	 Fixed P rate : 367345.0014857044    	 Relative change :  3.2007914785734773e-14
+C2H2 + HO2 <=> CH2O + HCO                	 Plog rate : 1667074.9710075152   	 Fixed P rate : 1667074.9710075182   	 Relative change :  1.815634221699715e-15
+C2H2 + HO2 => CH2O + CO + H              	 Plog rate : 856468.0221663574    	 Fixed P rate : 856468.0221663177    	 Relative change :  4.635038753994956e-14
+C2H2 + HO2 => CH2O + CO + H              	 Plog rate : 3899642.803364619    	 Fixed P rate : 3899642.8033646536   	 Relative change :  8.836433744916707e-15
+C2H2 + HO2 <=> CH3O + CO                 	 Plog rate : 18408.481822072714   	 Fixed P rate : 18408.4818220716     	 Relative change :  6.047329300318805e-14
+C2H2 + HO2 <=> CH3O + CO                 	 Plog rate : 122400.15636566107   	 Fixed P rate : 122400.15636566172   	 Relative change :  5.3499619993967615e-15
+C2H2 + HO2 <=> CH3 + CO2                 	 Plog rate : 10286.69247007416    	 Fixed P rate : 10286.69247007352    	 Relative change :  6.224394011105549e-14
+C2H2 + HO2 <=> CH3 + CO2                 	 Plog rate : 59150.22636877586    	 Fixed P rate : 59150.22636877534    	 Relative change :  8.856583996063045e-15
+C2H2 + HO2 <=> C2H3OO                    	 Plog rate : 67566.5234676825     	 Fixed P rate : 67566.52346767926    	 Relative change :  4.8027883179130105e-14
+C2H2 + HO2 <=> C2H3OO                    	 Plog rate : 78443.67539659305    	 Fixed P rate : 78443.67539659096    	 Relative change :  2.6713126103418616e-14
+CH2CHO <=> CH2CO + H                     	 Plog rate : 2092524696.8018425   	 Fixed P rate : 2092524696.8016415   	 Relative change :  9.604993551082098e-14
+CH2CHO <=> CH3 + CO                      	 Plog rate : 675424287.8326567    	 Fixed P rate : 675424287.8326232    	 Relative change :  4.9595211435554645e-14
+CH2CHO + H <=> CH3 + HCO                 	 Plog rate : 89702252098.93236    	 Fixed P rate : 89702252098.93013    	 Relative change :  2.4835309604802166e-14
+C2H5 + HCO <=> CH2CHO + CH3              	 Plog rate : 22667838315.260876   	 Fixed P rate : 22667838315.26047    	 Relative change :  1.7838397492187e-14 
+CH2CHO + O2 <=> CH2CO + HO2              	 Plog rate : 471583366.98404425   	 Fixed P rate : 471583366.98404354   	 Relative change :  1.516711121257353e-15
+CH2CHO + O2 => CH2O + CO + OH            	 Plog rate : 134421619.79232007   	 Fixed P rate : 134421619.79232007   	 Relative change :  0.0                 
+O2C2H4OH => 2 CH2O + OH                  	 Plog rate : 92996569.78087912    	 Fixed P rate : 92996569.78087647    	 Relative change :  2.8521554061128824e-14
+NC3H7 + O2 <=> C3H6 + HO2                	 Plog rate : 942663506.7160428    	 Fixed P rate : 942663506.7160536    	 Relative change :  1.150786603261267e-14
+IC3H7 + O2 <=> C3H6 + HO2                	 Plog rate : 1180825458.2097888   	 Fixed P rate : 1180825458.2097867   	 Relative change :  1.817175601182575e-15
+NC3H7 + O2 <=> C3H6OOH1-2                	 Plog rate : 130301.63794471743   	 Fixed P rate : 130301.63794471513   	 Relative change :  1.7645231804817652e-14
+NC3H7 + O2 <=> C3H6OOH1-3                	 Plog rate : 22522126140.202606   	 Fixed P rate : 22522126140.203407   	 Relative change :  3.5568863294451095e-14
+NC3H7 + O2 <=> C3H6OOH1-3                	 Plog rate : 1233930999.552775    	 Fixed P rate : 1233930999.5527267   	 Relative change :  3.903018320795158e-14
+C3H6OOH1-2 <=> C3H6OOH1-3                	 Plog rate : 3.026146408374337e+23 	 Fixed P rate : 3.0261464083743355e+23 	 Relative change :  4.4352688167557143e-16
+C3H6OOH1-2 <=> C3H6 + HO2                	 Plog rate : 1490893402167970.5   	 Fixed P rate : 1490893402168013.0   	 Relative change :  2.8506397531975775e-14
+C3H6OOH1-3 <=> C3H6 + HO2                	 Plog rate : 2701498.2789009837   	 Fixed P rate : 2701498.278900878    	 Relative change :  3.912832854435853e-14
+C3H6OOH1-3 + O2 <=> AC3H5OOH + HO2       	 Plog rate : 1561884307.7184913   	 Fixed P rate : 1561884307.7185385   	 Relative change :  3.0224312024151396e-14
+C3H6OOH1-2 + O2 <=> AC3H5OOH + HO2       	 Plog rate : 663054632.8740289    	 Fixed P rate : 663054632.8740318    	 Relative change :  4.3149128403153835e-15
+C2H3 + CH3 <=> C3H5-A + H                	 Plog rate : 9072309266.58619     	 Fixed P rate : 9072309266.585772    	 Relative change :  4.604223007744939e-14
+C2H3 + CH3 <=> C3H5-A + H                	 Plog rate : 4974068624.724027    	 Fixed P rate : 4974068624.724159    	 Relative change :  2.6650362104287118e-14
+C3H6 <=> C2H3 + CH3                      	 Plog rate : 52231482.939337194   	 Fixed P rate : 52231482.93932551    	 Relative change :  2.2366798180983852e-13
+C3H6 <=> C2H3 + CH3                      	 Plog rate : 26796381.670417357   	 Fixed P rate : 26796381.67041231    	 Relative change :  1.8837499840467356e-13
+C3H6 <=> C3H5-A + H                      	 Plog rate : 74933211.60737646    	 Fixed P rate : 74933211.60736127    	 Relative change :  2.0263756124708814e-13
+C3H6 <=> C3H5-A + H                      	 Plog rate : 36344448.24481256    	 Fixed P rate : 36344448.24480507    	 Relative change :  2.0622913381482333e-13
+C3H6 + H <=> NC3H7                       	 Plog rate : 183881625.2696846    	 Fixed P rate : 183881625.2696807    	 Relative change :  2.1231616954996158e-14
+C3H6 + H <=> NC3H7                       	 Plog rate : 2.598876179257882e-09 	 Fixed P rate : 2.5988761792578523e-09 	 Relative change :  1.14582227077907e-14
+C3H6 + H <=> C2H4 + CH3                  	 Plog rate : 24492995733.980053   	 Fixed P rate : 24492995733.979267   	 Relative change :  3.208376979499252e-14
+C3H6 + H <=> C2H4 + CH3                  	 Plog rate : 20318111279.404457   	 Fixed P rate : 20318111279.404793   	 Relative change :  1.652187817847405e-14
+C3H6 + H <=> IC3H7                       	 Plog rate : 50733423.708214164   	 Fixed P rate : 50733423.70821092    	 Relative change :  6.388298527420534e-14
+C3H6 + H <=> IC3H7                       	 Plog rate : 388439945.90058696   	 Fixed P rate : 388439945.90058696   	 Relative change :  0.0                 
+C2H4 + CH3 <=> NC3H7                     	 Plog rate : 3901697.1221751375   	 Fixed P rate : 3901697.1221749084   	 Relative change :  5.871941008780429e-14
+C2H4 + CH3 <=> NC3H7                     	 Plog rate : 1378272.3080261282   	 Fixed P rate : 1378272.3080261038   	 Relative change :  1.7737581638470284e-14
+2 C3H5-A <=> C3H4-A + C3H6               	 Plog rate : 316503.5986845544    	 Fixed P rate : 316503.5986845543    	 Relative change :  3.6781673987524226e-16
+C3H5-A + OH => C2H3CHO + 2 H             	 Plog rate : 7275375892.611878    	 Fixed P rate : 2434070.4360828223   	 Relative change :  0.9996654371578856  
+C3H5-A + O2 <=> C3H4-A + HO2             	 Plog rate : 1542430.6361739025   	 Fixed P rate : 1542430.6361739032   	 Relative change :  4.528514375818303e-16
+C3H5-A + O2 <=> C2H3CHO + OH             	 Plog rate : 14165722.193227151   	 Fixed P rate : 14165722.193227164   	 Relative change :  9.20427202140856e-16
+C3H5-A + HO2 <=> C3H5O + OH              	 Plog rate : 29774612674.879528   	 Fixed P rate : 29774612674.879578   	 Relative change :  1.665548599897132e-15
+C3H5-A + HO2 <=> AC3H5OOH                	 Plog rate : 32530531.607144613   	 Fixed P rate : 32530531.607143458   	 Relative change :  3.5500188145390105e-14
+C3H5-A + HO2 <=> C2H3CHO + H2O           	 Plog rate : 266715898.8293155    	 Fixed P rate : 266715898.8293226    	 Relative change :  2.659366299273599e-14
+AC3H5OOH <=> C2H3CHO + H2O               	 Plog rate : 385122215.07832277   	 Fixed P rate : 385122215.07829      	 Relative change :  8.512247110906811e-14
+AC3H5OOH <=> C3H5O + OH                  	 Plog rate : 84350197069.1142     	 Fixed P rate : 84350197069.10611    	 Relative change :  9.587598469389002e-14
+C3H5O <=> C2H3 + CH2O                    	 Plog rate : 8268434183.800442    	 Fixed P rate : 8268434183.800266    	 Relative change :  2.122240684488287e-14
+C3H5O <=> C2H3CHO + H                    	 Plog rate : 21105559683.0029     	 Fixed P rate : 21105559683.00162    	 Relative change :  6.054914454666345e-14
+C3H5O <=> C2H4 + HCO                     	 Plog rate : 6587835792.095707    	 Fixed P rate : 6587835792.095286    	 Relative change :  6.384044575606602e-14
+C2H3 + CH2O <=> C2H3CHO + H              	 Plog rate : 1014483875.5189505   	 Fixed P rate : 1014483875.5189527   	 Relative change :  2.232639232739125e-15
+C2H3 + CH2O <=> C2H4 + HCO               	 Plog rate : 46231225.343910605   	 Fixed P rate : 46231225.34391011    	 Relative change :  1.0636497642858659e-14
+C3H4-A <=> C3H4-P                        	 Plog rate : 28066736.179675315   	 Fixed P rate : 28066736.179675296   	 Relative change :  6.63648647034279e-16
+C3H3 + H <=> C3H4-P                      	 Plog rate : 6913594616.867071    	 Fixed P rate : 6913594616.867064    	 Relative change :  9.655932383650353e-16
+C3H3 + H <=> C3H4-A                      	 Plog rate : 3767977568.250339    	 Fixed P rate : 3767977568.250338    	 Relative change :  2.5309978606085196e-16
+C3H4-A + H <=> C3H4-P + H                	 Plog rate : 31666816702.94412    	 Fixed P rate : 31666816702.943333   	 Relative change :  2.4815492005095993e-14
+C3H4-A + H <=> C3H4-P + H                	 Plog rate : 33860917247.243057   	 Fixed P rate : 33860917247.243057   	 Relative change :  0.0                 
+C3H4-A + H <=> C3H5-A                    	 Plog rate : 732712850.3542165    	 Fixed P rate : 732712850.3541695    	 Relative change :  6.41021377751213e-14
+C3H4-A + H <=> C3H5-A                    	 Plog rate : 426239350.1140906    	 Fixed P rate : 426239350.11408305   	 Relative change :  1.7759481578714914e-14
+C3H4-A + H <=> C2H2 + CH3                	 Plog rate : 12527260201.304262   	 Fixed P rate : 12527260201.304064   	 Relative change :  1.5834608256308712e-14
+C3H4-A + H <=> C2H2 + CH3                	 Plog rate : 282461070.6467393    	 Fixed P rate : 282461070.64673626   	 Relative change :  1.0761967575159064e-14
+C3H4-P + H <=> C2H2 + CH3                	 Plog rate : 46627302139.905975   	 Fixed P rate : 46627302139.905396   	 Relative change :  1.243550361621178e-14
+C3H4-P + H <=> C3H5-A                    	 Plog rate : 18862383.95787566    	 Fixed P rate : 18862383.957873985   	 Relative change :  8.88742715688341e-14
+C2H2 + CH3 <=> C3H5-A                    	 Plog rate : 134445.86300650577   	 Fixed P rate : 134445.86300649765   	 Relative change :  6.039582413209532e-14
+C3H4-P + O <=> C3H3 + OH                 	 Plog rate : 560241342.0116386    	 Fixed P rate : 560241342.0116384    	 Relative change :  4.255640582422593e-16
+C3H4-P + O <=> C2H3 + HCO                	 Plog rate : 2034169434.8590212   	 Fixed P rate : 2034169434.8590229   	 Relative change :  8.204479062121997e-16
+C3H4-P + O <=> C2H4 + CO                 	 Plog rate : 2925951307.7059526   	 Fixed P rate : 2925951307.705951    	 Relative change :  4.889047438492562e-16
+C3H4-P + O <=> C2H2 + CO + H2            	 Plog rate : 32991726.13568637    	 Fixed P rate : 32991726.135686323   	 Relative change :  1.4679066406174068e-15
+C3H4-P + O <=> CH3 + HCCO                	 Plog rate : 11016058546.044437   	 Fixed P rate : 11016058546.044445   	 Relative change :  6.925702599855468e-16
+C3H4-P + O <=> C2H3CHO                   	 Plog rate : 11893172.14920282    	 Fixed P rate : 11893172.149202805   	 Relative change :  1.2529173047281971e-15
+C3H4-P + O <=> C2H3 + CO + H             	 Plog rate : 9610371048.037804    	 Fixed P rate : 9610371048.037792    	 Relative change :  1.1908064464598999e-15
+C3H4-P + O <=> C2H3CO + H                	 Plog rate : 2881505328.421817    	 Fixed P rate : 2881505328.4218216   	 Relative change :  1.654819630211428e-15
+CH3CHCHO <=> C2H3CHO + H                 	 Plog rate : 2594821147.9333897   	 Fixed P rate : 2594821147.9331317   	 Relative change :  9.941683371639948e-14
+CH3CHCHO <=> C2H3CHO + H                 	 Plog rate : 2555990446.0642843   	 Fixed P rate : 2555990446.0640574   	 Relative change :  8.880099205933377e-14
+C3H3 <=> C3H2 + H                        	 Plog rate : 148940935.0879919    	 Fixed P rate : 148940935.0879792    	 Relative change :  8.524042990369126e-14
+C3H3 + OH <=> C2H3 + HCO                 	 Plog rate : 7450390887.747703    	 Fixed P rate : 7450390887.7477045   	 Relative change :  2.560065185236345e-16
+C3H3 + OH <=> C2H2 + CO + H2             	 Plog rate : 1905069403.9408627   	 Fixed P rate : 1905069403.940863    	 Relative change :  1.251495502517469e-16
+C3H3 + OH <=> C2H4 + CO                  	 Plog rate : 87742002.39794919    	 Fixed P rate : 87742002.39794911    	 Relative change :  8.491464057467159e-16
+2 C3H3 => C6H6                           	 Plog rate : 72910734.86895473    	 Fixed P rate : 72910734.86895484    	 Relative change :  1.4306278567128779e-15
+C3H2 + OH => C2H2 + CO + H               	 Plog rate : 11925483038.305508   	 Fixed P rate : 11925483038.305527   	 Relative change :  1.599388994714897e-15
+
+ New mechanism file saved at chem_sk66_ver1_600atm.yaml
