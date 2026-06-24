@@ -26235,6 +26235,7 @@ AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void
 aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
 {
 #if defined(PELE_COMPILE_AJACOBIAN) || !defined(AMREX_USE_HIP)
+  T = amrex::Clamp(T, 200.0, 6000.0);
   const amrex::Real invT = 1.0 / T;
   const amrex::Real logT = log(T);
 
