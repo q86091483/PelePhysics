@@ -1654,9 +1654,9 @@ def qssa_coeff_functions(fstream, mechanism, species_info, reaction_info, syms):
             if is_troe:
                 cw.writer(fstream, "const amrex::Real F = redP / (1.0 + redP);")
                 f_smp = redp_smp / (1.0 + redp_smp)
-                cw.writer(fstream, "const amrex::Real logPred = log10(redP);")
+                cw.writer(fstream, "const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));") # log10(redP);") - ZS
                 log_pred_smp = sme.log(redp_smp, 10)
-                cw.writer(fstream, "const amrex::Real logFcent = log10(")
+                cw.writer(fstream, "const amrex::Real Fcent_arg = (") # logFcent = log10(") - ZS
                 int_smp = 0
                 if abs(troe[1]) > 1.0e-100:
                     if 1.0 - troe[0] != 0:
@@ -1700,6 +1700,7 @@ def qssa_coeff_functions(fstream, mechanism, species_info, reaction_info, syms):
                 else:
                     cw.writer(fstream, "    + 0.0);")
                     int_smp += 0.0
+                cw.writer(fstream, "const amrex::Real logFcent = log10(amrex::max(Fcent_arg, 1.e-200));") # ZS
                 log_fcent_smp = sme.log(int_smp, 10)
 
                 cw.writer(

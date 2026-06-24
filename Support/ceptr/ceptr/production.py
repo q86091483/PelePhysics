@@ -327,8 +327,8 @@ def production_rate(
                     )
                 if is_troe:
                     cw.writer(fstream, "F = redP / (1.0 + redP);")
-                    cw.writer(fstream, "logPred = log10(redP);")
-                    cw.writer(fstream, "Fcent = (") #"logFcent = log10(") // ZS
+                    cw.writer(fstream, "logPred = log10(amrex::max(redP, 1.e-200));") #log10(redP);") - ZS
+                    cw.writer(fstream, "Fcent = (") #"logFcent = log10(") - ZS
                     if abs(troe[1]) > 1.0e-100:
                         if 1.0 - troe[0] != 0:
                             cw.writer(
@@ -739,7 +739,7 @@ def production_rate(
                 if is_troe:
                     cw.writer(fstream, "const amrex::Real F = redP / (1.0 + redP);")
                     f_smp = redp_smp / (1.0 + redp_smp)
-                    cw.writer(fstream, "const amrex::Real logPred = log10(redP);")
+                    cw.writer(fstream, "const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));") # log10(redP);") - ZS
                     logpred_smp = sme.log(redp_smp, 10)
                     cw.writer(fstream, "const amrex::Real Fcent_arg = (") # logFcent = log10(") - ZS
                     int_smp = 0.0
@@ -1261,7 +1261,7 @@ def production_rate_light(fstream, mechanism, species_info, reaction_info):
                 )
                 if is_troe:
                     cw.writer(fstream, "const amrex::Real F = redP / (1.0 + redP);")
-                    cw.writer(fstream, "const amrex::Real logPred = log10(redP);")
+                    cw.writer(fstream, "const amrex::Real logPred = log10(amrex::max(redP, 1.e-200));") # log10(redP);") - ZS
                     cw.writer(fstream, "const amrex::Real Fcent_arg = (") # logFcent = log10(") - ZS
                     if abs(troe[1]) > 1.0e-100:
                         if 1.0 - troe[0] != 0:
