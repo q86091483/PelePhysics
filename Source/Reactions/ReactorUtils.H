@@ -755,8 +755,8 @@ fKernelSpec_aux(
     const int idx_rhoZ = aux_index<OrderType>(MIXF_IN_AUX + n, icell, ncells);
     amrex::Real rhoZ_pt = 0.0;
     rhoZ_pt = rhoAux_init[idx_rhoZ] + dt_save * ydot_d[idx_rhoZ];
-    amrex::Real alpha_1 = yvec_d[idx_rhoAge] / yvec_d[idx_rhoZ];
-    amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAge] / rhoAux_init[idx_rhoZ];
+    amrex::Real alpha_1 = yvec_d[idx_rhoAge] / (yvec_d[idx_rhoZ] + 1E-16);
+    amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAge] / (rhoAux_init[idx_rhoZ] + 1E-16);
     amrex::Real alpha_min = std::min(std::max(0.0, alpha_1), std::max(0.0, alpha_2));
 
     if ((rhoAux_init[idx_rhoZ] / rho_pt) > 1E-4) {
@@ -779,8 +779,8 @@ fKernelSpec_aux(
     const int idx_rhoAgePV = aux_index<OrderType>(AGEPV_IN_AUX + n, icell, ncells);
     amrex::Real rhoZ_pt = 0.0;
     rhoZ_pt = rhoAux_init[idx_rhoZ] + dt_save * ydot_d[idx_rhoZ];
-    amrex::Real alpha_1 = yvec_d[idx_rhoAgePV] / yvec_d[idx_rhoZ];
-    amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAgePV] / rhoAux_init[idx_rhoZ];
+    amrex::Real alpha_1 = yvec_d[idx_rhoAgePV] / (yvec_d[idx_rhoZ] + 1E-16);
+    amrex::Real alpha_2 = dt_save + rhoAux_init[idx_rhoAgePV] / (rhoAux_init[idx_rhoZ] + 1E-16);
     amrex::Real alpha_min = std::min(std::max(0.0, alpha_1), std::max(0.0, alpha_2));
     //amrex::Print() << "alpha_1: " << alpha_1 << ", alpha_2: " << alpha_2 << "dt_save: " << dt_save << std::endl;
     //if ((yvec_d[idx_rhoZ] / rho_pt) > 1E-3) {
