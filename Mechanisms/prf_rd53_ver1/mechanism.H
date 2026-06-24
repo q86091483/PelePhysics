@@ -26237,7 +26237,7 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
 #if defined(PELE_COMPILE_AJACOBIAN) || !defined(AMREX_USE_HIP)
   T = amrex::Math::isfinite(T) ? amrex::Clamp(T, 200.0, 6000.0) : 300.0;
   const amrex::Real invT = 1.0 / T;
-  const amrex::Real logT = log(T);
+  const amrex::Real logT = log(amrex::max(T, 1.e-200));
 
   // reference concentration: P_atm / (RT) in inverse mol/m^3
   const amrex::Real refC = 101325 / 8.31446 * invT;
@@ -26256,7 +26256,7 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   T_pert1 = T + pertT;
 
   const amrex::Real invT_pert1 = 1.0 / T_pert1;
-  const amrex::Real logT_pert1 = log(T_pert1);
+  const amrex::Real logT_pert1 = log(amrex::max(T_pert1, 1.e-200));
   productionRate_light(
     wdot_pert1, sc, g_RT, g_RT_qss, sc_qss, kf_qss, &J[0], &J[90], T_pert1,
     invT_pert1, logT_pert1);
@@ -26303,11 +26303,11 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   amrex::Real x44 = 0.43429448190325198 / x43;
   amrex::Real x50 = 60220000000.0 * x43 *
                     exp(-9069.9268627976908 * invT - 0.547 * logT) / kf_qss[0];
-  amrex::Real x51 = log(
+  amrex::Real x51 = log(amrex::max(
     exp(-2339.0 * invT) + 0.659 * exp(-0.035714285714285698 * T) +
-    0.341 * exp(-0.001 * T));
+    0.341 * exp(-0.001 * T), 1.e-200));
   amrex::Real x54 =
-    -0.29097730287517898 * x51 + 0.43429448190325198 * log(x50) - 0.4;
+    -0.29097730287517898 * x51 + 0.43429448190325198 * log(amrex::max(x50, 1.e-200)) - 0.4;
   amrex::Real x60 = x54 / ((-0.55155399201712996 * x51 - 0.14 * x54 + 0.75) *
                            (-0.55155399201712996 * x51 - 0.14 * x54 + 0.75));
   amrex::Real x62 =
@@ -26445,11 +26445,11 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   x77 = x154 * (-kf_qss[45] * exp(-x128 - x141) + x77);
   x93 = sc[10] + sc[11] + sc[17] + sc[1] + sc[5] + sc[9] + x38;
   x104 = 4.7e+19 * exp(-8319.1779190836296 * invT - 3.0 * logT);
-  x154 = log(
+  x154 = log(amrex::max(
     exp(-100000.0 * invT) + 0.574 * exp(-3.3333333333333299 * T) +
-    0.426 * exp(-0.00043898156277436299 * T));
+    0.426 * exp(-0.00043898156277436299 * T), 1.e-200));
   x54 = -0.29097730287517898 * x154 +
-        0.43429448190325198 * log(x104 * x93 / kf_qss[1]) - 0.4;
+        0.43429448190325198 * log(amrex::max(x104 * x93 / kf_qss[1], 1.e-200)) - 0.4;
   x50 = -0.55155399201712996 * x154 - 0.14 * x54 + 0.75;
   x67 = exp(
           M_LN10 * (0.43429448190325198 * x154 /
@@ -26503,9 +26503,9 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   x237 = (kf_qss[40] + x237) / x104;
   amrex::Real x281 = x43 * exp(-2935.5647416384099 * invT - 9.32 * logT);
   amrex::Real x285 =
-    log(exp(-50000.0 * invT) + exp(-0.00076103500761035003 * T));
+    log(amrex::max(exp(-50000.0 * invT) + exp(-0.00076103500761035003 * T), 1.e-200));
   amrex::Real x287 = -0.29097730287517898 * x285 +
-                     0.43429448190325198 * log(3.01e+36 * x281 / kf_qss[2]) -
+                     0.43429448190325198 * log(amrex::max(3.01e+36 * x281 / kf_qss[2], 1.e-200)) -
                      0.4;
   amrex::Real x292 =
     ((x287) * (x287)) / ((-0.55155399201712996 * x285 - 0.14 * x287 + 0.75) *
@@ -26904,11 +26904,11 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   amrex::Real x759 = -40056.046598055698 * invT + 1.5 * logT;
   amrex::Real x762 = 117906976744186.0 * x93 *
                      exp(-42445.3193272965 * invT - 3.42 * logT - x759);
-  amrex::Real x763 = log(
+  amrex::Real x763 = log(amrex::max(
     exp(-10300.0 * invT) + 0.068 * exp(-0.0050761421319797002 * T) +
-    0.932 * exp(-0.00064935064935064902 * T));
+    0.932 * exp(-0.00064935064935064902 * T), 1.e-200));
   amrex::Real x764 =
-    -0.29097730287517898 * x763 + 0.43429448190325198 * log(x762) - 0.4;
+    -0.29097730287517898 * x763 + 0.43429448190325198 * log(amrex::max(x762, 1.e-200)) - 0.4;
   amrex::Real x766 = -0.55155399201712996 * x763 - 0.14 * x764 + 0.75;
   amrex::Real x769 = exp(
     M_LN10 * (0.43429448190325198 * x763 /
@@ -27156,7 +27156,7 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   const amrex::Real x1360 =
     5490000000000.0 * sc[6] * exp(-1387.3683476236099 * invT - 1.8 * logT);
   amrex::Real x1373 = -0.29097730287517898 * x285 +
-                      0.43429448190325198 * log(8.3611111111111095e+28 * x281) -
+                      0.43429448190325198 * log(amrex::max(8.3611111111111095e+28 * x281, 1.e-200)) -
                       0.4;
   amrex::Real x1375 = -0.14 * x1373 - 0.55155399201712996 * x285 + 0.75;
   const amrex::Real x1380 =
@@ -27185,9 +27185,9 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   amrex::Real x1411 =
     3711111111111110.0 * x1410 * exp(-538.94504907684995 * invT - 5.93 * logT);
   amrex::Real x1413 =
-    log(0.212 * exp(9.8039215686274506e-5 * T) + 0.788 * exp(-1.0e+30 * T));
+    log(amrex::max(0.212 * exp(9.8039215686274506e-5 * T) + 0.788 * exp(-1.0e+30 * T), 1.e-200));
   amrex::Real x1414 =
-    -0.29097730287517898 * x1413 + 0.43429448190325198 * log(x1411) - 0.4;
+    -0.29097730287517898 * x1413 + 0.43429448190325198 * log(amrex::max(x1411, 1.e-200)) - 0.4;
   amrex::Real x1415 = -0.55155399201712996 * x1413 - 0.14 * x1414 + 0.75;
   const amrex::Real x1421 =
     exp(
@@ -27221,13 +27221,13 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
     3.2970995555555599e+35 * x1411 * x1455 -
     x1414 * (0.392 * x1437 + 2.8 * x1438) - 8.8844e+19 * x1415 * x1421 +
     8.8844e+19 * x1421 * x1427 + x1453 * (0.392 * x1437 + 2.8 * x1438);
-  amrex::Real x1458 = log(
+  amrex::Real x1458 = log(amrex::max(
     -0.569 * exp(0.000109325461900077 * T) + exp(-152.4 * invT) +
-    1.569 * exp(-0.0033444816053511701 * T));
+    1.569 * exp(-0.0033444816053511701 * T), 1.e-200));
   amrex::Real x1462 = 1.4829135750862201e+24 * x43 *
                       exp(-2221.1983628620351 * invT - 8.105 * logT);
   amrex::Real x1463 =
-    -0.29097730287517898 * x1458 + 0.43429448190325198 * log(x1462) - 0.4;
+    -0.29097730287517898 * x1458 + 0.43429448190325198 * log(amrex::max(x1462, 1.e-200)) - 0.4;
   amrex::Real x1465 = -0.55155399201712996 * x1458 - 0.14 * x1463 + 0.75;
   const amrex::Real x1470 =
     exp(
@@ -27262,12 +27262,12 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
     2.1042543630473402e+51 * x1458 * x1501 - 1.419e+27 * x1462 * x1470 +
     1.419e+27 * x1470 * x1476 - x1482 * x1485 + x1482 * x1499;
   amrex::Real x1504 = -805.14666528755197 * invT - 2.76 * logT;
-  amrex::Real x1508 = log(
+  amrex::Real x1508 = log(amrex::max(
     exp(-8552.0 * invT) + 0.438 * exp(-0.010989010989011 * T) +
-    0.562 * exp(-0.00017135023989033599 * T));
+    0.562 * exp(-0.00017135023989033599 * T), 1.e-200));
   amrex::Real x1509 =
     -0.29097730287517898 * x1508 +
-    0.43429448190325198 * log(173333.33333333299 * x43 * exp(x1504)) - 0.4;
+    0.43429448190325198 * log(amrex::max(173333.33333333299 * x43 * exp(x1504), 1.e-200)) - 0.4;
   amrex::Real x1512 = -0.55155399201712996 * x1508 - 0.14 * x1509 + 0.75;
   const amrex::Real x1517 =
     exp(
@@ -27305,13 +27305,13 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   const amrex::Real x1549 = refC * exp(-g_RT[2] - logT - x322);
   const amrex::Real x1550 = sc[6] * x1549;
   const amrex::Real x1554 = sc[2] * sc[4] * exp(-logT);
-  amrex::Real x1557 = log(
+  amrex::Real x1557 = log(amrex::max(
     exp(-6882.0 * invT) + 0.158 * exp(-0.008 * T) +
-    0.842 * exp(-0.000450653447498873 * T));
+    0.842 * exp(-0.000450653447498873 * T), 1.e-200));
   amrex::Real x1561 = 3.8195777351247603e+17 * x43 *
                       exp(-2568.9210789330928 * invT - 6.09 * logT);
   amrex::Real x1562 =
-    -0.29097730287517898 * x1557 + 0.43429448190325198 * log(x1561) - 0.4;
+    -0.29097730287517898 * x1557 + 0.43429448190325198 * log(amrex::max(x1561, 1.e-200)) - 0.4;
   amrex::Real x1563 = -0.55155399201712996 * x1557 - 0.14 * x1562 + 0.75;
   const amrex::Real x1569 =
     exp(
@@ -27345,10 +27345,10 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   x1563 = 3.8 * sc[10] + 2 * sc[11] + 3.0 * sc[17] + 1.3 * sc[1] +
           10.0 * sc[5] + 1.9 * sc[9] + x38;
   amrex::Real x1606 =
-    log(0.67 + exp(-1.0e+30 * invT) + 0.33 * exp(-1.0e+30 * T));
+    log(amrex::max(0.67 + exp(-1.0e+30 * invT) + 0.33 * exp(-1.0e+30 * T), 1.e-200));
   amrex::Real x1607 =
     -0.29097730287517898 * x1606 +
-    0.43429448190325198 * log(3.73548387096774 * x1563 * exp(-1.67 * logT)) -
+    0.43429448190325198 * log(amrex::max(3.73548387096774 * x1563 * exp(-1.67 * logT), 1.e-200)) -
     0.4;
   amrex::Real x1611 = ((x1607) * (x1607)) /
                         ((-0.55155399201712996 * x1606 - 0.14 * x1607 + 0.75) *
@@ -27389,11 +27389,11 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   const amrex::Real x1656 = sc[11] * x1655;
   amrex::Real x1658 =
     13199381761978.4 * x1410 * exp(-1134.2503647238348 * invT - 4.875 * logT);
-  amrex::Real x1659 = log(
+  amrex::Real x1659 = log(amrex::max(
     exp(-1.0e+30 * invT) + 0.516194 * exp(-T) +
-    0.483806 * exp(-0.00027488777569113499 * T));
+    0.483806 * exp(-0.00027488777569113499 * T), 1.e-200));
   amrex::Real x1660 =
-    -0.29097730287517898 * x1659 + 0.43429448190325198 * log(x1658) - 0.4;
+    -0.29097730287517898 * x1659 + 0.43429448190325198 * log(amrex::max(x1658, 1.e-200)) - 0.4;
   amrex::Real x1663 = -0.55155399201712996 * x1659 - 0.14 * x1660 + 0.75;
   const amrex::Real x1668 =
     exp(
@@ -27427,11 +27427,11 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   x1663 = 130.83633310922701 * invT + 0.48 * logT;
   amrex::Real x1699 = 1238532.11009174 * x93 *
                       exp(-717.08374877172605 * invT - 2.57 * logT - x1663);
-  amrex::Real x1700 = log(
+  amrex::Real x1700 = log(amrex::max(
     exp(-6570.0 * invT) + 0.2176 * exp(-0.0036900369003690001 * T) +
-    0.7824 * exp(-0.00036297640653357502 * T));
+    0.7824 * exp(-0.00036297640653357502 * T), 1.e-200));
   amrex::Real x1701 =
-    -0.29097730287517898 * x1700 + 0.43429448190325198 * log(x1699) - 0.4;
+    -0.29097730287517898 * x1700 + 0.43429448190325198 * log(amrex::max(x1699, 1.e-200)) - 0.4;
   amrex::Real x1703 = -0.55155399201712996 * x1700 - 0.14 * x1701 + 0.75;
   amrex::Real x1706 = exp(
     M_LN10 * (0.43429448190325198 * x1700 /
@@ -27467,9 +27467,9 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   amrex::Real x1736 =
     880.0 * x1735 * exp(-57.366699901738002 * invT - 2.234 * logT);
   amrex::Real x1737 =
-    log(0.73 + exp(-1.0e+30 * invT) + 0.27 * exp(-1.0e+30 * T));
+    log(amrex::max(0.73 + exp(-1.0e+30 * invT) + 0.27 * exp(-1.0e+30 * T), 1.e-200));
   amrex::Real x1738 =
-    -0.29097730287517898 * x1737 + 0.43429448190325198 * log(x1736) - 0.4;
+    -0.29097730287517898 * x1737 + 0.43429448190325198 * log(amrex::max(x1736, 1.e-200)) - 0.4;
   amrex::Real x1740 = -0.55155399201712996 * x1737 - 0.14 * x1738 + 0.75;
   const amrex::Real x1746 =
     exp(
@@ -27527,7 +27527,7 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   amrex::Real x1801 =
     5.32920353982301 * x43 * exp(3049.9962114424088 * invT - 1.757 * logT);
   amrex::Real x1805 =
-    -0.29097730287517898 * x51 + 0.43429448190325198 * log(x1801) - 0.4;
+    -0.29097730287517898 * x51 + 0.43429448190325198 * log(amrex::max(x1801, 1.e-200)) - 0.4;
   amrex::Real x1807 = -0.14 * x1805 - 0.55155399201712996 * x51 + 0.75;
   amrex::Real x1810 = exp(
     M_LN10 * (0.43429448190325198 * x51 /
@@ -29045,9 +29045,9 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
         0.79 * sc[3] + 5.1 * sc[5] + 5.2 * sc[7] + 2.8 * sc[9] + x37;
   const amrex::Real x4700 =
     1176509.05 * x37 * exp(2.8154972451993672 * invT - 3.1929358 * logT);
-  amrex::Real x4701 = log(0.43 + 0.57 * exp(-1.0e+30 * T));
+  amrex::Real x4701 = log(amrex::max(0.43 + 0.57 * exp(-1.0e+30 * T), 1.e-200));
   amrex::Real x4702 =
-    -0.29097730287517898 * x4701 + 0.43429448190325198 * log(x4700) - 0.4;
+    -0.29097730287517898 * x4701 + 0.43429448190325198 * log(amrex::max(x4700, 1.e-200)) - 0.4;
   amrex::Real x4704 = -0.55155399201712996 * x4701 - 0.14 * x4702 + 0.75;
   const amrex::Real x4706 = 0.43429448190325198 * ((x4702) * (x4702)) /
                             (x37 * ((x4704) * (x4704) * (x4704)));
@@ -29538,11 +29538,11 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   const amrex::Real x5751 = x123 * x930;
   amrex::Real x5756 =
     3320987654320990.0 * x43 * exp(-1300.8150811052001 * invT - 5.61 * logT);
-  amrex::Real x5757 = log(
+  amrex::Real x5757 = log(amrex::max(
     exp(-5185.0 * invT) + 0.4093 * exp(-0.0036363636363636398 * T) +
-    0.5907 * exp(-0.000815660685154976 * T));
+    0.5907 * exp(-0.000815660685154976 * T), 1.e-200));
   amrex::Real x5758 =
-    -0.29097730287517898 * x5757 + 0.43429448190325198 * log(x5756) - 0.4;
+    -0.29097730287517898 * x5757 + 0.43429448190325198 * log(amrex::max(x5756, 1.e-200)) - 0.4;
   amrex::Real x5760 = -0.55155399201712996 * x5757 - 0.14 * x5758 + 0.75;
   const amrex::Real x5765 =
     exp(
@@ -29787,11 +29787,11 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   amrex::Real x6375 = 3.0774193548387102e+47 * x6371 *
                       exp(-4887.2402582954019 * invT - 14.636 * logT);
   const amrex::Real x6377 = x6371 / ((x6375 + 1.0) * (x6375 + 1.0));
-  amrex::Real x6380 = log(
+  amrex::Real x6380 = log(amrex::max(
     exp(-8829.0 * invT) + 0.81 * exp(-0.0078125 * T) +
-    0.19 * exp(-0.00032351989647363299 * T));
+    0.19 * exp(-0.00032351989647363299 * T), 1.e-200));
   amrex::Real x6381 =
-    -0.29097730287517898 * x6380 + 0.43429448190325198 * log(x6375) - 0.4;
+    -0.29097730287517898 * x6380 + 0.43429448190325198 * log(amrex::max(x6375, 1.e-200)) - 0.4;
   amrex::Real x6382 = -0.55155399201712996 * x6380 - 0.14 * x6381 + 0.75;
   amrex::Real x6386 = exp(
     M_LN10 * (0.43429448190325198 * x6380 /
@@ -29825,9 +29825,9 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   amrex::Real x6422 =
     35371102327.6241 * x38 * exp(-405.94488430466765 * invT - 3.06 * logT);
   amrex::Real x6423 =
-    log(exp(-1.0e+30 * invT) + exp(-0.0017543859649122801 * T));
+    log(amrex::max(exp(-1.0e+30 * invT) + exp(-0.0017543859649122801 * T), 1.e-200));
   amrex::Real x6425 =
-    -0.29097730287517898 * x6423 + 0.43429448190325198 * log(x6422) - 0.4;
+    -0.29097730287517898 * x6423 + 0.43429448190325198 * log(amrex::max(x6422, 1.e-200)) - 0.4;
   amrex::Real x6427 = -0.55155399201712996 * x6423 - 0.14 * x6425 + 0.75;
   amrex::Real x6430 = exp(
     M_LN10 * (0.43429448190325198 * x6423 /
@@ -29856,7 +29856,7 @@ aJacobian(amrex::Real* J, amrex::Real* sc, amrex::Real T, const int consP)
   amrex::Real x6468 =
     746031746.031746 * x93 * exp(284.82063284547075 * invT - 3.93 * logT);
   amrex::Real x6472 =
-    -0.29097730287517898 * x154 + 0.43429448190325198 * log(x6468) - 0.4;
+    -0.29097730287517898 * x154 + 0.43429448190325198 * log(amrex::max(x6468, 1.e-200)) - 0.4;
   amrex::Real x6473 = -0.55155399201712996 * x154 - 0.14 * x6472 + 0.75;
   amrex::Real x6477 = exp(
     M_LN10 * (0.43429448190325198 * x154 /
