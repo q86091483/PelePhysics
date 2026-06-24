@@ -605,15 +605,24 @@ fKernelSpec(
 #endif
 
 //------------- begin debug -------------
-if (temp_pt < 600.0 || temp_pt > 4800.0 || !std::isfinite(temp_pt) ||
-    !std::isfinite(rho_pt) || !std::isfinite(nrg_pt)) {
-  fprintf(stderr, "[fKernelSpec ABNORMAL] icell=%d rho=%g T=%g nrg=%g\n",
-          icell, rho_pt, temp_pt, nrg_pt);
-  for (int n = 0; n < NUM_SPECIES; n++) {
-    if (massfrac[n] < -1e-6 || massfrac[n] > 1.0 + 1e-6)
-      fprintf(stderr, "  Y[%d]=%g (abnormal)\n", n, massfrac[n]);
-  }
-}
+// ZS : this is used to debug the cvode error, June 24 2026
+// More info: the GCI_jet3D case with prf_rd53_ver1 crashes with cvode
+// error when reaching about plt_05582 when the autoignition kernels form.
+// During this stage, the cvode when detect wider range of temperature, say > 4000K
+// which is actually not observed in flow field, but for like aJacobian.
+// The mechanism.H contains log10 for Fcent / Pref and so on. ZS fixed this by
+// add protect for log and log10 with amrex::max(..., 1e-200), as did with
+// ckwyp.f the qssa mechanism by Park and Lu. The following addition is for
+// showing whether the detection of T by cvode reach some ridicular level.
+//if (temp_pt < 600.0 || temp_pt > 4800.0 || !std::isfinite(temp_pt) ||
+//    !std::isfinite(rho_pt) || !std::isfinite(nrg_pt)) {
+//  fprintf(stderr, "[fKernelSpec ABNORMAL] icell=%d rho=%g T=%g nrg=%g\n",
+//          icell, rho_pt, temp_pt, nrg_pt);
+//  for (int n = 0; n < NUM_SPECIES; n++) {
+//    if (massfrac[n] < -1e-6 || massfrac[n] > 1.0 + 1e-6)
+//      fprintf(stderr, "  Y[%d]=%g (abnormal)\n", n, massfrac[n]);
+//  }
+//}
 //------------- end debug -------------
   amrex::GpuArray<amrex::Real, NUM_SPECIES> cdots_pt = {0.0};
   eos.RTY2WDOT(rho_pt, temp_pt, massfrac.arr, cdots_pt.arr);
