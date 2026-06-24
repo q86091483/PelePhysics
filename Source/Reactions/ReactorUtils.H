@@ -605,7 +605,7 @@ fKernelSpec(
 #endif
 
 //------------- begin debug -------------
-if (temp_pt < 600.0 || temp_pt > 3000.0 || !std::isfinite(temp_pt) ||
+if (temp_pt < 600.0 || temp_pt > 4800.0 || !std::isfinite(temp_pt) ||
     !std::isfinite(rho_pt) || !std::isfinite(nrg_pt)) {
   fprintf(stderr, "[fKernelSpec ABNORMAL] icell=%d rho=%g T=%g nrg=%g\n",
           icell, rho_pt, temp_pt, nrg_pt);
