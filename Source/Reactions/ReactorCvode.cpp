@@ -4,6 +4,24 @@
 
 namespace pele::physics::reactions {
 
+struct MyCellDiagCtx {
+  int i, j, k;
+  amrex::Real yvec_input[NUM_SPECIES + 1];
+};
+
+static void MyCvodeErrHandler(int line, const char* func, const char* file,
+  const char* msg, SUNErrCode err_code,
+  void* err_user_data, SUNContext sunctx) {
+  auto* ctx = static_cast<MyCellDiagCtx*>(err_user_data);
+  fprintf(stderr, "[CVODE INTERNAL FAIL] cell (%d,%d,%d) at %s:%d (%s): %s\n",
+  ctx->i, ctx->j, ctx->k, file, line, func, msg);
+  fprintf(stderr, "  Input state: T=%g ", ctx->yvec_input[NUM_SPECIES]);
+  for (int n = 0; n < NUM_SPECIES; ++n) {
+    fprintf(stderr, "Y[%d]=%g ", n, ctx->yvec_input[n]);
+  }
+  fprintf(stderr, "\n");
+}
+
 int
 ReactorCvode::init(int reactor_type, int /*ncells*/)
 {
@@ -1864,10 +1882,6 @@ ReactorCvode::react(
       if (mask(i, j, k) != -1) {
 
         amrex::Real* yvec_d = N_VGetArrayPointer(y);
-        amrex::Real yvec_input[NUM_SPECIES + 1];
-        for (int n = 0; n < NUM_SPECIES + 1; ++n) {
-          yvec_input[n] = yvec_d[n];
-        }
 #if defined (PELE_USE_AUX) && (NUMAUX > 0)
         amrex::Real* yvec_d_aux = N_VGetArrayPointer(y_aux);
 #endif
@@ -1891,24 +1905,19 @@ ReactorCvode::react(
         // ReInit CVODE is faster
         CVodeReInit(cvode_mem, time_start, y);
 
+        // ------ Debug -----
+        MyCellDiagCtx diag_ctx;
+        diag_ctx.i = i; diag_ctx.j = j; diag_ctx.k = k;
+        for (int n = 0; n < NUM_SPECIES + 1; ++n) {
+          diag_ctx.yvec_input[n] = yvec_d[n];   // CVodeReInit之前，这时yvec_d还是这个cell的初始输入状态
+        }
+        SUNContext sunctx = *amrex::sundials::The_Sundials_Context();
+        SUNContext_PushErrHandler(sunctx, MyCvodeErrHandler, &diag_ctx);
+        // ------ End debug ------
+
         BL_PROFILE_VAR("Pele::ReactorCvode::react():CVode", AroundCVODE);
         int cvode_flag = CVode(cvode_mem, time_final, y, &CvodeActual_time_final, CV_NORMAL);
         BL_PROFILE_VAR_STOP(AroundCVODE);
-
-        if (true) {
-#ifndef AMREX_USE_GPU
-          amrex::Print() << "\n[CVODE FAIL] cell (" << i << "," << j << "," << k
-            << ")  flag=" << cvode_flag
-            << "  time_start=" << time_start
-            << "  time_final=" << time_final << "\n";
-          amrex::Print() << "  Input state BEFORE CVode (packed per Ordering, "
-            << "first " << NUM_SPECIES << " = rho*Y_i, last = T):\n  ";
-          for (int n = 0; n < NUM_SPECIES; ++n) {
-            amrex::Print() << n << "-th species : " << yvec_input[n] << " ";
-          }
-          amrex::Print() << "T: " << yvec_input[NUM_SPECIES] << "\n";
-#endif
-        }
 
 #if defined(PELE_USE_AUX) && (NUMAUX > 0)
         // ReInit CVODE for aux
@@ -1916,6 +1925,9 @@ ReactorCvode::react(
 
         CVode(cvode_mem_aux, time_final, y_aux, &CvodeActual_time_final, CV_NORMAL);
 #endif
+        // ------- Debug -----
+        SUNContext_PopErrHandler(sunctx);
+        // ------- End debug ----
 
         // cppcheck-suppress knownConditionTrueFalse
         if ((udata->verbose > 1) && (omp_thread == 0)) {
