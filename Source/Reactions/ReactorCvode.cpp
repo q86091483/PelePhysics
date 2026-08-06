@@ -21,12 +21,12 @@ static void MyCvodeErrHandler(int line, const char* func, const char* file,
     ctx->i, ctx->j, ctx->k, file, line, func, msg);
   offset += snprintf(buf + offset, sizeof(buf) - offset,
     "  Input state: T=%g ", ctx->yvec_input[NUM_SPECIES]);
-//  for (int n = 0; n < NUM_SPECIES; ++n) {
-//    offset += snprintf(buf + offset, sizeof(buf) - offset,
-//      "Y[%d]=%g ", n, ctx->yvec_input[n]);
-//  }
-//  offset += snprintf(buf + offset, sizeof(buf) - offset, "\n");
-//
+  for (int n = 0; n < NUM_SPECIES; ++n) {
+    offset += snprintf(buf + offset, sizeof(buf) - offset,
+      "Y[%d]=%g ", n, ctx->yvec_input[n]);
+  }
+  offset += snprintf(buf + offset, sizeof(buf) - offset, "\n");
+
   fprintf(stderr, "%s", buf);
 }
 
@@ -1937,7 +1937,7 @@ ReactorCvode::react(
           char buf[4096];
           int off = 0;
           off += snprintf(buf + off, sizeof(buf) - off,
-            "\n[Second CVODE debug] cell (%d,%d,%d)", i,j,k);
+            "\n[1st CVODE debug] cell (%d,%d,%d)", i,j,k);
           fprintf(stderr, "%s", buf);
         }
         SUNContext_PopErrHandler(sunctx);
