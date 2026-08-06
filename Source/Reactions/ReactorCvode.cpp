@@ -16,14 +16,19 @@ static void MyCvodeErrHandler(int line, const char* func, const char* file,
 
   char buf[4096];
   int offset = 0;
+  // i,j,k
   offset += snprintf(buf + offset, sizeof(buf) - offset,
     "[CVODE INTERNAL FAIL] cell (%d,%d,%d) at %s:%d (%s): %s\n",
     ctx->i, ctx->j, ctx->k, file, line, func, msg);
+  // rho, T
+  amrex::Real rho = 0.0;
+  for (int n = 0; n < NUM_SPECIES; ++n) rho += ctx->yvec_input[n];
   offset += snprintf(buf + offset, sizeof(buf) - offset,
-    "  Input state: T=%g ", ctx->yvec_input[NUM_SPECIES]);
+  "  Input state: rho=%g  T=%g\n", rho, ctx->yvec_input[NUM_SPECIES]);
+  // Y, rhoY
   for (int n = 0; n < NUM_SPECIES; ++n) {
     offset += snprintf(buf + offset, sizeof(buf) - offset,
-      "Y[%d]=%g ", n, ctx->yvec_input[n]);
+      "  Y[%d]=%g (rhoY=%g)\n", n, ctx->yvec_input[n] / rho, ctx->yvec_input[n]);
   }
   offset += snprintf(buf + offset, sizeof(buf) - offset, "\n");
 
