@@ -1927,24 +1927,24 @@ ReactorCvode::react(
         SUNContext sunctx = *amrex::sundials::The_Sundials_Context();
         SUNContext_PushErrHandler(sunctx, MyCvodeErrHandler, &diag_ctx);
 
-        amrex::Real cell_input_state[NUM_SPECIES + 1];
-        for (int n = 0; n < NUM_SPECIES + 1; ++n) {
-          cell_input_state[n] = yvec_d[n];
-        }
+        //amrex::Real cell_input_state[NUM_SPECIES + 1];
+        //for (int n = 0; n < NUM_SPECIES + 1; ++n) {
+        //  cell_input_state[n] = yvec_d[n];
+        //}
         // ------ End debug ------
 
         BL_PROFILE_VAR("Pele::ReactorCvode::react():CVode", AroundCVODE);
-        int cvode_flag = CVode(cvode_mem, time_final, y, &CvodeActual_time_final, CV_NORMAL);
+        //int cvode_flag = CVode(cvode_mem, time_final, y, &CvodeActual_time_final, CV_NORMAL);
         BL_PROFILE_VAR_STOP(AroundCVODE);
 
         // ----- Debug output & release -----
-        if (cvode_flag < 0) {
-          char buf[4096];
-          int off = 0;
-          off += snprintf(buf + off, sizeof(buf) - off,
-            "\n[1st CVODE debug] cell (%d,%d,%d)", i,j,k);
-          fprintf(stderr, "%s", buf);
-        }
+        //if (cvode_flag < 0) {
+        //  char buf[4096];
+        //  int off = 0;
+        //  off += snprintf(buf + off, sizeof(buf) - off,
+        //    "\n[1st CVODE debug] cell (%d,%d,%d)", i,j,k);
+        //  fprintf(stderr, "%s", buf);
+        //}
         SUNContext_PopErrHandler(sunctx);
         // ----- End debug -----
 
