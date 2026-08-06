@@ -1934,7 +1934,7 @@ ReactorCvode::react(
         // ------ End debug ------
 
         BL_PROFILE_VAR("Pele::ReactorCvode::react():CVode", AroundCVODE);
-        //int cvode_flag = CVode(cvode_mem, time_final, y, &CvodeActual_time_final, CV_NORMAL);
+        int cvode_flag = CVode(cvode_mem, time_final, y, &CvodeActual_time_final, CV_NORMAL);
         BL_PROFILE_VAR_STOP(AroundCVODE);
 
         // ----- Debug output & release -----
