@@ -1938,13 +1938,21 @@ ReactorCvode::react(
         BL_PROFILE_VAR_STOP(AroundCVODE);
 
         // ----- Debug output & release -----
-        //if (cvode_flag < 0) {
-        //  char buf[4096];
-        //  int off = 0;
-        //  off += snprintf(buf + off, sizeof(buf) - off,
-        //    "\n[1st CVODE debug] cell (%d,%d,%d)", i,j,k);
-        //  fprintf(stderr, "%s", buf);
-        //}
+        if (cvode_flag < 0) {
+          char buf[4096];
+          int off = 0;
+          amrex::Real rho = 0.0;
+          for (int n = 0; n < NUM_SPECIES; ++n) rho += diag_ctx.yvec_input[n];
+          off += snprintf(buf + off, sizeof(buf) - off,
+            "[CVODE FAIL flag2=%d] cell (%d,%d,%d) at t=%.3e  rho=%g T=%g\n",
+            cvode_flag, i, j, k, time_start, rho, diag_ctx.yvec_input[NUM_SPECIES]);
+          for (int n = 0; n < NUM_SPECIES; ++n) {
+            off += snprintf(buf + off, sizeof(buf) - off,
+              "  Y[%d]=%.10g (rhoY=%.10g)\n", n,
+              diag_ctx.yvec_input[n] / rho, diag_ctx.yvec_input[n]);
+          }
+          fprintf(stderr, "%s", buf);
+        }
         SUNContext_PopErrHandler(sunctx);
         // ----- End debug -----
 
